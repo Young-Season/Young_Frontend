@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.js": "/static/js/main.7ed4b5be.js",
-    "index.html": "/index.html",
-    "main.7ed4b5be.js.map": "/static/js/main.7ed4b5be.js.map"
+    "main.js": "/Young_Frontend/static/js/main.7ed4b5be.js",
+    "index.html": "/Young_Frontend/index.html",
+    "main.7ed4b5be.js.map": "/Young_Frontend/static/js/main.7ed4b5be.js.map"
   },
   "entrypoints": [
     "static/js/main.7ed4b5be.js"
