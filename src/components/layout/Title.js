@@ -12,7 +12,6 @@ export default Title;
 const Wrapper = styled.div`
 
 width: 222px;
-height: 25px;
 
 font-family: 'Spoqa Han Sans Neo';
 font-style: normal;

@@ -28,7 +28,6 @@ height: 203px;
 const Text1 = styled.div`
 
 width: 296px;
-height: 32px;
 
 font-family: 'Spoqa Han Sans Neo';
 font-style: normal;
@@ -45,7 +44,6 @@ color: #000000;
 const Text2 = styled.div`
 
 width: 296px;
-height: 147px;
 
 font-family: 'Spoqa Han Sans Neo';
 font-style: normal;
