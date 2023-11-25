@@ -1,41 +1,41 @@
 import styled from 'styled-components';
 import SmallButton from "../../components/layout/SmallButton";
 import Ghost from "../../image/Ghost.png";
-import Dog from "../../image/Dog.png";
-import Bear from "../../image/Bear.png";
-import Cat from "../../image/Cat.png";
-import Fox from "../../image/Fox.png";
-import Rabbit from "../../image/Rabbit.png";
-import Squirrel from "../../image/Squirrel.png";
-import { useContext } from 'react';
-import { AnimalImageContext } from '../../context/AnimalImageContext';
+import { useRecoilState } from 'recoil';
+import { animalImageState } from '../../context/AnimalImageState';
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 function GuestFacePage(){
-  const { setAnimalImage } = useContext(AnimalImageContext);
+  const [animalImage, setAnimalImage] = useRecoilState(animalImageState);
+  const navigate = useNavigate(); // useNavigate 훅 호출
     const animals = [
-      { name: '강아지', image: Dog },
-      { name: '고양이', image: Cat },
-      { name: '토끼', image: Rabbit },
-      { name: '여우', image: Fox },
-      { name: '곰', image: Bear },
-      { name: '다람쥐', image: Squirrel },
+      { name: '강아지', name2: "Dog" },
+      { name: '고양이', name2: "Cat" },
+      { name: '토끼', name2: "Rabbit" },
+      { name: '여우', name2: "Fox" },
+      { name: '곰', name2: "Bear" },
+      { name: '다람쥐', name2: "Squirrel" },
     ];
+    const handleButtonClick = (name2) => {
+      setAnimalImage(name2);
+      navigate('/guestemoji');
+    };
     return (
         <FaceContainer>
             <FaceContainer2>
                 <Image src={Ghost}></Image>
             </FaceContainer2>
             <FaceContainer3>
-                <Text>얼굴상</Text>
+                <Text>얼굴상</Text>         
                 <FaceContainer4>
                 {animals.map((animal, index) => 
                 <Link to="/guestemoji" key={index}>
-                <SmallButton 
-                  onClick={() => setAnimalImage(animal.image)}
-                  contents={animal.name} 
-                />
-              </Link>
-        )}
+                    <SmallButton 
+                      onClick={() => handleButtonClick(animal.name2)}
+                      contents={animal.name} 
+                    />
+                    </Link>
+                )}
                 </FaceContainer4>
             </FaceContainer3>
         </FaceContainer>
@@ -43,7 +43,6 @@ function GuestFacePage(){
   }
   export default GuestFacePage;
   const FaceContainer = styled.div`;
-  
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -68,13 +67,11 @@ function GuestFacePage(){
 `
 const FaceContainer2 = styled.div`;
 height: 320px;
-
 background: #FFFFFF;
 border-radius: 20px;
 
 `
 const Image = styled.img`;
-
 `
 
 const FaceContainer3 = styled.div`;
@@ -83,7 +80,7 @@ flex-direction: column;
 justify-content: center;
 align-items: center;
 padding: 0px;
-gap: 24px;
+gap: 40px;
 `
 const Text = styled.div`;
 font-family: 'Spoqa Han Sans Neo';
@@ -92,7 +89,6 @@ font-weight: 700;
 font-size: 20px;
 line-height: 25px;
 text-align: center;
-
 color: #000000;
 `
 const FaceContainer4 = styled.div`
@@ -104,6 +100,11 @@ const FaceContainer4 = styled.div`
   gap: 20px;
   padding-bottom: 100px;
 `;
+const StyledLink = styled(Link)`
+  text-decoration: none;
+`;
+
+
 
 
 
