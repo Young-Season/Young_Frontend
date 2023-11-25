@@ -23,7 +23,7 @@ function GuestFacePage(){
     return (
         <FaceContainer>
             <FaceContainer2>
-                <Image></Image>
+                <Image src={Ghost}></Image>
             </FaceContainer2>
             <FaceContainer3>
                 <Text>얼굴상</Text>
@@ -43,13 +43,15 @@ function GuestFacePage(){
   }
   export default GuestFacePage;
   const FaceContainer = styled.div`;
+  
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: auto 0;
+  margin: auto;
   padding: 0px;
-  height: 689px;
+  padding-top: 100px;
+  gap: 30px;
   background: #F6F9FF;
   @media (min-width: 480px) {
     width: 480px;
@@ -71,8 +73,7 @@ background: #FFFFFF;
 border-radius: 20px;
 
 `
-const Image = styled.div`;
-background: url(${Ghost});
+const Image = styled.img`;
 
 `
 
@@ -83,8 +84,6 @@ justify-content: center;
 align-items: center;
 padding: 0px;
 gap: 24px;
-
-height: 329px;
 `
 const Text = styled.div`;
 font-family: 'Spoqa Han Sans Neo';
@@ -102,7 +101,8 @@ const FaceContainer4 = styled.div`
   justify-items: center; // 각 항목을 그리드 셀의 중앙에 배치
   align-items: center;
   padding: 0px;
-  gap: 16px;
+  gap: 20px;
+  padding-bottom: 100px;
 `;
 
 
