@@ -45,23 +45,37 @@ function GuestFacePage(){
   const FaceContainer = styled.div`;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  justify-content: center;
+  align-items: center;
+  margin: auto 0;
   padding: 0px;
-  gap: 36px;
-  width: 320px;
   height: 689px;
-  left: 28px;
-  top: calc(50% - 689px/2 + 11.5px);
-background: #F6F9FF;
+  background: #F6F9FF;
+  @media (min-width: 480px) {
+    width: 480px;
+    height: auto;
+  }
+  @media (min-width: 576px) {
+    width: 576px;
+    height: auto;
+  }
+  @media (min-width: 768px) {
+    width: 768px;
+    height: auto;
+  }
 `
 const FaceContainer2 = styled.div`;
-width: 320px;
 height: 320px;
 
 background: #FFFFFF;
 border-radius: 20px;
-background: url(${Ghost});
+
 `
+const Image = styled.div`;
+background: url(${Ghost});
+
+`
+
 const FaceContainer3 = styled.div`;
 display: flex;
 flex-direction: column;
@@ -70,7 +84,6 @@ align-items: center;
 padding: 0px;
 gap: 24px;
 
-width: 320px;
 height: 329px;
 `
 const Text = styled.div`;
@@ -83,322 +96,14 @@ text-align: center;
 
 color: #000000;
 `
-const FaceContainer4 = styled.div`;
-display: flex;
-flex-direction: row;
-flex-wrap: wrap;
-justify-content: space-between;
-align-items: flex-start;
-align-content: flex-start;
-padding: 0px;
-gap: 16px;
+const FaceContainer4 = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr; // 한 줄에 두 개의 열 생성
+  justify-items: center; // 각 항목을 그리드 셀의 중앙에 배치
+  align-items: center;
+  padding: 0px;
+  gap: 16px;
+`;
 
-width: 320px;
-height: 188px;
-`
 
-/* Frame 19 */
 
-/* Auto layout */
-
-
-
-/* Inside auto layout */
-flex: none;
-order: 1;
-align-self: stretch;
-flex-grow: 0;
-
-
-/* 선택 버튼 */
-
-box-sizing: border-box;
-
-/* Auto layout */
-display: flex;
-flex-direction: row;
-justify-content: center;
-align-items: center;
-padding: 10px 20px;
-gap: 10px;
-
-width: 152px;
-height: 52px;
-
-background: #FFFFFF;
-/* Light Brown */
-border: 1px solid #866B5B;
-box-shadow: inset -1px -2px 6px rgba(0, 0, 0, 0.15);
-border-radius: 20px;
-
-/* Inside auto layout */
-flex: none;
-order: 0;
-flex-grow: 0;
-
-
-/* 버튼 내용 */
-
-width: 112px;
-height: 18px;
-
-font-family: 'Spoqa Han Sans Neo';
-font-style: normal;
-font-weight: 700;
-font-size: 14px;
-line-height: 18px;
-/* identical to box height */
-text-align: center;
-
-color: #000000;
-
-
-/* Inside auto layout */
-flex: none;
-order: 0;
-flex-grow: 1;
-
-
-/* 선택 버튼 */
-
-box-sizing: border-box;
-
-/* Auto layout */
-display: flex;
-flex-direction: row;
-justify-content: center;
-align-items: center;
-padding: 10px 20px;
-gap: 10px;
-
-width: 152px;
-height: 52px;
-
-background: #FFFFFF;
-/* Light Brown */
-border: 1px solid #866B5B;
-box-shadow: inset -1px -2px 6px rgba(0, 0, 0, 0.15);
-border-radius: 20px;
-
-/* Inside auto layout */
-flex: none;
-order: 1;
-flex-grow: 0;
-
-
-/* 버튼 내용 */
-
-width: 112px;
-height: 18px;
-
-font-family: 'Spoqa Han Sans Neo';
-font-style: normal;
-font-weight: 700;
-font-size: 14px;
-line-height: 18px;
-/* identical to box height */
-text-align: center;
-
-color: #000000;
-
-
-/* Inside auto layout */
-flex: none;
-order: 0;
-flex-grow: 1;
-
-
-/* 선택 버튼 */
-
-box-sizing: border-box;
-
-/* Auto layout */
-display: flex;
-flex-direction: row;
-justify-content: center;
-align-items: center;
-padding: 10px 20px;
-gap: 10px;
-
-width: 152px;
-height: 52px;
-
-background: #FFFFFF;
-/* Light Brown */
-border: 1px solid #866B5B;
-box-shadow: inset -1px -2px 6px rgba(0, 0, 0, 0.15);
-border-radius: 20px;
-
-/* Inside auto layout */
-flex: none;
-order: 2;
-flex-grow: 0;
-
-
-/* 버튼 내용 */
-
-width: 112px;
-height: 18px;
-
-font-family: 'Spoqa Han Sans Neo';
-font-style: normal;
-font-weight: 700;
-font-size: 14px;
-line-height: 18px;
-/* identical to box height */
-text-align: center;
-
-color: #000000;
-
-
-/* Inside auto layout */
-flex: none;
-order: 0;
-flex-grow: 1;
-
-
-/* 선택 버튼 */
-
-box-sizing: border-box;
-
-/* Auto layout */
-display: flex;
-flex-direction: row;
-justify-content: center;
-align-items: center;
-padding: 10px 20px;
-gap: 10px;
-
-width: 152px;
-height: 52px;
-
-background: #FFFFFF;
-/* Light Brown */
-border: 1px solid #866B5B;
-box-shadow: inset -1px -2px 6px rgba(0, 0, 0, 0.15);
-border-radius: 20px;
-
-/* Inside auto layout */
-flex: none;
-order: 3;
-flex-grow: 0;
-
-
-/* 버튼 내용 */
-
-width: 112px;
-height: 18px;
-
-font-family: 'Spoqa Han Sans Neo';
-font-style: normal;
-font-weight: 700;
-font-size: 14px;
-line-height: 18px;
-/* identical to box height */
-text-align: center;
-
-color: #000000;
-
-
-/* Inside auto layout */
-flex: none;
-order: 0;
-flex-grow: 1;
-
-
-/* 선택 버튼 */
-
-box-sizing: border-box;
-
-/* Auto layout */
-display: flex;
-flex-direction: row;
-justify-content: center;
-align-items: center;
-padding: 10px 20px;
-gap: 10px;
-
-width: 152px;
-height: 52px;
-
-background: #FFFFFF;
-/* Light Brown */
-border: 1px solid #866B5B;
-box-shadow: inset -1px -2px 6px rgba(0, 0, 0, 0.15);
-border-radius: 20px;
-
-/* Inside auto layout */
-flex: none;
-order: 4;
-flex-grow: 0;
-
-
-/* 버튼 내용 */
-
-width: 112px;
-height: 18px;
-
-font-family: 'Spoqa Han Sans Neo';
-font-style: normal;
-font-weight: 700;
-font-size: 14px;
-line-height: 18px;
-/* identical to box height */
-text-align: center;
-
-color: #000000;
-
-
-/* Inside auto layout */
-flex: none;
-order: 0;
-flex-grow: 1;
-
-
-/* 선택 버튼 */
-
-box-sizing: border-box;
-
-/* Auto layout */
-display: flex;
-flex-direction: row;
-justify-content: center;
-align-items: center;
-padding: 10px 20px;
-gap: 10px;
-
-width: 152px;
-height: 52px;
-
-background: #FFFFFF;
-/* Light Brown */
-border: 1px solid #866B5B;
-box-shadow: inset -1px -2px 6px rgba(0, 0, 0, 0.15);
-border-radius: 20px;
-
-/* Inside auto layout */
-flex: none;
-order: 5;
-flex-grow: 0;
-
-
-/* 버튼 내용 */
-
-width: 112px;
-height: 18px;
-
-font-family: 'Spoqa Han Sans Neo';
-font-style: normal;
-font-weight: 700;
-font-size: 14px;
-line-height: 18px;
-/* identical to box height */
-text-align: center;
-
-color: #000000;
-
-
-/* Inside auto layout */
-flex: none;
-order: 0;
-flex-grow: 1;

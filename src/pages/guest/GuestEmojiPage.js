@@ -35,3 +35,65 @@ function GuestEmojiPage(){
     );
   }
   export default GuestEmojiPage;
+
+
+  const FaceContainer = styled.div`;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: auto 0;
+  padding: 0px;
+  width: 320px;
+  height: 689px;
+background: #F6F9FF;
+
+`
+const FaceContainer2 = styled.div`;
+width: 320px;
+height: 320px;
+
+background: #FFFFFF;
+border-radius: 20px;
+
+`
+const StyledImage = styled.img`;
+  background: url(${Ghost});
+
+`
+
+const FaceContainer3 = styled.div`;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+padding: 0px;
+gap: 24px;
+
+width: 320px;
+height: 329px;
+`
+const Text = styled.div`;
+font-family: 'Spoqa Han Sans Neo';
+font-style: normal;
+font-weight: 700;
+font-size: 20px;
+line-height: 25px;
+text-align: center;
+
+color: #000000;
+`
+const FaceContainer4 = styled.div`;
+display: flex;
+flex-direction: row;
+flex-wrap: wrap;
+justify-content: space-between;
+align-items: flex-start;
+align-content: flex-start;
+padding: 0px;
+gap: 16px;
+
+width: 320px;
+height: 188px;
+`
+
