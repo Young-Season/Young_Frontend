@@ -10,6 +10,7 @@ import HostUrlDeployPage from "./pages/host/HostUrlDeployPage";
 import { RecoilRoot } from 'recoil'; // RecoilRoot 추가\
 import HostLoadingPage from "./pages/host/HostLoadingPage";
 import HostNicknamePage from "./pages/host/HostNicknamePage";
+import GuestLoadingPage from "./pages/guest/GuestLoadingPage";
 
 const App = () => {
   return (
@@ -25,6 +26,7 @@ const App = () => {
           <Route path="/deploy" element={<HostUrlDeployPage />} />
           <Route path="/hostLoading" element={<HostLoadingPage/>}/>
           <Route path="/hostNickname" element={<HostNicknamePage/>}/>
+          <Route path="/guestLoading" element={<GuestLoadingPage/>}/>
         </Routes>
       </BrowserRouter>
     </RecoilRoot>
