@@ -1,14 +1,20 @@
 import styled from 'styled-components';
 import BigButton from '../../../src/components/layout/BigButton';
+import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 
 const HostLoadingPage = () => {
   const imageUrl = process.env.PUBLIC_URL + '/images/BG_blur.png';
 
+  let navigate = useNavigate();
 
-  const startKakao = () => {
-    //카카오 로그인 여기에 구현
-    console.log('start');
-  }
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      navigate('/hostNickname');
+    }, 300); // 3초 후에 실행
+
+    return () => clearTimeout(timer); // 컴포넌트가 언마운트 될 때 타이머를 제거
+  }, [navigate]);
 
   return (
     <BackGround>
