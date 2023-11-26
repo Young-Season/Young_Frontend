@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import BigButton from '../../../src/components/layout/BigButton';
 
-const GuestLoginPage = () => {
+const HostLoginPage = () => {
   const imageUrl = process.env.PUBLIC_URL + '/images/BG.png';
 
 
@@ -27,7 +27,7 @@ const GuestLoginPage = () => {
   )
 }
 
-export default GuestLoginPage;
+export default HostLoginPage;
 
 const BackGround = styled.div`
   display: flex;
