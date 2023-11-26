@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import BigButton from '../../../src/components/layout/BigButton';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 
@@ -11,7 +10,7 @@ const HostLoadingPage = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       navigate('/hostNickname');
-    }, 300); // 3초 후에 실행
+    }, 300); // 0.3초 후에 실행
 
     return () => clearTimeout(timer); // 컴포넌트가 언마운트 될 때 타이머를 제거
   }, [navigate]);
