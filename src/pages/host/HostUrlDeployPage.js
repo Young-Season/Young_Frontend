@@ -1,11 +1,10 @@
 import styled from 'styled-components';
 import UrlButton from "../../components/layout/UrlButton";
-import Ghost from "../../image/Ghost.png";
 import { useRecoilState } from 'recoil';
 import { animalImageState } from '../../context/AnimalImageState';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-function GuestFacePage(){
+const GuestFacePage = () => {
   const [animalImage, setAnimalImage] = useRecoilState(animalImageState);
   const navigate = useNavigate(); // useNavigate 훅 호출
     
@@ -17,7 +16,7 @@ function GuestFacePage(){
         <FaceContainer>
             <Text>얼굴상</Text> 
             <FaceContainer2>
-                <Image src={Ghost}></Image>
+                <Image src={process.env.PUBLIC_URL + '/images/Ghost.png'}></Image>
                 <FaceContainer3>
                 <Text1>친구에게 공유하고 내 이미지를 알아보세요!</Text1>
                 <UrlButton content={"URL 들어가는 공간"}></UrlButton>

@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import SmallButton from "../../components/layout/SmallButton";
-import Ghost from "../../image/Ghost.png";
 import { useRecoilState } from 'recoil';
 import { animalImageState } from '../../context/AnimalImageState';
 import { Link } from 'react-router-dom';
@@ -18,14 +17,14 @@ function GuestFacePage(){
       { name: '흰색', name2: "Squirrel" },
       { name: '검은색', name2: "Squirrel" },
     ];
-    const handleButtonClick = (name2) => {
-      setAnimalImage(name2);
-      navigate('/guestemoji');
+    const handleButtonClick = () => {
+      // setAnimalImage(name2);
+      navigate('/firstimpression');
     };
     return (
         <FaceContainer>
             <FaceContainer2>
-                <Image src={Ghost}></Image>
+                <Image src={process.env.PUBLIC_URL + '/images/Ghost.png'}></Image>
             </FaceContainer2>
             <FaceContainer3>
                 <Text>얼굴상</Text>         
@@ -33,7 +32,7 @@ function GuestFacePage(){
                 {colors.map((color, index) => 
                 <Link to="/guestemoji" key={index}>
                     <SmallButton 
-                      onClick={() => handleButtonClick(color.name2)}
+                      onClick={() => handleButtonClick()}
                       contents={color.name} 
                     />
                     </Link>

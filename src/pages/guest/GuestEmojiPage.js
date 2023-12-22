@@ -1,32 +1,30 @@
 import styled from 'styled-components';
 import SmallButton from "../../components/layout/SmallButton";
-import Ghost from "../../image/Ghost.png";
-import Dog from "../../image/Dog.png";
-import Bear from "../../image/Bear.png";
-import Cat from "../../image/Cat.png";
-import Fox from "../../image/Fox.png";
-import Rabbit from "../../image/Rabbit.png";
-import Squirrel from "../../image/Squirrel.png";
-import Emoji1 from "../../image/emoji1.png";
-import Emoji2 from "../../image/emoji2.png";
-import Emoji3 from "../../image/emoji3.png";
-import Emoji4 from "../../image/emoji4.png";
-import Emoji5 from "../../image/emoji5.png";
-import Emoji6 from "../../image/emoji6.png";
-import Emoji7 from "../../image/emoji7.png";
-import Emoji8 from "../../image/emoji8.png";
+// import Ghost from "../../image/Ghost.png";
+// import Emoji1 from "../../image/emoji1.png";
+// import Emoji2 from "../../image/emoji2.png";
+// import Emoji3 from "../../image/emoji3.png";
+// import Emoji4 from "../../image/emoji4.png";
+// import Emoji5 from "../../image/emoji5.png";
+// import Emoji6 from "../../image/emoji6.png";
+// import Emoji7 from "../../image/emoji7.png";
+// import Emoji8 from "../../image/emoji8.png";
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 import { animalImageState } from '../../context/AnimalImageState';
 function GuestEmojiPage(){
+  const navigate = useNavigate();
   const animalImage = useRecoilValue(animalImageState);
-  const emojis = [Emoji1, Emoji2, Emoji3, Emoji4, Emoji5, Emoji6, Emoji7, Emoji8];
-  const image = animalImage ? require(`../../image/${animalImage}.png`).default : Ghost;
-  // const image = require(`../../image/${animalImage}.png`).default;
+  const emojis = ["emoji1", "emoji2", "emoji3", "emoji4", "emoji5", "emoji6", "emoji7", "emoji8"];
+  const handleButtonClick = () => {
+    // setAnimalImage(name2);
+    navigate('/guestcolor');
+  };
   return (
         <FaceContainer>
             <FaceContainer2>
-              <StyledImage src={image} /> 
+              <StyledImage src={process.env.PUBLIC_URL + '/images/Ghost.png'} /> 
             </FaceContainer2>
             <FaceContainer3>
                 <Text>얼굴상</Text>
@@ -34,8 +32,9 @@ function GuestEmojiPage(){
                 <FaceContainer4>
                 {emojis.map((emoji, index) => 
                   <SmallButton 
-                    contents={<img src={emoji}/>} 
+                    contents={<img src={process.env.PUBLIC_URL + `/images/${emoji}.png`}/>} 
                     key={index}
+                    onClick={() => handleButtonClick()}
                   />
                  )}
 

@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import SmallButton from "../../components/layout/SmallButton";
-import Ghost from "../../image/Ghost.png";
 import { useRecoilState } from 'recoil';
 import { animalImageState } from '../../context/AnimalImageState';
 import { Link } from 'react-router-dom';
@@ -20,12 +19,12 @@ function GuestFacePage(){
     ];
     const handleButtonClick = (name2) => {
       setAnimalImage(name2);
-      navigate('/guestemoji');
+      navigate('/presentImpression');
     };
     return (
         <FaceContainer>
             <FaceContainer2>
-                <Image src={Ghost}></Image>
+                <Image src={process.env.PUBLIC_URL + '/images/Ghost.png'}></Image>
             </FaceContainer2>
             <FaceContainer3>
                 <Text>얼굴상</Text>         
