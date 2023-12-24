@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import SmallButton from "../../components/layout/SmallButton";
-import Ghost from "../../image/Ghost.png";
 import { useRecoilState } from 'recoil';
 import { animalImageState } from '../../context/AnimalImageState';
 import { Link } from 'react-router-dom';
@@ -20,21 +19,32 @@ function GuestFacePage(){
       setAnimalImage(name2);
       navigate('/guestemoji');
     };
+    const getSubjectSuffix = (name) => {
+      const lastChar = name.charAt(name.length - 1);
+      const lastCharCode = lastChar.charCodeAt(0);
+    
+      if (lastCharCode < 44032 || lastCharCode > 55203) {
+        return '는'; // 한글이 아닌 경우에는 '이'를 반환
+      }
+    
+      return ((lastCharCode - 44032) % 28) === 0 ? '는' : '은';
+    }
+    const hostNickname = '백엔드에서 받은 이름';
     return (
         <FaceContainer>
             <FaceContainer2>
-                <Image src={Ghost}></Image>
+                <Image src={process.env.PUBLIC_URL + '/images/Ghost.png'}></Image>
             </FaceContainer2>
             <FaceContainer3>
-                <Text>얼굴상</Text>         
+            <Text>{hostNickname}{getSubjectSuffix(hostNickname)} 00상이야! </Text>          
                 <FaceContainer4>
                 {animals.map((animal, index) => 
-                <Link to="/guestemoji" key={index}>
+                <StyledLink to="/guestemoji" key={index}>
                     <SmallButton 
                       onClick={() => handleButtonClick(animal.name2)}
                       contents={animal.name} 
                     />
-                    </Link>
+                    </StyledLink>
                 )}
                 </FaceContainer4>
             </FaceContainer3>

@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import SmallButton from "../../components/layout/SmallButton";
-import Ghost from "../../image/Ghost.png";
 import { useRecoilState } from 'recoil';
 import { animalImageState } from '../../context/AnimalImageState';
 import { Link } from 'react-router-dom';
@@ -18,25 +17,36 @@ function GuestFacePage(){
       { name: '흰색', name2: "Squirrel" },
       { name: '검은색', name2: "Squirrel" },
     ];
-    const handleButtonClick = (name2) => {
-      setAnimalImage(name2);
-      navigate('/guestemoji');
+    const handleButtonClick = () => {
+      // setAnimalImage(name2);
+      navigate('/firstimpression');
     };
+    const getSubjectSuffix = (name) => {
+      const lastChar = name.charAt(name.length - 1);
+      const lastCharCode = lastChar.charCodeAt(0);
+    
+      if (lastCharCode < 44032 || lastCharCode > 55203) {
+        return '와'; // 한글이 아닌 경우에는 '이'를 반환
+      }
+    
+      return ((lastCharCode - 44032) % 28) === 0 ? '와' : '과';
+    }
+    const hostNickname = '백엔드에서 받은 이름';
     return (
         <FaceContainer>
             <FaceContainer2>
-                <Image src={Ghost}></Image>
+                <Image src={process.env.PUBLIC_URL + '/images/Ghost.png'}></Image>
             </FaceContainer2>
             <FaceContainer3>
-                <Text>얼굴상</Text>         
+            <Text>{hostNickname}{getSubjectSuffix(hostNickname)} 어울리는 색은... </Text>    
                 <FaceContainer4>
                 {colors.map((color, index) => 
-                <Link to="/guestemoji" key={index}>
+                <StyledLink to="/firstimpression" key={index}>
                     <SmallButton 
-                      onClick={() => handleButtonClick(color.name2)}
+                      onClick={() => handleButtonClick()}
                       contents={color.name} 
                     />
-                    </Link>
+                    </StyledLink>
                 )}
                 </FaceContainer4>
             </FaceContainer3>
