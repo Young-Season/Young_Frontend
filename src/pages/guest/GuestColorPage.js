@@ -64,17 +64,14 @@ function GuestFacePage(){
   padding-top: 100px;
   gap: 30px;
   background: #F6F9FF;
-  @media (min-width: 480px) {
-    width: 480px;
-    height: auto;
+
+  width: 25rem;
+  height: 50.75rem;
+  @media (max-width: 400px) {
+    width: 23rem;
   }
-  @media (min-width: 576px) {
-    width: 576px;
-    height: auto;
-  }
-  @media (min-width: 768px) {
-    width: 768px;
-    height: auto;
+  @media (max-width: 370px) {
+    width: 21rem;
   }
 `
 const FaceContainer2 = styled.div`;
