@@ -84,6 +84,7 @@ border-radius: 20px;
 
 `
 const Image = styled.img`;
+
 `
 
 const FaceContainer3 = styled.div`;

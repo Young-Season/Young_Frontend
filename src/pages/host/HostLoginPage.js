@@ -44,8 +44,8 @@ const Image = styled.div`
 
   background-size: cover;
   background-position: center;
-  width: 375px;
-  height: 812px;
+  width: 23.4375rem;
+  height: 50.75rem;
   flex-shrink: 0;
 `
 

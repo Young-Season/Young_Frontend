@@ -27,6 +27,7 @@ const App = () => {
           <Route path="/deploy" element={<HostUrlDeployPage />} />
           <Route path="/guestLoading" element={<GuestLoadingPage />} />
           <Route path="/guestLogin" element={<GuestLoginPage />} />
+          <Route path="/hostLogin" element={<HostLoginPage />} />
           <Route path="/hostLoading" element={<HostLoadingPage />} />
           <Route path="/hostNickname" element={<HostNicknamePage />} />
         </Routes>

@@ -16,8 +16,8 @@ export default SmallButton;
 
 const SmallButtonContainer = styled.div`
 display: flex;
-width: 152px;
-height: 52px;
+width: 9.5rem;
+height: 3.25rem;
 padding: 10px 20px;
 justify-content: center;
 align-items: center;
@@ -27,6 +27,17 @@ border-radius: 20px;
 border: 1px solid var(--Light-Brown, #866B5B);
 background: #FFF;
 box-shadow: -1px -2px 6px 0px rgba(0, 0, 0, 0.15) inset;
+
+@media (max-width: 450px) {
+  width: 7rem;
+}
+@media (max-width: 350px) {
+  width: 5rem;
+}
+@media (max-width: 300px) {
+  width: 4rem;
+}
+
 `
 
 const ContentBox = styled.div`

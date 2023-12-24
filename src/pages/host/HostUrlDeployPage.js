@@ -27,43 +27,37 @@ const GuestFacePage = () => {
     );
   }
   export default GuestFacePage;
-const FaceContainer = styled.div`;
+  const FaceContainer = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  margin: auto;
-  padding: 0px;
-  padding-top: 100px;
-  gap: 30px;
+  text-align: center;
   background: #F6F9FF;
+  height: 100vh;
   @media (min-width: 480px) {
     width: 480px;
-    height: auto;
-  }
-  @media (min-width: 576px) {
-    width: 576px;
-    height: auto;
-  }
-  @media (min-width: 768px) {
-    width: 768px;
-    height: auto;
+    margin: 0 auto; // 추가된 부분: 뷰포트가 480px보다 클 때 가운데 정렬
   }
 `
 const FaceContainer2 = styled.div`;
 height: 320px;
-background: #FFFFFF;
+background: #F6F9FF;
 border-radius: 20px;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+margin-top: 3.75rem;
 
 `
 const Image = styled.img`;
+margin: 3.75rem;
 `
 const FaceContainer3 = styled.div`;
 display: flex;
 flex-direction: column;
 align-items: center;
-padding: 0px;
-gap: 12px;
+margin: 0px;
 
 `
 const Text = styled.div`;
@@ -73,7 +67,9 @@ font-weight: 700;
 font-size: 20px;
 line-height: 25px;
 text-align: center;
-color: #000000;
+// color: #000000;
+margin-top: 7.94rem;
+margin-bottom: 3.75rem;
 `
 const Text1 = styled.div`;
 font-family: 'Spoqa Han Sans Neo';
@@ -81,8 +77,8 @@ font-style: normal;
 font-weight: 700;
 font-size: 16px;
 line-height: 20px;
-/* identical to box height */
-
-/* Brown */
+margin-bottom: 3.75rem;
+width: 100%;
+text-align: center;
 color: #64422E;
 `
