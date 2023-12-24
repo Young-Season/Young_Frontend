@@ -1,5 +1,5 @@
 import React from "react";
-import { HashRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import HostLoginPage from "./pages/host/HostLoginPage";
 import GuestLoginPage from "./pages/guest/GuestLoginPage";
 import HostLoadingPage from "./pages/host/HostLoadingPage";
@@ -16,7 +16,7 @@ import { animalImageState } from "./context/AnimalImageState"; // AnimalImageSta
 const App = () => {
   return (
     <RecoilRoot> {/* RecoilRoot로 앱 감싸기 */}
-      <HashRouter>
+      <BrowserRouter>
         <Routes>
           <Route path="/" element={<HostLoginPage />} />
           <Route path="/guestface" element={<GuestFacePage />} />
@@ -31,7 +31,7 @@ const App = () => {
           <Route path="/hostLoading" element={<HostLoadingPage />} />
           <Route path="/hostNickname" element={<HostNicknamePage />} />
         </Routes>
-      </HashRouter>
+      </BrowserRouter>
     </RecoilRoot>
   );
 };
