@@ -21,21 +21,30 @@ function GuestFacePage(){
       setAnimalImage(name2);
       navigate('/guestemoji');
     };
+    const getSubjectSuffix = (name)=>{
+      const lastChar = name.charAt(name.length-1);
+      const lastCharCode = lastChar.charCodeAt(0);
+      if (lastCharCode < 44032 || lastCharCode > 55203){
+        return "는"
+      }
+      return ((lastCharCode - 44032)% 28) === 0 ? "는" : "은"
+    }
+    const hostNickname = "백엔드에서 받은 이름";
     return (
         <FaceContainer>
             <FaceContainer2>
                 <Image src={process.env.PUBLIC_URL + '/images/Ghost.png'}></Image>
             </FaceContainer2>
             <FaceContainer3>
-                <Text>얼굴상</Text>         
+                <Text>지금 생각하는 {hostNickname}{getSubjectSuffix(hostNickname)}</Text>         
                 <FaceContainer4>
                 {presentImpressions.map((presentImpression, index) => 
-                <Link to="/guestemoji" key={index}>
+                <StyledLink to="/guestemoji" key={index}>
                     <SmallButton 
                       onClick={() => handleButtonClick(presentImpression.name2)}
                       contents={presentImpression.name} 
                     />
-                    </Link>
+                    </StyledLink>
                 )}
                 </FaceContainer4>
             </FaceContainer3>

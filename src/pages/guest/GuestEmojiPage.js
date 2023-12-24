@@ -18,24 +18,35 @@ function GuestEmojiPage(){
   const animalImage = useRecoilValue(animalImageState);
   const emojis = ["emoji1", "emoji2", "emoji3", "emoji4", "emoji5", "emoji6", "emoji7", "emoji8"];
   const handleButtonClick = () => {
-    // setAnimalImage(name2);
     navigate('/guestcolor');
   };
+  const getSubjectSuffix = (name) =>{
+    const lastChar = name.charAt(name.length-1);
+    const lastCharCode = lastChar.charCodeAt(0);
+    if(lastCharCode< 44032 || lastCharCode>55203){
+      return "가"
+    }
+    return ((lastCharCode-44032)%28) === 0 ? "가" : "이가";
+  }
+  const hostNickname = "백엔드에서 받은 이름"
   return (
         <FaceContainer>
             <FaceContainer2>
               <StyledImage src={process.env.PUBLIC_URL + '/images/Ghost.png'} /> 
             </FaceContainer2>
             <FaceContainer3>
-                <Text>얼굴상</Text>
+                <Text>{hostNickname}{getSubjectSuffix(hostNickname)} 이모지라면</Text>
                 <Text>{animalImage}</Text>
                 <FaceContainer4>
                 {emojis.map((emoji, index) => 
-                  <SmallButton 
-                    contents={<img src={process.env.PUBLIC_URL + `/images/${emoji}.png`}/>} 
-                    key={index}
-                    onClick={() => handleButtonClick()}
-                  />
+          
+                    <StyledLink to="/guestcolor" key={index}>
+                        <SmallButton 
+                          onClick={() => handleButtonClick()}
+                          contents={<img src={process.env.PUBLIC_URL + `/images/${emoji}.png`}/>} 
+                        />
+                        </StyledLink>
+
                  )}
 
                 </FaceContainer4>
