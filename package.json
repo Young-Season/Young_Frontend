@@ -15,7 +15,6 @@
     "styled-components": "^6.1.1",
     "web-vitals": "^2.1.4"
   },
-  "homepage": "https://young-season.github.io/Young_Frontend/",
   "scripts": {
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
