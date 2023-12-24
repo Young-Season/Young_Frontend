@@ -1,9 +1,13 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import HostLoginPage from "./pages/host/HostLoginPage";
+import GuestLoginPage from "./pages/guest/GuestLoginPage";
+import HostLoadingPage from "./pages/host/HostLoadingPage";
+import HostNicknamePage from "./pages/host/HostNicknamePage";
 import GuestFacePage from "./pages/guest/GuestFacePage";
 import GuestEmojiPage from "./pages/guest/GuestEmojiPage";
 import GuestColorPage from "./pages/guest/GuestColorPage";
+import GuestLoadingPage from "./pages/guest/GuestLoadingPage";
 import GuestFirstImpressionPage from "./pages/guest/GuestFirstImpressionPage";
 import GuestPresentImpresssionPage from "./pages/guest/GuestPresentImpresssionPage";
 import HostUrlDeployPage from "./pages/host/HostUrlDeployPage";
@@ -21,6 +25,10 @@ const App = () => {
           <Route path="/firstimpression" element={<GuestFirstImpressionPage />} />
           <Route path="/presentimpression" element={<GuestPresentImpresssionPage />} />
           <Route path="/deploy" element={<HostUrlDeployPage />} />
+          <Route path="/guestLoading" element={<GuestLoadingPage />} />
+          <Route path="/guestLogin" element={<GuestLoginPage />} />
+          <Route path="/hostLoading" element={<HostLoadingPage />} />
+          <Route path="/hostNickname" element={<HostNicknamePage />} />
         </Routes>
       </BrowserRouter>
     </RecoilRoot>
@@ -28,4 +36,3 @@ const App = () => {
 };
 
 export default App;
-
