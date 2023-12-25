@@ -19,7 +19,7 @@ function GuestFacePage(){
     ];
     const handleButtonClick = (name2) => {
       setAnimalImage(name2);
-      navigate('/guestemoji');
+      navigate('/guestface');
     };
     const getSubjectSuffix = (name)=>{
       const lastChar = name.charAt(name.length-1);
@@ -39,7 +39,7 @@ function GuestFacePage(){
                 <Text>지금 생각하는 {hostNickname}{getSubjectSuffix(hostNickname)}</Text>         
                 <FaceContainer4>
                 {presentImpressions.map((presentImpression, index) => 
-                <StyledLink to="/guestemoji" key={index}>
+                <StyledLink to="/guestface" key={index}>
                     <SmallButton 
                       onClick={() => handleButtonClick(presentImpression.name2)}
                       contents={presentImpression.name} 
