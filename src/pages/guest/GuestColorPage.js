@@ -1,10 +1,10 @@
 import styled from 'styled-components';
-import SmallButton from "../../components/layout/SmallButton";
+import SmallButton2 from "../../components/layout/SmallButton2";
 import { useRecoilState } from 'recoil';
 import { animalImageState } from '../../context/AnimalImageState';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-function GuestFacePage(){
+function GuestColorPage(){
   const [animalImage, setAnimalImage] = useRecoilState(animalImageState);
   const navigate = useNavigate(); // useNavigate 훅 호출
     const colors = [
@@ -42,9 +42,10 @@ function GuestFacePage(){
                 <FaceContainer4>
                 {colors.map((color, index) => 
                 <StyledLink to="/firstimpression" key={index}>
-                    <SmallButton 
+                    <SmallButton2 
                       onClick={() => handleButtonClick()}
                       contents={color.name} 
+                      index={index}
                     />
                     </StyledLink>
                 )}
@@ -53,7 +54,7 @@ function GuestFacePage(){
         </FaceContainer>
     );
   }
-  export default GuestFacePage;
+  export default GuestColorPage;
   const FaceContainer = styled.div`;
   display: flex;
   flex-direction: column;
