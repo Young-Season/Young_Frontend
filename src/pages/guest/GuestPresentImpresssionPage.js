@@ -1,24 +1,22 @@
 import styled from 'styled-components';
 import SmallButton from "../../components/layout/SmallButton";
 import { useRecoilState } from 'recoil';
-import { animalImageState } from '../../context/AnimalImageState';
+import { animalImageState } from "../../atom";
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import { useRecoilValue } from 'recoil';
+import { hostNicknameState } from '../../apis/guest';
 function GuestFacePage(){
-  const [animalImage, setAnimalImage] = useRecoilState(animalImageState);
+  const hostName = useRecoilValue(hostNicknameState);
+  const animalImage = useRecoilValue(animalImageState)
+  const [animalImage2, setAnimalImage2] = useRecoilState(animalImageState);
   const navigate = useNavigate(); // useNavigate 훅 호출
-    const presentImpressions = [
-      { name: '밝은', name2: "Dog" },
-      { name: '다정한', name2: "Cat" },
-      { name: '웃긴', name2: "Rabbit" },
-      { name: '어른스러운', name2: "Fox" },
-      { name: '섬세한', name2: "Bear" },
-      { name: '시크한', name2: "Squirrel" },
-      { name: '투명한', name2: "Squirrel" },
-      { name: '줏대있는', name2: "Squirrel" },
-    ];
-    const handleButtonClick = (name2) => {
-      setAnimalImage(name2);
+    const presentImpressions = ['밝은', '다정한', '웃긴', '어른스러운',
+    '섬세한','시크한','투명한', '줏대있는'];
+    const handleButtonClick = (index) => {
+      let imageUrl = animalImage2;
+      imageUrl = imageUrl.slice(0,-9) + (index+1)+imageUrl.slice(-8);
+      setAnimalImage2(imageUrl);
       navigate('/guestface');
     };
     const getSubjectSuffix = (name)=>{
@@ -33,16 +31,16 @@ function GuestFacePage(){
     return (
         <FaceContainer>
             <FaceContainer2>
-                <Image src={process.env.PUBLIC_URL + '/images/Ghost.png'}></Image>
+                <Image src={animalImage}></Image>
             </FaceContainer2>
             <FaceContainer3>
-                <Text>지금 생각하는 {hostNickname}{getSubjectSuffix(hostNickname)}</Text>         
+                <Text>지금 생각하는 {hostName}{getSubjectSuffix(hostName)}</Text>         
                 <FaceContainer4>
                 {presentImpressions.map((presentImpression, index) => 
                 <StyledLink to="/guestface" key={index}>
                     <SmallButton 
-                      onClick={() => handleButtonClick(presentImpression.name2)}
-                      contents={presentImpression.name} 
+                      onClick={() => handleButtonClick(index)}
+                      contents={presentImpression} 
                     />
                     </StyledLink>
                 )}
@@ -78,7 +76,9 @@ background: #FFFFFF;
 border-radius: 20px;
 
 `
-const Image = styled.img`;
+const Image = styled.img`
+width: 320px;
+height: 320px;
 `
 
 const FaceContainer3 = styled.div`;

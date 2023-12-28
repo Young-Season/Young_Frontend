@@ -1,24 +1,22 @@
 import styled from 'styled-components';
 import SmallButton from "../../components/layout/SmallButton";
 import { useRecoilState } from 'recoil';
-import { animalImageState } from '../../context/AnimalImageState';
+import { animalImageState } from "../../atom";
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import { useRecoilValue } from 'recoil';
+import { hostNicknameState } from '../../apis/guest';
 function GuestFacePage(){
-  const [animalImage, setAnimalImage] = useRecoilState(animalImageState);
+  const hostName = useRecoilValue(hostNicknameState);
+  const animalImage = useRecoilValue(animalImageState)
+  const [animalImage2, setAnimalImage2] = useRecoilState(animalImageState);
   const navigate = useNavigate(); // useNavigate 훅 호출
-    const firstImpressions = [
-      { name: '밝은', name2: "Dog" },
-      { name: '다정한', name2: "Cat" },
-      { name: '웃긴', name2: "Rabbit" },
-      { name: '어른스러운', name2: "Fox" },
-      { name: '섬세한', name2: "Bear" },
-      { name: '시크한', name2: "Squirrel" },
-      { name: '투명한', name2: "Squirrel" },
-      { name: '줏대있는', name2: "Squirrel" },
-    ];
-    const handleButtonClick = (name2) => {
-      setAnimalImage(name2);
+    const firstImpressions = ['밝은', '다정한', 
+    '웃긴','어른스러운','섬세한','시크한', '투명한','줏대있는'];
+    const handleButtonClick = (index) => {
+      let imageUrl = animalImage2;
+      imageUrl = imageUrl.slice(0,-8) + (index+1)+imageUrl.slice(-7);
+      setAnimalImage2(imageUrl);
       navigate('/presentImpression');
     };
     const getSubjectSuffix = (name)=>{
@@ -29,20 +27,20 @@ function GuestFacePage(){
       }
       return ((lastCharCode - 44032)% 28) === 0 ? "를" : "을"
     }
-    const hostNickname = "백엔드에서 받은 이름";
     return (
         <FaceContainer>
             <FaceContainer2>
-                <Image src={process.env.PUBLIC_URL + '/images/Ghost.png'}></Image>
+                {/* <Image src={process.env.PUBLIC_URL + '/images/Ghost.png'}></Image> */}
+                <Image src={animalImage}></Image>
             </FaceContainer2>
             <FaceContainer3>
-            <Text>{hostNickname}{getSubjectSuffix(hostNickname)} 처음 봤을 때</Text>         
+            <Text>{hostName}{getSubjectSuffix(hostName)} 처음 봤을 때</Text>         
                 <FaceContainer4>
                 {firstImpressions.map((firstImpression, index) => 
                 <StyledLink to="/presentImpression" key={index}>
                     <SmallButton 
-                      onClick={() => handleButtonClick(firstImpression.name2)}
-                      contents={firstImpression.name} 
+                      onClick={() => handleButtonClick(index)}
+                      contents={firstImpression} 
                     />
                     </StyledLink>
                 )}
@@ -78,7 +76,9 @@ background: #FFFFFF;
 border-radius: 20px;
 
 `
-const Image = styled.img`;
+const Image = styled.img`
+width: 320px;
+height: 320px;
 `
 
 const FaceContainer3 = styled.div`;

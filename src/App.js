@@ -12,7 +12,7 @@ import GuestFirstImpressionPage from "./pages/guest/GuestFirstImpressionPage";
 import GuestPresentImpresssionPage from "./pages/guest/GuestPresentImpresssionPage";
 import HostUrlDeployPage from "./pages/host/HostUrlDeployPage";
 import { RecoilRoot } from 'recoil'; // RecoilRoot 추가
-import { animalImageState } from "./context/AnimalImageState"; // AnimalImageState 추가
+
 const App = () => {
   return (
     <RecoilRoot> {/* RecoilRoot로 앱 감싸기 */}

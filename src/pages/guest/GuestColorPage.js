@@ -1,50 +1,44 @@
 import styled from 'styled-components';
 import SmallButton2 from "../../components/layout/SmallButton2";
 import { useRecoilState } from 'recoil';
-import { animalImageState } from '../../context/AnimalImageState';
+import { animalImageState } from '../../atom';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import { useRecoilValue } from 'recoil';
+import { hostNicknameState } from '../../apis/guest';
 function GuestColorPage(){
-  const [animalImage, setAnimalImage] = useRecoilState(animalImageState);
+  const hostName = useRecoilValue(hostNicknameState);
+  const animalImage = useRecoilValue(animalImageState)
+  const [animalImage2, setAnimalImage2] = useRecoilState(animalImageState);
   const navigate = useNavigate(); // useNavigate 훅 호출
-    const colors = [
-      { name: '빨간색', name2: "Dog" },
-      { name: '노란색', name2: "Cat" },
-      { name: '초록색', name2: "Rabbit" },
-      { name: '파란색', name2: "Fox" },
-      { name: '보라색', name2: "Bear" },
-      { name: '분홍색', name2: "Squirrel" },
-      { name: '흰색', name2: "Squirrel" },
-      { name: '검은색', name2: "Squirrel" },
-    ];
-    const handleButtonClick = () => {
-      // setAnimalImage(name2);
+    const colors = ['빨간색', '노란색', '초록색','파란색','보라색','분홍색','흰색','검은색'];
+    const handleButtonClick = (index) => {
+      let imageUrl = animalImage2;
+      imageUrl = imageUrl.slice(0,-7) + (index+1)+imageUrl.slice(-6);
+      setAnimalImage2(imageUrl);
       navigate('/firstimpression');
     };
     const getSubjectSuffix = (name) => {
       const lastChar = name.charAt(name.length - 1);
-      const lastCharCode = lastChar.charCodeAt(0);
-    
+      const lastCharCode = lastChar.charCodeAt(0);    
       if (lastCharCode < 44032 || lastCharCode > 55203) {
         return '와'; // 한글이 아닌 경우에는 '이'를 반환
-      }
-    
+      }    
       return ((lastCharCode - 44032) % 28) === 0 ? '와' : '과';
     }
-    const hostNickname = '백엔드에서 받은 이름';
     return (
         <FaceContainer>
             <FaceContainer2>
-                <Image src={process.env.PUBLIC_URL + '/images/Ghost.png'}></Image>
+                <Image src={animalImage}></Image>
             </FaceContainer2>
             <FaceContainer3>
-            <Text>{hostNickname}{getSubjectSuffix(hostNickname)} 어울리는 색은... </Text>    
+            <Text>{hostName}{getSubjectSuffix(hostName)} 어울리는 색은... </Text>    
                 <FaceContainer4>
                 {colors.map((color, index) => 
                 <StyledLink to="/firstimpression" key={index}>
                     <SmallButton2 
-                      onClick={() => handleButtonClick()}
-                      contents={color.name} 
+                      onClick={() => handleButtonClick(index)}
+                      contents={color} 
                       index={index}
                     />
                     </StyledLink>
@@ -82,7 +76,8 @@ border-radius: 20px;
 
 `
 const Image = styled.img`;
-
+width: 320px;
+height: 320px;
 `
 
 const FaceContainer3 = styled.div`;

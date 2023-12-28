@@ -1,24 +1,27 @@
 import React from 'react'
 import styled from 'styled-components';
 
-const BigButton = ({textBox}) => {
+const UrlButton = ({text}) => {
   // example : <BigButton textBox={<Text>HI</Text>}></BigButton>
   return (
-    <BigButtonContainer>{textBox}</BigButtonContainer>
+    <BigButtonContainer>
+      {text}
+      <Image src={process.env.PUBLIC_URL + '/images/CopyButton.png'}></Image>
+    </BigButtonContainer>
   )
 }
 
-export default BigButton;
+export default UrlButton;
 
-const BigButtonContainer = styled.textarea`
+const BigButtonContainer = styled.div`
 display: flex;
 width: 17.5rem;
-height: 3.25rem;
+height: 2.5rem;
 padding: 0.625rem 1.25rem;
 
 justify-content: center;
 align-items: center;
-// gap: 10px;
+gap: 10px;
 
 
 border-radius: 20px;
@@ -35,5 +38,17 @@ box-shadow: -1px -2px 7.3px 0px rgba(0, 0, 0, 0.25) inset;
 @media (max-width: 250px) {
   width: 11rem;
 }
+font-family: 'Spoqa Han Sans Neo';
+font-style: normal;
+font-weight: 500;
+font-size: 16px;
+line-height: 15px;
+/* identical to box height */
 
+/* Gray */
+color: #555555;
+`
+
+const Image = styled.img`;
+margin: 0rem;
 `

@@ -1,10 +1,14 @@
+import React from 'react';
 import styled from 'styled-components';
 import SmallButton from "../../components/layout/SmallButton";
-import { useRecoilState } from 'recoil';
-import { animalImageState } from '../../context/AnimalImageState';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import { useRecoilValue } from 'recoil';
+import { hostNicknameState } from '../../apis/guest';
+import { useRecoilState } from 'recoil';
+import { animalImageState } from '../../atom';
 function GuestFacePage(){
+  const hostName = useRecoilValue(hostNicknameState);
   const [animalImage, setAnimalImage] = useRecoilState(animalImageState);
   const navigate = useNavigate(); // useNavigate 훅 호출
     const animals = [
@@ -15,10 +19,34 @@ function GuestFacePage(){
       { name: '곰', name2: "Bear" },
       { name: '다람쥐', name2: "Squirrel" },
     ];
-    const handleButtonClick = (name2) => {
-      setAnimalImage(name2);
+    const handleButtonClick = (animalName) => {
+      let imageUrl;
+      switch (animalName){
+        case "Dog":
+          imageUrl = 'https://example.com/images/001.jpg';
+          break;
+        case "Cat":
+          imageUrl = 'https://example.com/images/002.jpg';
+          break;
+        case "Rabbit":
+          imageUrl = 'https://example.com/images/003.jpg';
+          break;
+        case "Fox":
+          imageUrl = 'https://example.com/images/004.jpg';
+          break;
+        case "Bear":
+            imageUrl = 'https://example.com/images/005.jpg';
+            break;
+        case "Squirrel":
+          imageUrl = 'https://example.com/images/006.jpg';
+          break;
+        default:
+          imageUrl = "";  
+        }
+        setAnimalImage(imageUrl);
+      }
       navigate('/guestemoji');
-    };
+    
     const getSubjectSuffix = (name) => {
       const lastChar = name.charAt(name.length - 1);
       const lastCharCode = lastChar.charCodeAt(0);
@@ -29,14 +57,13 @@ function GuestFacePage(){
     
       return ((lastCharCode - 44032) % 28) === 0 ? '는' : '은';
     }
-    const hostNickname = '백엔드에서 받은 이름';
     return (
         <FaceContainer>
             <FaceContainer2>
-                <Image src={process.env.PUBLIC_URL + '/images/Ghost.png'}></Image>
+              <Image src={process.env.PUBLIC_URL + '/images/Ghost.png'}></Image>
             </FaceContainer2>
             <FaceContainer3>
-            <Text>{hostNickname}{getSubjectSuffix(hostNickname)} 00상이야! </Text>          
+            <Text>{hostName}{getSubjectSuffix(hostName)} 00상이야! </Text>          
                 <FaceContainer4>
                 {animals.map((animal, index) => 
                 <StyledLink to="/guestemoji" key={index}>
@@ -78,7 +105,9 @@ background: #FFFFFF;
 border-radius: 20px;
 
 `
-const Image = styled.img`;
+const Image = styled.img`
+width: 320px;
+height: 320px;
 `
 
 const FaceContainer3 = styled.div`;
