@@ -11,13 +11,19 @@ import SmallButton from "../../components/layout/SmallButton";
 // import Emoji8 from "../../image/emoji8.png";
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-import { useRecoilValue } from 'recoil';
-import { animalImageState } from '../../context/AnimalImageState';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { animalImageState } from "../../atom";
+import { hostNicknameState } from '../../apis/guest';
 function GuestEmojiPage(){
   const navigate = useNavigate();
+  const hostName = useRecoilValue(hostNicknameState);
   const animalImage = useRecoilValue(animalImageState);
+  const [animalImage2, setAnimalImage2] = useRecoilState(animalImageState);
   const emojis = ["emoji1", "emoji2", "emoji3", "emoji4", "emoji5", "emoji6", "emoji7", "emoji8"];
-  const handleButtonClick = () => {
+  const handleButtonClick = (emojiindex) => {
+    let imageUrl = animalImage2;
+    imageUrl = imageUrl.slice(0,-6) + (emojiindex+1)+imageUrl.slice(-5);
+    setAnimalImage2(imageUrl);
     navigate('/guestcolor');
   };
   const getSubjectSuffix = (name) =>{
@@ -28,27 +34,21 @@ function GuestEmojiPage(){
     }
     return ((lastCharCode-44032)%28) === 0 ? "가" : "이가";
   }
-  const hostNickname = "백엔드에서 받은 이름"
   return (
         <FaceContainer>
             <FaceContainer2>
-              <StyledImage src={process.env.PUBLIC_URL + '/images/Ghost.png'} /> 
+              <Image src={animalImage} /> 
             </FaceContainer2>
             <FaceContainer3>
-                <Text>{hostNickname}{getSubjectSuffix(hostNickname)} 이모지라면</Text>
-                <Text>{animalImage}</Text>
+                <Text>{hostName}{getSubjectSuffix(hostName)} 이모지라면</Text>
                 <FaceContainer4>
-                {emojis.map((emoji, index) => 
-          
+                {emojis.map((emoji, index) =>           
                     <StyledLink to="/guestcolor" key={index}>
                         <SmallButton 
-                          onClick={() => handleButtonClick()}
-                          contents={<img src={process.env.PUBLIC_URL + `/images/${emoji}.png`}/>} 
-                        />
+                          onClick={() => handleButtonClick(index)}
+                          contents={<img src={process.env.PUBLIC_URL + `/images/${emoji}.png`}/>}/>
                         </StyledLink>
-
-                 )}
-
+                )}
                 </FaceContainer4>
             </FaceContainer3>
         </FaceContainer>
@@ -83,7 +83,7 @@ background: #FFFFFF;
 border-radius: 20px;
 
 `
-const StyledImage = styled.img`;
+const Image = styled.img`;
 width: 320px;
 height: 320px;
 
