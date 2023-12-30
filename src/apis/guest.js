@@ -10,7 +10,8 @@ export const hostNicknameState = atom({
 //랜딩페이지 HOST 이름 반환
 export const GetGuestName = ()=>{
     const [hostNickname, setHostNickname] = useRecoilState(hostNickname);
-    const hostId = "your-host-id";
+    const hostid = useRecoilValue(userIdState);
+    const hostId = hostid;
     useEffect(()=>{
         axios.get(`${baseUrl}/names/${hostId}`)
         .then((response)=>{
@@ -27,19 +28,23 @@ export const GetGuestName = ()=>{
 //guest의 response post
 export const usePostResponses = async()=>{
     const array = useRecoilValue(arrayState);
-    let data = {
-        "hostId": "...",	// string
-        "guestName": "...", // string
-        "animal": array[0], // int
-        "emoji": array[1], // int
-        "color": array[2], // int
-        "first": array[3], // int
-        "now": array[4] // int
-      }
-    try{
-        const response = await axios.post("/responses", data);
-        console.log(response);
-    } catch (error){
-        console.error(error);
+    const hostId = useRecoilValue(userIdState);
+    const postResponses = async()=>{
+        let data = {
+            "hostId": hostId,	// string
+            "guestName": "...", // string
+            "animal": array[0], // int
+            "emoji": array[1], // int
+            "color": array[2], // int
+            "first": array[3], // int
+            "now": array[4] // int
+        }
+        try{
+            const response = await axios.post("/responses", data);
+            console.log(response);
+        } catch (error){
+            console.error(error);
+        }
     }
+    return postResponses;    
 }

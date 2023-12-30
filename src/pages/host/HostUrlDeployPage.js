@@ -6,9 +6,6 @@ import { useNavigate } from 'react-router-dom';
 const GuestFacePage = () => {
   const navigate = useNavigate(); // useNavigate 훅 호출
     
-    const handleButtonClick = (name2) => {
-      navigate('/guestemoji');
-    };
     return (
         <FaceContainer>
             <Text>얼굴상</Text> 
