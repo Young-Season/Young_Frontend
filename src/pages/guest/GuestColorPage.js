@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import SmallButton2 from "../../components/layout/SmallButton2";
 import { useRecoilState } from 'recoil';
-import { animalImageState } from '../../atom';
+import { animalImageState, arrayState } from '../../atom';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
@@ -11,11 +11,22 @@ function GuestColorPage(){
   const animalImage = useRecoilValue(animalImageState)
   const [animalImage2, setAnimalImage2] = useRecoilState(animalImageState);
   const navigate = useNavigate(); // useNavigate 훅 호출
+  const [postArray, setPostArray] = useRecoilState(arrayState);
     const colors = ['빨간색', '노란색', '초록색','파란색','보라색','분홍색','흰색','검은색'];
-    const handleButtonClick = (index) => {
+    const handleButtonClick = async(index) => {
       let imageUrl = animalImage2;
       imageUrl = imageUrl.slice(0,-7) + (index+1)+imageUrl.slice(-6);
       setAnimalImage2(imageUrl);
+      await new Promise(resolve => {
+        setPostArray(prevArray => {
+          let newArray = [...prevArray];
+          newArray[2] = index+1;
+          console.log("index:",index);
+          console.log(`array: ${postArray}`);
+          return newArray;
+        });
+        resolve();
+      });
       navigate('/firstimpression');
     };
     const getSubjectSuffix = (name) => {
@@ -29,14 +40,14 @@ function GuestColorPage(){
     return (
         <FaceContainer>
             <FaceContainer2>
-                <Image src={animalImage}></Image>
+                <Image src={animalImage}></Image>이미지: {animalImage}
             </FaceContainer2>
             <FaceContainer3>
             <Text>{hostName}{getSubjectSuffix(hostName)} 어울리는 색은... </Text>    
                 <FaceContainer4>
                 {colors.map((color, index) => 
                 <StyledLink to="/firstimpression" key={index}>
-                    <SmallButton2 
+                    <SmallButton2
                       onClick={() => handleButtonClick(index)}
                       contents={color} 
                       index={index}

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import SmallButton from "../../components/layout/SmallButton";
 import { useRecoilState } from 'recoil';
-import { animalImageState } from "../../atom";
+import { animalImageState, arrayState } from "../../atom";
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
@@ -10,13 +10,21 @@ function GuestFacePage(){
   const hostName = useRecoilValue(hostNicknameState);
   const animalImage = useRecoilValue(animalImageState)
   const [animalImage2, setAnimalImage2] = useRecoilState(animalImageState);
+  const [postArray, setPostArray] = useRecoilState(arrayState);
   const navigate = useNavigate(); // useNavigate 훅 호출
     const presentImpressions = ['밝은', '다정한', '웃긴', '어른스러운',
     '섬세한','시크한','투명한', '줏대있는'];
-    const handleButtonClick = (index) => {
-      let imageUrl = animalImage2;
-      imageUrl = imageUrl.slice(0,-9) + (index+1)+imageUrl.slice(-8);
-      setAnimalImage2(imageUrl);
+    const handleButtonClick = async(index) => {
+      await new Promise(resolve => {
+        setPostArray(prevArray => {
+          let newArray = [...prevArray];
+          newArray[4] = index+1;
+          console.log("index:",index);
+          console.log(`array: ${postArray}`);
+          return newArray;
+        });
+        resolve();
+      });
       navigate('/guestface');
     };
     const getSubjectSuffix = (name)=>{
@@ -27,11 +35,10 @@ function GuestFacePage(){
       }
       return ((lastCharCode - 44032)% 28) === 0 ? "는" : "은"
     }
-    const hostNickname = "백엔드에서 받은 이름";
     return (
         <FaceContainer>
             <FaceContainer2>
-                <Image src={animalImage}></Image>
+                <Image src={animalImage}></Image> 이미지: {animalImage}
             </FaceContainer2>
             <FaceContainer3>
                 <Text>지금 생각하는 {hostName}{getSubjectSuffix(hostName)}</Text>         
@@ -41,6 +48,7 @@ function GuestFacePage(){
                     <SmallButton 
                       onClick={() => handleButtonClick(index)}
                       contents={presentImpression} 
+                      index={index}
                     />
                     </StyledLink>
                 )}
