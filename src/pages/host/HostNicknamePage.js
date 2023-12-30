@@ -16,6 +16,7 @@ const HostNicknamePage = () => {
   const handleStart = ()=>{
     // setNickname(nickname);
     console.log(nickname);
+    
   
   }
 
