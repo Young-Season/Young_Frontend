@@ -1,7 +1,7 @@
 import React, {useEffect} from "react";
 import axios from "axios";
 import {atom, useRecoilState} from "recoil";
-import { arrayState } from './atom';
+import { arrayState, userIdState } from './atom';
 export const baseUrl = 'https://young-season.o-r.kr';
 export const hostNicknameState = atom({
     key: "hostNicknameState",
@@ -25,21 +25,26 @@ export const GetGuestName = ()=>{
 
 }
 //guest의 response post
-export const postResponses = async()=>{
+
+export const usePostResponses = async()=>{
     const array = useRecoilValue(arrayState);
-    let data = {
-        "hostId": "...",	// string
-        "guestName": "...", // string
-        "animal": array[0], // int
-        "emoji": array[1], // int
-        "color": array[2], // int
-        "first": array[3], // int
-        "now": array[4] // int
-      }
-    try{
-        const response = await axios.post("/responses", data);
-        console.log(response);
-    } catch (error){
-        console.error(error);
+    const hostId = useRecoilValue(userIdState);
+    const postResponses = async()=>{
+        let data = {
+            "hostId": hostId,	// string
+            "guestName": "...", // string
+            "animal": array[0], // int
+            "emoji": array[1], // int
+            "color": array[2], // int
+            "first": array[3], // int
+            "now": array[4] // int
+        }
+        try{
+            const response = await axios.post("/responses", data);
+            console.log(response);
+        } catch (error){
+            console.error(error);
+        }
     }
+    return postResponses;    
 }

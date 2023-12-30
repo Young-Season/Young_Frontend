@@ -7,3 +7,8 @@ export const arrayState = atom({
     key: "arrayState",
     default: ["0", "0", "0", "0", "0"],
 })
+//hostid
+export const userIdState = atom({
+    key: 'userIdState',
+    default: null,
+});
