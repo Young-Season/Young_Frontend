@@ -30,8 +30,7 @@ function GuestFacePage(){
     return (
         <FaceContainer>
             <FaceContainer2>
-                {/* <Image src={process.env.PUBLIC_URL + '/images/Ghost.png'}></Image> */}
-                <Image src={animalImage}></Image>
+                <Image src={animalImage}></Image>이미지: {animalImage}
             </FaceContainer2>
             <FaceContainer3>
             <Text>{hostName}{getSubjectSuffix(hostName)} 처음 봤을 때</Text>         

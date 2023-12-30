@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import SmallButton from "../../components/layout/SmallButton";
 import { Link } from 'react-router-dom';
@@ -10,57 +10,34 @@ import { animalImageState } from '../../atom';
 function GuestFacePage(){
   const hostName = useRecoilValue(hostNicknameState);
   const [animalImage, setAnimalImage] = useRecoilState(animalImageState);
+  const [animalName, setAnimalName] = useState("");
+  useEffect(() => {
+    console.log(animalImage);
+  }, []);
   const navigate = useNavigate(); // useNavigate 훅 호출
-    const animals = [
-      { name: '강아지', name2: "Dog" },
-      { name: '고양이', name2: "Cat" },
-      { name: '토끼', name2: "Rabbit" },
-      { name: '여우', name2: "Fox" },
-      { name: '곰', name2: "Bear" },
-      { name: '다람쥐', name2: "Squirrel" },
-    ];
-    const handleButtonClick = (animalName) => {
-      let imageUrl;
-      switch (animalName){
-        case "Dog":
-          imageUrl = 'https://example.com/images/001.jpg';
-          break;
-        case "Cat":
-          imageUrl = 'https://example.com/images/002.jpg';
-          break;
-        case "Rabbit":
-          imageUrl = 'https://example.com/images/003.jpg';
-          break;
-        case "Fox":
-          imageUrl = 'https://example.com/images/004.jpg';
-          break;
-        case "Bear":
-            imageUrl = 'https://example.com/images/005.jpg';
-            break;
-        case "Squirrel":
-          imageUrl = 'https://example.com/images/006.jpg';
-          break;
-        default:
-          imageUrl = "";  
-        }
-        setAnimalImage(imageUrl);
-      }
+    const animals = ['강아지', '고양이', '토끼', '여우', '곰','다람쥐'];
+    const handleButtonClick = (index) => {
+      console.log("index:", index);
+      let imageUrl = animalImage;
+      imageUrl = imageUrl.slice(0,-5) + (index+1)+imageUrl.slice(-4);
+      console.log(imageUrl);
+      setAnimalImage(imageUrl);
       navigate('/guestemoji');
+    };    
+    
     
     const getSubjectSuffix = (name) => {
       const lastChar = name.charAt(name.length - 1);
-      const lastCharCode = lastChar.charCodeAt(0);
-    
+      const lastCharCode = lastChar.charCodeAt(0);   
       if (lastCharCode < 44032 || lastCharCode > 55203) {
         return '는'; // 한글이 아닌 경우에는 '이'를 반환
-      }
-    
+      }    
       return ((lastCharCode - 44032) % 28) === 0 ? '는' : '은';
     }
     return (
         <FaceContainer>
             <FaceContainer2>
-              <Image src={process.env.PUBLIC_URL + '/images/Ghost.png'}></Image>
+              <Image src={animalImage}></Image>
             </FaceContainer2>
             <FaceContainer3>
             <Text>{hostName}{getSubjectSuffix(hostName)} 00상이야! </Text>          
@@ -68,9 +45,9 @@ function GuestFacePage(){
                 {animals.map((animal, index) => 
                 <StyledLink to="/guestemoji" key={index}>
                     <SmallButton 
-                      onClick={() => handleButtonClick(animal.name2)}
-                      contents={animal.name} 
-                    />
+                      onClick={() => handleButtonClick(index)}
+                      contents={animal} 
+                    />{index}
                     </StyledLink>
                 )}
                 </FaceContainer4>

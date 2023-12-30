@@ -27,11 +27,10 @@ function GuestFacePage(){
       }
       return ((lastCharCode - 44032)% 28) === 0 ? "는" : "은"
     }
-    const hostNickname = "백엔드에서 받은 이름";
     return (
         <FaceContainer>
             <FaceContainer2>
-                <Image src={animalImage}></Image>
+                <Image src={animalImage}></Image> 이미지: {animalImage}
             </FaceContainer2>
             <FaceContainer3>
                 <Text>지금 생각하는 {hostName}{getSubjectSuffix(hostName)}</Text>         
@@ -41,6 +40,7 @@ function GuestFacePage(){
                     <SmallButton 
                       onClick={() => handleButtonClick(index)}
                       contents={presentImpression} 
+                      index={index}
                     />
                     </StyledLink>
                 )}
