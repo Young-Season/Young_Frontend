@@ -10,7 +10,8 @@ export const hostNicknameState = atom({
 //랜딩페이지 HOST 이름 반환
 export const GetGuestName = ()=>{
     const [hostNickname, setHostNickname] = useRecoilState(hostNickname);
-    const hostId = "your-host-id";
+    const hostid = useRecoilValue(userIdState);
+    const hostId = hostid;
     useEffect(()=>{
         axios.get(`${baseUrl}/names/${hostId}`)
         .then((response)=>{
@@ -26,7 +27,7 @@ export const GetGuestName = ()=>{
 }
 //guest의 response post
 
-export const usePostResponses = async()=>{
+export const usePostResponses = ()=>{
     const array = useRecoilValue(arrayState);
     const hostId = useRecoilValue(userIdState);
     const postResponses = async()=>{

@@ -4,7 +4,7 @@ import SmallButton from "../../components/layout/SmallButton";
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
-import { hostNicknameState } from '../../apis/guest';
+import { hostNicknameState, usePostResponses } from '../../apis/guest';
 import { useRecoilState } from 'recoil';
 import { animalImageState, arrayState } from '../../atom';
 function GuestFacePage(){
@@ -13,6 +13,7 @@ function GuestFacePage(){
   const [postArray, setPostArray] = useRecoilState(arrayState);
   const [animalName, setAnimalName] = useState("");
   const navigate = useNavigate(); // useNavigate 훅 호출
+  const postResponses = usePostResponses();
     const animals = ['강아지', '고양이', '토끼', '여우', '곰','다람쥐'];
     const handleButtonClick = async (index) => {
       console.log(`index: ${index}`);
@@ -31,9 +32,10 @@ function GuestFacePage(){
           console.log(`array: ${postArray}`);
           return newArray;
         });
+        
         resolve();
       });
-    
+      await postResponses();
       navigate('/guestemoji');
     };
     const getSubjectSuffix = (name) => {
