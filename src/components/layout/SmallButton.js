@@ -1,10 +1,10 @@
 import React from 'react'
 import styled from 'styled-components';
 
-const SmallButton = ({contents}) => {
+const SmallButton = ({contents, onClick}) => {
   //example: return <SmallButton contents={"Hello"}></SmallButton>
   return (
-    <SmallButtonContainer>
+    <SmallButtonContainer onClick={onClick}>
       <ContentBox>
         {contents}
       </ContentBox>

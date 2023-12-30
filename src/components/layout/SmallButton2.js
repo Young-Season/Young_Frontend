@@ -1,10 +1,10 @@
 import React from 'react'
 import styled from 'styled-components';
 const colors = ["#FF5D5D", "#F4CD00", "#00BA4B", "#4971FF", "#7800EF", "#F15AD0", "#FFFFFF", "#000000"];
-const SmallButton = ({contents, index}) => {
+const SmallButton = ({contents, index, onClick}) => {
   //example: return <SmallButton contents={"Hello"}></SmallButton>
   return (
-    <SmallButtonContainer index={index}>
+    <SmallButtonContainer index={index} onClick={onClick}>
       <ContentBox index={index}>
         {contents}
       </ContentBox>
