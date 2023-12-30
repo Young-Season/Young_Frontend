@@ -24,6 +24,7 @@ export const GetGuestName = ()=>{
     }, [hostId]);
 
 }
+//guest의 response post
 export const postResponses = async()=>{
     const array = useRecoilValue(arrayState);
     let data = {
