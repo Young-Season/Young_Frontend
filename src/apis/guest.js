@@ -1,7 +1,7 @@
 import React, {useEffect} from "react";
 import axios from "axios";
 import {atom, useRecoilState, useRecoilValue} from "recoil";
-import { arrayState } from '../atom';
+import { arrayState, userIdState } from '../atom';
 export const baseUrl = 'https://young-season.o-r.kr';
 export const hostNicknameState = atom({
     key: "hostNicknameState",
