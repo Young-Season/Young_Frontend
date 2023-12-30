@@ -1,6 +1,5 @@
 
 import styled from 'styled-components';
-import BigButton from '../../../src/components/layout/BigButton';
 import { getLogin } from '../../apis/login';
 
 const HostLoginPage = () => {
@@ -24,7 +23,15 @@ const HostLoginPage = () => {
           <Text>친구들이 생각하는 나는?</Text>
           
           <NicknameBox onClick={startKakao}>
-            <BigButton textBox={<><img src={process.env.PUBLIC_URL + '/images/message-circle.png'} alt="kakao" /> <NicknameText>카카오로 시작하기</NicknameText></>}></BigButton>
+            {/* <BigButton textBox={<> */}
+            <KakaoButton>
+              <img src={process.env.PUBLIC_URL + '/images/message-circle.png'} alt="kakao" />
+              <NicknameText>카카오로 시작하기</NicknameText>
+
+
+            </KakaoButton>
+
+            {/* </BigButton> */}
           </NicknameBox>
         </Contents>
       
@@ -38,6 +45,19 @@ export default HostLoginPage;
 const BackGround = styled.div`
   display: flex;
   justify-content: center;
+`
+const KakaoButton = styled.div`
+  display: flex;
+  width: 260px;
+  height: 48px;
+  padding: 10px 20px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.85);
+  background: #FEE500;
+
 `
 
 const Image = styled.div`
@@ -62,7 +82,8 @@ width: 280px;
 display: flex;
 `
 const Text = styled.div`
-color: var(--Brown, #64422E);
+c
+olor: var(--Brown, #64422E);
 text-align: center;
 font-family: Sandoll Hoyoyo2;
 font-size: 30px;
