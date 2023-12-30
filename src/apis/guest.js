@@ -1,7 +1,7 @@
 import React, {useEffect} from "react";
 import axios from "axios";
-import {atom, useRecoilState} from "recoil";
-import { arrayState } from './atom';
+import {atom, useRecoilState, useRecoilValue} from "recoil";
+import { arrayState } from '../atom';
 export const baseUrl = 'https://young-season.o-r.kr';
 export const hostNicknameState = atom({
     key: "hostNicknameState",
@@ -25,7 +25,7 @@ export const GetGuestName = ()=>{
 
 }
 //guest의 response post
-export const postResponses = async()=>{
+export const usePostResponses = async()=>{
     const array = useRecoilValue(arrayState);
     let data = {
         "hostId": "...",	// string
