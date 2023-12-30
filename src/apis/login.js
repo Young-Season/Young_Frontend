@@ -31,7 +31,6 @@ export const getLogin = async () => {
 //     console.error(error);
 //   }
 // }
-
 export const postkakaoCallback = async (code) => {
   try{
     const url = `${baseURL}/oauth/kakao/callback`;
