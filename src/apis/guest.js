@@ -7,7 +7,7 @@ export const hostNicknameState = atom({
     default: "",
 });
 //랜딩페이지 HOST 이름 반환
-export default function Guest(){
+export const GetGuestName = ()=>{
     const [hostNickname, setHostNickname] = useRecoilState(hostNickname);
     const hostId = "your-host-id";
     useEffect(()=>{
@@ -22,4 +22,21 @@ export default function Guest(){
         })
     }, [hostId]);
 
+}
+export const postResponses = async()=>{
+    let data = {
+        hostId: "...",
+        guestName: "...",
+        animal: "...",
+        emoji: "...",
+        color: "...",
+        first: "...",
+        now: "..."
+    };
+    try{
+        const response = await axios.post("/responses", data);
+        console.log(response);
+    } catch (error){
+        console.error(error);
+    }
 }

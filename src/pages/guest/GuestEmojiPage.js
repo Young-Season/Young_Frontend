@@ -1,14 +1,5 @@
 import styled from 'styled-components';
 import SmallButton from "../../components/layout/SmallButton";
-// import Ghost from "../../image/Ghost.png";
-// import Emoji1 from "../../image/emoji1.png";
-// import Emoji2 from "../../image/emoji2.png";
-// import Emoji3 from "../../image/emoji3.png";
-// import Emoji4 from "../../image/emoji4.png";
-// import Emoji5 from "../../image/emoji5.png";
-// import Emoji6 from "../../image/emoji6.png";
-// import Emoji7 from "../../image/emoji7.png";
-// import Emoji8 from "../../image/emoji8.png";
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilState, useRecoilValue } from 'recoil';
@@ -18,11 +9,13 @@ function GuestEmojiPage(){
   const navigate = useNavigate();
   const hostName = useRecoilValue(hostNicknameState);
   const animalImage = useRecoilValue(animalImageState);
+  console.log("animalImage: ", animalImage);
   const [animalImage2, setAnimalImage2] = useRecoilState(animalImageState);
   const emojis = ["emoji1", "emoji2", "emoji3", "emoji4", "emoji5", "emoji6", "emoji7", "emoji8"];
   const handleButtonClick = (emojiindex) => {
     let imageUrl = animalImage2;
-    imageUrl = imageUrl.slice(0,-6) + (emojiindex+1)+imageUrl.slice(-5);
+    let emojiIndexString = (emojiindex + 1).toString();
+    imageUrl = imageUrl.slice(0,-6) + emojiIndexString +imageUrl.slice(-5);
     setAnimalImage2(imageUrl);
     navigate('/guestcolor');
   };
@@ -38,6 +31,7 @@ function GuestEmojiPage(){
         <FaceContainer>
             <FaceContainer2>
               <Image src={animalImage} /> 
+              이미지: {animalImage}
             </FaceContainer2>
             <FaceContainer3>
                 <Text>{hostName}{getSubjectSuffix(hostName)} 이모지라면</Text>
@@ -47,6 +41,7 @@ function GuestEmojiPage(){
                         <SmallButton 
                           onClick={() => handleButtonClick(index)}
                           contents={<img src={process.env.PUBLIC_URL + `/images/${emoji}.png`}/>}/>
+                        
                         </StyledLink>
                 )}
                 </FaceContainer4>

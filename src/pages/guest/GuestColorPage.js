@@ -29,14 +29,14 @@ function GuestColorPage(){
     return (
         <FaceContainer>
             <FaceContainer2>
-                <Image src={animalImage}></Image>
+                <Image src={animalImage}></Image>이미지: {animalImage}
             </FaceContainer2>
             <FaceContainer3>
             <Text>{hostName}{getSubjectSuffix(hostName)} 어울리는 색은... </Text>    
                 <FaceContainer4>
                 {colors.map((color, index) => 
                 <StyledLink to="/firstimpression" key={index}>
-                    <SmallButton2 
+                    <SmallButton2
                       onClick={() => handleButtonClick(index)}
                       contents={color} 
                       index={index}
