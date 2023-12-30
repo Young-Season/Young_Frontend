@@ -5,9 +5,13 @@ const HostLoginPage = () => {
   const imageUrl = process.env.PUBLIC_URL + '/images/BG.png';
 
 
-  const startKakao = () => {
+  const startKakao = async () => {
     //카카오 로그인 여기에 구현
     console.log('start');
+    // const data = await getLogin();
+    // console.log(data);
+    
+    window.location.href = '/hostLoading';
   }
 
   return (
