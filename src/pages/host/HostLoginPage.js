@@ -36,20 +36,25 @@ const HostLoginPage = () => {
       const code = urlParams.get('code');
       if (code) {
         console.log(code);
-        const data = await postkakaoCallback(code);
-        console.log(data);
-
-        if (data && data.status === '200') {
-          setUserId(data.id);
-          // 나중에 hostUrlDeployPage로 변경
-          navigate('/hostLoading');
+        try{
+          const data = await postkakaoCallback(code);
+          console.log(data);
+  
+          if (data && data.status === '200') {
+            setUserId(data.id);
+            // 나중에 hostUrlDeployPage로 변경
+            navigate('/hostLoading');
+          }
+          else if(data && data.status === '404'){
+            navigate('/hostLoading');
+          }
+          // else{
+          //   navigate('/hostLoading');
+          // }
         }
-        else if(data && data.status === '404'){
-          navigate('/hostLoading');
+        catch(error){
+          
         }
-        // else{
-        //   navigate('/hostLoading');
-        // }
       }
     };
     fetchCode();
