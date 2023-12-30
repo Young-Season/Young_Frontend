@@ -4,8 +4,13 @@ import styled from "styled-components";
 const Footer = () => {
   return (
     <FooterContainer>
-      <div>Made by.</div>
-      <div>중앙대학교 멋쟁이사자처럼 11기 영춘기</div>
+      <TextContainer>
+        <Text>
+          Made by.
+          <br />
+          중앙대학교 멋쟁이사자처럼 11기 영춘기
+        </Text>
+      </TextContainer>
     </FooterContainer>
   );
 };
@@ -21,4 +26,28 @@ const FooterContainer = styled.div`
   width: 100%;
   background-color: #64422e;
   color: white;
+  padding: 0;
+`;
+
+const TextContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 23.4375rem;
+  height: 7.5rem;
+  padding: 2rem 0.625rem 2.5rem 1.25rem;
+  align-items: flex-start;
+  gap: 0.625rem;
+`;
+
+const Text = styled.div`
+  color: #fffdfd;
+  font-family: Spoqa Han Sans Neo;
+  font-size: 0.75rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 150%; /* 1.125rem */
+  white-space: pre-line;
+  margin: 0;
+  padding: 0;
 `;
