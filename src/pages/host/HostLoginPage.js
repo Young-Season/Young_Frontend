@@ -1,24 +1,59 @@
 import styled from 'styled-components';
-import { getLogin } from '../../apis/login';
+import { getLogin, postkakaoCallback } from '../../apis/login';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useSetRecoilState } from 'recoil';
+import { userIdState } from '../../atom';
 
 
 const HostLoginPage = () => {
   const imageUrl = process.env.PUBLIC_URL + '/images/BG.png';
-
-
+  const navigate = useNavigate();
+  const location = useLocation();
+  const setUserId = useSetRecoilState(userIdState);
+  
+  
   const startKakao = async () => {
     //카카오 로그인 여기에 구현
     try{
       console.log('start');
       const data = await getLogin();
       console.log(data);
-      window.location.href = '/hostLoading';
+
+      console.log("방가방가");
+      
     }
     catch(error){
       console.error('Login failed:', error);
-      window.location.href = '/hostLoading';
+      console.log("하이");
+      // navigate('/hostLoading');
     }
   }
+  
+  useEffect(()=>{
+    const fetchCode = async () => {
+      const urlParams = new URLSearchParams(location.search);
+      const code = urlParams.get('code');
+      if (code) {
+        console.log(code);
+        const data = await postkakaoCallback(code);
+        console.log(data);
+
+        if (data && data.status === '200') {
+          setUserId(data.id);
+          // 나중에 hostUrlDeployPage로 변경
+          navigate('/hostLoading');
+        }
+        else if(data && data.status === '404'){
+          navigate('/hostLoading');
+        }
+        // else{
+        //   navigate('/hostLoading');
+        // }
+      }
+    };
+    fetchCode();
+  }, [location, setUserId]);
 
   return (
     <BackGround>
@@ -29,7 +64,7 @@ const HostLoginPage = () => {
           
           <NicknameBox onClick={startKakao}>
             {/* <BigButton textBox={<> */}
-            <KakaoButton>
+            <KakaoButton href="https://young-season.o-r.kr/oauth/kakao">
               <img src={process.env.PUBLIC_URL + '/images/message-circle.png'} alt="kakao" />
               <NicknameText>카카오로 시작하기</NicknameText>
 
@@ -51,7 +86,7 @@ const BackGround = styled.div`
   display: flex;
   justify-content: center;
 `
-const KakaoButton = styled.div`
+const KakaoButton = styled.a`
   display: flex;
   width: 260px;
   height: 48px;
