@@ -6,26 +6,36 @@ import { useNavigate } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 import { hostNicknameState } from '../../apis/guest';
 import { useRecoilState } from 'recoil';
-import { animalImageState } from '../../atom';
+import { animalImageState, arrayState } from '../../atom';
 function GuestFacePage(){
   const hostName = useRecoilValue(hostNicknameState);
   const [animalImage, setAnimalImage] = useRecoilState(animalImageState);
+  const [postArray, setPostArray] = useRecoilState(arrayState);
   const [animalName, setAnimalName] = useState("");
-  useEffect(() => {
-    console.log(animalImage);
-  }, []);
   const navigate = useNavigate(); // useNavigate 훅 호출
     const animals = ['강아지', '고양이', '토끼', '여우', '곰','다람쥐'];
-    const handleButtonClick = (index) => {
-      console.log("index:", index);
+    const handleButtonClick = async (index) => {
+      console.log(`index: ${index}`);
       let imageUrl = animalImage;
       imageUrl = imageUrl.slice(0,-5) + (index+1)+imageUrl.slice(-4);
       console.log(imageUrl);
       setAnimalImage(imageUrl);
+      console.log(animalImage);
+
+      // Wrap setArray in a Promise
+      await new Promise(resolve => {
+        setPostArray(prevArray => {
+          let newArray = [...prevArray];
+          newArray[0] = index+1;
+          console.log("index:",index);
+          console.log(`array: ${postArray}`);
+          return newArray;
+        });
+        resolve();
+      });
+    
       navigate('/guestemoji');
-    };    
-    
-    
+    };
     const getSubjectSuffix = (name) => {
       const lastChar = name.charAt(name.length - 1);
       const lastCharCode = lastChar.charCodeAt(0);   
@@ -43,12 +53,11 @@ function GuestFacePage(){
             <Text>{hostName}{getSubjectSuffix(hostName)} 00상이야! </Text>          
                 <FaceContainer4>
                 {animals.map((animal, index) => 
-                <StyledLink to="/guestemoji" key={index}>
-                    <SmallButton 
-                      onClick={() => handleButtonClick(index)}
-                      contents={animal} 
-                    />{index}
-                    </StyledLink>
+                <SmallButton 
+                  onClick={() => handleButtonClick(index)}
+                  contents={animal}
+                  key={index}>
+                    </SmallButton>
                 )}
                 </FaceContainer4>
             </FaceContainer3>

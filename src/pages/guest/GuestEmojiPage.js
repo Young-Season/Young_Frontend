@@ -3,8 +3,8 @@ import SmallButton from "../../components/layout/SmallButton";
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { animalImageState } from "../../atom";
-import { hostNicknameState } from '../../apis/guest';
+import { animalImageState, arrayState } from "../../atom";
+import { hostNicknameState} from '../../apis/guest';
 function GuestEmojiPage(){
   const navigate = useNavigate();
   const hostName = useRecoilValue(hostNicknameState);
@@ -12,11 +12,22 @@ function GuestEmojiPage(){
   console.log("animalImage: ", animalImage);
   const [animalImage2, setAnimalImage2] = useRecoilState(animalImageState);
   const emojis = ["emoji1", "emoji2", "emoji3", "emoji4", "emoji5", "emoji6", "emoji7", "emoji8"];
-  const handleButtonClick = (emojiindex) => {
+  const [postArray, setPostArray] = useRecoilState(arrayState);
+  const handleButtonClick = async(index) => {
     let imageUrl = animalImage2;
-    let emojiIndexString = (emojiindex + 1).toString();
+    let emojiIndexString = (index + 1).toString();
     imageUrl = imageUrl.slice(0,-6) + emojiIndexString +imageUrl.slice(-5);
     setAnimalImage2(imageUrl);
+    await new Promise(resolve => {
+      setPostArray(prevArray => {
+        let newArray = [...prevArray];
+        newArray[1] = index+1;
+        console.log("index:",index);
+        console.log(`array: ${postArray}`);
+        return newArray;
+      });
+      resolve();
+    });
     navigate('/guestcolor');
   };
   const getSubjectSuffix = (name) =>{
