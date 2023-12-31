@@ -25,3 +25,9 @@ export const tokenState = atom({
   key: "tokenState",
   default: '',
 });
+
+//guestNickname
+export const guestNicknameState = atom({
+  key: "guestNicknameState",
+  default: '',
+});
