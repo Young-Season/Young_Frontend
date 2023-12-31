@@ -1,11 +1,34 @@
 import styled from 'styled-components';
+import { useEffect } from 'react';
 import UrlButton from "../../components/layout/UrlButton";
 import { useRecoilState } from 'recoil';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import { useRecoilValue } from 'recoil';
+import { nicknameAtom } from '../../atom';
+const {Kakao} = window;
 const GuestFacePage = () => {
   const navigate = useNavigate(); // useNavigate 훅 호출
-    
+  const realUrl = "http://localhost:3000";
+  //로컬주소
+  const resultUrl = "http://localhost:3000";
+  const host_nickname = useRecoilValue(nicknameAtom);
+  useEffect(()=>{
+    Kakao.cleanup();
+    Kakao.init("9769e69ba2b11621a50723827584b67e")
+    console.log(Kakao.isInitialized);
+  }, []) 
+  const shareKaKao = () =>{
+    Kakao.Share.createCustomButton({
+      container: '#kakaotalk-sharing-btn',
+      templateId: 102394,
+      templateArgs: {
+        title: '제목 영역입니다.',
+        description: '설명 영역입니다.',
+        host_nickname: `${host_nickname}`,
+      },
+    });
+  } 
     return (
         <FaceContainer>
             <Text>얼굴상</Text> 
@@ -13,7 +36,9 @@ const GuestFacePage = () => {
                 <Image src={process.env.PUBLIC_URL + '/images/Ghost.png'}></Image>
                 <FaceContainer3>
                 <Text1>친구에게 공유하고 내 이미지를 알아보세요!</Text1>
-                <UrlButton text={"URL 들어가는 공간"}></UrlButton>
+                <div id="kakaotalk-sharing-btn">
+          <UrlButton onClick = {()=>{shareKaKao()}} text={"URL 들어가는 공간"}></UrlButton>
+        </div>
                 </FaceContainer3>
             </FaceContainer2>
             

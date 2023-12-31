@@ -17,7 +17,7 @@ export const userIdState = atom({
 
 export const nicknameAtom = atom({
   key: "nickname",
-  default: ``,
+  default: "hello",
 });
 
 //token
