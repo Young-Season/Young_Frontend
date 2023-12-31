@@ -2,12 +2,17 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import BigButton from "../../../src/components/layout/BigButton";
 import StartButton from "../../../src/components/layout/StartButton";
-import { nicknameAtom } from "../../atom";
-import { useRecoilState } from "recoil";
+import { nicknameAtom, tokenState, userIdState } from "../../atom";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import { postNickname } from "../../apis/login";
+import { useNavigate } from "react-router-dom";
 
 const HostNicknamePage = () => {
-  const host_nickname = "영은";
   const [nickname, setNickname] = useRecoilState(nicknameAtom);
+  const userId = useRecoilValue(userIdState);
+  const setToken = useSetRecoilState(tokenState);
+  const setUserId = useSetRecoilState(userIdState);
+  const navigate = useNavigate();
 
   const handleNicknameChange = (event) => {
     setNickname(event.target.value);
@@ -15,9 +20,23 @@ const HostNicknamePage = () => {
   };
 
   //닉네임 post & 시작
-  const handleStart = () => {
-    // setNickname(nickname);
-    console.log(nickname);
+  const handleStart = async () => {
+    console.log(userId);
+    const result = await postNickname(userId, nickname);
+    if(result.status === "409"){
+      console.log("동일 user");
+      alert("동일한 유저가 이미 존재합니다.");
+      setUserId(null);
+      navigate('/');
+
+    }
+    else if(result.status === "201"){
+      setToken(result.data.token);
+    }
+    else{
+      alert("오류 발생");
+      navigate('/');
+    }
   };
 
   //조사 설정
@@ -55,9 +74,9 @@ const HostNicknamePage = () => {
             </NicknameText>
           </NicknameBox>
 
-          <div onClick={handleStart}>
+          <Start onClick={handleStart}>
             <StartButton />
-          </div>
+          </Start>
         </Contents>
       </Image>
     </BackGround>
@@ -124,3 +143,6 @@ const NicknameText = styled.div`
   font-weight: 500;
   line-height: normal;
 `;
+const Start = styled.div`
+cursor: pointer;
+`

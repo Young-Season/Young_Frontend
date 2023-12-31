@@ -19,3 +19,9 @@ export const nicknameAtom = atom({
   key: "nickname",
   default: ``,
 });
+
+//token
+export const tokenState = atom({
+  key: "tokenState",
+  default: '',
+});

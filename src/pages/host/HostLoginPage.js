@@ -3,7 +3,7 @@ import { getLogin, postkakaoCallback } from '../../apis/login';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useSetRecoilState } from 'recoil';
-import { userIdState } from '../../atom';
+import { tokenState, userIdState } from '../../atom';
 
 
 const HostLoginPage = () => {
@@ -11,6 +11,7 @@ const HostLoginPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const setUserId = useSetRecoilState(userIdState);
+  const setToken = useSetRecoilState(tokenState);
   
   
   const startKakao = async () => {
@@ -34,10 +35,12 @@ const HostLoginPage = () => {
         console.log(code);
         try{
           const data = await postkakaoCallback(code);
+          console.log(data.id);
           setUserId(data.id);
   
           if (data && data.status === '200') {
             // 기존 유저
+            setToken(data.token);
             navigate('/deploy');
           }
           else if(data && data.status === '404'){
