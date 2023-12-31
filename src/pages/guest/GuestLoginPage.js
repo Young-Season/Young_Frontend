@@ -2,11 +2,18 @@ import React, { useState } from 'react'
 import styled from 'styled-components';
 import BigButton from '../../../src/components/layout/BigButton';
 import StartButton from '../../../src/components/layout/StartButton';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { guestNicknameState, userIdState } from '../../atom';
+import { postGuestLogin } from '../../apis/guestLogin';
+import { useNavigate } from 'react-router-dom';
 
 const GuestLoginPage = () => {
   const imageUrl = process.env.PUBLIC_URL + '/images/BG.png';
   const host_nickname = "영은";
   const [nickname, setNickname] = useState('');
+  const hostId = useRecoilValue(userIdState);
+  const setGuestNickname = useSetRecoilState(guestNicknameState);
+  const navigate = useNavigate();
 
   const handleNicknameChange = (event) => {
     setNickname(event.target.value);
@@ -14,10 +21,21 @@ const GuestLoginPage = () => {
   };
 
   //닉네임 post & 시작
-  const handleStart = ()=>{
-    // setNickname(nickname);
-    console.log(nickname);
-  
+  const handleStart = async ()=>{
+    try{
+      const newNickname = (nickname.replace(/\s/g, '+'));
+      const data = await postGuestLogin(hostId, newNickname);
+      if(data.status === "200"){
+        setGuestNickname(data.name);
+        navigate("/presentimpression");
+      }
+      else if(data.status === "400"){
+        alert("동일한 닉네임이 존재합니다.");
+      }
+    }
+    catch(error){
+      alert("다시 시도해주세요");
+    }
   }
 
   //조사 설정

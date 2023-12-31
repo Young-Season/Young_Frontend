@@ -3,7 +3,7 @@ import { getLogin, postkakaoCallback } from '../../apis/login';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useSetRecoilState } from 'recoil';
-import { userIdState } from '../../atom';
+import { tokenState, userIdState } from '../../atom';
 
 
 const HostLoginPage = () => {
@@ -11,6 +11,7 @@ const HostLoginPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const setUserId = useSetRecoilState(userIdState);
+  const setToken = useSetRecoilState(tokenState);
   
   
   const startKakao = async () => {
@@ -18,14 +19,10 @@ const HostLoginPage = () => {
     try{
       console.log('start');
       const data = await getLogin();
-      console.log(data);
-
-      console.log("방가방가");
-      
+      console.log(data);      
     }
     catch(error){
       console.error('Login failed:', error);
-      console.log("하이");
       // navigate('/hostLoading');
     }
   }
@@ -38,14 +35,16 @@ const HostLoginPage = () => {
         console.log(code);
         try{
           const data = await postkakaoCallback(code);
-          console.log(data);
+          console.log(data.id);
+          setUserId(data.id);
   
           if (data && data.status === '200') {
-            setUserId(data.id);
-            // 나중에 hostUrlDeployPage로 변경
-            navigate('/hostLoading');
+            // 기존 유저
+            setToken(data.token);
+            navigate('/deploy');
           }
           else if(data && data.status === '404'){
+            //신규 가입자
             navigate('/hostLoading');
           }
           // else{
@@ -53,12 +52,11 @@ const HostLoginPage = () => {
           // }
         }
         catch(error){
-          
         }
       }
     };
     fetchCode();
-  }, [location, setUserId]);
+  }, [location, setUserId, navigate]);
 
   return (
     <BackGround>
