@@ -1,16 +1,20 @@
 import React from "react";
 import styled from "styled-components";
 import Footer from "../../components/layout/Footer";
+import { useNavigate } from "react-router-dom";
+import { getHostTotalResult } from "../../apis/host";
 
 const HostIndividualResultPage = ({ guestName, hostName }) => {
   const backButton = process.env.PUBLIC_URL + "/images/goToBackButton.png";
   const answerArrow = process.env.PUBLIC_URL + "/images/arrow-right.png";
 
+  const navigate = useNavigate();
+
   return (
     <Wrapper>
       <Container>
         <ButtonContainer>
-          <GoToBackButton src={backButton} />
+          <GoToBackButton src={backButton} onClick={() => navigate(-1)} />
         </ButtonContainer>
         <Title>친구들이 생각하는 루씨는?</Title>
         <WhiteBox>
