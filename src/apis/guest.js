@@ -8,21 +8,19 @@ export const hostNicknameState = atom({
     default: "",
 });
 //랜딩페이지 HOST 이름 반환
-export const GetGuestName = ()=>{
+export const GetGuestName = async()=>{
     const [hostNickname, setHostNickname] = useRecoilState(hostNickname);
     const hostid = useRecoilValue(userIdState);
-    const hostId = hostid;
-    useEffect(()=>{
-        axios.get(`${baseUrl}/names/${hostId}`)
-        .then((response)=>{
-            if(response.data.status === "200"){
-                setHostNickname(response.data.data["host-name"]);
+    try{
+        const response = await axios.get("/names", {
+            params: {
+                hostId: hostid
             }
-        })
-        .catch((error)=>{
+        });
+        setHostNickname(response.data.data.hostName);
+    }catch(error){
             console.error("Error fetching data: ", error);
-        })
-    }, [hostId]);
+    }
 
 }
 //guest의 response post

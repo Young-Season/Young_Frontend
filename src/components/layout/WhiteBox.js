@@ -4,7 +4,7 @@ import styled from "styled-components";
 const WhiteBox = () => {
   return (
     <WhiteContainer>
-      <div>ㅇㅇ</div>
+      <div></div>
     </WhiteContainer>
   );
 };
