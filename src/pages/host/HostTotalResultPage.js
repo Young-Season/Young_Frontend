@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import Footer from "../../components/layout/Footer";
 import { useNavigate } from "react-router-dom";
 import { getHostTotalResult } from "../../apis/host";
 import { useState } from "react";
+import { nicknameAtom } from "../../atom";
 
 import {
   Wrapper,
@@ -18,9 +19,11 @@ import {
   Description,
   Button,
 } from "../guest/GuestOthersResultPage";
+import { useRecoilValue } from "recoil";
+import { userIdState } from "../../atom";
 
 const HostTotalResultPage = () => {
-  const image = process.env.PUBLIC_URL + "/images/rabbit22.png";
+  // const image = process.env.PUBLIC_URL + "/images/rabbit22.png";
   // const statistics = process.env.PUBLIC_URL + "/images/home.png";
   const download = process.env.PUBLIC_URL + "/images/download.png";
   const urlImage = process.env.PUBLIC_URL + "/images/copyButton.png";
@@ -28,55 +31,49 @@ const HostTotalResultPage = () => {
 
   const navigate = useNavigate();
 
-  // const response = getHostTotalResult(hostId);
-  // const data = response.data.data;
-  // const imagee = data.image;
-  // const title = data.title;
-  // const first = data.first;
-  // const now = data.now;
-  // const guests = data.guests;
+  const hostNickname = useRecoilValue(nicknameAtom);
+  const hostId = useRecoilValue(userIdState);
 
-  // const [visibleGuests, setVisibleGuests] = useState(6);
-  // const seeMore = () => {
-  //   setVisibleGuests((prevVisibleGuests) => prevVisibleGuests + 6);
-  // };
-  // {guests.slice(0, visibleGuests)
-  // .map((guest) => (
-  // 	<TableListContainer>
-  //             <NicknameBox>
-  //               <ListText>{guest.name}</ListText>
-  //             </NicknameBox>
-  //             <AnswerBox>
-  //               <ListText>
-  //                 <AnswerFileImage
-  //                   src={fileImage}
-  //                   onClick={() => navigate("/hostResult", { state: guest })}
-  //                 />
-  //               </ListText>
-  //             </AnswerBox>
-  //           </TableListContainer>
-  // ))}
+  useEffect(() => {
+    getHostTotalResult(hostId)
+      .then((response) => {
+        if (response.data.status === "200") {
+          console.log(response.data.message);
+        } else if (response.data.status === "204") {
+          console.log(response.data.message);
+        } else if (response.data.status === "400") {
+          console.log(response.data.message);
+        } else if (response.data.status === "403") {
+          console.log(response.data.message);
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  });
+
+  const data = getHostTotalResult(hostId).data.data;
+  const guests = data.guests;
+
+  const [visibleGuests, setVisibleGuests] = useState(6);
+  const seeMore = () => {
+    setVisibleGuests((prevVisibleGuests) => prevVisibleGuests + 6);
+  };
 
   return (
     <Wrapper>
       <Container>
-        <Title>친구들이 생각하는 루씨는?</Title>
+        <Title>친구들이 생각하는 {hostNickname}는?</Title>
         <WhiteBox style={{ padding: 0 }}>
-          <Image src={image} />
+          <Image src={data.image} />
         </WhiteBox>
         <DescriptionContainer>
-          <DescriptionTitle>처음엔 귀엽지만 지금은 웃긴 친구!</DescriptionTitle>
+          <DescriptionTitle>{data.title}</DescriptionTitle>
           <Description>
-            당신은 처음엔 수줍지만 귀여운 친구였어요.
-            <br />
-            마치 뭐랄까.. 왜 다들 수업에 갑자기 가버린걸까요?
-            <br />
-            흑흑 남겨지니 조금 슬프네요.
+            {data.first}
             <br />
             <br />
-            하지만 이제는 웃기다는걸 알게 됐어요. <br />
-            마치 나의 멋사 내의 웃음벨이랄까요? <br />
-            당신 없는 멋사 상상할 수 없다 이말이야 ~ <br />
+            {data.now}
           </Description>
         </DescriptionContainer>
         <Button onClick={() => navigate("/hostStatistics")}>
@@ -101,24 +98,23 @@ const HostTotalResultPage = () => {
             </TableHeaderContainer>
             {/* 헤더 */}
 
-            {/* {guests.slice(0, visibleGuests)
-						.map((guest) => (
-							<TableListContainer>
-              <NicknameBox>
-                <ListText>{guest.name}</ListText>
-              </NicknameBox>
-              <AnswerBox>
-                <ListText>
-                  <AnswerFileImage
-                    src={fileImage}
-                    onClick={() => navigate("/hostResult", { state: guest })}
-                  />
-                </ListText>
-              </AnswerBox>
-            </TableListContainer>
-						))} */}
+            {guests.slice(0, visibleGuests).map((guest) => (
+              <TableListContainer>
+                <NicknameBox>
+                  <ListText>{guest.name}</ListText>
+                </NicknameBox>
+                <AnswerBox>
+                  <ListText>
+                    <AnswerFileImage
+                      src={fileImage}
+                      onClick={() => navigate("/hostResult", { state: guest })}
+                    />
+                  </ListText>
+                </AnswerBox>
+              </TableListContainer>
+            ))}
 
-            <TableListContainer>
+            {/* <TableListContainer>
               <NicknameBox>
                 <ListText>닉네임</ListText>
               </NicknameBox>
@@ -126,14 +122,14 @@ const HostTotalResultPage = () => {
                 <ListText>
                   <AnswerFileImage
                     src={fileImage}
-                    // onClick={() => navigate("/hostResult", { state: guests })}
+                    onClick={() => navigate("/hostResult", { state: guests })}
                   />
                 </ListText>
               </AnswerBox>
-            </TableListContainer>
-            {/* {visibleGuests < guests.length && (
-							<SeeMoreButton>더보기</SeeMoreButton>
-						)} */}
+            </TableListContainer> */}
+            {visibleGuests < guests.length && (
+              <SeeMoreButton>더보기</SeeMoreButton>
+            )}
           </WhiteBox>
           <SharingText>친구에게 공유하고 내 이미지를 알아보세요!</SharingText>
           <Button>
