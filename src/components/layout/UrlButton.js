@@ -1,10 +1,10 @@
 import React from 'react'
 import styled from 'styled-components';
 
-const UrlButton = ({text}) => {
+const UrlButton = ({onClick, text}) => {
   // example : <BigButton textBox={<Text>HI</Text>}></BigButton>
   return (
-    <BigButtonContainer>
+    <BigButtonContainer onClick={onClick}>
       {text}
       <Image src={process.env.PUBLIC_URL + '/images/CopyButton.png'}></Image>
     </BigButtonContainer>
@@ -13,7 +13,7 @@ const UrlButton = ({text}) => {
 
 export default UrlButton;
 
-const BigButtonContainer = styled.div`
+const BigButtonContainer = styled.button`
 display: flex;
 width: 17.5rem;
 height: 2.5rem;
