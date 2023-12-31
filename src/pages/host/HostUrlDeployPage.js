@@ -8,7 +8,7 @@ import { useRecoilValue } from 'recoil';
 import { nicknameAtom } from '../../atom';
 const {Kakao} = window;
 const GuestFacePage = () => {
-  const navigate = useNavigate(); // useNavigate 훅 호출
+  const navigate = useNavigate(); 
   const realUrl = "http://localhost:3000";
   //로컬주소
   const resultUrl = "http://localhost:3000";
