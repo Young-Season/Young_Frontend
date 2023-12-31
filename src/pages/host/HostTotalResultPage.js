@@ -1,6 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 import Footer from "../../components/layout/Footer";
+import { useNavigate } from "react-router-dom";
+import { getHostTotalResult } from "../../apis/host";
+import { useState } from "react";
 
 import {
   Wrapper,
@@ -22,6 +25,37 @@ const HostTotalResultPage = () => {
   const download = process.env.PUBLIC_URL + "/images/download.png";
   const urlImage = process.env.PUBLIC_URL + "/images/copyButton.png";
   const fileImage = process.env.PUBLIC_URL + "/images/file.png";
+
+  const navigate = useNavigate();
+
+  // const response = getHostTotalResult(hostId);
+  // const data = response.data.data;
+  // const imagee = data.image;
+  // const title = data.title;
+  // const first = data.first;
+  // const now = data.now;
+  // const guests = data.guests;
+
+  // const [visibleGuests, setVisibleGuests] = useState(6);
+  // const seeMore = () => {
+  //   setVisibleGuests((prevVisibleGuests) => prevVisibleGuests + 6);
+  // };
+  // {guests.slice(0, visibleGuests)
+  // .map((guest) => (
+  // 	<TableListContainer>
+  //             <NicknameBox>
+  //               <ListText>{guest.name}</ListText>
+  //             </NicknameBox>
+  //             <AnswerBox>
+  //               <ListText>
+  //                 <AnswerFileImage
+  //                   src={fileImage}
+  //                   onClick={() => navigate("/hostResult", { state: guest })}
+  //                 />
+  //               </ListText>
+  //             </AnswerBox>
+  //           </TableListContainer>
+  // ))}
 
   return (
     <Wrapper>
@@ -45,7 +79,7 @@ const HostTotalResultPage = () => {
             당신 없는 멋사 상상할 수 없다 이말이야 ~ <br />
           </Description>
         </DescriptionContainer>
-        <Button>
+        <Button onClick={() => navigate("/hostStatistics")}>
           <ButtonText>질문별 통계 보러가기 </ButtonText>
         </Button>
         <Button>
@@ -65,6 +99,24 @@ const HostTotalResultPage = () => {
                 <HeaderText>답변</HeaderText>
               </AnswerBox>
             </TableHeaderContainer>
+            {/* 헤더 */}
+
+            {/* {guests.slice(0, visibleGuests)
+						.map((guest) => (
+							<TableListContainer>
+              <NicknameBox>
+                <ListText>{guest.name}</ListText>
+              </NicknameBox>
+              <AnswerBox>
+                <ListText>
+                  <AnswerFileImage
+                    src={fileImage}
+                    onClick={() => navigate("/hostResult", { state: guest })}
+                  />
+                </ListText>
+              </AnswerBox>
+            </TableListContainer>
+						))} */}
 
             <TableListContainer>
               <NicknameBox>
@@ -72,65 +124,16 @@ const HostTotalResultPage = () => {
               </NicknameBox>
               <AnswerBox>
                 <ListText>
-                  <AnswerFileImage src={fileImage} />
+                  <AnswerFileImage
+                    src={fileImage}
+                    // onClick={() => navigate("/hostResult", { state: guests })}
+                  />
                 </ListText>
               </AnswerBox>
             </TableListContainer>
-
-            <TableListContainer>
-              <NicknameBox>
-                <ListText>닉네임</ListText>
-              </NicknameBox>
-              <AnswerBox>
-                <ListText>
-                  <AnswerFileImage src={fileImage} />
-                </ListText>
-              </AnswerBox>
-            </TableListContainer>
-
-            <TableListContainer>
-              <NicknameBox>
-                <ListText>닉네임</ListText>
-              </NicknameBox>
-              <AnswerBox>
-                <ListText>
-                  <AnswerFileImage src={fileImage} />
-                </ListText>
-              </AnswerBox>
-            </TableListContainer>
-
-            <TableListContainer>
-              <NicknameBox>
-                <ListText>닉네임</ListText>
-              </NicknameBox>
-              <AnswerBox>
-                <ListText>
-                  <AnswerFileImage src={fileImage} />
-                </ListText>
-              </AnswerBox>
-            </TableListContainer>
-
-            <TableListContainer>
-              <NicknameBox>
-                <ListText>닉네임</ListText>
-              </NicknameBox>
-              <AnswerBox>
-                <ListText>
-                  <AnswerFileImage src={fileImage} />
-                </ListText>
-              </AnswerBox>
-            </TableListContainer>
-
-            <TableListContainer>
-              <NicknameBox>
-                <ListText>닉네임</ListText>
-              </NicknameBox>
-              <AnswerBox>
-                <ListText>
-                  <AnswerFileImage src={fileImage} />
-                </ListText>
-              </AnswerBox>
-            </TableListContainer>
+            {/* {visibleGuests < guests.length && (
+							<SeeMoreButton>더보기</SeeMoreButton>
+						)} */}
           </WhiteBox>
           <SharingText>친구에게 공유하고 내 이미지를 알아보세요!</SharingText>
           <Button>
@@ -229,6 +232,20 @@ const ListText = styled.div`
 const AnswerFileImage = styled.img`
   width: 1.25rem;
   height: 1.25rem;
+  cursor: pointer;
+`;
+
+const SeeMoreButton = styled.div`
+  width: 5rem;
+  color: var(--Light-Gray, #a4a4a4);
+  text-align: center;
+  font-family: Spoqa Han Sans Neo;
+  font-size: 0.75rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  align-self: center;
+  cursor: pointer;
 `;
 
 const SharingText = styled.div`

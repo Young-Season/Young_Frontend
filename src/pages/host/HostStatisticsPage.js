@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Footer from "../../components/layout/Footer";
+import { useNavigate } from "react-router-dom";
 import {
   Wrapper,
   Container,
@@ -13,11 +14,13 @@ import {
 const HostStatisticsPage = () => {
   const backButton = process.env.PUBLIC_URL + "/images/goToBackButton.png";
 
+  const navigate = useNavigate();
+
   return (
     <Wrapper>
       <Container>
         <ButtonContainer>
-          <GoToBackButton src={backButton} />
+          <GoToBackButton src={backButton} onClick={() => navigate(-1)} />
         </ButtonContainer>
         <Title>질문별 통계</Title>
         <WhiteBox>

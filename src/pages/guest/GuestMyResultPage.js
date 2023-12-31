@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 import Footer from "../../components/layout/Footer";
 import {
   Wrapper,
@@ -23,6 +24,16 @@ import {
 const GuestMyResultPage = () => {
   const homeButton = process.env.PUBLIC_URL + "/images/home.png";
   const image = process.env.PUBLIC_URL + "/images/rabbit22.png";
+
+  const navigate = useNavigate();
+
+  const seeOthersResult = () => {
+    navigate("/guestOtherResult");
+  };
+
+  const goToHostLogin = () => {
+    navigate("/hostLogin");
+  };
 
   return (
     <Wrapper>
@@ -52,7 +63,7 @@ const GuestMyResultPage = () => {
 
         <CuriousContainer>
           <CuriousText>다른 친구들이 본 루씨가 궁금하다면?</CuriousText>
-          <Button>
+          <Button onClick={seeOthersResult}>
             <ButtonText>결과 보러 가기</ButtonText>
           </Button>
         </CuriousContainer>
@@ -60,7 +71,7 @@ const GuestMyResultPage = () => {
         <CuriousContainer>
           <CuriousText>친구가 보는 내가 궁금하다면?</CuriousText>
           <Button>
-            <ButtonText>
+            <ButtonText onClick={goToHostLogin}>
               물어보러 가기 <HomeButton src={homeButton} />
             </ButtonText>
           </Button>
