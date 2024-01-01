@@ -1,19 +1,25 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components';
 import BigButton from '../../../src/components/layout/BigButton';
 import StartButton from '../../../src/components/layout/StartButton';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { guestNicknameState, userIdState } from '../../atom';
-import { postGuestLogin } from '../../apis/guestLogin';
-import { useNavigate } from 'react-router-dom';
+import { guestNicknameState, nicknameAtom, userIdState } from '../../atom';
+import { getHostNickname, postGuestLogin } from '../../apis/guestLogin';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const GuestLoginPage = () => {
   const imageUrl = process.env.PUBLIC_URL + '/images/BG.png';
-  const host_nickname = "영은";
+  // const host_nickname = "영은";
   const [nickname, setNickname] = useState('');
   const hostId = useRecoilValue(userIdState);
   const setGuestNickname = useSetRecoilState(guestNicknameState);
+  const setUserId = useSetRecoilState(userIdState);
+  const setNicknameAtom = useSetRecoilState(nicknameAtom);
+  // const hostNickname = useRecoilValue(nicknameAtom);
+  const [hostNickname, setHostNickname] = useState('홍길동');
+
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleNicknameChange = (event) => {
     setNickname(event.target.value);
@@ -40,19 +46,39 @@ const GuestLoginPage = () => {
 
   //조사 설정
   const set_prepositional_particle = (name)=>{
-    //name의 마지막 음절의 유니코드(UTF-16) 
-    const charCode = name.charCodeAt(name.length - 1);
-        
-    //유니코드의 한글 범위 내에서 해당 코드의 받침 확인
-    const consonantCode = (charCode - 44032) % 28;
-
-    if(consonantCode === 0){
-        //0이면 받침 없음 -> 를
-        return `${name}는`;
+    if(name){
+      //name의 마지막 음절의 유니코드(UTF-16) 
+      const charCode = name.charCodeAt(name.length - 1);
+          
+      //유니코드의 한글 범위 내에서 해당 코드의 받침 확인
+      const consonantCode = (charCode - 44032) % 28;
+  
+      if(consonantCode === 0){
+          //0이면 받침 없음 -> 를
+          return `${name}는`;
+      }
+      //1이상이면 받침 있음 -> 을
+      return `${name}이는`;
     }
-    //1이상이면 받침 있음 -> 을
-    return `${name}이는`;
   }
+  useEffect(()=>{
+    const fetchData = async () =>{
+      const urlParams = new URLSearchParams(location.search);
+      const hostId = urlParams.get('hostId');
+      setUserId(hostId);
+      const data = await getHostNickname(hostId);
+      if(data && data.hostName){
+        console.log(data.hostNickname);
+        setNicknameAtom(data.hostName);
+        setHostNickname(data.hostName);
+      }
+      else{
+        alert('해당 페이지가 존재하지 않습니다. 자신의 공간을 만들어보세요!');
+        navigate('/');
+      }
+    };
+    fetchData();
+  }, [hostId, setNicknameAtom])
 
   return (
     <BackGround>
@@ -60,7 +86,7 @@ const GuestLoginPage = () => {
       
         <Contents>
           <Text>내가 생각하는</Text>
-          <Text>{set_prepositional_particle(host_nickname)}?</Text>
+          <Text>{set_prepositional_particle(hostNickname)}?</Text>
           <NicknameBox>
 
             <BigButton textBox={<NicknameInput placeholder="닉네임을 입력해주세요"
