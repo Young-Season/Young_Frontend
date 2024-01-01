@@ -3,19 +3,18 @@ import styled from 'styled-components';
 import BigButton from '../../../src/components/layout/BigButton';
 import StartButton from '../../../src/components/layout/StartButton';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { guestNicknameState, nicknameAtom, userIdState } from '../../atom';
+import { guestNicknameState, userIdState } from '../../atom';
 import { getHostNickname, postGuestLogin } from '../../apis/guestLogin';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { hostNicknameState } from '../../apis/guest';
 
 const GuestLoginPage = () => {
   const imageUrl = process.env.PUBLIC_URL + '/images/BG.png';
-  // const host_nickname = "영은";
   const [nickname, setNickname] = useState('');
   const hostId = useRecoilValue(userIdState);
   const setGuestNickname = useSetRecoilState(guestNicknameState);
   const setUserId = useSetRecoilState(userIdState);
-  const setNicknameAtom = useSetRecoilState(nicknameAtom);
-  // const hostNickname = useRecoilValue(nicknameAtom);
+  const setNicknameAtom = useSetRecoilState(hostNicknameState);
   const [hostNickname, setHostNickname] = useState('홍길동');
 
   const navigate = useNavigate();
@@ -23,7 +22,6 @@ const GuestLoginPage = () => {
 
   const handleNicknameChange = (event) => {
     setNickname(event.target.value);
-    // console.log(nickname);
   };
 
   //닉네임 post & 시작
@@ -33,13 +31,11 @@ const GuestLoginPage = () => {
       const newNickname = (nickname.replace(/\s/g, '+'));
       const data = await postGuestLogin(hostId, newNickname);
       console.log(data.status);
-      if(data.status == "200"){
-        console.log(1);
+      if(data.status === 200){
         setGuestNickname(data.name);
-        console.log(data.name)
         navigate("/guestface");
       }
-      else if(data.status === "400"){
+      else if(data.status === 400){
         alert("동일한 닉네임이 존재합니다.");
       }
     }
@@ -62,7 +58,7 @@ const GuestLoginPage = () => {
           return `${name}는`;
       }
       //1이상이면 받침 있음 -> 을
-      return `${name}이는`;
+      return `${name}은`;
     }
   }
   useEffect(()=>{
@@ -72,18 +68,20 @@ const GuestLoginPage = () => {
       setUserId(hostId);
       console.log(hostId); //여기까지 okay
       const data = await getHostNickname(hostId);
-      if(data && data.hostName){
-        console.log(data.hostNickname);
+      console.log(data);
+      if(data){
         setNicknameAtom(data.hostName);
+        
         setHostNickname(data.hostName);
       }
       else{
         alert('해당 페이지가 존재하지 않습니다. 자신의 공간을 만들어보세요!');
-        navigate(`http://localhost:3000/guestLogin?hostId=${hostId}`);
+        // navigate(`/guestLogin?hostId=${hostId}`);
+        navigate('/');
       }
     };
     fetchData();
-  }, [hostId, setNicknameAtom])
+  }, [hostId, setNicknameAtom, location.search, navigate, setUserId])
 
   return (
     <BackGround>

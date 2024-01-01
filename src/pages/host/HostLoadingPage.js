@@ -50,7 +50,7 @@ const HostLoadingPage = () => {
     fetchCode();
 
 
-  }, [location, setUserId, navigate, setToken]);
+  }, [location, setUserId, navigate, setToken, setHostNickname]);
 
   return (
     <BackGround>
