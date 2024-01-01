@@ -1,21 +1,25 @@
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import { useRecoilValue } from 'recoil';
+import { guestNicknameState, nicknameAtom } from '../../atom';
 
 const HostLoadingPage = () => {
   const imageUrl = process.env.PUBLIC_URL + '/images/BG_blur.png';
 
   let navigate = useNavigate();
-  const [guestName, setGuestName] = useState('영은');
-  const [hostName, setHostName] = useState('수연');
+  // const [guestName, setGuestName] = useState('영은');
+  // const [hostName, setHostName] = useState('수연');
+  const guestName = useRecoilValue(guestNicknameState);
+  const hostName = useRecoilValue(nicknameAtom);
 
-//   useEffect(() => {
-//     const timer = setTimeout(() => {
-//       navigate('/hostNickname');
-//     }, 300); // 0.3초 후에 실행
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      navigate('/guestResult');
+    }, 300); // 0.3초 후에 실행
 
-//     return () => clearTimeout(timer); // 컴포넌트가 언마운트 될 때 타이머를 제거
-//   }, [navigate]);
+    return () => clearTimeout(timer); // 컴포넌트가 언마운트 될 때 타이머를 제거
+  }, [navigate]);
 
   //조사 설정
   const set_prepositional_particle = (name)=>{
