@@ -34,13 +34,13 @@ const GuestFacePage = () => {
   } 
     return (
         <FaceContainer>
-            <Text>얼굴상{hostId}</Text> 
+            <Text>친구들이 생각하는 {host_nickname}는?</Text> 
             <FaceContainer2>
                 <Image src={process.env.PUBLIC_URL + '/images/Ghost.png'}></Image>
                 <FaceContainer3>
                 <Text1>친구에게 공유하고 내 이미지를 알아보세요!</Text1>
                 <div id="kakaotalk-sharing-btn">
-          <UrlButton onClick = {()=>{shareKaKao()}} text={"URL 들어가는 공간"}></UrlButton>
+          <UrlButton onClick = {()=>{shareKaKao()}} text={"친구들에게 공유하기"}></UrlButton>
         </div>
                 </FaceContainer3>
             </FaceContainer2>
