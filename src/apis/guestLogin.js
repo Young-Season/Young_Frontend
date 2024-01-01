@@ -22,7 +22,7 @@ export const getHostNickname = async (hostId)=>{
     console.log(url);
     const data = await axios.get(url);
     console.log(data);
-    return data;
+    return data.data;
   }
   catch(error){
     console.error(error);
