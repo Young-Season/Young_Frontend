@@ -1,14 +1,44 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Footer from "../../components/layout/Footer";
-import { useNavigate } from "react-router-dom";
-import { getHostTotalResult } from "../../apis/host";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useRecoilValue } from "recoil";
+import { nicknameAtom, userIdState } from "../../atom";
+import { getHostIndividualResult } from "../../apis/host";
 
-const HostIndividualResultPage = ({ guestName, hostName }) => {
+const HostIndividualResultPage = () => {
   const backButton = process.env.PUBLIC_URL + "/images/goToBackButton.png";
   const answerArrow = process.env.PUBLIC_URL + "/images/arrow-right.png";
 
   const navigate = useNavigate();
+
+  const { state } = useLocation();
+  const guest = state.guest;
+  const token = state.token;
+  const hostId = state.hostId;
+  console.log(guest);
+
+  const [individualData, setIndividualData] = useState({});
+
+  const hostNickname = useRecoilValue(nicknameAtom);
+  const guestId = guest.id;
+
+  useEffect(() => {
+    getHostIndividualResult(token, hostId, guestId)
+      .then((res) => {
+        if (res.data.status === "200") {
+          console.log(res.message);
+          setIndividualData(res.data);
+        } else if (res.status === "400") {
+          console.log(res.message);
+        } else if (res.status === "403") {
+          console.log(res.message);
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
 
   return (
     <Wrapper>
@@ -16,45 +46,49 @@ const HostIndividualResultPage = ({ guestName, hostName }) => {
         <ButtonContainer>
           <GoToBackButton src={backButton} onClick={() => navigate(-1)} />
         </ButtonContainer>
-        <Title>친구들이 생각하는 루씨는?</Title>
+        <Title>
+          {individualData.data.name}이 생각하는 {hostNickname}는?
+        </Title>
         <WhiteBox>
           <ContentsContainer>
-            <ContentsText>HostNickname이는 땡땡상이야!</ContentsText>
+            <ContentsText>{hostNickname}이는 ㅇㅇ상이야!</ContentsText>
             <AnswerContainer>
               <RightArrow src={answerArrow} />
-              <ContentsAnswer>강아지상</ContentsAnswer>
+              <ContentsAnswer>{individualData.data.animal}</ContentsAnswer>
             </AnswerContainer>
           </ContentsContainer>
 
           <ContentsContainer>
-            <ContentsText>HostNickname이가 이모지라면</ContentsText>
+            <ContentsText>{hostNickname}이가 이모지라면</ContentsText>
             <AnswerContainer>
               <RightArrow src={answerArrow} />
-              <ContentsAnswer>강아지상</ContentsAnswer>
+              <ContentsAnswer>{individualData.data.emoji}</ContentsAnswer>
             </AnswerContainer>
           </ContentsContainer>
 
           <ContentsContainer>
-            <ContentsText>HostNickname이와 어울리는 색은</ContentsText>
+            <ContentsText>{hostNickname}이와 어울리는 색은</ContentsText>
             <AnswerContainer>
               <RightArrow src={answerArrow} />
-              <ContentsAnswer>강아지상</ContentsAnswer>
+              <ContentsAnswer>{individualData.data.color}</ContentsAnswer>
             </AnswerContainer>
           </ContentsContainer>
 
           <ContentsContainer>
-            <ContentsText>HostNickname이를 처음 봤을 때...</ContentsText>
+            <ContentsText>{hostNickname}이를 처음 봤을 때...</ContentsText>
             <AnswerContainer>
               <RightArrow src={answerArrow} />
-              <ContentsAnswer>강아지상</ContentsAnswer>
+              <ContentsAnswer>{individualData.data.first}</ContentsAnswer>
             </AnswerContainer>
           </ContentsContainer>
 
           <ContentsContainer>
-            <ContentsText>지금 내가 생각하는 HostNickname이는...</ContentsText>
+            <ContentsText>
+              지금 내가 생각하는 {hostNickname}이는...
+            </ContentsText>
             <AnswerContainer>
               <RightArrow src={answerArrow} />
-              <ContentsAnswer>강아지상</ContentsAnswer>
+              <ContentsAnswer>{individualData.data.now}</ContentsAnswer>
             </AnswerContainer>
           </ContentsContainer>
         </WhiteBox>

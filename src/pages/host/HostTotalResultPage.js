@@ -2,9 +2,8 @@ import React, { useEffect } from "react";
 import styled from "styled-components";
 import Footer from "../../components/layout/Footer";
 import { useNavigate } from "react-router-dom";
-import { getHostTotalResult } from "../../apis/host";
 import { useState } from "react";
-import { nicknameAtom } from "../../atom";
+import { nicknameAtom, tokenState } from "../../atom";
 
 import {
   Wrapper,
@@ -21,6 +20,7 @@ import {
 } from "../guest/GuestOthersResultPage";
 import { useRecoilValue } from "recoil";
 import { userIdState } from "../../atom";
+import { getHostTotalResult } from "../../apis/host";
 
 const HostTotalResultPage = () => {
   // const image = process.env.PUBLIC_URL + "/images/rabbit22.png";
@@ -31,52 +31,72 @@ const HostTotalResultPage = () => {
 
   const navigate = useNavigate();
 
+  const token = useRecoilValue(tokenState); // 백엔드에서 받아온 토큰
+
   const hostNickname = useRecoilValue(nicknameAtom);
   const hostId = useRecoilValue(userIdState);
+  const [totalData, setTotalData] = useState({});
 
-  useEffect(() => {
-    getHostTotalResult(hostId)
-      .then((response) => {
-        if (response.data.status === "200") {
-          console.log(response.data.message);
-        } else if (response.data.status === "204") {
-          console.log(response.data.message);
-        } else if (response.data.status === "400") {
-          console.log(response.data.message);
-        } else if (response.data.status === "403") {
-          console.log(response.data.message);
-        }
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  });
-
-  const data = getHostTotalResult(hostId).data.data;
-  const guests = data.guests;
+  // useEffect(() => {
+  // 	const fetchData = async () => {
+  // 		try {
+  // 			const response = await getHostTotalResult(hostId);
+  // 			setTotalData(response.data);
+  // 			console.log(response.data);
+  // 		} catch(error) {
+  // 			console.error(error);
+  // 		}
+  // 	}
+  // 	fetchData;
+  // }, [hostId])
 
   const [visibleGuests, setVisibleGuests] = useState(6);
   const seeMore = () => {
     setVisibleGuests((prevVisibleGuests) => prevVisibleGuests + 6);
   };
 
+  useEffect(() => {
+    getHostTotalResult(token, hostId)
+      .then((res) => {
+        if (res.data.status === "200") {
+          console.log(res.data.message);
+          setTotalData(res.data.data);
+        } else if (res.data.status === "204") {
+          console.log(res.data.message);
+        } else if (res.data.status === "400") {
+          console.log(res.data.message);
+        } else if (res.data.status === "403") {
+          console.log(res.data.message);
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, [visibleGuests]);
+
   return (
     <Wrapper>
       <Container>
         <Title>친구들이 생각하는 {hostNickname}는?</Title>
         <WhiteBox style={{ padding: 0 }}>
-          <Image src={data.image} />
+          <Image src={totalData.data.image} />
         </WhiteBox>
         <DescriptionContainer>
-          <DescriptionTitle>{data.title}</DescriptionTitle>
+          <DescriptionTitle>{totalData.data.title}</DescriptionTitle>
           <Description>
-            {data.first}
+            {totalData.data.first}
             <br />
             <br />
-            {data.now}
+            {totalData.data.now}
           </Description>
         </DescriptionContainer>
-        <Button onClick={() => navigate("/hostStatistics")}>
+        <Button
+          onClick={() =>
+            navigate("/hostStatistics", {
+              state: { hostId: hostId, token: token },
+            })
+          }
+        >
           <ButtonText>질문별 통계 보러가기 </ButtonText>
         </Button>
         <Button>
@@ -98,7 +118,7 @@ const HostTotalResultPage = () => {
             </TableHeaderContainer>
             {/* 헤더 */}
 
-            {guests.slice(0, visibleGuests).map((guest) => (
+            {totalData.data.guests.slice(0, visibleGuests).map((guest) => (
               <TableListContainer>
                 <NicknameBox>
                   <ListText>{guest.name}</ListText>
@@ -107,7 +127,11 @@ const HostTotalResultPage = () => {
                   <ListText>
                     <AnswerFileImage
                       src={fileImage}
-                      onClick={() => navigate("/hostResult", { state: guest })}
+                      onClick={() =>
+                        navigate("/hostResult", {
+                          state: { guest: guest, hostId: hostId, token: token },
+                        })
+                      }
                     />
                   </ListText>
                 </AnswerBox>
@@ -127,8 +151,8 @@ const HostTotalResultPage = () => {
                 </ListText>
               </AnswerBox>
             </TableListContainer> */}
-            {visibleGuests < guests.length && (
-              <SeeMoreButton>더보기</SeeMoreButton>
+            {visibleGuests < totalData.data.guests.length && (
+              <SeeMoreButton onClick={seeMore}>더보기</SeeMoreButton>
             )}
           </WhiteBox>
           <SharingText>친구에게 공유하고 내 이미지를 알아보세요!</SharingText>
