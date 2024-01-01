@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { postkakaoCallback } from '../../apis/login';
 import { useSetRecoilState } from 'recoil';
-import { tokenState, userIdState } from '../../atom';
+import { nicknameAtom, tokenState, userIdState } from '../../atom';
 
 const HostLoadingPage = () => {
   const imageUrl = process.env.PUBLIC_URL + '/images/BG_blur.png';
@@ -12,6 +12,7 @@ const HostLoadingPage = () => {
   const location = useLocation();
   const setUserId = useSetRecoilState(userIdState);
   const setToken = useSetRecoilState(tokenState);
+  const setHostNickname = useSetRecoilState(nicknameAtom);
 
   useEffect(() => {
     const fetchCode = async () => {
@@ -23,10 +24,12 @@ const HostLoadingPage = () => {
           const data = await postkakaoCallback(code);
           console.log(data.id);
           setUserId(data.id);
-  
           if (data && data.status === '200') {
             // 기존 유저
             setToken(data.token);
+            console.log("호스트");
+            console.log(data.hostName);
+            setHostNickname(data.hostName);
             navigate('/deploy');
           }
           else if(data && data.status === '404'){
