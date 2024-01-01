@@ -20,6 +20,7 @@ import {
   ButtonText,
   HomeButton,
 } from "./GuestOthersResultPage";
+import { usePostResponses } from "../../apis/guest";
 
 const GuestMyResultPage = () => {
   const homeButton = process.env.PUBLIC_URL + "/images/home.png";
@@ -30,8 +31,12 @@ const GuestMyResultPage = () => {
   const { state } = useLocation();
   const hostName = state.hostName;
 
+  const [myResult, setMyResult] = useState(); // 앞에서 post api로 받아온 데이터를 저장
+
   const seeOthersResult = () => {
-    navigate("/guestOtherResult", { state: { hostName: hostName } });
+    navigate("/guestOtherResult", {
+      state: { hostName: hostName, hostId: hostId },
+    });
   };
 
   const goToHostLogin = () => {

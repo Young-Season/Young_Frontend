@@ -39,6 +39,7 @@ export const usePostResponses = async () => {
     try {
       const response = await axios.post("/responses", data);
       console.log(response);
+      return response;
     } catch (error) {
       console.error(error);
     }
