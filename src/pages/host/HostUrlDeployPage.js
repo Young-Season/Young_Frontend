@@ -5,7 +5,7 @@ import { useRecoilState } from 'recoil';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
-import { nicknameAtom } from '../../atom';
+import { nicknameAtom, userIdState } from '../../atom';
 const {Kakao} = window;
 const GuestFacePage = () => {
   const navigate = useNavigate(); 
@@ -13,6 +13,7 @@ const GuestFacePage = () => {
   //로컬주소
   const resultUrl = "http://localhost:3000";
   const host_nickname = useRecoilValue(nicknameAtom);
+  const hostId = useRecoilValue(userIdState);
   useEffect(()=>{
     Kakao.cleanup();
     Kakao.init("9769e69ba2b11621a50723827584b67e")
@@ -26,12 +27,14 @@ const GuestFacePage = () => {
         title: '제목 영역입니다.',
         description: '설명 영역입니다.',
         host_nickname: `${host_nickname}`,
+        hostId: `${hostId}`,
+        url: `http://localhost:3000/guestLogin?hostId=${hostId}`,
       },
     });
   } 
     return (
         <FaceContainer>
-            <Text>얼굴상</Text> 
+            <Text>얼굴상{hostId}</Text> 
             <FaceContainer2>
                 <Image src={process.env.PUBLIC_URL + '/images/Ghost.png'}></Image>
                 <FaceContainer3>
