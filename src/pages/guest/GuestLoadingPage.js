@@ -9,15 +9,14 @@ import {
   nicknameAtom,
   userIdState,
 } from "../../atom";
+import { hostNicknameState } from "../../apis/guest";
 
-const HostLoadingPage = () => {
+const GuestLoadingPage = () => {
   const imageUrl = process.env.PUBLIC_URL + "/images/BG_blur.png";
 
   const navigate = useNavigate();
-  // const [guestName, setGuestName] = useState('영은');
-  // const [hostName, setHostName] = useState('수연');
   const guestName = useRecoilValue(guestNicknameState);
-  const hostName = useRecoilValue(nicknameAtom);
+  const hostName = useRecoilValue(hostNicknameState);
   const hostId = useRecoilValue(userIdState);
 
   const data = useRecoilValue(arrayState);
@@ -57,24 +56,38 @@ const HostLoadingPage = () => {
 
   useEffect(() => {
     const navigateAfterPost = async () => {
-      const response = await postMyResult();
-      response
-        .then((res) => {
-          if (res.data.status === "201") {
-            console.log(res.data.message);
-            setMyResultData(res.data.data);
-          } else if (res.data.status === "400") {
-            console.log(res.data.message);
-          } else if (res.data.status === "404") {
-            console.log(res.data.message);
-          }
-        })
-        .catch((error) => {
-          console.error(error);
+      try{
+        const response = await postMyResult();
+        console.log(response);
+        if(response.data.status === 201 || response.data.status === 400 || response.data.status === 404){
+          console.log(response.data.message);
+        }
+        else{
+          navigate("/guestResult", {
+            state: { myResultData: myResultData },
         });
-      navigate("/guestResult", {
-        state: { myResultData: myResultData },
-      });
+        }
+      }
+      catch(error){
+        console.error(error);
+      }
+      // response
+      //   .then((res) => {
+      //     if (res.data.status === "201") {
+      //       console.log(res.data.message);
+      //       setMyResultData(res.data.data);
+      //     } else if (res.data.status === "400") {
+      //       console.log(res.data.message);
+      //     } else if (res.data.status === "404") {
+      //       console.log(res.data.message);
+      //     }
+      //   })
+      //   .catch((error) => {
+      //     console.error(error);
+      //   });
+      // navigate("/guestResult", {
+      //   state: { myResultData: myResultData },
+      // });
     };
     navigateAfterPost();
   }, []);
@@ -109,7 +122,7 @@ const HostLoadingPage = () => {
   );
 };
 
-export default HostLoadingPage;
+export default GuestLoadingPage;
 
 const BackGround = styled.div`
   display: flex;
