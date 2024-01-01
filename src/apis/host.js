@@ -4,6 +4,7 @@ import { tokenState } from "../atom";
 
 export const baseUrl = "https://young-season.o-r.kr";
 
+// 호스트가 게스트들에게 받은 총 결과 열람
 export const getHostTotalResult = async (token, hostId) => {
   const url = `${baseUrl}/data/:${hostId}`;
   try {
@@ -18,6 +19,7 @@ export const getHostTotalResult = async (token, hostId) => {
   }
 };
 
+// 호스트가 각자 게스트의 결과 열람
 export const getHostIndividualResult = async (token, hostId, guestId) => {
   const url = `${baseUrl}/data/:${hostId}/:${guestId}`;
   try {
@@ -32,6 +34,7 @@ export const getHostIndividualResult = async (token, hostId, guestId) => {
   }
 };
 
+// 호스트가 질문별 통계 열람
 export const getHostStats = async (token, hostId) => {
   const url = `${baseUrl}/stats/:${hostId}`;
   try {

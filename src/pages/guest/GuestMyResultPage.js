@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Footer from "../../components/layout/Footer";
 import {
   Wrapper,
@@ -27,8 +27,11 @@ const GuestMyResultPage = () => {
 
   const navigate = useNavigate();
 
+  const { state } = useLocation();
+  const hostName = state.hostName;
+
   const seeOthersResult = () => {
-    navigate("/guestOtherResult");
+    navigate("/guestOtherResult", { state: { hostName: hostName } });
   };
 
   const goToHostLogin = () => {
@@ -38,7 +41,7 @@ const GuestMyResultPage = () => {
   return (
     <Wrapper>
       <Container>
-        <Title>내가 생각하는 루씨는?</Title>
+        <Title>내가 생각하는 {hostName}는?</Title>
         <WhiteBox style={{ padding: 0 }}>
           <Image src={image} />
         </WhiteBox>

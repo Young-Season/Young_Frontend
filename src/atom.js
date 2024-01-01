@@ -16,18 +16,18 @@ export const userIdState = atom({
 });
 
 export const nicknameAtom = atom({
-  key: "nickname",
+  key: "hostNickname",
   default: "hello",
 });
 
 //token
 export const tokenState = atom({
   key: "tokenState",
-  default: '',
+  default: "",
 });
 
 //guestNickname
 export const guestNicknameState = atom({
   key: "guestNicknameState",
-  default: '',
+  default: "",
 });
