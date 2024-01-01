@@ -35,7 +35,6 @@ function GuestFacePage(){
         
         resolve();
       });
-      await postResponses();
       navigate('/guestemoji');
     };
     const getSubjectSuffix = (name) => {

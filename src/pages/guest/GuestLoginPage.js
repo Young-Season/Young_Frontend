@@ -29,13 +29,14 @@ const GuestLoginPage = () => {
   //닉네임 post & 시작
   const handleStart = async ()=>{
     try{
+      console.log(nickname);
       const newNickname = (nickname.replace(/\s/g, '+'));
       const data = await postGuestLogin(hostId, newNickname);
       console.log(data.status);
       if(data.status == "200"){
         console.log(1);
         setGuestNickname(data.name);
-        console.log()
+        console.log(data.name)
         navigate("/guestface");
       }
       else if(data.status === "400"){
@@ -69,6 +70,7 @@ const GuestLoginPage = () => {
       const urlParams = new URLSearchParams(location.search);
       const hostId = urlParams.get('hostId');
       setUserId(hostId);
+      console.log(hostId); //여기까지 okay
       const data = await getHostNickname(hostId);
       if(data && data.hostName){
         console.log(data.hostNickname);
