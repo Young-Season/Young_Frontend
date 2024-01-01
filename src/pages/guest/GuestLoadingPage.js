@@ -1,8 +1,14 @@
 import styled from "styled-components";
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
-import { guestNicknameState, nicknameAtom } from "../../atom";
+import {
+  arrayState,
+  guestNicknameState,
+  nicknameAtom,
+  userIdState,
+} from "../../atom";
 
 const HostLoadingPage = () => {
   const imageUrl = process.env.PUBLIC_URL + "/images/BG_blur.png";
@@ -12,7 +18,8 @@ const HostLoadingPage = () => {
   // const [hostName, setHostName] = useState('수연');
   const guestName = useRecoilValue(guestNicknameState);
   const hostName = useRecoilValue(nicknameAtom);
-
+  const data = useRecoilValue(arrayState);
+  const hostId = useRecoilValue(userIdState);
   const [myResultData, setMyResultData] = useState({}); // post 요청으로 받아온 데이터를 저장
 
   // useEffect(() => {
@@ -29,7 +36,6 @@ const HostLoadingPage = () => {
   const postMyResult = async () => {
     const baseUrl = "https://young-season.o-r.kr";
     const url = `${baseUrl}/responses`;
-    const data = useRecoilValue(arrayState);
     const postData = {
       hostId: hostId,
       guestName: guestName,
