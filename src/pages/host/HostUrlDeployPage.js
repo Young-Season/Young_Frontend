@@ -28,7 +28,8 @@ const GuestFacePage = () => {
         description: '설명 영역입니다.',
         host_nickname: `${host_nickname}`,
         hostId: `${hostId}`,
-        url: `http://localhost:3000/guestLogin?hostId=${hostId}`,
+        
+        // url: `https://youngchun.netlify.app/guestLogin?hostId=${hostId}`,
       },
     });
   } 
