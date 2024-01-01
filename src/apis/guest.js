@@ -55,6 +55,6 @@ export const postMyResult = () => {
 
 //게스트가 호스트의 다른 게스트들 결과 열람하는 api
 export const getOtherGuestsResult = (hostId) => {
-  const url = `${baseUrl}/results?hostId=${hostId}`;
+  const url = `${baseUrl}/results/${hostId}`;
   return axios.get(url);
 };

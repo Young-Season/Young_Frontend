@@ -23,7 +23,7 @@ const HostTotalResultPage = () => {
 
   const { state } = useLocation();
   const hostName = state.hostName;
-  const hostId = state.hostId;
+  const hostId = useRecoilValue(userIdState);
 
   // const hostId = useRecoilValue(userIdState);
 

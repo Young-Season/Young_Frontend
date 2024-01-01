@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import axios from "axios";
 import styled from "styled-components";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -44,65 +44,60 @@ const GuestMyResultPage = () => {
   const goToHostLogin = () => {
     navigate("/");
   };
-
-  //게스트가 배열에 저장한 호스트의 이미지 결과 post
-  // const postMyResult = async () => {
-  //   const baseUrl = "https://young-season.o-r.kr";
-  //   const url = `${baseUrl}/responses`;
-  //   const data = useRecoilValue(arrayState);
-  //   const postData = {
-  //     hostId: hostId,
-  //     guestName: guestName,
-  //     animal: data[0],
-  //     emoji: data[1],
-  //     color: data[2],
-  //     first: data[3],
-  //     now: data[4],
-  //   };
-  //   try {
-  //     const response = await axios.post(url, JSON.stringify(postData));
-  //     return response;
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   postMyResult()
-  //     .then((res) => {
-  //       if (res.data.status === "201") {
-  //         console.log(res.data.message);
-  //         setMyResult(res.data.data);
-  //       } else if (res.data.status === "400") {
-  //         console.log(res.data.message);
-  //       } else if (res.data.status === "404") {
-  //         console.log(res.data.message);
-  //       }
-  //     })
-  //     .catch((error) => {
-  //       console.error(error);
-  //     });
-  // }, []);
+    //조사 설정1
+    const set_prepositional_particle1 = (name)=>{
+      if(name){
+        //name의 마지막 음절의 유니코드(UTF-16) 
+        const charCode = name.charCodeAt(name.length - 1);
+            
+        //유니코드의 한글 범위 내에서 해당 코드의 받침 확인
+        const consonantCode = (charCode - 44032) % 28;
+    
+        if(consonantCode === 0){
+            //0이면 받침 없음 -> 를
+            return `${name}는`;
+        }
+        //1이상이면 받침 있음 -> 을
+        return `${name}은`;
+      }
+    }
+    //조사 설정2
+    const set_prepositional_particle2 = (name)=>{
+      if(name){
+        //name의 마지막 음절의 유니코드(UTF-16) 
+        const charCode = name.charCodeAt(name.length - 1);
+            
+        //유니코드의 한글 범위 내에서 해당 코드의 받침 확인
+        const consonantCode = (charCode - 44032) % 28;
+    
+        if(consonantCode === 0){
+            //0이면 받침 없음 -> 가
+            return `${name}가`;
+        }
+        //1이상이면 받침 있음 -> 이
+        return `${name}이`;
+      }
+    }
 
   return (
     <Wrapper>
       <Container>
-        <Title>내가 생각하는 {hostName}는?</Title>
+        <Title>내가 생각하는 {set_prepositional_particle1(hostName)}?</Title>
         <WhiteBox style={{ padding: 0 }}>
           <Image src={image} />
         </WhiteBox>
         <DescriptionContainer>
-          <DescriptionTitle>{myResultData.title}</DescriptionTitle>
+          <DescriptionTitle>{myResultData.title || "제목"}</DescriptionTitle>
           <Description>
-            {myResultData.first}
+            {myResultData.first || "first"}
             <br />
             <br />
-            {myResultData.now}
+            {myResultData.now || "now"}
           </Description>
         </DescriptionContainer>
 
         <CuriousContainer>
-          <CuriousText>다른 친구들이 본 {hostName}가 궁금하다면?</CuriousText>
+          <CuriousText>다른 친구들이 본 {set_prepositional_particle1(hostName)} 궁금하다면?</CuriousText>
           <Button onClick={seeOthersResult}>
             <ButtonText>결과 보러 가기</ButtonText>
           </Button>

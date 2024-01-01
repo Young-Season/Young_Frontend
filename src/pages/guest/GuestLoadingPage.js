@@ -23,31 +23,23 @@ const GuestLoadingPage = () => {
 
   const [myResultData, setMyResultData] = useState({}); // post 요청으로 받아온 데이터를 저장
 
-  // useEffect(() => {
-  //   const timer = setTimeout(() => {
-  //     navigate("/guestResult", {
-  //       state: { hostName: hostName, guestName: guestName },
-  //     });
-  //   }, 300); // 0.3초 후에 실행
-
-  //   return () => clearTimeout(timer); // 컴포넌트가 언마운트 될 때 타이머를 제거
-  // }, [navigate]);
 
   //게스트가 배열에 저장한 호스트의 이미지 결과 post
   const postMyResult = async () => {
     const baseUrl = "https://young-season.o-r.kr";
     const url = `${baseUrl}/responses`;
     const postData = {
-      hostId: hostId,
-      guestName: guestName,
-      animal: data[0],
-      emoji: data[1],
-      color: data[2],
-      first: data[3],
-      now: data[4],
+      "hostId": hostId,
+      "guestName": guestName,
+      "animal": data[0],
+      "emoji": data[1],
+      "color": data[2],
+      "first": data[3],
+      "now": data[4], 
     };
     try {
-      const response = await axios.post(url, JSON.stringify(postData));
+      const response = await axios.post(url, postData);
+      
       return response;
     } catch (error) {
       console.error(error);
@@ -58,13 +50,14 @@ const GuestLoadingPage = () => {
     const navigateAfterPost = async () => {
       try{
         const response = await postMyResult();
-        console.log(response);
+        console.log(response.data);
         if(response.data.status === 201 || response.data.status === 400 || response.data.status === 404){
           console.log(response.data.message);
         }
         else{
+          setMyResultData(response.data.data);
           navigate("/guestResult", {
-            state: { myResultData: myResultData },
+            state: { myResultData: response.data.data },
         });
         }
       }

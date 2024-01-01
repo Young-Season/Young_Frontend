@@ -137,20 +137,6 @@ const HostTotalResultPage = () => {
                 </AnswerBox>
               </TableListContainer>
             ))}
-
-            {/* <TableListContainer>
-              <NicknameBox>
-                <ListText>닉네임</ListText>
-              </NicknameBox>
-              <AnswerBox>
-                <ListText>
-                  <AnswerFileImage
-                    src={fileImage}
-                    onClick={() => navigate("/hostResult", { state: guests })}
-                  />
-                </ListText>
-              </AnswerBox>
-            </TableListContainer> */}
             {visibleGuests < totalData.data.guests.length && (
               <SeeMoreButton onClick={seeMore}>더보기</SeeMoreButton>
             )}
