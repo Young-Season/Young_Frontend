@@ -100,7 +100,7 @@ const KakaoButton = styled.a`
   border-radius: 12px;
   border: 1px solid rgba(0, 0, 0, 0.85);
   background: #FEE500;
-
+  text-decoration: none;
 `
 
 const Image = styled.div`
@@ -147,4 +147,5 @@ font-size: 16px;
 font-style: normal;
 font-weight: 500;
 line-height: normal;
+
 `
