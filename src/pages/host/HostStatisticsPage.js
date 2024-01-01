@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Footer from "../../components/layout/Footer";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import {
   Wrapper,
   Container,
@@ -10,11 +10,41 @@ import {
   GoToBackButton,
   ContentsText,
 } from "./HostIndividualResultPage";
+import { useRecoilValue } from "recoil";
+import { nicknameAtom, userIdState } from "../../atom";
+import { getHostStats } from "../../apis/host";
 
 const HostStatisticsPage = () => {
   const backButton = process.env.PUBLIC_URL + "/images/goToBackButton.png";
 
   const navigate = useNavigate();
+
+  const { state } = useLocation();
+  const token = state.token;
+  const hostId = state.hostId;
+
+  const hostNickname = useRecoilValue(nicknameAtom);
+
+  const [statsData, setStatsData] = useState();
+
+  useEffect(() => {
+    getHostStats(token, hostId)
+      .then((res) => {
+        if (res.status === "200") {
+          console.log(res.message);
+          setStatsData(res.data);
+        } else if (res.status === "204") {
+          console.log(res.message);
+        } else if (res.status === "400") {
+          console.log(res.message);
+        } else if (res.status === "403") {
+          console.log(res.message);
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, [hostId]);
 
   return (
     <Wrapper>
@@ -25,11 +55,13 @@ const HostStatisticsPage = () => {
         <Title>질문별 통계</Title>
         <WhiteBox>
           <StatisticContainer>
-            <ContentsText>Host Nickname이는 ㅇㅇ상이야!</ContentsText>
+            <ContentsText>{hostNickname}이는 ㅇㅇ상이야!</ContentsText>
             <AnswerContainer>
-              <TextBox>강아지상</TextBox>
+              <TextBox>{statsData.data.animal[0].animal}</TextBox>
               <PercentageBar></PercentageBar>
-              <PercentageTextBox>100%</PercentageTextBox>
+              <PercentageTextBox>
+                {statsData.data.animal[0].percent}%
+              </PercentageTextBox>
             </AnswerContainer>
             <AnswerContainer>
               <TextBox>고양이상</TextBox>
