@@ -12,8 +12,16 @@ const GuestFacePage = () => {
   const realUrl = "http://localhost:3000";
   //로컬주소
   const resultUrl = "http://localhost:3000";
-  const host_nickname = useRecoilValue(nicknameAtom);
+  const hostName = useRecoilValue(nicknameAtom);
   const hostId = useRecoilValue(userIdState);
+  const getSubjectSuffix = (name)=>{
+    const lastChar = name.charAt(name.length-1);
+    const lastCharCode = lastChar.charCodeAt(0);
+    if (lastCharCode < 44032 || lastCharCode > 55203){
+      return "는"
+    }
+    return ((lastCharCode - 44032)% 28) === 0 ? "는" : "은"
+  }
   useEffect(()=>{
     Kakao.cleanup();
     Kakao.init("9769e69ba2b11621a50723827584b67e")
@@ -26,7 +34,7 @@ const GuestFacePage = () => {
       templateArgs: {
         title: '제목 영역입니다.',
         description: '설명 영역입니다.',
-        host_nickname: `${host_nickname}`,
+        host_nickname: `${hostName}`,
         hostId: `${hostId}`,
         url: `http://localhost:3000/guestLogin?hostId=${hostId}`,
       },
@@ -34,7 +42,7 @@ const GuestFacePage = () => {
   } 
     return (
         <FaceContainer>
-            <Text>친구들이 생각하는 {host_nickname}는?</Text> 
+            <Text>친구들이 생각하는 {hostName}{getSubjectSuffix(hostName)}?</Text> 
             <FaceContainer2>
                 <Image src={process.env.PUBLIC_URL + '/images/Ghost.png'}></Image>
                 <FaceContainer3>
