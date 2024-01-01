@@ -1,8 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Footer from "../../components/layout/Footer";
-import { useNavigate } from "react-router-dom";
-
+import { useLocation, useNavigate } from "react-router-dom";
 import {
   Wrapper,
   Container,
@@ -11,17 +10,43 @@ import {
   ButtonContainer,
   GoToBackButton,
 } from "../host/HostIndividualResultPage";
+import { getOtherGuestsResult } from "../../apis/guest";
+import { useRecoilValue } from "recoil";
+import { userIdState } from "../../atom";
 
 const HostTotalResultPage = () => {
-  const image = process.env.PUBLIC_URL + "/images/rabbit22.png";
+  // const image = process.env.PUBLIC_URL + "/images/rabbit22.png";
   const homeButton = process.env.PUBLIC_URL + "/images/home.png";
   const backButton = process.env.PUBLIC_URL + "/images/goToBackButton.png";
 
   const navigate = useNavigate();
 
+  const { state } = useLocation();
+  const hostName = state.hostName;
+  const hostId = state.hostId;
+
+  // const hostId = useRecoilValue(userIdState);
+
   const goToHostLogin = () => {
     navigate("/hostLogin");
   };
+
+  const [otherGuestsData, setOtherGuestsData] = useState({});
+
+  useEffect(() => {
+    getOtherGuestsResult(hostId)
+      .then((res) => {
+        if (res.data.status === "200") {
+          console.log(res.data.message);
+          setOtherGuestsData(res.data.data);
+        } else if (res.data.status === "400") {
+          console.log(res.data.message);
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
 
   return (
     <Wrapper>
@@ -29,23 +54,17 @@ const HostTotalResultPage = () => {
         <ButtonContainer>
           <GoToBackButton src={backButton} onClick={() => navigate(-1)} />
         </ButtonContainer>
-        <Title>친구들이 생각하는 루씨는?</Title>
+        <Title>친구들이 생각하는 {hostName}는?</Title>
         <WhiteBox style={{ padding: 0 }}>
-          <Image src={image} />
+          <Image src={otherGuestsData.image} />
         </WhiteBox>
         <DescriptionContainer>
-          <DescriptionTitle>처음엔 귀엽지만 지금은 웃긴 친구!</DescriptionTitle>
+          <DescriptionTitle>{otherGuestsData.title}</DescriptionTitle>
           <Description>
-            당신은 처음엔 수줍지만 귀여운 친구였어요.
-            <br />
-            마치 뭐랄까.. 왜 다들 수업에 갑자기 가버린걸까요?
-            <br />
-            흑흑 남겨지니 조금 슬프네요.
+            {otherGuestsData.first}
             <br />
             <br />
-            하지만 이제는 웃기다는걸 알게 됐어요. <br />
-            마치 나의 멋사 내의 웃음벨이랄까요? <br />
-            당신 없는 멋사 상상할 수 없다 이말이야 ~ <br />
+            {otherGuestsData.now}
           </Description>
         </DescriptionContainer>
         <CuriousContainer>
