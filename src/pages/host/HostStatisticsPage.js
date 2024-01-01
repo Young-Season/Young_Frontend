@@ -32,7 +32,7 @@ const HostStatisticsPage = () => {
       .then((res) => {
         if (res.status === "200") {
           console.log(res.message);
-          setStatsData(res.data);
+          setStatsData(res.data.data);
         } else if (res.status === "204") {
           console.log(res.message);
         } else if (res.status === "400") {
@@ -57,31 +57,119 @@ const HostStatisticsPage = () => {
           <StatisticContainer>
             <ContentsText>{hostNickname}이는 ㅇㅇ상이야!</ContentsText>
             <AnswerContainer>
-              <TextBox>{statsData.data.animal[0].animal}</TextBox>
-              <PercentageBar></PercentageBar>
+              <TextBox>{statsData.animal[0].animal}</TextBox>
+              <PercentageBarContainer>
+                <PercentageBar width={statsData.animal[0].percent} />
+              </PercentageBarContainer>
               <PercentageTextBox>
-                {statsData.data.animal[0].percent}%
+                {statsData.animal[0].percent}%
               </PercentageTextBox>
             </AnswerContainer>
-            <AnswerContainer>
-              <TextBox>고양이상</TextBox>
-              <PercentageBar></PercentageBar>
-              <PercentageTextBox>100%</PercentageTextBox>
-            </AnswerContainer>
+            {statsData.animal[1].animal !== 0 && (
+              <AnswerContainer>
+                <TextBox>{statsData.animal[1].animal}</TextBox>
+                <PercentageBarContainer>
+                  <PercentageBar width={statsData.animal[1].percent} />
+                </PercentageBarContainer>
+                <PercentageTextBox>
+                  {statsData.animal[1].percent}%
+                </PercentageTextBox>
+              </AnswerContainer>
+            )}
           </StatisticContainer>
 
           <StatisticContainer>
-            <ContentsText>Host Nickname이는 ㅇㅇ상이야!</ContentsText>
+            <ContentsText>{hostNickname}이가 이모지라면</ContentsText>
             <AnswerContainer>
-              <TextBox>강아지상</TextBox>
-              <PercentageBar></PercentageBar>
-              <PercentageTextBox>100%</PercentageTextBox>
+              <TextBox>{statsData.emoji[0].emoji}</TextBox>
+              <PercentageBarContainer>
+                <PercentageBar width={statsData.emoji[0].percent} />
+              </PercentageBarContainer>
+              <PercentageTextBox>
+                {statsData.emoji[0].percent}%
+              </PercentageTextBox>
             </AnswerContainer>
+            {statsData.emoji[1].emoji !== 0 && (
+              <AnswerContainer>
+                <TextBox>{statsData.animal[1].animal}</TextBox>
+                <PercentageBarContainer>
+                  <PercentageBar width={statsData.emoji[1].percent} />
+                </PercentageBarContainer>
+                <PercentageTextBox>
+                  {statsData.emoji[1].percent}%
+                </PercentageTextBox>
+              </AnswerContainer>
+            )}
+          </StatisticContainer>
+
+          <StatisticContainer>
+            <ContentsText>{hostNickname}이와 어울리는 색은...</ContentsText>
             <AnswerContainer>
-              <TextBox>고양이상</TextBox>
-              <PercentageBar></PercentageBar>
-              <PercentageTextBox>100%</PercentageTextBox>
+              <TextBox>{statsData.color[0].color}</TextBox>
+              <PercentageBarContainer>
+                <PercentageBar width={statsData.color[0].percent} />
+              </PercentageBarContainer>
+              <PercentageTextBox>
+                {statsData.color[0].percent}%
+              </PercentageTextBox>
             </AnswerContainer>
+            {statsData.color[1].color !== 0 && (
+              <AnswerContainer>
+                <TextBox>{statsData.color[1].color}</TextBox>
+                <PercentageBarContainer>
+                  <PercentageBar width={statsData.color[1].percent} />
+                </PercentageBarContainer>
+                <PercentageTextBox>
+                  {statsData.color[1].percent}%
+                </PercentageTextBox>
+              </AnswerContainer>
+            )}
+          </StatisticContainer>
+
+          <StatisticContainer>
+            <ContentsText>{hostNickname}이를 처음 봤을 때...</ContentsText>
+            <AnswerContainer>
+              <TextBox>{statsData.first[0].first}</TextBox>
+              <PercentageBarContainer>
+                <PercentageBar width={statsData.first[0].percent} />
+              </PercentageBarContainer>
+              <PercentageTextBox>
+                {statsData.first[0].percent}%
+              </PercentageTextBox>
+            </AnswerContainer>
+            {statsData.first[1].first !== 0 && (
+              <AnswerContainer>
+                <TextBox>{statsData.first[1].first}</TextBox>
+                <PercentageBarContainer>
+                  <PercentageBar width={statsData.first[1].percent} />
+                </PercentageBarContainer>
+                <PercentageTextBox>
+                  {statsData.first[1].percent}%
+                </PercentageTextBox>
+              </AnswerContainer>
+            )}
+          </StatisticContainer>
+
+          <StatisticContainer>
+            <ContentsText>
+              지금 내가 생각하는 {hostNickname}이는...
+            </ContentsText>
+            <AnswerContainer>
+              <TextBox>{statsData.now[0].now}</TextBox>
+              <PercentageBarContainer>
+                <PercentageBar width={statsData.now[0].percent} />
+              </PercentageBarContainer>
+              <PercentageTextBox>{statsData.now[0].percent}%</PercentageTextBox>
+            </AnswerContainer>
+            {statsData.now[1].now !== 0 && (
+              <AnswerContainer>
+                <TextBox>{statsData.now[1].now}</TextBox>
+                <PercentageBarContainer>
+                  <PercentageBar width={statsData.now[1].percent} />
+                </PercentageBarContainer>
+                <PercentageTextBox>{statsData.now[1].now}%</PercentageTextBox>
+              </AnswerContainer>
+            )}
           </StatisticContainer>
         </WhiteBox>
         <InformationBox>
@@ -137,16 +225,24 @@ const TextBox = styled.div`
   line-height: normal;
 `;
 
-const PercentageBar = styled.div`
+const PercentageBarContainer = styled.div`
   display: flex;
   padding: 0.375rem;
-  flex-direction: column;
-  justify-content: center;
+  flex-direction: row;
+  justify-content: flex-start;
   align-items: center;
   gap: 0.625rem;
   flex: 1 0 0;
   border-radius: 0.625rem;
   background: var(--Light-Light-Gray, #e8e8e8);
+`;
+
+const PercentageBar = styled.div`
+  height: 0.75rem;
+  align-self: stretch;
+  border-radius: 0.375rem;
+  background: var(--Brown, #64422e);
+  width: ${(props) => props.width}%;
 `;
 
 const PercentageTextBox = styled.div`
