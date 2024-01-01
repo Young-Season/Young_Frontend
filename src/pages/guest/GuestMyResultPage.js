@@ -20,7 +20,7 @@ import {
   ButtonText,
   HomeButton,
 } from "./GuestOthersResultPage";
-import { usePostResponses } from "../../apis/guest";
+import { hostNicknameState, usePostResponses } from "../../apis/guest";
 import { useRecoilValue } from "recoil";
 import { arrayState, userIdState } from "../../atom";
 
@@ -33,8 +33,7 @@ const GuestMyResultPage = () => {
   const { state } = useLocation();
   const myResultData = state.myResultData;
   const hostId = myResultData.hostId;
-  const hostName = myResultData.hostName;
-  const guestName = myResultData.guestName;
+  const hostName = useRecoilValue(hostNicknameState);
 
   const seeOthersResult = () => {
     navigate("/guestOtherResult", {
@@ -43,7 +42,7 @@ const GuestMyResultPage = () => {
   };
 
   const goToHostLogin = () => {
-    navigate("/hostLogin");
+    navigate("/");
   };
 
   //게스트가 배열에 저장한 호스트의 이미지 결과 post
