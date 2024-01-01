@@ -1,19 +1,53 @@
 import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
+import { postkakaoCallback } from '../../apis/login';
+import { useSetRecoilState } from 'recoil';
+import { tokenState, userIdState } from '../../atom';
 
 const HostLoadingPage = () => {
   const imageUrl = process.env.PUBLIC_URL + '/images/BG_blur.png';
 
-  let navigate = useNavigate();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const setUserId = useSetRecoilState(userIdState);
+  const setToken = useSetRecoilState(tokenState);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      navigate('/hostNickname');
-    }, 300); // 0.3초 후에 실행
+    const fetchCode = async () => {
+      const urlParams = new URLSearchParams(location.search);
+      const code = urlParams.get('code');
+      if (code) {
+        console.log(code);
+        try{
+          const data = await postkakaoCallback(code);
+          console.log(data.id);
+          setUserId(data.id);
+  
+          if (data && data.status === '200') {
+            // 기존 유저
+            setToken(data.token);
+            navigate('/deploy');
+          }
+          else if(data && data.status === '404'){
+            //신규 가입자
+            // navigate('/hostLoading');
+            const timer = setTimeout(() => {
+              navigate('/hostNickname');
+            }, 300); // 0.3초 후에 실행
+            return () => clearTimeout(timer); // 컴포넌트가 언마운트 될 때 타이머를 제거
+          }
+        }
+        catch(error){
+          alert("계정 정보가 없습니다");
+          console.error('Error occurred in postkakaoCallback:', error);
+        }
+      }
+    };
+    fetchCode();
 
-    return () => clearTimeout(timer); // 컴포넌트가 언마운트 될 때 타이머를 제거
-  }, [navigate]);
+
+  }, [location, setUserId, navigate, setToken]);
 
   return (
     <BackGround>
