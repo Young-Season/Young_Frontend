@@ -47,6 +47,12 @@ export const usePostResponses = async () => {
   return postResponses;
 };
 
+//게스트가 배열에 저장한 호스트의 이미지 결과 post
+export const postMyResult = () => {
+  const url = `${baseUrl}/responses`;
+  return axios.post;
+};
+
 //게스트가 호스트의 다른 게스트들 결과 열람하는 api
 export const getOtherGuestsResult = (hostId) => {
   const url = `${baseUrl}/results?hostId=${hostId}`;

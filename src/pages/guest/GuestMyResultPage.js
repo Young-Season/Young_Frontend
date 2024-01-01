@@ -1,4 +1,5 @@
 import React from "react";
+import axios from "axios";
 import styled from "styled-components";
 import { useLocation, useNavigate } from "react-router-dom";
 import Footer from "../../components/layout/Footer";
@@ -8,7 +9,6 @@ import {
   Title,
   WhiteBox,
 } from "../host/HostIndividualResultPage";
-
 import {
   Image,
   DescriptionContainer,
@@ -21,6 +21,8 @@ import {
   HomeButton,
 } from "./GuestOthersResultPage";
 import { usePostResponses } from "../../apis/guest";
+import { useRecoilValue } from "recoil";
+import { arrayState, userIdState } from "../../atom";
 
 const GuestMyResultPage = () => {
   const homeButton = process.env.PUBLIC_URL + "/images/home.png";
@@ -29,9 +31,10 @@ const GuestMyResultPage = () => {
   const navigate = useNavigate();
 
   const { state } = useLocation();
-  const hostName = state.hostName;
-
-  const [myResult, setMyResult] = useState(); // 앞에서 post api로 받아온 데이터를 저장
+  const myResultData = state.myResultData;
+  const hostId = myResultData.hostId;
+  const hostName = myResultData.hostName;
+  const guestName = myResultData.guestName;
 
   const seeOthersResult = () => {
     navigate("/guestOtherResult", {
@@ -43,6 +46,45 @@ const GuestMyResultPage = () => {
     navigate("/hostLogin");
   };
 
+  //게스트가 배열에 저장한 호스트의 이미지 결과 post
+  // const postMyResult = async () => {
+  //   const baseUrl = "https://young-season.o-r.kr";
+  //   const url = `${baseUrl}/responses`;
+  //   const data = useRecoilValue(arrayState);
+  //   const postData = {
+  //     hostId: hostId,
+  //     guestName: guestName,
+  //     animal: data[0],
+  //     emoji: data[1],
+  //     color: data[2],
+  //     first: data[3],
+  //     now: data[4],
+  //   };
+  //   try {
+  //     const response = await axios.post(url, JSON.stringify(postData));
+  //     return response;
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   postMyResult()
+  //     .then((res) => {
+  //       if (res.data.status === "201") {
+  //         console.log(res.data.message);
+  //         setMyResult(res.data.data);
+  //       } else if (res.data.status === "400") {
+  //         console.log(res.data.message);
+  //       } else if (res.data.status === "404") {
+  //         console.log(res.data.message);
+  //       }
+  //     })
+  //     .catch((error) => {
+  //       console.error(error);
+  //     });
+  // }, []);
+
   return (
     <Wrapper>
       <Container>
@@ -51,26 +93,17 @@ const GuestMyResultPage = () => {
           <Image src={image} />
         </WhiteBox>
         <DescriptionContainer>
-          <DescriptionTitle>처음엔 ㅇㅇㅇ만 지금은 ㅁㅁ친구!</DescriptionTitle>
+          <DescriptionTitle>{myResultData.title}</DescriptionTitle>
           <Description>
-            ~~~~~~~~~~~
-            <br />
-            ~~~~~~~~~~~
-            <br />
-            ~~~~~~~~~~~
+            {myResultData.first}
             <br />
             <br />
-            ~~~~~~~~~~~
-            <br />
-            ~~~~~~~~~~~
-            <br />
-            ~~~~~~~~~~~
-            <br />
+            {myResultData.now}
           </Description>
         </DescriptionContainer>
 
         <CuriousContainer>
-          <CuriousText>다른 친구들이 본 루씨가 궁금하다면?</CuriousText>
+          <CuriousText>다른 친구들이 본 {hostName}가 궁금하다면?</CuriousText>
           <Button onClick={seeOthersResult}>
             <ButtonText>결과 보러 가기</ButtonText>
           </Button>

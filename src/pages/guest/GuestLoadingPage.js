@@ -7,21 +7,69 @@ import { guestNicknameState, nicknameAtom } from "../../atom";
 const HostLoadingPage = () => {
   const imageUrl = process.env.PUBLIC_URL + "/images/BG_blur.png";
 
-  let navigate = useNavigate();
+  const navigate = useNavigate();
   // const [guestName, setGuestName] = useState('영은');
   // const [hostName, setHostName] = useState('수연');
   const guestName = useRecoilValue(guestNicknameState);
   const hostName = useRecoilValue(nicknameAtom);
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      navigate("/guestResult", {
-        state: { hostName: hostName },
-      });
-    }, 300); // 0.3초 후에 실행
+  const [myResultData, setMyResultData] = useState({}); // post 요청으로 받아온 데이터를 저장
 
-    return () => clearTimeout(timer); // 컴포넌트가 언마운트 될 때 타이머를 제거
-  }, [navigate]);
+  // useEffect(() => {
+  //   const timer = setTimeout(() => {
+  //     navigate("/guestResult", {
+  //       state: { hostName: hostName, guestName: guestName },
+  //     });
+  //   }, 300); // 0.3초 후에 실행
+
+  //   return () => clearTimeout(timer); // 컴포넌트가 언마운트 될 때 타이머를 제거
+  // }, [navigate]);
+
+  //게스트가 배열에 저장한 호스트의 이미지 결과 post
+  const postMyResult = async () => {
+    const baseUrl = "https://young-season.o-r.kr";
+    const url = `${baseUrl}/responses`;
+    const data = useRecoilValue(arrayState);
+    const postData = {
+      hostId: hostId,
+      guestName: guestName,
+      animal: data[0],
+      emoji: data[1],
+      color: data[2],
+      first: data[3],
+      now: data[4],
+    };
+    try {
+      const response = await axios.post(url, JSON.stringify(postData));
+      return response;
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    const navigateAfterPost = async () => {
+      const response = await postMyResult();
+      response
+        .then((res) => {
+          if (res.data.status === "201") {
+            console.log(res.data.message);
+            setMyResultData(res.data.data);
+          } else if (res.data.status === "400") {
+            console.log(res.data.message);
+          } else if (res.data.status === "404") {
+            console.log(res.data.message);
+          }
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+      navigate("/guestResult", {
+        state: { myResultData: myResultData },
+      });
+    };
+    navigateAfterPost();
+  }, []);
 
   //조사 설정
   const set_prepositional_particle = (name) => {
