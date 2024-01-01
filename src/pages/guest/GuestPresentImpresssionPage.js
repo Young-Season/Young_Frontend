@@ -25,7 +25,7 @@ function GuestFacePage(){
         });
         resolve();
       });
-      navigate('/guestface');
+      navigate("/guestLoading");
     };
     const getSubjectSuffix = (name)=>{
       const lastChar = name.charAt(name.length-1);
@@ -44,7 +44,7 @@ function GuestFacePage(){
                 <Text>지금 생각하는 {hostName}{getSubjectSuffix(hostName)}</Text>         
                 <FaceContainer4>
                 {presentImpressions.map((presentImpression, index) => 
-                <StyledLink to="/guestface" key={index}>
+                <StyledLink to="/guestLoading" key={index}>
                     <SmallButton 
                       onClick={() => handleButtonClick(index)}
                       contents={presentImpression} 
