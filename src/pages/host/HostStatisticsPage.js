@@ -53,8 +53,8 @@ const HostStatisticsPage = () => {
     "투명한",
     "줏대있는",
   ];
-  const [animalData, setAnimalData] = useState([]);
-  const [mostAnimalData, setMostAnimalData] = useState();
+  const [animalValues, setAnimalValues] = useState([]);
+  const [percentValues, setPercentValues] = useState([]);
   const [emojiData, setEmojiData] = useState([]);
   const [colorData, setColorData] = useState([]);
   const [firstImpressionData, setFirstImpressionData] = useState([]);
@@ -65,30 +65,18 @@ const HostStatisticsPage = () => {
     console.log(hostId);
     getHostStats(token, hostId)
       .then((res) => {
-        const animaldata = res.data.data.animal.map(item => {
-          return {
-            name: animals[item.animal],
-            percent: item.percent
-          };
-        });
-        console.log(animaldata);
-        setAnimalData(animalData);
-        console.log(animalData);
-        console.log(res.status);
         console.log("res.data.data:", res.data.data);
         console.log("res.data.data.animal:", res.data.data.animal);
         console.log("res.data.data.animal:", res.data.data.animal[0]);
         console.log("res.data.data.animal:", res.data.data.animal[0].animal);
-        if (res.status === "200") {    
-          const animaldata = res.data.data.animal.map(item => {
-            return {
-              name: animals[item.animal],
-              percent: item.percent
-            };
-          });
-          console.log(animaldata);
-          setAnimalData(animaldata);
-          console.log(animalData);   
+        if (res.status === 200) {
+          const resAnimal = res.data.data.animal
+          const animalValues = resAnimal.map(item => item.animal);
+          const percentValues = resAnimal.map(item => item.percent);
+          setAnimalValues(animalValues);
+          setPercentValues(percentValues); 
+          console.log(animalValues);
+          console.log(percentValues);
         } else if (res.status === "204") {
           console.log(res.status);
           setLoading(false);
@@ -105,9 +93,9 @@ const HostStatisticsPage = () => {
       });
     }, []);
 
-    if (loading) {
-      return <div>Loading...</div>;
-    }
+    // if (loading) {
+    //   return <div>Loading...</div>;
+    // }/
 
   return (
     <Wrapper>
@@ -118,22 +106,28 @@ const HostStatisticsPage = () => {
         <Title>질문별 통계</Title>
         <WhiteBox>
           <StatisticContainer>     
-            <ContentsText>{hostNickname}이는 {animalData}상이야!</ContentsText>
+            <ContentsText>{hostNickname}이는 {animals[animalValues[0]]}상이야!</ContentsText>
             <AnswerContainer>            
-            {animalData.map((item, index) => (
-    <div key={index}>
-      <TextBox>{item.name}</TextBox>
-      <PercentageBarContainer>
-        <PercentageBar width={item.percent} />
-      </PercentageBarContainer>
-      <PercentageTextBox>
-        {item.percent}%
-      </PercentageTextBox>
-    </div>
-  ))}
+              <TextBox>{animals[animalValues[0]]}</TextBox>
+              <PercentageBarContainer>
+                <PercentageBar width={percentValues[0]} />
+              </PercentageBarContainer>
+              <PercentageTextBox>
+                {percentValues[0]}%
+              </PercentageTextBox>
+              <br></br>
             </AnswerContainer>
+            <AnswerContainer>  
+            <TextBox>{animals[animalValues[1]]}</TextBox>
+              <PercentageBarContainer>
+                <PercentageBar width={percentValues[1]} />
+              </PercentageBarContainer>
+              <PercentageTextBox>
+                {percentValues[1]}%
+              </PercentageTextBox>
+              </AnswerContainer>
           </StatisticContainer> 
-          <StatisticContainer>     
+{/*          <StatisticContainer>     
             <ContentsText>{hostNickname}이가 이모지라면</ContentsText>
             <AnswerContainer>            
             {animalData.map((item, index) => (
@@ -196,14 +190,14 @@ const HostStatisticsPage = () => {
     </div>
   ))}
             </AnswerContainer>
-          </StatisticContainer> 
+          </StatisticContainer> */}
           
         </WhiteBox>
         <InformationBox>
           <InformationText>
             *항목별 상위 2개의 통계가 표시됩니다
           </InformationText>
-        </InformationBox>
+            </InformationBox>
       </Container> 
       <Footer />
     </Wrapper>
