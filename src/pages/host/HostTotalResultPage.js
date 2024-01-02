@@ -1,9 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect,  useRef } from "react";
 import styled from "styled-components";
 import Footer from "../../components/layout/Footer";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { hostTotal, nicknameAtom, tokenState } from "../../atom";
+import { saveAs } from 'file-saver';
+import html2canvas from 'html2canvas';
 
 import {
   Wrapper,
@@ -29,12 +31,19 @@ const HostTotalResultPage = () => {
   const download = process.env.PUBLIC_URL + "/images/download.png";
   const urlImage = process.env.PUBLIC_URL + "/images/copyButton.png";
   const fileImage = process.env.PUBLIC_URL + "/images/file.png";
+
+  //이미지 다운
+  const imageRef = useRef();
+
+
+
   const navigate = useNavigate();
   const token = useRecoilValue(tokenState); // 백엔드에서 받아온 토큰
   const totalData = useRecoilValue(hostTotal); // 백엔드에서 받아온 토큰
   const hostNickname = useRecoilValue(nicknameAtom);
   const hostId = useRecoilValue(userIdState);
   // const { totalData } = useLocation();
+
   // useEffect(() => {
   // 	const fetchData = async () => {
   // 		try {
@@ -47,17 +56,26 @@ const HostTotalResultPage = () => {
   // 	}
   // 	fetchData;
   // }, [hostId])
+
   const [visibleGuests, setVisibleGuests] = useState(6);
   const seeMore = () => {
     setVisibleGuests((prevVisibleGuests) => prevVisibleGuests + 6);
   };
   const handleDownload = () => {
-    const link = document.createElement("a");
-    link.href = totalData.image; // 이미지 URL
-    link.download = `https://young-season.o-r.kr/public/images/${totalData.image}.png`;
-    link.click();
-  };
+    const sectionToCapture = document.getElementById('section-to-capture');
 
+    html2canvas(sectionToCapture, { useCORS: true })
+      .then((canvas) => {
+        const image = canvas.toDataURL('image/png');
+        const link = document.createElement('a');
+        link.href = image;
+        link.download = `${hostNickname}.png`;
+        link.click();
+      })
+      .catch((err) => {
+        console.error('oops, something went wrong!', err);
+      });
+  };
   const convertToImageSource = (imageState) => {
     if (imageState) {
       console.log(imageState);
@@ -114,21 +132,30 @@ const HostTotalResultPage = () => {
   return (
     <Wrapper>
       <Container>
-        <Title>
-          친구들이 생각하는 {set_prepositional_particle(hostNickname)}?
-        </Title>
-        <WhiteBox style={{ padding: 0 }}>
-          <Image src={convertToImageSource(totalData.image)} />
-        </WhiteBox>
-        <DescriptionContainer>
-          <DescriptionTitle>{totalData.title}</DescriptionTitle>
-          <Description>
-            {totalData.first}
-            <br />
-            <br />
-            {totalData.now}
-          </Description>
-        </DescriptionContainer>
+      <div id="section-to-capture">
+  <Title>
+    친구들이 생각하는 {set_prepositional_particle(hostNickname)}?
+  </Title>
+  <WhiteBox style={{ padding: 0 }}>
+    <Image src={convertToImageSource(totalData.image)} />
+  </WhiteBox>
+  <DescriptionContainer>
+    <DescriptionTitle>{totalData.title}</DescriptionTitle>
+    <Description>
+      {totalData.first}
+      <br />
+      <br />
+      {totalData.now}
+    </Description>
+  </DescriptionContainer>
+</div>
+
+<Button onClick={handleDownload}>
+  <ButtonText>
+    이미지 다운로드 <DownloadImage src={download} />
+  </ButtonText>
+</Button>
+
         <Button
           onClick={() =>
             navigate("/hostStatistics", {
@@ -142,6 +169,7 @@ const HostTotalResultPage = () => {
             이미지 다운로드 <DownloadImage src={download} />
           </ButtonText>
         </Button>
+
         <VisitorContainer>
           <VisiorListTitle>방문자 목록</VisiorListTitle>
           <WhiteBox>
