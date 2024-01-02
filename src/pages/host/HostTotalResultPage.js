@@ -26,41 +26,23 @@ import { getHostTotalResult } from "../../apis/host";
 
 const HostTotalResultPage = () => {
   const { Kakao } = window;
-  // const image = process.env.PUBLIC_URL + "/images/rabbit22.png";
-  // const statistics = process.env.PUBLIC_URL + "/images/home.png";
   const download = process.env.PUBLIC_URL + "/images/download.png";
   const urlImage = process.env.PUBLIC_URL + "/images/copyButton.png";
   const fileImage = process.env.PUBLIC_URL + "/images/file.png";
 
-  //이미지 다운
-  const imageRef = useRef();
-
-
-
   const navigate = useNavigate();
+
   const token = useRecoilValue(tokenState); // 백엔드에서 받아온 토큰
   const totalData = useRecoilValue(hostTotal); // 백엔드에서 받아온 토큰
+
   const hostNickname = useRecoilValue(nicknameAtom);
   const hostId = useRecoilValue(userIdState);
-  // const { totalData } = useLocation();
-
-  // useEffect(() => {
-  // 	const fetchData = async () => {
-  // 		try {
-  // 			const response = await getHostTotalResult(hostId);
-  // 			setTotalData(response.data);
-  // 			console.log(response.data);
-  // 		} catch(error) {
-  // 			console.error(error);
-  // 		}
-  // 	}
-  // 	fetchData;
-  // }, [hostId])
 
   const [visibleGuests, setVisibleGuests] = useState(6);
   const seeMore = () => {
-    setVisibleGuests((prevVisibleGuests) => prevVisibleGuests + 6);
+    setVisibleGuests(visibleGuests + 6);
   };
+
   const handleDownload = () => {
     const sectionToCapture = document.getElementById('section-to-capture');
 
@@ -161,14 +143,11 @@ const HostTotalResultPage = () => {
             navigate("/hostStatistics", {
               state: { hostId: hostId, token: token },
             })
-          }>
+          }
+        >
           <ButtonText>질문별 통계 보러가기 </ButtonText>
         </Button>
-        <Button onClick={handleDownload}>
-          <ButtonText>
-            이미지 다운로드 <DownloadImage src={download} />
-          </ButtonText>
-        </Button>
+
 
         <VisitorContainer>
           <VisiorListTitle>방문자 목록</VisiorListTitle>
@@ -181,8 +160,8 @@ const HostTotalResultPage = () => {
                 <HeaderText>답변</HeaderText>
               </AnswerBox>
             </TableHeaderContainer>
-            {totalData.guests.map((guest) => (
-              <TableListContainer key={guest.id}>
+            {totalData.guests.slice(0, visibleGuests).map((guest) => (
+              <TableListContainer>
                 <NicknameBox>
                   <ListText>{guest.name}</ListText>
                 </NicknameBox>
@@ -203,6 +182,14 @@ const HostTotalResultPage = () => {
             )}
           </WhiteBox>
           <SharingText>친구에게 공유하고 내 이미지를 알아보세요!</SharingText>
+          {/* <Button onClick={handleDownload}>
+            <ButtonText>
+              친구들에게 공유하기
+              <Image2
+              src={process.env.PUBLIC_URL + "/images/CopyButton.png"}
+            ></Image2>
+            </ButtonText>
+          </Button> */}
           <BigButtonContainer
             id="kakaotalk-sharing-btn"
             onClick={() => {
@@ -220,6 +207,7 @@ const HostTotalResultPage = () => {
     </Wrapper>
   );
 };
+
 export default HostTotalResultPage;
 
 const DownloadImage = styled.img`
@@ -353,38 +341,23 @@ const UrlImage = styled.img`
 const BigButtonContainer = styled.button`
   display: flex;
   width: 17.5rem;
-  height: 2.5rem;
+  height: 3.75rem;
   padding: 0.625rem 1.25rem;
-
   justify-content: center;
   align-items: center;
-  gap: 10px;
-
-  border-radius: 20px;
-  border: 1px solid var(--Brown, #64422e);
-  background: var(--White, #fafafa);
-  box-shadow: -1px -2px 7.3px 0px rgba(0, 0, 0, 0.25) inset;
-
-  @media (max-width: 360px) {
-    width: 15rem;
-  }
-  @media (max-width: 300px) {
-    width: 13rem;
-  }
-  @media (max-width: 250px) {
-    width: 11rem;
-  }
-  font-family: "Spoqa Han Sans Neo";
-  font-style: normal;
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 15px;
-  /* identical to box height */
-
-  /* Gray */
-  color: #555555;
+  gap: 0.625rem;
+  border-radius: 1rem;
+border: 1px solid var(--Brown, #64422E);
+background: var(--White, #FAFAFA);
+box-shadow: -1px -2px 7.3px 0px rgba(0, 0, 0, 0.25) inset;
+color: #64422e;
+font-family: Spoqa Han Sans Neo;
+font-size: 1rem;
+font-style: normal;
+font-weight: 550;
+line-height: normal;
 `;
 
 const Image2 = styled.img`
-  margin: 0rem;
+  margin-left: 0.5rem 0 0 0.5rem;
 `;
