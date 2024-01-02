@@ -9,7 +9,6 @@ import { getHostIndividualResult } from "../../apis/host";
 const HostIndividualResultPage = () => {
   const backButton = process.env.PUBLIC_URL + "/images/goToBackButton.png";
   const answerArrow = process.env.PUBLIC_URL + "/images/arrow-right.png";
-  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   const { state } = useLocation();
@@ -67,24 +66,20 @@ const HostIndividualResultPage = () => {
         if (res.data.status === "200") {
           console.log(guest);
           console.log(res.data.data.animal);
-          setIndividualData(res.data);
-          setLoading(false);
+          setIndividualData(res.data.data);
+          // setLoading(false);
         } else if (res.status === "400") {
           console.log(res.message);
-          setLoading(false);
+          // setLoading(false);
         } else if (res.status === "403") {
           console.log(res.message);
-          setLoading(false);
+          // setLoading(false);
         }
       })
       .catch((error) => {
         console.error(error);
       });
   }, []);
-
-  if (loading) {
-    return <div>Loading...</div>;
-  }
 
   const convertFace = (int) => {
     if (int === 1) return "강아지";
@@ -117,7 +112,18 @@ const HostIndividualResultPage = () => {
     else if (int === 8) return "검은색";
   };
 
-  const convertImpression = (int) => {
+  const convertFirst = (int) => {
+    if (int === 1) return "밝았어";
+    else if (int === 2) return "다정했어";
+    else if (int === 3) return "웃겼어";
+    else if (int === 4) return "어른스러웠어";
+    else if (int === 5) return "섬세했어";
+    else if (int === 6) return "시크했어";
+    else if (int === 7) return "투명했어";
+    else if (int === 8) return "줏대있었어";
+  };
+
+  const convertNow = (int) => {
     if (int === 1) return "밝아";
     else if (int === 2) return "다정해";
     else if (int === 3) return "웃겨";
@@ -135,7 +141,8 @@ const HostIndividualResultPage = () => {
           <GoToBackButton src={backButton} onClick={() => navigate(-1)} />
         </ButtonContainer>
         <Title>
-          {set_prepositional_particle2(guest.name)} 생각하는 {set_prepositional_particle(hostNickname)}?
+          {set_prepositional_particle2(guest.name)} 생각하는{" "}
+          {set_prepositional_particle(hostNickname)}?
         </Title>
         <WhiteBox>
           <ContentsContainer>
@@ -143,7 +150,7 @@ const HostIndividualResultPage = () => {
             <AnswerContainer>
               <RightArrow src={answerArrow} />
               <ContentsAnswer>
-                {convertFace(individualData.data.animal)}
+                {convertFace(individualData.animal)}
               </ContentsAnswer>
             </AnswerContainer>
           </ContentsContainer>
@@ -153,7 +160,7 @@ const HostIndividualResultPage = () => {
             <AnswerContainer>
               <RightArrow src={answerArrow} />
               <ContentsAnswer>
-                {convertEmoji(individualData.data.emoji)}
+                {convertEmoji(individualData.emoji)}
               </ContentsAnswer>
             </AnswerContainer>
           </ContentsContainer>
@@ -163,7 +170,7 @@ const HostIndividualResultPage = () => {
             <AnswerContainer>
               <RightArrow src={answerArrow} />
               <ContentsAnswer>
-                {convertColor(individualData.data.color)}
+                {convertColor(individualData.color)}
               </ContentsAnswer>
             </AnswerContainer>
           </ContentsContainer>
@@ -173,7 +180,7 @@ const HostIndividualResultPage = () => {
             <AnswerContainer>
               <RightArrow src={answerArrow} />
               <ContentsAnswer>
-                {convertImpression(individualData.data.first)}
+                {convertFirst(individualData.first)}
               </ContentsAnswer>
             </AnswerContainer>
           </ContentsContainer>
@@ -184,9 +191,7 @@ const HostIndividualResultPage = () => {
             </ContentsText>
             <AnswerContainer>
               <RightArrow src={answerArrow} />
-              <ContentsAnswer>
-                {convertImpression(individualData.data.now)}
-              </ContentsAnswer>
+              <ContentsAnswer>{convertNow(individualData.now)}</ContentsAnswer>
             </AnswerContainer>
           </ContentsContainer>
         </WhiteBox>

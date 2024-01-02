@@ -8,6 +8,7 @@ import { tokenState, userIdState } from '../../atom';
 
 const HostLoginPage = () => {
   const imageUrl = process.env.PUBLIC_URL + '/images/BG.png';
+  const letterUrl = process.env.PUBLIC_URL + '/images/friendthinkingLetters.png'
   const navigate = useNavigate();
   const location = useLocation();
   const setUserId = useSetRecoilState(userIdState);
@@ -63,13 +64,13 @@ const HostLoginPage = () => {
       <Image bg={imageUrl}>
       
         <Contents>
-          <Text>친구들이 생각하는 나는?</Text>
+          <LetterImage src={letterUrl} alt="친구들이 생각하는 나는?"/> 
           
           <NicknameBox onClick={startKakao}>
             {/* <BigButton textBox={<> */}
             <KakaoButton href="https://young-season.o-r.kr/oauth/kakao">
               <img src={process.env.PUBLIC_URL + '/images/message-circle.png'} alt="kakao" />
-              <NicknameText>카카오로 시작하기</NicknameText>
+              <NicknameText>카카오 로그인</NicknameText>
 
 
             </KakaoButton>
@@ -90,18 +91,16 @@ const BackGround = styled.div`
   justify-content: center;
 `
 const KakaoButton = styled.a`
-  display: flex;
-  width: 260px;
-  height: 48px;
-  padding: 10px 20px;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  border-radius: 12px;
-  border-radius: 0.75rem;
-  border: 1px solid #000;
-  background: #FEE500;
-  box-shadow: -1px -2px 7.3px 0px rgba(0, 0, 0, 0.25) inset;
+display: flex;
+width: 16.25rem;
+height: 3rem;
+padding: 0.3rem 0.7rem;
+justify-content: center;
+align-items: center;
+gap: 0.625rem;
+border-radius: 0.75rem;
+border: 1px solid rgba(0, 0, 0, 0.85);
+background: #FEE500;
   text-decoration: none;
 `
 
@@ -127,15 +126,14 @@ width: 280px;
 display: flex;
 `
 const Text = styled.div`
-c
-olor: var(--Brown, #64422E);
+color: var(--Brown, #64422E);
 text-align: center;
-font-family: Sandoll Hoyoyo2;
-font-size: 30px;
+font-family: Partial Sans KR;
+font-size: 2rem;
 font-style: normal;
-font-weight: 900;
+font-weight: 400;
 line-height: normal;
-letter-spacing: 1.2px;
+letter-spacing: 0.12rem;
 `
 const NicknameBox = styled.div`
 padding-top: 48px;
@@ -143,12 +141,14 @@ cursor: pointer;
 `
 
 const NicknameText = styled.div`
-color: var(--Brown, #64422E);
-font-family: Spoqa Han Sans Neo;
-font-size: 16px;
+color: rgba(0, 0, 0, 0.85);
+font-family: PartialSansKR-Regular;
+font-size: 1rem;
 font-style: normal;
-font-weight: 600;
+font-weight: 550;
 line-height: normal;
-padding-bottom: 3px;
-
+}
+`
+const LetterImage = styled.img`
+width: 100%;
 `
