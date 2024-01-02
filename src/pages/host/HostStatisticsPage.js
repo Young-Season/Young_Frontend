@@ -79,8 +79,8 @@ const HostStatisticsPage = () => {
           console.log(animalValues);
           console.log(percentValues);
           const resColor = res.data.data.color
-          const colorValues = resColor.map(color => item.animal);
-          const percentColorValues = resColor.map(item => item.percent);
+          /*const colorValues = resColor.map(color => item.animal);
+          const percentColorValues = resColor.map(item => item.percent);*/
           setColorValues(colorValues);
           setPercentColorValues(percentColorValues); 
           console.log(colorValues);
