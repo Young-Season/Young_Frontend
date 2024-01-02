@@ -64,9 +64,7 @@ const GuestLoginPage = () => {
     }
   }
   useEffect(()=>{
-    console.log(hostId);
     const fetchData = async () =>{
-      console.log(hostId);
       const urlParams = new URLSearchParams(location.search);
       const hostId = urlParams.get('hostId');
       setUserId(hostId);
@@ -91,7 +89,7 @@ const GuestLoginPage = () => {
       <Image bg={imageUrl}>
       
         <Contents>
-          <Text>내가 생각하는{hostId}</Text>
+          <Text>내가 생각하는</Text>
           <Text>{set_prepositional_particle(hostNickname)}?</Text>
           <NicknameBox>
 
