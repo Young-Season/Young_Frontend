@@ -59,6 +59,7 @@ const HostStatisticsPage = () => {
   const [colorData, setColorData] = useState([]);
   const [firstImpressionData, setFirstImpressionData] = useState([]);
   const [presentImpressionData, setPresentImpressionData] = useState([]);
+  const [loading, setLoading] = useState(true);
     useEffect(() => {
       console.log(token);
     console.log(hostId);
@@ -71,6 +72,8 @@ const HostStatisticsPage = () => {
           };
         });
         console.log(animaldata);
+        setAnimalData(animalData);
+        console.log(animalData);
         console.log(res.status);
         console.log("res.data.data:", res.data.data);
         console.log("res.data.data.animal:", res.data.data.animal);
@@ -88,16 +91,23 @@ const HostStatisticsPage = () => {
           console.log(animalData);   
         } else if (res.status === "204") {
           console.log(res.status);
+          setLoading(false);
         } else if (res.status === "400") {
           console.log(res.status);
+          setLoading(false);
         } else if (res.status === "403") {
           console.log(res.status);
+          setLoading(false);
         }
       })
       .catch((error) => {
         console.error(error);
       });
     }, []);
+
+    if (loading) {
+      return <div>Loading...</div>;
+    }
 
   return (
     <Wrapper>
@@ -183,7 +193,7 @@ const HostStatisticsPage = () => {
       <PercentageTextBox>
         {item.percent}%
       </PercentageTextBox>
-gi    </div>
+    </div>
   ))}
             </AnswerContainer>
           </StatisticContainer> 
