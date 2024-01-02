@@ -44,40 +44,40 @@ const GuestMyResultPage = () => {
   const goToHostLogin = () => {
     navigate("/");
   };
-    //조사 설정1
-    const set_prepositional_particle1 = (name)=>{
-      if(name){
-        //name의 마지막 음절의 유니코드(UTF-16) 
-        const charCode = name.charCodeAt(name.length - 1);
-            
-        //유니코드의 한글 범위 내에서 해당 코드의 받침 확인
-        const consonantCode = (charCode - 44032) % 28;
-    
-        if(consonantCode === 0){
-            //0이면 받침 없음 -> 를
-            return `${name}는`;
-        }
-        //1이상이면 받침 있음 -> 을
-        return `${name}은`;
+  //조사 설정1
+  const set_prepositional_particle1 = (name) => {
+    if (name) {
+      //name의 마지막 음절의 유니코드(UTF-16)
+      const charCode = name.charCodeAt(name.length - 1);
+
+      //유니코드의 한글 범위 내에서 해당 코드의 받침 확인
+      const consonantCode = (charCode - 44032) % 28;
+
+      if (consonantCode === 0) {
+        //0이면 받침 없음 -> 를
+        return `${name}는`;
       }
+      //1이상이면 받침 있음 -> 을
+      return `${name}은`;
     }
-    //조사 설정2
-    const set_prepositional_particle2 = (name)=>{
-      if(name){
-        //name의 마지막 음절의 유니코드(UTF-16) 
-        const charCode = name.charCodeAt(name.length - 1);
-            
-        //유니코드의 한글 범위 내에서 해당 코드의 받침 확인
-        const consonantCode = (charCode - 44032) % 28;
-    
-        if(consonantCode === 0){
-            //0이면 받침 없음 -> 가
-            return `${name}가`;
-        }
-        //1이상이면 받침 있음 -> 이
-        return `${name}이`;
+  };
+  //조사 설정2
+  const set_prepositional_particle2 = (name) => {
+    if (name) {
+      //name의 마지막 음절의 유니코드(UTF-16)
+      const charCode = name.charCodeAt(name.length - 1);
+
+      //유니코드의 한글 범위 내에서 해당 코드의 받침 확인
+      const consonantCode = (charCode - 44032) % 28;
+
+      if (consonantCode === 0) {
+        //0이면 받침 없음 -> 가
+        return `${name}가`;
       }
+      //1이상이면 받침 있음 -> 이
+      return `${name}이`;
     }
+  };
 
   return (
     <Wrapper>
@@ -97,7 +97,9 @@ const GuestMyResultPage = () => {
         </DescriptionContainer>
 
         <CuriousContainer>
-          <CuriousText>다른 친구들이 본 {set_prepositional_particle1(hostName)} 궁금하다면?</CuriousText>
+          <CuriousText>
+            다른 친구들이 본 {set_prepositional_particle2(hostName)} 궁금하다면?
+          </CuriousText>
           <Button onClick={seeOthersResult}>
             <ButtonText>결과 보러 가기</ButtonText>
           </Button>
