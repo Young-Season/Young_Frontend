@@ -55,9 +55,10 @@ const HostStatisticsPage = () => {
   ];
   const [animalValues, setAnimalValues] = useState([]);
   const [percentValues, setPercentValues] = useState([]);
+  const [colorValues, setColorValues] = useState([]);
+  const [percentColorValues, setPercentColorValues] = useState([]);
   const [emojiData, setEmojiData] = useState([]);
-  const [colorData, setColorData] = useState([]);
-  const [firstImpressionData, setFirstImpressionData] = useState([]);
+  const [firstImpressionValues, setFirstImpressionValues] = useState([]);
   const [presentImpressionData, setPresentImpressionData] = useState([]);
   const [loading, setLoading] = useState(true);
     useEffect(() => {
@@ -77,6 +78,14 @@ const HostStatisticsPage = () => {
           setPercentValues(percentValues); 
           console.log(animalValues);
           console.log(percentValues);
+          const resColor = res.data.data.color
+          const colorValues = resColor.map(color => item.animal);
+          const percentColorValues = resColor.map(item => item.percent);
+          setColorValues(colorValues);
+          setPercentColorValues(percentColorValues); 
+          console.log(colorValues);
+          console.log(percentColorValues);
+
         } else if (res.status === "204") {
           console.log(res.status);
           setLoading(false);
@@ -107,90 +116,47 @@ const HostStatisticsPage = () => {
         <WhiteBox>
           <StatisticContainer>     
             <ContentsText>{hostNickname}이는 {animals[animalValues[0]]}상이야!</ContentsText>
-            <AnswerContainer>            
-              <TextBox>{animals[animalValues[0]]}</TextBox>
-              <PercentageBarContainer>
-                <PercentageBar width={percentValues[0]} />
-              </PercentageBarContainer>
-              <PercentageTextBox>
-                {percentValues[0]}%
-              </PercentageTextBox>
-              <br></br>
-            </AnswerContainer>
-            <AnswerContainer>  
-            <TextBox>{animals[animalValues[1]]}</TextBox>
-              <PercentageBarContainer>
-                <PercentageBar width={percentValues[1]} />
-              </PercentageBarContainer>
-              <PercentageTextBox>
-                {percentValues[1]}%
-              </PercentageTextBox>
+            {animalValues.map((animalValue, index) => (
+              <AnswerContainer key={index}>
+                <TextBox>{animals[animalValue]}</TextBox>
+                <PercentageBarContainer>
+                  <PercentageBar width={percentColorValues[index]} />
+                </PercentageBarContainer>
+                <PercentageTextBox>
+                  {percentColorValues[index]}%
+                </PercentageTextBox>
               </AnswerContainer>
+            ))}
           </StatisticContainer> 
-{/*          <StatisticContainer>     
+          <StatisticContainer>     
             <ContentsText>{hostNickname}이가 이모지라면</ContentsText>
-            <AnswerContainer>            
-            {animalData.map((item, index) => (
-    <div key={index}>
-      <TextBox>{item.name}</TextBox>
-      <PercentageBarContainer>
-        <PercentageBar width={item.percent} />
-      </PercentageBarContainer>
-      <PercentageTextBox>
-        {item.percent}%
-      </PercentageTextBox>
-    </div>
-  ))}
-            </AnswerContainer>
+            {colorValues.map((colorValue, index) => (
+              <AnswerContainer key={index}>
+                <TextBox>{colors[colorValue]}</TextBox>
+                <PercentageBarContainer>
+                  <PercentageBar width={percentValues[index]} />
+                </PercentageBarContainer>
+                <PercentageTextBox>
+                  {percentValues[index]}%
+                </PercentageTextBox>
+              </AnswerContainer>
+            ))}
           </StatisticContainer> 
           <StatisticContainer>     
-            <ContentsText>{hostNickname}이와 어울리는 색은...</ContentsText>
-            <AnswerContainer>            
-            {animalData.map((item, index) => (
-    <div key={index}>
-      <TextBox>{item.name}</TextBox>
-      <PercentageBarContainer>
-        <PercentageBar width={item.percent} />
-      </PercentageBarContainer>
-      <PercentageTextBox>
-        {item.percent}%
-      </PercentageTextBox>
-    </div>
-  ))}
-            </AnswerContainer>
+            <ContentsText>{hostNickname}이가 이모지라면</ContentsText>
+            {colorValues.map((colorValue, index) => (
+              <AnswerContainer key={index}>
+                <TextBox>{colors[colorValue]}</TextBox>
+                <PercentageBarContainer>
+                  <PercentageBar width={percentValues[index]} />
+                </PercentageBarContainer>
+                <PercentageTextBox>
+                  {percentValues[index]}%
+                </PercentageTextBox>
+              </AnswerContainer>
+            ))}
           </StatisticContainer> 
-          <StatisticContainer>     
-            <ContentsText>{hostNickname}이를 처음 봤을 때...</ContentsText>
-            <AnswerContainer>            
-            {animalData.map((item, index) => (
-    <div key={index}>
-      <TextBox>{item.name}</TextBox>
-      <PercentageBarContainer>
-        <PercentageBar width={item.percent} />
-      </PercentageBarContainer>
-      <PercentageTextBox>
-        {item.percent}%
-      </PercentageTextBox>
-    </div>
-  ))}
-            </AnswerContainer>
-          </StatisticContainer> 
-          <StatisticContainer>     
-            <ContentsText>지금 내가 생각하는 {hostNickname}이는...</ContentsText>
-            <AnswerContainer>            
-            {animalData.map((item, index) => (
-    <div key={index}>
-      <TextBox>{item.name}</TextBox>
-      <PercentageBarContainer>
-        <PercentageBar width={item.percent} />
-      </PercentageBarContainer>
-      <PercentageTextBox>
-        {item.percent}%
-      </PercentageTextBox>
-    </div>
-  ))}
-            </AnswerContainer>
-          </StatisticContainer> */}
+
           
         </WhiteBox>
         <InformationBox>
