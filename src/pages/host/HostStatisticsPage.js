@@ -241,7 +241,7 @@ const StatisticContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 0.75rem;
+  gap: 1rem;
   align-self: stretch;
 `;
 
