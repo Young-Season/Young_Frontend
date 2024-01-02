@@ -343,6 +343,7 @@ const UrlImage = styled.img`
   height: 1rem;
   flex-shrink: 0;
 `;
+
 const BigButtonContainer = styled.button`
   display: flex;
   width: 17.5rem;
