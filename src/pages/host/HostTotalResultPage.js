@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Footer from "../../components/layout/Footer";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { nicknameAtom, tokenState } from "../../atom";
+import { hostTotal, nicknameAtom, tokenState } from "../../atom";
 
 import {
   Wrapper,
@@ -32,10 +32,11 @@ const HostTotalResultPage = () => {
   const navigate = useNavigate();
 
   const token = useRecoilValue(tokenState); // 백엔드에서 받아온 토큰
+  const totalData = useRecoilValue(hostTotal); // 백엔드에서 받아온 토큰
 
   const hostNickname = useRecoilValue(nicknameAtom);
   const hostId = useRecoilValue(userIdState);
-  const { totalData } = useLocation();
+  // const { totalData } = useLocation();
 
   // useEffect(() => {
   // 	const fetchData = async () => {
@@ -74,6 +75,7 @@ const HostTotalResultPage = () => {
     //   });
     console.log("토탈토탈");
     console.log(totalData);
+    console.log(totalData.title);
 
   }, []);
 
@@ -81,37 +83,27 @@ const HostTotalResultPage = () => {
     <Wrapper>
       <Container>
         <Title>친구들이 생각하는 {hostNickname}는?</Title>
-        {totalData && totalData.image &&
-        <WhiteBox style={{ padding: 0 }}>
-          <Image src={totalData.image||null} />
-        </WhiteBox>}
+        <WhiteBox style={{padding: 0}}>
+          <Image src={totalData.image}/>
+        </WhiteBox>
         <DescriptionContainer>
-          {totalData && 
-          <DescriptionTitle>{totalData.title || "제목"}</DescriptionTitle>
-          }
-          {
-            totalData &&
+          <DescriptionTitle>{totalData.title}</DescriptionTitle>
           <Description>
-            {totalData.first || "first"}
-            <br />
-            <br />
-            {totalData.now || "now"}
+            {totalData.first}
+            <br/>
+            <br/>
+            {totalData.now}
           </Description>
-          }
         </DescriptionContainer>
-        <Button
-          onClick={() =>
-            navigate("/hostStatistics", {
-              state: { hostId: hostId, token: token },
-            })
-          }
-        >
+        <Button onClick={()=>navigate("/hostStatistics", {
+          state: {hostId: hostId, token: token},
+        })}>
           <ButtonText>질문별 통계 보러가기 </ButtonText>
         </Button>
         <Button>
-          <ButtonText>
-            이미지 다운로드 <DownloadImage src={download} />
-          </ButtonText>
+           <ButtonText>
+             이미지 다운로드 <DownloadImage src={download} />
+           </ButtonText>
         </Button>
 
         <VisitorContainer>
@@ -125,28 +117,20 @@ const HostTotalResultPage = () => {
                 <HeaderText>답변</HeaderText>
               </AnswerBox>
             </TableHeaderContainer>
-            {/* 헤더 */}
-            {/* {} */}
-            {totalData && totalData.guests.map((guest) => (
+            {totalData.guests.map(guest=>(
               <TableListContainer>
                 <NicknameBox>
-                  <ListText>{guest.name || "이름"}</ListText>
+                  <ListText>{guest.name}</ListText>
                 </NicknameBox>
                 <AnswerBox>
                   <ListText>
-                    <AnswerFileImage
-                      src={fileImage}
-                      onClick={() =>
-                        navigate("/hostResult", {
-                          state: { guest: guest, hostId: hostId, token: token },
-                        })
-                      }
-                    />
+                    <AnswerFileImage src={fileImage} onClick={()=>navigate("/hostResult", {state: {guest: guest}})}></AnswerFileImage>
                   </ListText>
                 </AnswerBox>
               </TableListContainer>
-            ))}
-            {visibleGuests < totalData.data.guests.length && (
+            ))
+            }
+            {visibleGuests < totalData.guests.length && (
               <SeeMoreButton onClick={seeMore}>더보기</SeeMoreButton>
             )}
           </WhiteBox>
@@ -154,13 +138,13 @@ const HostTotalResultPage = () => {
           <Button>
             <ButtonContentsContainer>
               <ButtonText>URL 들어가는 공간</ButtonText>
-              <UrlImage src={urlImage} />
+              <UrlImage src={urlImage}/>
             </ButtonContentsContainer>
           </Button>
         </VisitorContainer>
       </Container>
-      <Footer />
     </Wrapper>
+
   );
 };
 

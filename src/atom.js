@@ -31,3 +31,9 @@ export const guestNicknameState = atom({
   key: "guestNicknameState",
   default: '',
 });
+
+//guestNickname
+export const hostTotal = atom({
+  key: "hostTotalDatas",
+  default: '',
+});

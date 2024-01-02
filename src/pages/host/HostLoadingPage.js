@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { getLogin, postkakaoCallback } from '../../apis/login';
 import { useSetRecoilState } from 'recoil';
-import { nicknameAtom, tokenState, userIdState } from '../../atom';
+import { hostTotal, nicknameAtom, tokenState, userIdState } from '../../atom';
 import { getHostTotalResult } from '../../apis/host';
 
 const HostLoadingPage = () => {
@@ -14,6 +14,7 @@ const HostLoadingPage = () => {
   const setUserId = useSetRecoilState(userIdState);
   const setToken = useSetRecoilState(tokenState);
   const setHostNickname = useSetRecoilState(nicknameAtom);
+  const setHostTotal = useSetRecoilState(hostTotal);
 
   useEffect(() => {
     const fetchCode = async () => {
@@ -40,8 +41,14 @@ const HostLoadingPage = () => {
             console.log(hostTotal);
             console.log(hostTotal.status);
             if(hostTotal && hostTotal.status === "200"){
+              console.log("전달");
               console.log(hostTotal.data);
-              navigate('/deploy');
+              // navigate('/deploy');
+              setHostTotal(hostTotal.data);
+              
+              navigate('/hostTotalResult');
+
+
             }
             else if(hostTotal && hostTotal.status === "204"){
               navigate('/deploy');
