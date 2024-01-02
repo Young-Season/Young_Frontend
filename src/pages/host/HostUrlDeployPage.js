@@ -140,7 +140,8 @@ const FaceContainer2 = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-top: 3.75rem;
+  height: 700px;
+  
 `;
 const Image = styled.img`
   margin: 3.75rem;
@@ -159,8 +160,8 @@ const Text = styled.div`
   line-height: 25px;
   text-align: center;
   // color: #000000;
-  margin-top: 7.94rem;
-  margin-bottom: 3.75rem;
+  margin-top: 5rem;
+  margin-bottom: 1rem;
 `;
 const Text1 = styled.div`
   font-family: "Spoqa Han Sans Neo";
@@ -173,44 +174,40 @@ const Text1 = styled.div`
   text-align: center;
   color: #64422e;
 `;
-const BigButtonContainer = styled.button`
-  display: flex;
-  width: 17.5rem;
-  height: 2.5rem;
-  padding: 0.625rem 1.25rem;
+// const BigButtonContainer = styled.button`
+//   display: flex;
+//   width: 17.5rem;
+//   height: 2.5rem;
+//   padding: 0.625rem 1.25rem;
 
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
+//   justify-content: center;
+//   align-items: center;
+//   gap: 10px;
 
-  border-radius: 20px;
-  border: 1px solid var(--Brown, #64422e);
-  background: var(--White, #fafafa);
-  box-shadow: -1px -2px 7.3px 0px rgba(0, 0, 0, 0.25) inset;
+//   border-radius: 20px;
+//   border: 1px solid var(--Brown, #64422e);
+//   background: var(--White, #fafafa);
+//   box-shadow: -1px -2px 7.3px 0px rgba(0, 0, 0, 0.25) inset;
 
-  @media (max-width: 360px) {
-    width: 15rem;
-  }
-  @media (max-width: 300px) {
-    width: 13rem;
-  }
-  @media (max-width: 250px) {
-    width: 11rem;
-  }
-  font-family: "Spoqa Han Sans Neo";
-  font-style: normal;
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 15px;
-  /* identical to box height */
+//   @media (max-width: 360px) {
+//     width: 15rem;
+//   }
+//   @media (max-width: 300px) {
+//     width: 13rem;
+//   }
+//   @media (max-width: 250px) {
+//     width: 11rem;
+//   }
+//   font-family: "Spoqa Han Sans Neo";
+//   font-style: normal;
+//   font-weight: 500;
+//   font-size: 16px;
+//   line-height: 15px;
+//   /* identical to box height */
 
-  /* Gray */
-  color: #555555;
-`;
-
-const Image2 = styled.img`
-  margin: 0rem;
-`;
+//   /* Gray */
+//   color: #555555;
+// `;
 
 const UrlBtn = styled.button`
   display: flex;
@@ -229,7 +226,7 @@ const UrlBtn = styled.button`
   font-family: Spoqa Han Sans Neo;
   font-size: 0.75rem;
   font-style: normal;
-  font-weight: 500;
+  font-weight: 600;
   line-height: normal;
   cursor: pointer;
 `;

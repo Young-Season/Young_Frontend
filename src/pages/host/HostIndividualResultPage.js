@@ -192,7 +192,7 @@ const HostIndividualResultPage = () => {
 
           <ContentsContainer>
             <ContentsText>
-              지금 내가 생각하는 {set_prepositional_particle(5, hostNickname)}...
+              지금 내가 생각하는 {set_prepositional_particle(5,hostNickname)}...
             </ContentsText>
             <AnswerContainer>
               <RightArrow src={answerArrow} />
