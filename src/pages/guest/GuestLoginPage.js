@@ -7,6 +7,7 @@ import { guestNicknameState, userIdState } from '../../atom';
 import { getHostNickname, postGuestLogin } from '../../apis/guestLogin';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { hostNicknameState } from '../../apis/guest';
+import '../../../src/index.css'
 
 const GuestLoginPage = () => {
   const imageUrl = process.env.PUBLIC_URL + '/images/BG.png';
@@ -140,12 +141,15 @@ display: flex;
 const Text = styled.div`
 color: var(--Brown, #64422E);
 text-align: center;
-font-family: Sandoll Hoyoyo2;
-font-size: 30px;
+font-family: PartialSansKR-Regular;
+color: var(--Brown, #64422E);
+text-align: center;
+font-size: 2rem;
 font-style: normal;
-font-weight: 900;
+font-weight: 400;
 line-height: normal;
-letter-spacing: 1.2px;
+letter-spacing: 0.2rem;
+line-height: 1.5;
 `
 const NicknameBox = styled.div`
 padding-top: 60px;

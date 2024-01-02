@@ -45,7 +45,7 @@ export const getHostStats = async (token, hostId) => {
   try {
     const response = await axios.get(url, {
       headers: {
-        "token": token,
+        Authorization: `Bearer ${token}`,
       },
     });
     return response;
