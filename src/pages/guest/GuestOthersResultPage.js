@@ -32,11 +32,8 @@ const HostTotalResultPage = () => {
   const [otherGuestsData, setOtherGuestsData] = useState({});
 
   const convertToImageSource = (imageState) => {
-    console.log(imageState);
     if (imageState) {
-      const extractedNumber = imageState.slice(0, 3); // 문자열 슬라이싱을 사용하여 숫자 추출
       console.log(imageState);
-      console.log(extractedNumber);
       return `https://young-season.o-r.kr/public/images/${imageState}.png`;
     } else {
       // imageState가 유효한 값이 아닌 경우에 대한 처리
@@ -45,19 +42,38 @@ const HostTotalResultPage = () => {
     }
   };
 
+  // useEffect(() => {
+  //   getOtherGuestsResult(hostId)
+  //     .then((res) => {
+  //       if (res.data.status === "200") {
+  //         console.log(res.data.message);
+  //         setOtherGuestsData(res.data.data);
+  //       } else if (res.data.status === "400") {
+  //         console.log(res.data.message);
+  //       }
+  //     })
+  //     .catch((error) => {
+  //       console.error(error);
+  //     });
+  // }, []);
+
   useEffect(() => {
-    getOtherGuestsResult(hostId)
-      .then((res) => {
+    const fetchData = async () => {
+      try {
+        const res = await getOtherGuestsResult(hostId);
+
         if (res.data.status === "200") {
           console.log(res.data.message);
           setOtherGuestsData(res.data.data);
         } else if (res.data.status === "400") {
           console.log(res.data.message);
         }
-      })
-      .catch((error) => {
+      } catch (error) {
         console.error(error);
-      });
+      }
+    };
+
+    fetchData();
   }, []);
 
   return (
