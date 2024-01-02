@@ -98,8 +98,10 @@ const KakaoButton = styled.a`
   align-items: center;
   gap: 10px;
   border-radius: 12px;
-  border: 1px solid rgba(0, 0, 0, 0.85);
+  border-radius: 0.75rem;
+  border: 1px solid #000;
   background: #FEE500;
+  box-shadow: -1px -2px 7.3px 0px rgba(0, 0, 0, 0.25) inset;
   text-decoration: none;
 `
 
@@ -145,7 +147,8 @@ color: var(--Brown, #64422E);
 font-family: Spoqa Han Sans Neo;
 font-size: 16px;
 font-style: normal;
-font-weight: 500;
+font-weight: 600;
 line-height: normal;
+padding-bottom: 3px;
 
 `

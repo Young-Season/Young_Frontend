@@ -294,12 +294,12 @@ const ButtonContentsContainer = styled.div`
 `;
 
 const ButtonText = styled.div`
-  color: #1c1c1c;
-  font-family: Spoqa Han Sans Neo;
-  font-size: 0.75rem;
-  font-style: normal;
-  font-weight: 500;
-  line-height: normal;
+color: #64422E;
+font-family: Spoqa Han Sans Neo;
+font-size: 1rem;
+font-style: normal;
+font-weight: 550;
+line-height: normal;
 `;
 
 const UrlImage = styled.img`
