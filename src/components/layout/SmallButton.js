@@ -43,5 +43,8 @@ const ContentBox = styled.div`
   font-style: normal;
   font-weight: 700;
   line-height: normal;
+  height: 1.5rem;
+  display: flex;
+  justify-content: center;
 `;
 /* 버튼 내용 */
