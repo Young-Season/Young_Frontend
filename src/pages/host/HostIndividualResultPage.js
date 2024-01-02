@@ -259,7 +259,7 @@ export const Title = styled.div`
 export const WhiteBox = styled.div`
   display: flex;
   width: 20rem;
-  padding: 1.25rem 0rem;
+  padding: 1.25rem 1rem;
   flex-direction: column;
   align-items: flex-start;
   gap: 1.25rem;

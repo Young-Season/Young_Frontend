@@ -23,19 +23,16 @@ const HostNicknamePage = () => {
   const handleStart = async () => {
     console.log(userId);
     const result = await postNickname(userId, nickname);
-    if(result.status === "409"){
+    if (result.status === "409") {
       console.log("동일 user");
       alert("동일한 유저가 이미 존재합니다.");
       setUserId(null);
-      navigate('/');
-
-    }
-    else if(result.status === "201"){
+      navigate("/");
+    } else if (result.status === "201") {
       setToken(result.data.token);
-    }
-    else{
+    } else {
       alert("오류 발생");
-      navigate('/');
+      navigate("/");
     }
   };
 
@@ -144,5 +141,5 @@ const NicknameText = styled.div`
   line-height: normal;
 `;
 const Start = styled.div`
-cursor: pointer;
-`
+  cursor: pointer;
+`;
