@@ -13,6 +13,7 @@ const HostNicknamePage = () => {
   const setToken = useSetRecoilState(tokenState);
   const setUserId = useSetRecoilState(userIdState);
   const navigate = useNavigate();
+  const [red, setRed] = useState(false);
 
   const handleNicknameChange = (event) => {
     setNickname(event.target.value);
@@ -22,17 +23,20 @@ const HostNicknamePage = () => {
   //닉네임 post & 시작
   const handleStart = async () => {
     console.log(userId);
-    const result = await postNickname(userId, nickname);
-    if (result.status === "409") {
-      console.log("동일 user");
-      alert("동일한 유저가 이미 존재합니다.");
-      setUserId(null);
-      navigate("/");
-    } else if (result.status === "201") {
-      setToken(result.data.token);
-    } else {
-      alert("오류 발생");
-      navigate("/");
+    if(nickname>15)setRed(true);
+    else{
+      const result = await postNickname(userId, nickname);
+      if (result.status === "409") {
+        console.log("동일 user");
+        alert("동일한 유저가 이미 존재합니다.");
+        setUserId(null);
+        navigate("/");
+      } else if (result.status === "201") {
+        setToken(result.data.token);
+      } else {
+        alert("오류 발생");
+        navigate("/");
+      }
     }
   };
 
@@ -66,7 +70,7 @@ const HostNicknamePage = () => {
                 />
               }
             ></BigButton>
-            <NicknameText style={{ paddingTop: "12px", paddingBottom: "32px" }}>
+            <NicknameText red={red} style={{ paddingTop: "12px", paddingBottom: "32px" }}>
               한글 최대 15자
             </NicknameText>
           </NicknameBox>
@@ -132,7 +136,7 @@ const NicknameInput = styled.input`
 `;
 
 const NicknameText = styled.div`
-  color: var(--Light-Gray, #a4a4a4);
+  color: ${props => props.red ? 'red' : 'var(--Light-Gray, #A4A4A4)'};  
   text-align: center;
   font-family: Spoqa Han Sans Neo;
   font-size: 16px;

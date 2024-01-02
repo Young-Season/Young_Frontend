@@ -17,6 +17,7 @@ const GuestLoginPage = () => {
   const setUserId = useSetRecoilState(userIdState);
   const setNicknameAtom = useSetRecoilState(hostNicknameState);
   const [hostNickname, setHostNickname] = useState('홍길동');
+  const [red, setRed] = useState(false);
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -30,16 +31,23 @@ const GuestLoginPage = () => {
     try{
       console.log(nickname);
       const newNickname = (nickname.replace(/\s/g, '+'));
-      const data = await postGuestLogin(hostId, newNickname);
-      console.log(data.status);
-      if(data.status === 200){
-        setGuestNickname(data.name);
-        console.log(newNickname);
-        setGuestNickname(newNickname);
-        navigate("/guestface");
+      console.log(newNickname.length);
+      if(newNickname.length>15){
+        setRed(true);
+        
       }
-      else if(data.status === 409){
-        alert("동일한 닉네임이 존재합니다.");
+      else{
+        const data = await postGuestLogin(hostId, newNickname);
+        console.log(data.status);
+        if(data.status === 200){
+          setGuestNickname(data.name);
+          console.log(newNickname);
+          setGuestNickname(newNickname);
+          navigate("/guestface");
+        }
+        else if(data.status === 409){
+          alert("동일한 닉네임이 존재합니다.");
+        }
       }
     }
     catch(error){
@@ -97,7 +105,7 @@ const GuestLoginPage = () => {
             <BigButton textBox={<NicknameInput placeholder="닉네임을 입력해주세요"
                 value={nickname}
                 onChange={handleNicknameChange}/>}></BigButton>
-            <NicknameText style={{ paddingTop: "12px", paddingBottom: "32px" }}>한글 최대 15자</NicknameText>
+            <NicknameText red = {red} style={{ paddingTop: "12px", paddingBottom: "32px" }}>한글 최대 15자</NicknameText>
           </NicknameBox>
 
           <div onClick={handleStart}>
@@ -168,7 +176,7 @@ background: var(--White, #FAFAFA);
 `
 
 const NicknameText = styled.div`
-color: var(--Light-Gray, #A4A4A4);
+color: ${props => props.red ? 'red' : 'var(--Light-Gray, #A4A4A4)'};
 text-align: center;
 font-family: Spoqa Han Sans Neo;
 font-size: 16px;
