@@ -22,11 +22,12 @@ import {
 } from "./GuestOthersResultPage";
 import { hostNicknameState, usePostResponses } from "../../apis/guest";
 import { useRecoilValue } from "recoil";
-import { arrayState, userIdState } from "../../atom";
+import { animalImageState, arrayState, userIdState } from "../../atom";
 
 const GuestMyResultPage = () => {
   const homeButton = process.env.PUBLIC_URL + "/images/home.png";
-  const image = process.env.PUBLIC_URL + "/images/rabbit22.png";
+  // const image = process.env.PUBLIC_URL + "/images/rabbit22.png";
+  const image = useRecoilValue(animalImageState);
 
   const navigate = useNavigate();
 
