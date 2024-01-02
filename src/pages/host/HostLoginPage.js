@@ -142,11 +142,10 @@ cursor: pointer;
 
 const NicknameText = styled.div`
 color: rgba(0, 0, 0, 0.85);
-// font-family: PartialSansKR-Regular;
-font-family: Spoqa Han Sans Neo
+font-family: Spoqa Han Sans Neo;
 font-size: 1rem;
 font-style: normal;
-font-weight: 500;
+font-weight: 600;
 line-height: normal;
 }
 `
