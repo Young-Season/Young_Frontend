@@ -59,9 +59,10 @@ const HostStatisticsPage = () => {
   const [percentEmojiValues, setPercentEmojiValues] = useState([]);
   const [colorValues, setColorValues] = useState([]);
   const [percentColorValues, setPercentColorValues] = useState([]);
-  const [emojiData, setEmojiData] = useState([]);
   const [firstImpressionValues, setFirstImpressionValues] = useState([]);
-  const [presentImpressionData, setPresentImpressionData] = useState([]);
+  const [percentFirstImpression, setPercentFirstImpression] = useState([]);
+  const [nowImpressionValues, setNowImpressionValues] = useState([]);
+  const [percentNowImpression, setPercentNowImpression] = useState([]);
   const [loading, setLoading] = useState(true);
     useEffect(() => {
       console.log(token);
@@ -95,6 +96,20 @@ const HostStatisticsPage = () => {
           setPercentColorValues(percentColorValues); 
           console.log(colorValues);
           console.log(percentColorValues);
+          const resFirst = res.data.data.first
+          const firstImpressionValues = resFirst.map(item => item.first);
+          const percentFirstImpression = resFirst.map(item => item.percent);
+          setFirstImpressionValues(firstImpressionValues);
+          setPercentFirstImpression(percentFirstImpression); 
+          console.log(firstImpressionValues);
+          console.log(percentFirstImpression);
+          const resNow = res.data.data.now
+          const nowImpressionValues = resNow.map(item => item.now);
+          const percentNowImpression = resNow.map(item => item.percent);
+          setNowImpressionValues(nowImpressionValues);
+          setPercentNowImpression(percentNowImpression); 
+          console.log(nowImpressionValues);
+          console.log(percentNowImpression);
 
         } else if (res.status === "204") {
           console.log(res.status);
@@ -128,7 +143,7 @@ const HostStatisticsPage = () => {
             <ContentsText>{hostNickname}이는 {animals[animalValues[0]]}상이야!</ContentsText>
             {animalValues.map((animalValue, index) => (
               <AnswerContainer key={index}>
-                <TextBox>{animals[animalValue]}</TextBox>
+                <TextBox>{animals[animalValue-1]}</TextBox>
                 <PercentageBarContainer>
                   <PercentageBar width={percentValues[index]} />
                 </PercentageBarContainer>
@@ -153,15 +168,43 @@ const HostStatisticsPage = () => {
             ))}
           </StatisticContainer> 
           <StatisticContainer>     
-            <ContentsText>{hostNickname}이와 어울리는 색은{hostNickname}이가 이모지라면</ContentsText>
+            <ContentsText>{hostNickname}이와 어울리는 색은</ContentsText>
             {colorValues.map((colorValue, index) => (
               <AnswerContainer key={index}>
-                <TextBox>{colors[colorValue]}</TextBox>
+                <TextBox>{colors[colorValue-1]}</TextBox>
                 <PercentageBarContainer>
                   <PercentageBar width={percentColorValues[index]} />
                 </PercentageBarContainer>
                 <PercentageTextBox>
                   {percentColorValues[index]}%
+                </PercentageTextBox>
+              </AnswerContainer>
+            ))}
+          </StatisticContainer>
+          <StatisticContainer>     
+            <ContentsText>{hostNickname}이를 처음 봤을 때...</ContentsText>
+            {firstImpressionValues.map((firstValue, index) => (
+              <AnswerContainer key={index}>
+                <TextBox>{firstImpressions[firstValue-1]}</TextBox>
+                <PercentageBarContainer>
+                  <PercentageBar width={percentFirstImpression[index]} />
+                </PercentageBarContainer>
+                <PercentageTextBox>
+                  {percentFirstImpression[index]}%
+                </PercentageTextBox>
+              </AnswerContainer>
+            ))}
+          </StatisticContainer>
+          <StatisticContainer>     
+            <ContentsText>지금 내가 생각하는 {hostNickname}이는...</ContentsText>
+            {nowImpressionValues.map((nowValue, index) => (
+              <AnswerContainer key={index}>
+                <TextBox>{presentImpressions[nowValue-1]}</TextBox>
+                <PercentageBarContainer>
+                  <PercentageBar width={percentNowImpression[index]} />
+                </PercentageBarContainer>
+                <PercentageTextBox>
+                  {percentNowImpression[index]}%
                 </PercentageTextBox>
               </AnswerContainer>
             ))}
@@ -198,7 +241,7 @@ const StatisticContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 0.75rem;
+  gap: 1rem;
   align-self: stretch;
 `;
 
@@ -221,8 +264,8 @@ const TextBox = styled.div`
   line-height: normal;
 `;
 const ImgBox = styled.img`
-  width: 1.75rem;
-  padding: 0.1rem;
+  width: 1.65rem;
+  padding: 0.1rem 0.5rem;
   flex-shrink: 0;
 `;
 const PercentageBarContainer = styled.div`
