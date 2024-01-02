@@ -23,6 +23,7 @@ import { userIdState } from "../../atom";
 import { getHostTotalResult } from "../../apis/host";
 
 const HostTotalResultPage = () => {
+  const {Kakao} = window;
   // const image = process.env.PUBLIC_URL + "/images/rabbit22.png";
   // const statistics = process.env.PUBLIC_URL + "/images/home.png";
   const download = process.env.PUBLIC_URL + "/images/download.png";
@@ -84,7 +85,25 @@ const HostTotalResultPage = () => {
     console.log(totalData);
     console.log(totalData.title);
   }, []);
-
+  useEffect(()=>{
+    Kakao.cleanup();
+    Kakao.init("9769e69ba2b11621a50723827584b67e")
+    console.log(Kakao.isInitialized);
+  }, []) 
+  const shareKaKao = () =>{
+    console.log(hostId);
+    Kakao.Share.createCustomButton({
+      container: '#kakaotalk-sharing-btn',
+      templateId: 102394,
+      templateArgs: {
+        title: '제목 영역입니다.',
+        description: '설명 영역입니다.',
+        host_nickname: `${hostNickname}`,
+        hostId: `${hostId}`,
+        url: `https://youngchun.netlify.app/guestLogin?hostId=${hostId}`,
+      },
+    });
+  } 
   return (
     <Wrapper>
       <Container>
@@ -152,7 +171,9 @@ const HostTotalResultPage = () => {
           <Button>
             <ButtonContentsContainer>
               <ButtonText>URL 들어가는 공간</ButtonText>
-              <UrlImage src={urlImage} />
+              <BigButtonContainer id='kakaotalk-sharing-btn' onClick={()=>{shareKaKao()}} text={"친구들에게 공유하기"}>
+      <Image2 src={process.env.PUBLIC_URL + '/images/CopyButton.png'}></Image2>
+    </BigButtonContainer>
             </ButtonContentsContainer>
           </Button>
         </VisitorContainer>
@@ -291,3 +312,42 @@ const UrlImage = styled.img`
   height: 1rem;
   flex-shrink: 0;
 `;
+const BigButtonContainer = styled.button`
+display: flex;
+width: 17.5rem;
+height: 2.5rem;
+padding: 0.625rem 1.25rem;
+
+justify-content: center;
+align-items: center;
+gap: 10px;
+
+
+border-radius: 20px;
+border: 1px solid var(--Brown, #64422E);
+background: var(--White, #FAFAFA);
+box-shadow: -1px -2px 7.3px 0px rgba(0, 0, 0, 0.25) inset;
+
+@media (max-width: 360px) {
+  width: 15rem;
+}
+@media (max-width: 300px) {
+  width: 13rem;
+}
+@media (max-width: 250px) {
+  width: 11rem;
+}
+font-family: 'Spoqa Han Sans Neo';
+font-style: normal;
+font-weight: 500;
+font-size: 16px;
+line-height: 15px;
+/* identical to box height */
+
+/* Gray */
+color: #555555;
+`
+
+const Image2 = styled.img`;
+margin: 0rem;
+`

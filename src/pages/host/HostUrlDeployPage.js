@@ -6,8 +6,9 @@ import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 import { nicknameAtom, userIdState } from '../../atom';
-const {Kakao} = window;
+
 const HostUrlDeployPage = () => {
+  const {Kakao} = window;
   const navigate = useNavigate(); 
   const realUrl = "http://localhost:3000";
   //로컬주소
@@ -87,10 +88,10 @@ const HostUrlDeployPage = () => {
                 <Image src={process.env.PUBLIC_URL + '/images/Ghost.png'}></Image>
                 <FaceContainer3>
                 <Text1>친구에게 공유하고 내 이미지를 알아보세요!</Text1>
-          <button id='kakaotalk-sharing-btn' onClick={()=>{shareKaKao()}}>친구들에게 공유하기</button>
-          {/* <BigButtonContainer id='kakaotalk-sharing-btn2' onClick={()=>{shareKaKao2()}} text={"친구들에게 공유하기"}>
-      <Image2 src={process.env.PUBLIC_URL + '/images/CopyButton.png'}></Image2>
-    </BigButtonContainer> */}
+          {/* <button id='kakaotalk-sharing-btn' onClick={()=>{shareKaKao()}}>친구들에게 공유하기</button> */}
+                    <BigButtonContainer id='kakaotalk-sharing-btn' onClick={()=>{shareKaKao()}} text={"친구들에게 공유하기"}>
+                    {"친구들에게 공유하기"}<Image2 src={process.env.PUBLIC_URL + '/images/CopyButton.png'}></Image2>
+              </BigButtonContainer>
         {/* <UrlButton onClick = {()=>{shareKaKao()}} text={"친구들에게 공유하기"}></UrlButton> */}
                 </FaceContainer3>
             </FaceContainer2>
