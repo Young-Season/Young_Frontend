@@ -87,6 +87,16 @@ const HostTotalResultPage = () => {
     }
   };
 
+  const handleCopyClick = () => {
+    navigator.clipboard.writeText(`https://youngchun.netlify.app/?hostId=${hostId}`)
+      .then(() => {
+        alert('URL이 복사되었습니다.');
+      })
+      .catch((error) => {
+        console.error('복사 실패:', error);
+      });
+  };
+
   useEffect(() => {
     Kakao.cleanup();
     Kakao.init("9769e69ba2b11621a50723827584b67e");
@@ -194,18 +204,10 @@ const HostTotalResultPage = () => {
             카카오톡으로 공유하기
             <UrlImage src={urlImage}></UrlImage>
           </UrlButton>
-          {/* <BigButtonContainer
-            id="kakaotalk-sharing-btn"
-            onClick={() => {
-              shareKaKao();
-            }}
-            text={"친구들에게 공유하기"}
-          >
-            {"친구들에게 공유하기"}
-            <UrlImage
-              src={process.env.PUBLIC_URL + "/images/CopyButton.png"}
-            ></UrlImage>
-          </BigButtonContainer> */}
+
+        <Button>
+          <ButtonText onClick={handleCopyClick}>URL 복사 </ButtonText>
+        </Button>
         </VisitorContainer>
       </Container>
       <Footer />
@@ -372,10 +374,10 @@ const Image2 = styled.img`
 const UrlButton = styled.button`
   display: flex;
   height: 3.25rem;
-  padding: 0.625rem 1.25rem;
+  padding: 0.5rem 1.25rem;
   justify-content: space-between;
   align-items: center;
-  gap: 0.625rem;
+  gap: 0.5rem;
   flex-shrink: 0;
   align-self: stretch;
   border-radius: 1rem;
@@ -386,7 +388,7 @@ const UrlButton = styled.button`
   font-family: Spoqa Han Sans Neo;
   font-size: 0.75rem;
   font-style: normal;
-  font-weight: 500;
+  font-weight: 600;
   line-height: normal;
   cursor: pointer;
 `;
