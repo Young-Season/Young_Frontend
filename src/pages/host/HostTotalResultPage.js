@@ -1,11 +1,11 @@
-import React, { useEffect,  useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import styled from "styled-components";
 import Footer from "../../components/layout/Footer";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { hostTotal, nicknameAtom, tokenState } from "../../atom";
-import { saveAs } from 'file-saver';
-import html2canvas from 'html2canvas';
+import { saveAs } from "file-saver";
+import html2canvas from "html2canvas";
 
 import {
   Wrapper,
@@ -44,18 +44,18 @@ const HostTotalResultPage = () => {
   };
 
   const handleDownload = () => {
-    const sectionToCapture = document.getElementById('section-to-capture');
+    const sectionToCapture = document.getElementById("section-to-capture");
 
     html2canvas(sectionToCapture, { useCORS: true })
       .then((canvas) => {
-        const image = canvas.toDataURL('image/png');
-        const link = document.createElement('a');
+        const image = canvas.toDataURL("image/png");
+        const link = document.createElement("a");
         link.href = image;
         link.download = `${hostNickname}.png`;
         link.click();
       })
       .catch((err) => {
-        console.error('oops, something went wrong!', err);
+        console.error("oops, something went wrong!", err);
       });
   };
   const convertToImageSource = (imageState) => {
@@ -88,15 +88,11 @@ const HostTotalResultPage = () => {
   };
 
   useEffect(() => {
-    console.log("토탈토탈");
-    console.log(totalData);
-    console.log(totalData.title);
-  }, []);
-  useEffect(() => {
     Kakao.cleanup();
     Kakao.init("9769e69ba2b11621a50723827584b67e");
     console.log(Kakao.isInitialized);
-  }, []);
+  }, [visibleGuests]);
+
   const shareKaKao = () => {
     console.log(hostId);
     Kakao.Share.createCustomButton({
@@ -113,30 +109,30 @@ const HostTotalResultPage = () => {
   };
   return (
     <Wrapper>
-      <Container>
-      <div id="section-to-capture">
-  <Title>
-    친구들이 생각하는 {set_prepositional_particle(hostNickname)}?
-  </Title>
-  <WhiteBox style={{ padding: 0 }}>
-    <Image src={convertToImageSource(totalData.image)} />
-  </WhiteBox>
-  <DescriptionContainer>
-    <DescriptionTitle>{totalData.title}</DescriptionTitle>
-    <Description>
-      {totalData.first}
-      <br />
-      <br />
-      {totalData.now}
-    </Description>
-  </DescriptionContainer>
-</div>
+      <Container style={{ alignItems: "center" }}>
+        <CaptureDiv id="section-to-capture">
+          <Title>
+            친구들이 생각하는 {set_prepositional_particle(hostNickname)}?
+          </Title>
+          <WhiteBox style={{ padding: 0, marginBottom: "0.5rem" }}>
+            <Image src={convertToImageSource(totalData.image)} />
+          </WhiteBox>
+          <DescriptionContainer>
+            <DescriptionTitle>{totalData.title}</DescriptionTitle>
+            <Description>
+              {totalData.first}
+              <br />
+              <br />
+              {totalData.now}
+            </Description>
+          </DescriptionContainer>
+        </CaptureDiv>
 
-<Button onClick={handleDownload}>
-  <ButtonText>
-    이미지 다운로드 <DownloadImage src={download} />
-  </ButtonText>
-</Button>
+        <Button onClick={handleDownload}>
+          <ButtonText>
+            이미지 다운로드 <DownloadImage src={download} />
+          </ButtonText>
+        </Button>
 
         <Button
           onClick={() =>
@@ -148,10 +144,9 @@ const HostTotalResultPage = () => {
           <ButtonText>질문별 통계 보러가기 </ButtonText>
         </Button>
 
-
         <VisitorContainer>
           <VisiorListTitle>방문자 목록</VisiorListTitle>
-          <WhiteBox>
+          <WhiteBox style={{ padding: "0.75rem 0.75rem 1.25rem 0.75rem" }}>
             <TableHeaderContainer>
               <NicknameBox>
                 <HeaderText>닉네임</HeaderText>
@@ -190,7 +185,16 @@ const HostTotalResultPage = () => {
             ></Image2>
             </ButtonText>
           </Button> */}
-          <BigButtonContainer
+          <UrlButton
+            id="kakaotalk-sharing-btn"
+            onClick={() => {
+              shareKaKao();
+            }}
+          >
+            카카오톡으로 공유하기
+            <UrlImage src={urlImage}></UrlImage>
+          </UrlButton>
+          {/* <BigButtonContainer
             id="kakaotalk-sharing-btn"
             onClick={() => {
               shareKaKao();
@@ -198,12 +202,13 @@ const HostTotalResultPage = () => {
             text={"친구들에게 공유하기"}
           >
             {"친구들에게 공유하기"}
-            <Image2
+            <UrlImage
               src={process.env.PUBLIC_URL + "/images/CopyButton.png"}
-            ></Image2>
-          </BigButtonContainer>
+            ></UrlImage>
+          </BigButtonContainer> */}
         </VisitorContainer>
       </Container>
+      <Footer />
     </Wrapper>
   );
 };
@@ -347,17 +352,46 @@ const BigButtonContainer = styled.button`
   align-items: center;
   gap: 0.625rem;
   border-radius: 1rem;
-border: 1px solid var(--Brown, #64422E);
-background: var(--White, #FAFAFA);
-box-shadow: -1px -2px 7.3px 0px rgba(0, 0, 0, 0.25) inset;
-color: #64422e;
-font-family: Spoqa Han Sans Neo;
-font-size: 1rem;
-font-style: normal;
-font-weight: 550;
-line-height: normal;
+  border: 1px solid var(--Brown, #64422e);
+  background: var(--White, #fafafa);
+  box-shadow: -1px -2px 7.3px 0px rgba(0, 0, 0, 0.25) inset;
+  color: #64422e;
+  font-family: Spoqa Han Sans Neo;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 550;
+  line-height: normal;
 `;
 
 const Image2 = styled.img`
   margin-left: 0.5rem 0 0 0.5rem;
+`;
+
+const UrlButton = styled.button`
+  display: flex;
+  height: 3.25rem;
+  padding: 0.625rem 1.25rem;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.625rem;
+  flex-shrink: 0;
+  align-self: stretch;
+  border-radius: 1rem;
+  border: 1px solid var(--Brown, #64422e);
+  background: var(--White, #fafafa);
+  box-shadow: -1px -2px 7.3px 0px rgba(0, 0, 0, 0.25) inset;
+  color: #1c1c1c;
+  font-family: Spoqa Han Sans Neo;
+  font-size: 0.75rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  cursor: pointer;
+`;
+
+const CaptureDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  align-items: center;
 `;

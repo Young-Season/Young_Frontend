@@ -55,17 +55,21 @@ const HostStatisticsPage = () => {
   ];
   const [animalValues, setAnimalValues] = useState([]);
   const [percentValues, setPercentValues] = useState([]);
+  const [emojiValues, setEmojiValues] = useState([]);
+  const [percentEmojiValues, setPercentEmojiValues] = useState([]);
   const [colorValues, setColorValues] = useState([]);
   const [percentColorValues, setPercentColorValues] = useState([]);
-  const [emojiData, setEmojiData] = useState([]);
   const [firstImpressionValues, setFirstImpressionValues] = useState([]);
-  const [presentImpressionData, setPresentImpressionData] = useState([]);
+  const [percentFirstImpression, setPercentFirstImpression] = useState([]);
+  const [nowImpressionValues, setNowImpressionValues] = useState([]);
+  const [percentNowImpression, setPercentNowImpression] = useState([]);
   const [loading, setLoading] = useState(true);
     useEffect(() => {
       console.log(token);
     console.log(hostId);
     getHostStats(token, hostId)
       .then((res) => {
+        console.log(res);
         console.log("res.data.data:", res.data.data);
         console.log("res.data.data.animal:", res.data.data.animal);
         console.log("res.data.data.animal:", res.data.data.animal[0]);
@@ -78,13 +82,34 @@ const HostStatisticsPage = () => {
           setPercentValues(percentValues); 
           console.log(animalValues);
           console.log(percentValues);
+          const resEmoji = res.data.data.emoji
+          const emojiValues = resEmoji.map(item => item.emoji);
+          const percentEmojiValues = resEmoji.map(item => item.percent);
+          setEmojiValues(emojiValues);
+          setPercentEmojiValues(percentEmojiValues); 
+          console.log(emojiValues);
+          console.log(percentEmojiValues);
           const resColor = res.data.data.color
-          /*const colorValues = resColor.map(color => item.animal);
-          const percentColorValues = resColor.map(item => item.percent);*/
+          const colorValues = resColor.map(item => item.color);
+          const percentColorValues = resColor.map(item => item.percent);
           setColorValues(colorValues);
           setPercentColorValues(percentColorValues); 
           console.log(colorValues);
           console.log(percentColorValues);
+          const resFirst = res.data.data.first
+          const firstImpressionValues = resFirst.map(item => item.first);
+          const percentFirstImpression = resFirst.map(item => item.percent);
+          setFirstImpressionValues(firstImpressionValues);
+          setPercentFirstImpression(percentFirstImpression); 
+          console.log(firstImpressionValues);
+          console.log(percentFirstImpression);
+          const resNow = res.data.data.now
+          const nowImpressionValues = resNow.map(item => item.now);
+          const percentNowImpression = resNow.map(item => item.percent);
+          setNowImpressionValues(nowImpressionValues);
+          setPercentNowImpression(percentNowImpression); 
+          console.log(nowImpressionValues);
+          console.log(percentNowImpression);
 
         } else if (res.status === "204") {
           console.log(res.status);
@@ -118,7 +143,35 @@ const HostStatisticsPage = () => {
             <ContentsText>{hostNickname}이는 {animals[animalValues[0]]}상이야!</ContentsText>
             {animalValues.map((animalValue, index) => (
               <AnswerContainer key={index}>
-                <TextBox>{animals[animalValue]}</TextBox>
+                <TextBox>{animals[animalValue-1]}</TextBox>
+                <PercentageBarContainer>
+                  <PercentageBar width={percentValues[index]} />
+                </PercentageBarContainer>
+                <PercentageTextBox>
+                  {percentValues[index]}%
+                </PercentageTextBox>
+              </AnswerContainer>
+            ))}
+          </StatisticContainer>            
+          <StatisticContainer>     
+            <ContentsText>{hostNickname}이가 이모지라면</ContentsText>
+            {emojiValues.map((emojiValue, index) => (
+              <AnswerContainer key={index}>
+                <ImgBox src={process.env.PUBLIC_URL + `/images/emoji${emojiValue}.png`}></ImgBox>
+                <PercentageBarContainer>
+                  <PercentageBar width={percentEmojiValues[index]} />
+                </PercentageBarContainer>
+                <PercentageTextBox>
+                  {percentEmojiValues[index]}%
+                </PercentageTextBox>
+              </AnswerContainer>
+            ))}
+          </StatisticContainer> 
+          <StatisticContainer>     
+            <ContentsText>{hostNickname}이와 어울리는 색은</ContentsText>
+            {colorValues.map((colorValue, index) => (
+              <AnswerContainer key={index}>
+                <TextBox>{colors[colorValue-1]}</TextBox>
                 <PercentageBarContainer>
                   <PercentageBar width={percentColorValues[index]} />
                 </PercentageBarContainer>
@@ -127,35 +180,35 @@ const HostStatisticsPage = () => {
                 </PercentageTextBox>
               </AnswerContainer>
             ))}
-          </StatisticContainer> 
+          </StatisticContainer>
           <StatisticContainer>     
-            <ContentsText>{hostNickname}이가 이모지라면</ContentsText>
-            {colorValues.map((colorValue, index) => (
+            <ContentsText>{hostNickname}이를 처음 봤을 때...</ContentsText>
+            {firstImpressionValues.map((firstValue, index) => (
               <AnswerContainer key={index}>
-                <TextBox>{colors[colorValue]}</TextBox>
+                <TextBox>{firstImpressions[firstValue-1]}</TextBox>
                 <PercentageBarContainer>
-                  <PercentageBar width={percentValues[index]} />
+                  <PercentageBar width={percentFirstImpression[index]} />
                 </PercentageBarContainer>
                 <PercentageTextBox>
-                  {percentValues[index]}%
+                  {percentFirstImpression[index]}%
                 </PercentageTextBox>
               </AnswerContainer>
             ))}
-          </StatisticContainer> 
+          </StatisticContainer>
           <StatisticContainer>     
-            <ContentsText>{hostNickname}이가 이모지라면</ContentsText>
-            {colorValues.map((colorValue, index) => (
+            <ContentsText>지금 내가 생각하는 {hostNickname}이는...</ContentsText>
+            {nowImpressionValues.map((nowValue, index) => (
               <AnswerContainer key={index}>
-                <TextBox>{colors[colorValue]}</TextBox>
+                <TextBox>{presentImpressions[nowValue-1]}</TextBox>
                 <PercentageBarContainer>
-                  <PercentageBar width={percentValues[index]} />
+                  <PercentageBar width={percentNowImpression[index]} />
                 </PercentageBarContainer>
                 <PercentageTextBox>
-                  {percentValues[index]}%
+                  {percentNowImpression[index]}%
                 </PercentageTextBox>
               </AnswerContainer>
             ))}
-          </StatisticContainer> 
+          </StatisticContainer>
 
           
         </WhiteBox>
@@ -188,7 +241,7 @@ const StatisticContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 0.75rem;
+  gap: 1rem;
   align-self: stretch;
 `;
 
@@ -210,7 +263,11 @@ const TextBox = styled.div`
   font-weight: 500;
   line-height: normal;
 `;
-
+const ImgBox = styled.img`
+  width: 1.65rem;
+  padding: 0.1rem 0.5rem;
+  flex-shrink: 0;
+`;
 const PercentageBarContainer = styled.div`
   display: flex;
   padding: 0.375rem;

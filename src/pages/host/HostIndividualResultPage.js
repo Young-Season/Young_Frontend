@@ -259,7 +259,7 @@ export const Title = styled.div`
 export const WhiteBox = styled.div`
   display: flex;
   width: 20rem;
-  padding: 1.25rem 0rem;
+  padding: 1.25rem 1rem;
   flex-direction: column;
   align-items: flex-start;
   gap: 1.25rem;
@@ -279,9 +279,9 @@ const ContentsContainer = styled.div`
 export const ContentsText = styled.div`
   color: var(--BLACK, #1c1c1c);
   font-family: Spoqa Han Sans Neo;
-  font-size: 0.875rem;
+  font-size: 1.05rem;
   font-style: normal;
-  font-weight: 700;
+  font-weight: 800;
   line-height: normal;
 `;
 
