@@ -127,10 +127,28 @@ const HostStatisticsPage = () => {
       });
     }, []);
 
-    // if (loading) {
-    //   return <div>Loading...</div>;
-    // }/
+    const set_prepositional_particle = (idx, name)=>{
+      if(name){
+        const charCode = name.charCodeAt(name.length - 1);
+        const consonantCode = (charCode - 44032) % 28;
+    
+        if(consonantCode === 0){
+          if(idx === 1)return `${name}는`;
+          if(idx===2)return `${name}가`;
+          if(idx===3)return `${name}와`;
+          if(idx===4)return `${name}를`;
+          if(idx===5)return `${name}는`;
 
+        }
+        if(idx === 1)return `${name}은`;
+        if(idx===2)return `${name}이`;
+        if(idx===3)return `${name}과`;
+        if(idx===4)return `${name}을`;
+        if(idx===5)return `${name}은`;
+
+      }
+    };
+    
   return (
     <Wrapper>
       <Container>
@@ -140,7 +158,7 @@ const HostStatisticsPage = () => {
         <Title>질문별 통계</Title>
         <WhiteBox>
           <StatisticContainer>     
-            <ContentsText>{hostNickname}이는 {animals[animalValues[0]]}상이야!</ContentsText>
+            <ContentsText>{set_prepositional_particle(1, hostNickname)} OO상이야!</ContentsText>
             {animalValues.map((animalValue, index) => (
               <AnswerContainer key={index}>
                 <TextBox>{animals[animalValue-1]}</TextBox>
@@ -154,7 +172,7 @@ const HostStatisticsPage = () => {
             ))}
           </StatisticContainer>            
           <StatisticContainer>     
-            <ContentsText>{hostNickname}이가 이모지라면</ContentsText>
+            <ContentsText>{set_prepositional_particle(2, hostNickname)} 이모지라면</ContentsText>
             {emojiValues.map((emojiValue, index) => (
               <AnswerContainer key={index}>
                 <ImgBox src={process.env.PUBLIC_URL + `/images/emoji${emojiValue}.png`}></ImgBox>
@@ -168,7 +186,7 @@ const HostStatisticsPage = () => {
             ))}
           </StatisticContainer> 
           <StatisticContainer>     
-            <ContentsText>{hostNickname}이와 어울리는 색은</ContentsText>
+            <ContentsText>{set_prepositional_particle(3, hostNickname)}  어울리는 색은</ContentsText>
             {colorValues.map((colorValue, index) => (
               <AnswerContainer key={index}>
                 <TextBox>{colors[colorValue-1]}</TextBox>
@@ -182,7 +200,7 @@ const HostStatisticsPage = () => {
             ))}
           </StatisticContainer>
           <StatisticContainer>     
-            <ContentsText>{hostNickname}이를 처음 봤을 때...</ContentsText>
+            <ContentsText>{set_prepositional_particle(4, hostNickname)} 처음 봤을 때...</ContentsText>
             {firstImpressionValues.map((firstValue, index) => (
               <AnswerContainer key={index}>
                 <TextBox>{firstImpressions[firstValue-1]}</TextBox>
@@ -196,7 +214,7 @@ const HostStatisticsPage = () => {
             ))}
           </StatisticContainer>
           <StatisticContainer>     
-            <ContentsText>지금 내가 생각하는 {hostNickname}이는...</ContentsText>
+            <ContentsText>지금 내가 생각하는 {set_prepositional_particle(5, hostNickname)}...</ContentsText>
             {nowImpressionValues.map((nowValue, index) => (
               <AnswerContainer key={index}>
                 <TextBox>{presentImpressions[nowValue-1]}</TextBox>

@@ -226,6 +226,7 @@ const VisitorContainer = styled.div`
   align-items: center;
   gap: 3rem;
   padding: 0px;
+  margin-top: 7rem;
 `;
 
 const VisiorListTitle = styled.div`

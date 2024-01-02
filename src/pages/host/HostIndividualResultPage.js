@@ -225,7 +225,6 @@ export const Container = styled.div`
   flex-direction: column;
   height: 100%;
   align-items: flex-start;
-  gap: 2.25rem;
 `;
 
 export const ButtonContainer = styled.div`
@@ -233,8 +232,6 @@ export const ButtonContainer = styled.div`
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
-  padding: 0px;
-  margin: 0px;
 `;
 
 export const GoToBackButton = styled.img`
