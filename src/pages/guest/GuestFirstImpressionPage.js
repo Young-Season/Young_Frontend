@@ -51,7 +51,9 @@ function GuestFacePage() {
       <FaceContainer3>
         <Text>
           {hostName}
-          {getSubjectSuffix(hostName)} 처음 봤을 때
+          {getSubjectSuffix(hostName)}
+          <br />
+          처음 봤을 때
         </Text>
         <FaceContainer4>
           {firstImpressions.map((firstImpression, index) => (

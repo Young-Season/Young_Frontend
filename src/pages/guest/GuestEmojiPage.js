@@ -55,7 +55,9 @@ function GuestEmojiPage() {
       <FaceContainer3>
         <Text>
           {hostName}
-          {getSubjectSuffix(hostName)} 이모지라면
+          {getSubjectSuffix(hostName)}
+          <br />
+          이모지라면
         </Text>
         <FaceContainer4>
           {emojis.map((emoji, index) => (

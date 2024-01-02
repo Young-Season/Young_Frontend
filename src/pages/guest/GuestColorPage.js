@@ -54,7 +54,9 @@ function GuestColorPage() {
       <FaceContainer3>
         <Text>
           {hostName}
-          {getSubjectSuffix(hostName)} 어울리는 색은...{" "}
+          {getSubjectSuffix(hostName)}
+          <br />
+          어울리는 색은...{" "}
         </Text>
         <FaceContainer4>
           {colors.map((color, index) => (

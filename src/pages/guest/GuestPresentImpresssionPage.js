@@ -50,7 +50,8 @@ function GuestFacePage() {
       </FaceContainer2>
       <FaceContainer3>
         <Text>
-          지금 내가 생각하는 {hostName}
+          지금 내가 생각하는
+          <br /> {hostName}
           {getSubjectSuffix(hostName)}...
         </Text>
         <FaceContainer4>
