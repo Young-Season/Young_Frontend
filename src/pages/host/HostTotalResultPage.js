@@ -29,16 +29,12 @@ const HostTotalResultPage = () => {
   const download = process.env.PUBLIC_URL + "/images/download.png";
   const urlImage = process.env.PUBLIC_URL + "/images/copyButton.png";
   const fileImage = process.env.PUBLIC_URL + "/images/file.png";
-
   const navigate = useNavigate();
-
   const token = useRecoilValue(tokenState); // 백엔드에서 받아온 토큰
   const totalData = useRecoilValue(hostTotal); // 백엔드에서 받아온 토큰
-
   const hostNickname = useRecoilValue(nicknameAtom);
   const hostId = useRecoilValue(userIdState);
   // const { totalData } = useLocation();
-
   // useEffect(() => {
   // 	const fetchData = async () => {
   // 		try {
@@ -51,19 +47,16 @@ const HostTotalResultPage = () => {
   // 	}
   // 	fetchData;
   // }, [hostId])
-
   const [visibleGuests, setVisibleGuests] = useState(6);
   const seeMore = () => {
     setVisibleGuests((prevVisibleGuests) => prevVisibleGuests + 6);
   };
-
   const handleDownload = () => {
     const link = document.createElement("a");
     link.href = totalData.image; // 이미지 URL
     link.download = `https://young-season.o-r.kr/public/images/${totalData}.png`;
     link.click();
   };
-
   useEffect(() => {
     // getHostTotalResult(token, hostId)
     //   .then((res) => {
@@ -125,8 +118,7 @@ const HostTotalResultPage = () => {
             navigate("/hostStatistics", {
               state: { hostId: hostId, token: token },
             })
-          }
-        >
+          }>
           <ButtonText>질문별 통계 보러가기 </ButtonText>
         </Button>
         <Button onClick={handleDownload}>
@@ -134,7 +126,6 @@ const HostTotalResultPage = () => {
             이미지 다운로드 <DownloadImage src={download} />
           </ButtonText>
         </Button>
-
         <VisitorContainer>
           <VisiorListTitle>방문자 목록</VisiorListTitle>
           <WhiteBox>
@@ -147,7 +138,7 @@ const HostTotalResultPage = () => {
               </AnswerBox>
             </TableHeaderContainer>
             {totalData.guests.map((guest) => (
-              <TableListContainer>
+              <TableListContainer key={guest.id}>
                 <NicknameBox>
                   <ListText>{guest.name}</ListText>
                 </NicknameBox>
@@ -176,7 +167,6 @@ const HostTotalResultPage = () => {
     </Wrapper>
   );
 };
-
 export default HostTotalResultPage;
 
 const DownloadImage = styled.img`
