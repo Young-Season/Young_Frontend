@@ -91,11 +91,7 @@ const GuestLoginPage = () => {
       <Image bg={imageUrl}>
       
         <Contents>
-<<<<<<< HEAD
-          <Text>내가 생각하는 {hostId}</Text>
-=======
           <Text>내가 생각하는{hostId}</Text>
->>>>>>> main
           <Text>{set_prepositional_particle(hostNickname)}?</Text>
           <NicknameBox>
 
