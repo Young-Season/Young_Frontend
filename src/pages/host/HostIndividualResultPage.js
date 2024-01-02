@@ -279,7 +279,7 @@ const ContentsContainer = styled.div`
 export const ContentsText = styled.div`
   color: var(--BLACK, #1c1c1c);
   font-family: Spoqa Han Sans Neo;
-  font-size: 0.875rem;
+  font-size: 0.9rem;
   font-style: normal;
   font-weight: 700;
   line-height: normal;
