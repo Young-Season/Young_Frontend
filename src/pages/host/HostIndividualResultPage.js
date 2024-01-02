@@ -22,40 +22,40 @@ const HostIndividualResultPage = () => {
   const [individualData, setIndividualData] = useState({});
   const guestId = guest.id;
 
-    //조사 설정
-    const set_prepositional_particle = (name)=>{
-      if(name){
-        //name의 마지막 음절의 유니코드(UTF-16) 
-        const charCode = name.charCodeAt(name.length - 1);
-            
-        //유니코드의 한글 범위 내에서 해당 코드의 받침 확인
-        const consonantCode = (charCode - 44032) % 28;
-    
-        if(consonantCode === 0){
-            //0이면 받침 없음 -> 를
-            return `${name}는`;
-        }
-        //1이상이면 받침 있음 -> 을
-        return `${name}은`;
+  //조사 설정
+  const set_prepositional_particle = (name) => {
+    if (name) {
+      //name의 마지막 음절의 유니코드(UTF-16)
+      const charCode = name.charCodeAt(name.length - 1);
+
+      //유니코드의 한글 범위 내에서 해당 코드의 받침 확인
+      const consonantCode = (charCode - 44032) % 28;
+
+      if (consonantCode === 0) {
+        //0이면 받침 없음 -> 를
+        return `${name}는`;
       }
+      //1이상이면 받침 있음 -> 을
+      return `${name}은`;
     }
-        //조사 설정
-        const set_prepositional_particle2 = (name)=>{
-          if(name){
-            //name의 마지막 음절의 유니코드(UTF-16) 
-            const charCode = name.charCodeAt(name.length - 1);
-                
-            //유니코드의 한글 범위 내에서 해당 코드의 받침 확인
-            const consonantCode = (charCode - 44032) % 28;
-        
-            if(consonantCode === 0){
-                //0이면 받침 없음 -> 가
-                return `${name}가`;
-            }
-            //1이상이면 받침 있음 -> 이
-            return `${name}이`;
-          }
-        }
+  };
+  //조사 설정
+  const set_prepositional_particle2 = (name) => {
+    if (name) {
+      //name의 마지막 음절의 유니코드(UTF-16)
+      const charCode = name.charCodeAt(name.length - 1);
+
+      //유니코드의 한글 범위 내에서 해당 코드의 받침 확인
+      const consonantCode = (charCode - 44032) % 28;
+
+      if (consonantCode === 0) {
+        //0이면 받침 없음 -> 가
+        return `${name}가`;
+      }
+      //1이상이면 받침 있음 -> 이
+      return `${name}이`;
+    }
+  };
 
   useEffect(() => {
     console.log(token);
@@ -86,6 +86,48 @@ const HostIndividualResultPage = () => {
     return <div>Loading...</div>;
   }
 
+  const convertFace = (int) => {
+    if (int === 1) return "강아지";
+    else if (int === 2) return "고양이";
+    else if (int === 3) return "토끼";
+    else if (int === 4) return "여우";
+    else if (int === 5) return "곰";
+    else if (int === 6) return "다람쥐";
+  };
+
+  const convertEmoji = (int) => {
+    if (int === 1) return "😊";
+    else if (int === 2) return "😆";
+    else if (int === 3) return "😎";
+    else if (int === 4) return "😏";
+    else if (int === 5) return "🤪";
+    else if (int === 6) return "🫠";
+    else if (int === 7) return "🤭";
+    else if (int === 8) return "😐";
+  };
+
+  const convertColor = (int) => {
+    if (int === 1) return "빨간색";
+    else if (int === 2) return "노란색";
+    else if (int === 3) return "초록색";
+    else if (int === 4) return "파란색";
+    else if (int === 5) return "보라색";
+    else if (int === 6) return "분홍색";
+    else if (int === 7) return "흰색";
+    else if (int === 8) return "검은색";
+  };
+
+  const convertImpression = (int) => {
+    if (int === 1) return "밝아";
+    else if (int === 2) return "다정해";
+    else if (int === 3) return "웃겨";
+    else if (int === 4) return "어른스러워";
+    else if (int === 5) return "섬세해";
+    else if (int === 6) return "시크해";
+    else if (int === 7) return "투명해";
+    else if (int === 8) return "줏대있어";
+  };
+
   return (
     <Wrapper>
       <Container>
@@ -93,14 +135,17 @@ const HostIndividualResultPage = () => {
           <GoToBackButton src={backButton} onClick={() => navigate(-1)} />
         </ButtonContainer>
         <Title>
-        {set_prepositional_particle2(guest.name)}이 생각하는 {hostNickname}{set_prepositional_particle(hostNickname)}?
+          {set_prepositional_particle2(guest.name)}이 생각하는 {hostNickname}
+          {set_prepositional_particle(hostNickname)}?
         </Title>
         <WhiteBox>
           <ContentsContainer>
             <ContentsText>{hostNickname}이는 ㅇㅇ상이야!</ContentsText>
             <AnswerContainer>
               <RightArrow src={answerArrow} />
-              <ContentsAnswer>{individualData.data.animal}</ContentsAnswer>
+              <ContentsAnswer>
+                {convertFace(individualData.data.animal)}
+              </ContentsAnswer>
             </AnswerContainer>
           </ContentsContainer>
 
@@ -108,7 +153,9 @@ const HostIndividualResultPage = () => {
             <ContentsText>{hostNickname}이가 이모지라면</ContentsText>
             <AnswerContainer>
               <RightArrow src={answerArrow} />
-              <ContentsAnswer>{individualData.data.emoji}</ContentsAnswer>
+              <ContentsAnswer>
+                {convertEmoji(individualData.data.emoji)}
+              </ContentsAnswer>
             </AnswerContainer>
           </ContentsContainer>
 
@@ -116,7 +163,9 @@ const HostIndividualResultPage = () => {
             <ContentsText>{hostNickname}이와 어울리는 색은</ContentsText>
             <AnswerContainer>
               <RightArrow src={answerArrow} />
-              <ContentsAnswer>{individualData.data.color}</ContentsAnswer>
+              <ContentsAnswer>
+                {convertColor(individualData.data.color)}
+              </ContentsAnswer>
             </AnswerContainer>
           </ContentsContainer>
 
@@ -124,7 +173,9 @@ const HostIndividualResultPage = () => {
             <ContentsText>{hostNickname}이를 처음 봤을 때...</ContentsText>
             <AnswerContainer>
               <RightArrow src={answerArrow} />
-              <ContentsAnswer>{individualData.data.first}</ContentsAnswer>
+              <ContentsAnswer>
+                {convertImpression(individualData.data.first)}
+              </ContentsAnswer>
             </AnswerContainer>
           </ContentsContainer>
 
@@ -134,14 +185,15 @@ const HostIndividualResultPage = () => {
             </ContentsText>
             <AnswerContainer>
               <RightArrow src={answerArrow} />
-              <ContentsAnswer>{individualData.data.now}</ContentsAnswer>
+              <ContentsAnswer>
+                {convertImpression(individualData.data.now)}
+              </ContentsAnswer>
             </AnswerContainer>
           </ContentsContainer>
         </WhiteBox>
       </Container>
       <Footer />
     </Wrapper>
-    
   );
 };
 
