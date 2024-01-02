@@ -55,6 +55,8 @@ const HostStatisticsPage = () => {
   ];
   const [animalValues, setAnimalValues] = useState([]);
   const [percentValues, setPercentValues] = useState([]);
+  const [emojiValues, setEmojiValues] = useState([]);
+  const [percentEmojiValues, setPercentEmojiValues] = useState([]);
   const [colorValues, setColorValues] = useState([]);
   const [percentColorValues, setPercentColorValues] = useState([]);
   const [emojiData, setEmojiData] = useState([]);
@@ -66,6 +68,7 @@ const HostStatisticsPage = () => {
     console.log(hostId);
     getHostStats(token, hostId)
       .then((res) => {
+        console.log(res);
         console.log("res.data.data:", res.data.data);
         console.log("res.data.data.animal:", res.data.data.animal);
         console.log("res.data.data.animal:", res.data.data.animal[0]);
@@ -78,9 +81,16 @@ const HostStatisticsPage = () => {
           setPercentValues(percentValues); 
           console.log(animalValues);
           console.log(percentValues);
+          const resEmoji = res.data.data.emoji
+          const emojiValues = resEmoji.map(item => item.emoji);
+          const percentEmojiValues = resEmoji.map(item => item.percent);
+          setEmojiValues(emojiValues);
+          setPercentEmojiValues(percentEmojiValues); 
+          console.log(emojiValues);
+          console.log(percentEmojiValues);
           const resColor = res.data.data.color
-          /*const colorValues = resColor.map(color => item.animal);
-          const percentColorValues = resColor.map(item => item.percent);*/
+          const colorValues = resColor.map(item => item.color);
+          const percentColorValues = resColor.map(item => item.percent);
           setColorValues(colorValues);
           setPercentColorValues(percentColorValues); 
           console.log(colorValues);
@@ -120,6 +130,34 @@ const HostStatisticsPage = () => {
               <AnswerContainer key={index}>
                 <TextBox>{animals[animalValue]}</TextBox>
                 <PercentageBarContainer>
+                  <PercentageBar width={percentValues[index]} />
+                </PercentageBarContainer>
+                <PercentageTextBox>
+                  {percentValues[index]}%
+                </PercentageTextBox>
+              </AnswerContainer>
+            ))}
+          </StatisticContainer>            
+          <StatisticContainer>     
+            <ContentsText>{hostNickname}이가 이모지라면</ContentsText>
+            {emojiValues.map((emojiValue, index) => (
+              <AnswerContainer key={index}>
+                <ImgBox src={process.env.PUBLIC_URL + `/images/emoji${emojiValue}.png`}></ImgBox>
+                <PercentageBarContainer>
+                  <PercentageBar width={percentEmojiValues[index]} />
+                </PercentageBarContainer>
+                <PercentageTextBox>
+                  {percentEmojiValues[index]}%
+                </PercentageTextBox>
+              </AnswerContainer>
+            ))}
+          </StatisticContainer> 
+          <StatisticContainer>     
+            <ContentsText>{hostNickname}이와 어울리는 색은{hostNickname}이가 이모지라면</ContentsText>
+            {colorValues.map((colorValue, index) => (
+              <AnswerContainer key={index}>
+                <TextBox>{colors[colorValue]}</TextBox>
+                <PercentageBarContainer>
                   <PercentageBar width={percentColorValues[index]} />
                 </PercentageBarContainer>
                 <PercentageTextBox>
@@ -127,35 +165,7 @@ const HostStatisticsPage = () => {
                 </PercentageTextBox>
               </AnswerContainer>
             ))}
-          </StatisticContainer> 
-          <StatisticContainer>     
-            <ContentsText>{hostNickname}이가 이모지라면</ContentsText>
-            {colorValues.map((colorValue, index) => (
-              <AnswerContainer key={index}>
-                <TextBox>{colors[colorValue]}</TextBox>
-                <PercentageBarContainer>
-                  <PercentageBar width={percentValues[index]} />
-                </PercentageBarContainer>
-                <PercentageTextBox>
-                  {percentValues[index]}%
-                </PercentageTextBox>
-              </AnswerContainer>
-            ))}
-          </StatisticContainer> 
-          <StatisticContainer>     
-            <ContentsText>{hostNickname}이가 이모지라면</ContentsText>
-            {colorValues.map((colorValue, index) => (
-              <AnswerContainer key={index}>
-                <TextBox>{colors[colorValue]}</TextBox>
-                <PercentageBarContainer>
-                  <PercentageBar width={percentValues[index]} />
-                </PercentageBarContainer>
-                <PercentageTextBox>
-                  {percentValues[index]}%
-                </PercentageTextBox>
-              </AnswerContainer>
-            ))}
-          </StatisticContainer> 
+          </StatisticContainer>
 
           
         </WhiteBox>
@@ -210,7 +220,11 @@ const TextBox = styled.div`
   font-weight: 500;
   line-height: normal;
 `;
-
+const ImgBox = styled.img`
+  width: 1.75rem;
+  padding: 0.1rem;
+  flex-shrink: 0;
+`;
 const PercentageBarContainer = styled.div`
   display: flex;
   padding: 0.375rem;
