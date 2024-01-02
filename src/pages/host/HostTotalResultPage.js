@@ -56,6 +56,13 @@ const HostTotalResultPage = () => {
     setVisibleGuests((prevVisibleGuests) => prevVisibleGuests + 6);
   };
 
+  const handleDownload = () => {
+    const link = document.createElement("a");
+    link.href = totalData.image; // 이미지 URL
+    link.download = `https://young-season.o-r.kr/public/images/${totalData}.png`;
+    link.click();
+  };
+
   useEffect(() => {
     // getHostTotalResult(token, hostId)
     //   .then((res) => {
@@ -76,34 +83,37 @@ const HostTotalResultPage = () => {
     console.log("토탈토탈");
     console.log(totalData);
     console.log(totalData.title);
-
   }, []);
 
   return (
     <Wrapper>
       <Container>
         <Title>친구들이 생각하는 {hostNickname}는?</Title>
-        <WhiteBox style={{padding: 0}}>
-          <Image src={totalData.image}/>
+        <WhiteBox style={{ padding: 0 }}>
+          <Image src={totalData.image} />
         </WhiteBox>
         <DescriptionContainer>
           <DescriptionTitle>{totalData.title}</DescriptionTitle>
           <Description>
             {totalData.first}
-            <br/>
-            <br/>
+            <br />
+            <br />
             {totalData.now}
           </Description>
         </DescriptionContainer>
-        <Button onClick={()=>navigate("/hostStatistics", {
-          state: {hostId: hostId, token: token},
-        })}>
+        <Button
+          onClick={() =>
+            navigate("/hostStatistics", {
+              state: { hostId: hostId, token: token },
+            })
+          }
+        >
           <ButtonText>질문별 통계 보러가기 </ButtonText>
         </Button>
-        <Button>
-           <ButtonText>
-             이미지 다운로드 <DownloadImage src={download} />
-           </ButtonText>
+        <Button onClick={handleDownload}>
+          <ButtonText>
+            이미지 다운로드 <DownloadImage src={download} />
+          </ButtonText>
         </Button>
 
         <VisitorContainer>
@@ -117,19 +127,23 @@ const HostTotalResultPage = () => {
                 <HeaderText>답변</HeaderText>
               </AnswerBox>
             </TableHeaderContainer>
-            {totalData.guests.map(guest=>(
+            {totalData.guests.map((guest) => (
               <TableListContainer>
                 <NicknameBox>
                   <ListText>{guest.name}</ListText>
                 </NicknameBox>
                 <AnswerBox>
                   <ListText>
-                    <AnswerFileImage src={fileImage} onClick={()=>navigate("/hostResult", {state: {guest: guest}})}></AnswerFileImage>
+                    <AnswerFileImage
+                      src={fileImage}
+                      onClick={() =>
+                        navigate("/hostResult", { state: { guest: guest } })
+                      }
+                    ></AnswerFileImage>
                   </ListText>
                 </AnswerBox>
               </TableListContainer>
-            ))
-            }
+            ))}
             {visibleGuests < totalData.guests.length && (
               <SeeMoreButton onClick={seeMore}>더보기</SeeMoreButton>
             )}
@@ -138,13 +152,12 @@ const HostTotalResultPage = () => {
           <Button>
             <ButtonContentsContainer>
               <ButtonText>URL 들어가는 공간</ButtonText>
-              <UrlImage src={urlImage}/>
+              <UrlImage src={urlImage} />
             </ButtonContentsContainer>
           </Button>
         </VisitorContainer>
       </Container>
     </Wrapper>
-
   );
 };
 

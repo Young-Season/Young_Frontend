@@ -3,42 +3,88 @@ import styled from "styled-components";
 import Footer from "../../components/layout/Footer";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useRecoilValue } from "recoil";
-import { nicknameAtom, userIdState } from "../../atom";
+import { nicknameAtom, tokenState, userIdState } from "../../atom";
 import { getHostIndividualResult } from "../../apis/host";
 
 const HostIndividualResultPage = () => {
   const backButton = process.env.PUBLIC_URL + "/images/goToBackButton.png";
   const answerArrow = process.env.PUBLIC_URL + "/images/arrow-right.png";
-
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   const { state } = useLocation();
   const guest = state.guest;
-  const token = state.token;
-  const hostId = state.hostId;
+  const token = useRecoilValue(tokenState);
+  const hostNickname = useRecoilValue(nicknameAtom);
+  const hostId = useRecoilValue(userIdState);
   console.log(guest);
 
   const [individualData, setIndividualData] = useState({});
-
-  const hostNickname = useRecoilValue(nicknameAtom);
   const guestId = guest.id;
 
+    //조사 설정
+    const set_prepositional_particle = (name)=>{
+      if(name){
+        //name의 마지막 음절의 유니코드(UTF-16) 
+        const charCode = name.charCodeAt(name.length - 1);
+            
+        //유니코드의 한글 범위 내에서 해당 코드의 받침 확인
+        const consonantCode = (charCode - 44032) % 28;
+    
+        if(consonantCode === 0){
+            //0이면 받침 없음 -> 를
+            return `${name}는`;
+        }
+        //1이상이면 받침 있음 -> 을
+        return `${name}은`;
+      }
+    }
+        //조사 설정
+        const set_prepositional_particle2 = (name)=>{
+          if(name){
+            //name의 마지막 음절의 유니코드(UTF-16) 
+            const charCode = name.charCodeAt(name.length - 1);
+                
+            //유니코드의 한글 범위 내에서 해당 코드의 받침 확인
+            const consonantCode = (charCode - 44032) % 28;
+        
+            if(consonantCode === 0){
+                //0이면 받침 없음 -> 가
+                return `${name}가`;
+            }
+            //1이상이면 받침 있음 -> 이
+            return `${name}이`;
+          }
+        }
+
   useEffect(() => {
+    console.log(token);
+    console.log(guestId);
+    console.log(hostId);
     getHostIndividualResult(token, hostId, guestId)
       .then((res) => {
+        console.log(res);
         if (res.data.status === "200") {
-          console.log(res.message);
+          console.log(guest);
+          console.log(res.data.data.animal);
           setIndividualData(res.data);
+          setLoading(false);
         } else if (res.status === "400") {
           console.log(res.message);
+          setLoading(false);
         } else if (res.status === "403") {
           console.log(res.message);
+          setLoading(false);
         }
       })
       .catch((error) => {
         console.error(error);
       });
   }, []);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <Wrapper>
@@ -47,7 +93,7 @@ const HostIndividualResultPage = () => {
           <GoToBackButton src={backButton} onClick={() => navigate(-1)} />
         </ButtonContainer>
         <Title>
-          {individualData.data.name}이 생각하는 {hostNickname}는?
+        {set_prepositional_particle2(guest.name)}이 생각하는 {set_prepositional_particle(hostNickname)}?
         </Title>
         <WhiteBox>
           <ContentsContainer>
@@ -95,6 +141,7 @@ const HostIndividualResultPage = () => {
       </Container>
       <Footer />
     </Wrapper>
+    
   );
 };
 

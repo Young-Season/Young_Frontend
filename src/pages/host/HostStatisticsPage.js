@@ -183,7 +183,7 @@ const HostStatisticsPage = () => {
       <PercentageTextBox>
         {item.percent}%
       </PercentageTextBox>
-    </div>
+gi    </div>
   ))}
             </AnswerContainer>
           </StatisticContainer> 
