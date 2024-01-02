@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 import { nicknameAtom, userIdState } from '../../atom';
 const {Kakao} = window;
-const GuestFacePage = () => {
+const HostUrlDeployPage = () => {
   const navigate = useNavigate(); 
   const realUrl = "http://localhost:3000";
   //로컬주소
@@ -28,6 +28,7 @@ const GuestFacePage = () => {
     console.log(Kakao.isInitialized);
   }, []) 
   const shareKaKao = () =>{
+    console.log(hostId);
     Kakao.Share.createCustomButton({
       container: '#kakaotalk-sharing-btn',
       templateId: 102394,
@@ -40,6 +41,45 @@ const GuestFacePage = () => {
       },
     });
   } 
+  // const shareKaKao2 = () =>{
+  //   Kakao.Share.createCustomButton({
+  //     container: '#kakaotalk-sharing-btn2',
+  //     templateId: 102394,
+  //     templateArgs: {
+  //       title: '제목 영역입니다.',
+  //       description: '설명 영역입니다.',
+  //       host_nickname: `${hostName}`,
+  //       hostId: `${hostId}`,
+  //       url: `http://localhost:3000/guestLogin?hostId=${hostId}`,
+  //     },
+  //   });
+  // } 
+  // useEffect(() => {
+  //   kakaoButton()
+  // }, [])
+  // const kakaoButton = () => {
+  //   if (window.Kakao) {
+  //     const Kakao = window.Kakao
+
+  //     if (!Kakao.isInitialized()) {
+  //       Kakao.init('9769e69ba2b11621a50723827584b67e')
+  //     }
+
+  //     Kakao.Share.createScrapButton({
+  //       container: '#kakaotalk-sharing-btn3',
+  //       requestUrl: "http://localhost:3000/guestLogin",
+  //       templateId: 102394,
+  //       templateArgs: {
+  //         host_nickname: `${hostName}`,
+  //         hostId: `${hostId}`,
+  //         // url: `http://localhost:3000/guestLogin?hostId=${hostId}`,
+  //       },
+  //     });
+      
+  //   }
+  // }
+
+  
     return (
         <FaceContainer>
             <Text>친구들이 생각하는 {hostName}{getSubjectSuffix(hostName)}?</Text> 
@@ -47,16 +87,18 @@ const GuestFacePage = () => {
                 <Image src={process.env.PUBLIC_URL + '/images/Ghost.png'}></Image>
                 <FaceContainer3>
                 <Text1>친구에게 공유하고 내 이미지를 알아보세요!</Text1>
-                <div id="kakaotalk-sharing-btn">
-          <UrlButton onClick = {()=>{shareKaKao()}} text={"친구들에게 공유하기"}></UrlButton>
-        </div>
+          <button id='kakaotalk-sharing-btn' onClick={()=>{shareKaKao()}}>친구들에게 공유하기</button>
+          {/* <BigButtonContainer id='kakaotalk-sharing-btn2' onClick={()=>{shareKaKao2()}} text={"친구들에게 공유하기"}>
+      <Image2 src={process.env.PUBLIC_URL + '/images/CopyButton.png'}></Image2>
+    </BigButtonContainer> */}
+        {/* <UrlButton onClick = {()=>{shareKaKao()}} text={"친구들에게 공유하기"}></UrlButton> */}
                 </FaceContainer3>
             </FaceContainer2>
             
         </FaceContainer>
     );
   }
-  export default GuestFacePage;
+  export default HostUrlDeployPage;
   const FaceContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -111,4 +153,43 @@ margin-bottom: 3.75rem;
 width: 100%;
 text-align: center;
 color: #64422E;
+`
+const BigButtonContainer = styled.button`
+display: flex;
+width: 17.5rem;
+height: 2.5rem;
+padding: 0.625rem 1.25rem;
+
+justify-content: center;
+align-items: center;
+gap: 10px;
+
+
+border-radius: 20px;
+border: 1px solid var(--Brown, #64422E);
+background: var(--White, #FAFAFA);
+box-shadow: -1px -2px 7.3px 0px rgba(0, 0, 0, 0.25) inset;
+
+@media (max-width: 360px) {
+  width: 15rem;
+}
+@media (max-width: 300px) {
+  width: 13rem;
+}
+@media (max-width: 250px) {
+  width: 11rem;
+}
+font-family: 'Spoqa Han Sans Neo';
+font-style: normal;
+font-weight: 500;
+font-size: 16px;
+line-height: 15px;
+/* identical to box height */
+
+/* Gray */
+color: #555555;
+`
+
+const Image2 = styled.img`;
+margin: 0rem;
 `
