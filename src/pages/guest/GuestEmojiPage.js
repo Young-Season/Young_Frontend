@@ -6,7 +6,6 @@ import { useRecoilState, useRecoilValue } from "recoil";
 
 import { animalImageState, arrayState } from "../../atom";
 import { hostNicknameState } from "../../apis/guest";
-import { createBrowserHistory } from "history";
 
 function GuestEmojiPage() {
   const navigate = useNavigate();

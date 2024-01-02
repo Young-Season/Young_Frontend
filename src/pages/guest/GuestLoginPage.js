@@ -78,6 +78,9 @@ const GuestLoginPage = () => {
       const hostId = urlParams.get('hostId');
       setUserId(hostId);
       console.log(hostId); //여기까지 okay
+      if(hostId == null || hostId === undefined) {
+        navigate("/hostLogin");
+      }
       const data = await getHostNickname(hostId);
       console.log(data);
       if(data){
