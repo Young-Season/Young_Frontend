@@ -72,7 +72,10 @@ const HostTotalResultPage = () => {
     //   .catch((error) => {
     //     console.error(error);
     //   });
-  }, [visibleGuests]);
+    console.log("토탈토탈");
+    console.log(totalData);
+
+  }, []);
 
   return (
     <Wrapper>
@@ -124,10 +127,10 @@ const HostTotalResultPage = () => {
             </TableHeaderContainer>
             {/* 헤더 */}
             {/* {} */}
-            {/* {totalData.data.guests.slice(0, visibleGuests).map((guest) => (
+            {totalData && totalData.guests.map((guest) => (
               <TableListContainer>
                 <NicknameBox>
-                  <ListText>{guest.name}</ListText>
+                  <ListText>{guest.name || "이름"}</ListText>
                 </NicknameBox>
                 <AnswerBox>
                   <ListText>
@@ -142,7 +145,7 @@ const HostTotalResultPage = () => {
                   </ListText>
                 </AnswerBox>
               </TableListContainer>
-            ))} */}
+            ))}
             {visibleGuests < totalData.data.guests.length && (
               <SeeMoreButton onClick={seeMore}>더보기</SeeMoreButton>
             )}
