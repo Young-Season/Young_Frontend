@@ -30,7 +30,7 @@ export const getHostIndividualResult = async (token, hostId, guestId) => {
   try {
     const response = await axios.get(url, {
       headers: {
-        Authorization: `Bearer ${token}`,
+        token: token,
       },
     });
     return response;
