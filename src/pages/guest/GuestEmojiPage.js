@@ -3,14 +3,20 @@ import SmallButton from "../../components/layout/SmallButton";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState, useRecoilValue } from "recoil";
+
 import { animalImageState, arrayState } from "../../atom";
 import { hostNicknameState } from "../../apis/guest";
+import { createBrowserHistory } from "history";
+
 function GuestEmojiPage() {
   const navigate = useNavigate();
+
   const hostName = useRecoilValue(hostNicknameState);
   const animalImage = useRecoilValue(animalImageState);
+
   console.log("animalImage: ", animalImage);
   const [animalImage2, setAnimalImage2] = useRecoilState(animalImageState);
+
   const emojis = [
     "emoji1",
     "emoji2",
@@ -22,6 +28,7 @@ function GuestEmojiPage() {
     "emoji8",
   ];
   const [postArray, setPostArray] = useRecoilState(arrayState);
+
   const handleButtonClick = async (index) => {
     let imageUrl = animalImage2;
     let emojiIndexString = (index + 1).toString();
@@ -37,8 +44,9 @@ function GuestEmojiPage() {
       });
       resolve();
     });
-    navigate("/guestcolor");
+    navigate("/guestcolor", { replace: true });
   };
+
   const getSubjectSuffix = (name) => {
     const lastChar = name.charAt(name.length - 1);
     const lastCharCode = lastChar.charCodeAt(0);
@@ -47,6 +55,7 @@ function GuestEmojiPage() {
     }
     return (lastCharCode - 44032) % 28 === 0 ? "가" : "이";
   };
+
   return (
     <FaceContainer>
       <FaceContainer2>

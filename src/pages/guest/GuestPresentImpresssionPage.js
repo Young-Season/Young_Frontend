@@ -33,7 +33,7 @@ function GuestFacePage() {
       });
       resolve();
     });
-    navigate("/guestLoading");
+    navigate("/guestLoading", { replace: true });
   };
   const getSubjectSuffix = (name) => {
     const lastChar = name.charAt(name.length - 1);

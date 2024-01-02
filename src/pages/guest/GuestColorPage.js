@@ -5,7 +5,9 @@ import { animalImageState, arrayState } from "../../atom";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useRecoilValue } from "recoil";
+
 import { hostNicknameState } from "../../apis/guest";
+
 function GuestColorPage() {
   const hostName = useRecoilValue(hostNicknameState);
   const animalImage = useRecoilValue(animalImageState);
@@ -36,8 +38,9 @@ function GuestColorPage() {
       });
       resolve();
     });
-    navigate("/firstimpression");
+    navigate("/firstimpression", { replace: true });
   };
+
   const getSubjectSuffix = (name) => {
     const lastChar = name.charAt(name.length - 1);
     const lastCharCode = lastChar.charCodeAt(0);
@@ -46,6 +49,7 @@ function GuestColorPage() {
     }
     return (lastCharCode - 44032) % 28 === 0 ? "와" : "과";
   };
+
   return (
     <FaceContainer>
       <FaceContainer2>

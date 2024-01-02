@@ -4,9 +4,14 @@ import SmallButton from "../../components/layout/SmallButton";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useRecoilValue } from "recoil";
+import { createBrowserHistory } from "history";
+
 import { hostNicknameState, usePostResponses } from "../../apis/guest";
 import { useRecoilState } from "recoil";
 import { animalImageState, arrayState } from "../../atom";
+
+const history = createBrowserHistory();
+
 function GuestFacePage() {
   const hostName = useRecoilValue(hostNicknameState);
   const [animalImage, setAnimalImage] = useRecoilState(animalImageState);
@@ -37,6 +42,7 @@ function GuestFacePage() {
     });
     navigate("/guestemoji");
   };
+
   const getSubjectSuffix = (name) => {
     const lastChar = name.charAt(name.length - 1);
     const lastCharCode = lastChar.charCodeAt(0);
@@ -45,6 +51,20 @@ function GuestFacePage() {
     }
     return (lastCharCode - 44032) % 28 === 0 ? "는" : "은";
   };
+
+  useEffect(() => {
+    const unblock = history.block((location, action) => {
+      if (action === "POP") {
+        // 뒤로가기 동작 방지
+        return false;
+      }
+    });
+
+    return () => {
+      unblock(); // 컴포넌트가 언마운트되었을 때 블록 해제
+    };
+  }, []);
+
   return (
     <FaceContainer>
       <FaceContainer2>
