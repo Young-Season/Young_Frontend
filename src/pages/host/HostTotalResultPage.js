@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
 import Footer from "../../components/layout/Footer";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { nicknameAtom, tokenState } from "../../atom";
 
@@ -35,7 +35,7 @@ const HostTotalResultPage = () => {
 
   const hostNickname = useRecoilValue(nicknameAtom);
   const hostId = useRecoilValue(userIdState);
-  const [totalData, setTotalData] = useState({});
+  const { totalData } = useLocation();
 
   // useEffect(() => {
   // 	const fetchData = async () => {
@@ -56,39 +56,45 @@ const HostTotalResultPage = () => {
   };
 
   useEffect(() => {
-    getHostTotalResult(token, hostId)
-      .then((res) => {
-        if (res.data.status === "200") {
-          console.log(res.data.message);
-          setTotalData(res.data.data);
-        } else if (res.data.status === "204") {
-          console.log(res.data.message);
-        } else if (res.data.status === "400") {
-          console.log(res.data.message);
-        } else if (res.data.status === "403") {
-          console.log(res.data.message);
-        }
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    // getHostTotalResult(token, hostId)
+    //   .then((res) => {
+    //     if (res.data.status === "200") {
+    //       console.log(res.data.message);
+    //       setTotalData(res.data.data);
+    //     } else if (res.data.status === "204") {
+    //       console.log(res.data.message);
+    //     } else if (res.data.status === "400") {
+    //       console.log(res.data.message);
+    //     } else if (res.data.status === "403") {
+    //       console.log(res.data.message);
+    //     }
+    //   })
+    //   .catch((error) => {
+    //     console.error(error);
+    //   });
   }, [visibleGuests]);
 
   return (
     <Wrapper>
       <Container>
         <Title>친구들이 생각하는 {hostNickname}는?</Title>
+        {totalData && totalData.image &&
         <WhiteBox style={{ padding: 0 }}>
-          <Image src={totalData.data.image} />
-        </WhiteBox>
+          <Image src={totalData.image||null} />
+        </WhiteBox>}
         <DescriptionContainer>
-          <DescriptionTitle>{totalData.data.title}</DescriptionTitle>
+          {totalData && 
+          <DescriptionTitle>{totalData.title || "제목"}</DescriptionTitle>
+          }
+          {
+            totalData &&
           <Description>
-            {totalData.data.first}
+            {totalData.first || "first"}
             <br />
             <br />
-            {totalData.data.now}
+            {totalData.now || "now"}
           </Description>
+          }
         </DescriptionContainer>
         <Button
           onClick={() =>
@@ -117,8 +123,8 @@ const HostTotalResultPage = () => {
               </AnswerBox>
             </TableHeaderContainer>
             {/* 헤더 */}
-
-            {totalData.data.guests.slice(0, visibleGuests).map((guest) => (
+            {/* {} */}
+            {/* {totalData.data.guests.slice(0, visibleGuests).map((guest) => (
               <TableListContainer>
                 <NicknameBox>
                   <ListText>{guest.name}</ListText>
@@ -136,7 +142,7 @@ const HostTotalResultPage = () => {
                   </ListText>
                 </AnswerBox>
               </TableListContainer>
-            ))}
+            ))} */}
             {visibleGuests < totalData.data.guests.length && (
               <SeeMoreButton onClick={seeMore}>더보기</SeeMoreButton>
             )}

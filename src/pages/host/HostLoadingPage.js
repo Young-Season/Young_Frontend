@@ -1,9 +1,10 @@
 import styled from 'styled-components';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
-import { postkakaoCallback } from '../../apis/login';
+import { getLogin, postkakaoCallback } from '../../apis/login';
 import { useSetRecoilState } from 'recoil';
 import { nicknameAtom, tokenState, userIdState } from '../../atom';
+import { getHostTotalResult } from '../../apis/host';
 
 const HostLoadingPage = () => {
   const imageUrl = process.env.PUBLIC_URL + '/images/BG_blur.png';
@@ -30,7 +31,35 @@ const HostLoadingPage = () => {
             console.log("호스트");
             console.log(data.hostName);
             setHostNickname(data.hostName);
-            navigate('/deploy');
+            console.log(data.token);
+            console.log(data.id);
+
+            //게스트 결과 불러오기 -> 있으면: hostTotalResult / 없으면: 
+            const hostTotal = await getHostTotalResult(data.token, data.id);
+            console.log("호스트토탈");
+            console.log(hostTotal);
+            console.log(hostTotal.status);
+            if(hostTotal && hostTotal.status === "200"){
+              console.log(hostTotal.data);
+              navigate('/hostTotalResult', hostTotal);
+            }
+            else if(hostTotal && hostTotal.status === "204"){
+              navigate('/deploy');
+            }
+            else if(hostTotal && hostTotal.status === "403"){
+              // await getLogin();
+              // alert(hostTotal.message);
+              alert("토큰 만료! 다시 로그인 해주세요");
+              setUserId(null);
+              setToken("");
+              setHostNickname("hello");
+
+              navigate('/');
+            }
+            else{
+              alert("로그인을 다시 해주세요.");
+            }
+
           }
           else if(data && data.status === '404'){
             //신규 가입자
