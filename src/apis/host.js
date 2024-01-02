@@ -10,18 +10,18 @@ export const getHostTotalResult = async (token, hostId) => {
   console.log(url);
   console.log(token);
   console.log(hostId);
-try{
-  const data = await axios.get(url, {
-    headers: {
+  try {
+    const data = await axios.get(url, {
+      headers: {
         // Authorization: `Bearer ${token}`
         token: token,
-    }
-  })
-  console.log(data);
-  return data.data;
-}catch(error){
-  console.error(error);
-}
+      },
+    });
+    console.log(data);
+    return data.data;
+  } catch (error) {
+    console.error(error);
+  }
 };
 
 // 호스트가 각자 게스트의 결과 열람
@@ -41,7 +41,7 @@ export const getHostIndividualResult = async (token, hostId, guestId) => {
 
 // 호스트가 질문별 통계 열람
 export const getHostStats = async (token, hostId) => {
-  const url = `${baseUrl}/stats/:${hostId}`;
+  const url = `${baseUrl}/stats/${hostId}`;
   try {
     const response = await axios.get(url, {
       headers: {
@@ -54,6 +54,4 @@ export const getHostStats = async (token, hostId) => {
   }
 };
 
-export const refreshToken = async (token, setTokenState)=>{
-
-}
+export const refreshToken = async (token, setTokenState) => {};

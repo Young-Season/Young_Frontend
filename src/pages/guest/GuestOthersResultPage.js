@@ -23,7 +23,7 @@ const HostTotalResultPage = () => {
 
   const { state } = useLocation();
   const hostName = state.hostName;
-  const hostId = useRecoilValue(userIdState);
+  const hostId = state.hostId;
 
   // const hostId = useRecoilValue(userIdState);
 
@@ -34,8 +34,17 @@ const HostTotalResultPage = () => {
   const [otherGuestsData, setOtherGuestsData] = useState({});
 
   const convertToImageSource = (imageState) => {
-    const extractedNumber = imageState.slice(0, 3); // 문자열 슬라이싱을 사용하여 숫자 추출
-    return `https://young-season.o-r.kr/public/images/${extractedNumber}.png`;
+    console.log(imageState);
+    if (imageState) {
+      const extractedNumber = imageState.slice(0, 3); // 문자열 슬라이싱을 사용하여 숫자 추출
+      console.log(imageState);
+      console.log(extractedNumber);
+      return `https://young-season.o-r.kr/public/images/${imageState}.png`;
+    } else {
+      // imageState가 유효한 값이 아닌 경우에 대한 처리
+      console.log("imageState에 값이 없음");
+      return;
+    }
   };
 
   useEffect(() => {
@@ -59,7 +68,7 @@ const HostTotalResultPage = () => {
         <ButtonContainer>
           <GoToBackButton src={backButton} onClick={() => navigate(-1)} />
         </ButtonContainer>
-        <Title>친구들이 생각하는 {hostName}는?</Title>
+        <Title>다른 친구들이 생각하는 {hostName}는?</Title>
         <WhiteBox style={{ padding: 0 }}>
           <Image src={convertToImageSource(otherGuestsData.image)} />
         </WhiteBox>
