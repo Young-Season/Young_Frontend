@@ -41,7 +41,7 @@ const HostLoadingPage = () => {
             console.log(hostTotal.status);
             if(hostTotal && hostTotal.status === "200"){
               console.log(hostTotal.data);
-              navigate('/hostTotalResult', hostTotal);
+              navigate('/deploy');
             }
             else if(hostTotal && hostTotal.status === "204"){
               navigate('/deploy');

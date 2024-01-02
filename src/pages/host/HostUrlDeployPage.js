@@ -37,7 +37,7 @@ const HostUrlDeployPage = () => {
         description: '설명 영역입니다.',
         host_nickname: `${hostName}`,
         hostId: `${hostId}`,
-        url: `http://localhost:3000/guestLogin?hostId=${hostId}`,
+        url: `https://youngchun.netlify.app/guestLogin?hostId=${hostId}`,
       },
     });
   } 
