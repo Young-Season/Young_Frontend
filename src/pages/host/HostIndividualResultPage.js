@@ -93,7 +93,7 @@ const HostIndividualResultPage = () => {
           <GoToBackButton src={backButton} onClick={() => navigate(-1)} />
         </ButtonContainer>
         <Title>
-        {set_prepositional_particle2(guest.name)}이 생각하는 {set_prepositional_particle(hostNickname)}?
+        {set_prepositional_particle2(guest.name)}이 생각하는 {hostNickname}{set_prepositional_particle(hostNickname)}?
         </Title>
         <WhiteBox>
           <ContentsContainer>
