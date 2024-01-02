@@ -33,6 +33,11 @@ const HostTotalResultPage = () => {
 
   const [otherGuestsData, setOtherGuestsData] = useState({});
 
+  const convertToImageSource = (imageState) => {
+    const extractedNumber = imageState.slice(0, 3); // 문자열 슬라이싱을 사용하여 숫자 추출
+    return `https://young-season.o-r.kr/public/images/${extractedNumber}.png`;
+  };
+
   useEffect(() => {
     getOtherGuestsResult(hostId)
       .then((res) => {
@@ -56,7 +61,7 @@ const HostTotalResultPage = () => {
         </ButtonContainer>
         <Title>친구들이 생각하는 {hostName}는?</Title>
         <WhiteBox style={{ padding: 0 }}>
-          <Image src={otherGuestsData.image} />
+          <Image src={convertToImageSource(otherGuestsData.image)} />
         </WhiteBox>
         <DescriptionContainer>
           <DescriptionTitle>{otherGuestsData.title}</DescriptionTitle>
