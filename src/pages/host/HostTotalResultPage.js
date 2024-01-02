@@ -23,7 +23,7 @@ import { userIdState } from "../../atom";
 import { getHostTotalResult } from "../../apis/host";
 
 const HostTotalResultPage = () => {
-  const {Kakao} = window;
+  const { Kakao } = window;
   // const image = process.env.PUBLIC_URL + "/images/rabbit22.png";
   // const statistics = process.env.PUBLIC_URL + "/images/home.png";
   const download = process.env.PUBLIC_URL + "/images/download.png";
@@ -60,58 +60,71 @@ const HostTotalResultPage = () => {
   const handleDownload = () => {
     const link = document.createElement("a");
     link.href = totalData.image; // 이미지 URL
-    link.download = `https://young-season.o-r.kr/public/images/${totalData}.png`;
+    link.download = `https://young-season.o-r.kr/public/images/${totalData.image}.png`;
     link.click();
   };
 
-        //조사 설정
-        const set_prepositional_particle = (name) => {
-          if (name) {
-            //name의 마지막 음절의 유니코드(UTF-16)
-            const charCode = name.charCodeAt(name.length - 1);
-      
-            //유니코드의 한글 범위 내에서 해당 코드의 받침 확인
-            const consonantCode = (charCode - 44032) % 28;
-      
-            if (consonantCode === 0) {
-              //0이면 받침 없음 -> 는
-              return `${name}는`;
-            }
-            //1이상이면 받침 있음 -> 은
-            return `${name}은`;
-          }
-        };
+  const convertToImageSource = (imageState) => {
+    if (imageState) {
+      console.log(imageState);
+      return `https://young-season.o-r.kr/public/images/${imageState}.png`;
+    } else {
+      // imageState가 유효한 값이 아닌 경우에 대한 처리
+      console.log("imageState에 값이 없음");
+      return;
+    }
+  };
+
+  //조사 설정
+  const set_prepositional_particle = (name) => {
+    if (name) {
+      //name의 마지막 음절의 유니코드(UTF-16)
+      const charCode = name.charCodeAt(name.length - 1);
+
+      //유니코드의 한글 범위 내에서 해당 코드의 받침 확인
+      const consonantCode = (charCode - 44032) % 28;
+
+      if (consonantCode === 0) {
+        //0이면 받침 없음 -> 는
+        return `${name}는`;
+      }
+      //1이상이면 받침 있음 -> 은
+      return `${name}은`;
+    }
+  };
 
   useEffect(() => {
     console.log("토탈토탈");
     console.log(totalData);
     console.log(totalData.title);
   }, []);
-  useEffect(()=>{
+  useEffect(() => {
     Kakao.cleanup();
-    Kakao.init("9769e69ba2b11621a50723827584b67e")
+    Kakao.init("9769e69ba2b11621a50723827584b67e");
     console.log(Kakao.isInitialized);
-  }, []) 
-  const shareKaKao = () =>{
+  }, []);
+  const shareKaKao = () => {
     console.log(hostId);
     Kakao.Share.createCustomButton({
-      container: '#kakaotalk-sharing-btn',
+      container: "#kakaotalk-sharing-btn",
       templateId: 102394,
       templateArgs: {
-        title: '제목 영역입니다.',
-        description: '설명 영역입니다.',
+        title: "제목 영역입니다.",
+        description: "설명 영역입니다.",
         host_nickname: `${hostNickname}`,
         hostId: `${hostId}`,
         url: `https://youngchun.netlify.app/guestLogin?hostId=${hostId}`,
       },
     });
-  } 
+  };
   return (
     <Wrapper>
       <Container>
-        <Title>친구들이 생각하는 {set_prepositional_particle(hostNickname)}?</Title>
+        <Title>
+          친구들이 생각하는 {set_prepositional_particle(hostNickname)}?
+        </Title>
         <WhiteBox style={{ padding: 0 }}>
-          <Image src={totalData.image} />
+          <Image src={convertToImageSource(totalData.image)} />
         </WhiteBox>
         <DescriptionContainer>
           <DescriptionTitle>{totalData.title}</DescriptionTitle>
@@ -170,9 +183,18 @@ const HostTotalResultPage = () => {
             )}
           </WhiteBox>
           <SharingText>친구에게 공유하고 내 이미지를 알아보세요!</SharingText>
-              <BigButtonContainer id='kakaotalk-sharing-btn' onClick={()=>{shareKaKao()}} text={"친구들에게 공유하기"}>
-              {"친구들에게 공유하기"}<Image2 src={process.env.PUBLIC_URL + '/images/CopyButton.png'}></Image2>
-    </BigButtonContainer>
+          <BigButtonContainer
+            id="kakaotalk-sharing-btn"
+            onClick={() => {
+              shareKaKao();
+            }}
+            text={"친구들에게 공유하기"}
+          >
+            {"친구들에게 공유하기"}
+            <Image2
+              src={process.env.PUBLIC_URL + "/images/CopyButton.png"}
+            ></Image2>
+          </BigButtonContainer>
         </VisitorContainer>
       </Container>
     </Wrapper>
@@ -296,12 +318,12 @@ const ButtonContentsContainer = styled.div`
 `;
 
 const ButtonText = styled.div`
-color: #64422E;
-font-family: Spoqa Han Sans Neo;
-font-size: 1rem;
-font-style: normal;
-font-weight: 550;
-line-height: normal;
+  color: #64422e;
+  font-family: Spoqa Han Sans Neo;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 550;
+  line-height: normal;
 `;
 
 const UrlImage = styled.img`
@@ -310,41 +332,40 @@ const UrlImage = styled.img`
   flex-shrink: 0;
 `;
 const BigButtonContainer = styled.button`
-display: flex;
-width: 17.5rem;
-height: 2.5rem;
-padding: 0.625rem 1.25rem;
+  display: flex;
+  width: 17.5rem;
+  height: 2.5rem;
+  padding: 0.625rem 1.25rem;
 
-justify-content: center;
-align-items: center;
-gap: 10px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
 
+  border-radius: 20px;
+  border: 1px solid var(--Brown, #64422e);
+  background: var(--White, #fafafa);
+  box-shadow: -1px -2px 7.3px 0px rgba(0, 0, 0, 0.25) inset;
 
-border-radius: 20px;
-border: 1px solid var(--Brown, #64422E);
-background: var(--White, #FAFAFA);
-box-shadow: -1px -2px 7.3px 0px rgba(0, 0, 0, 0.25) inset;
+  @media (max-width: 360px) {
+    width: 15rem;
+  }
+  @media (max-width: 300px) {
+    width: 13rem;
+  }
+  @media (max-width: 250px) {
+    width: 11rem;
+  }
+  font-family: "Spoqa Han Sans Neo";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 15px;
+  /* identical to box height */
 
-@media (max-width: 360px) {
-  width: 15rem;
-}
-@media (max-width: 300px) {
-  width: 13rem;
-}
-@media (max-width: 250px) {
-  width: 11rem;
-}
-font-family: 'Spoqa Han Sans Neo';
-font-style: normal;
-font-weight: 500;
-font-size: 16px;
-line-height: 15px;
-/* identical to box height */
+  /* Gray */
+  color: #555555;
+`;
 
-/* Gray */
-color: #555555;
-`
-
-const Image2 = styled.img`;
-margin: 0rem;
-`
+const Image2 = styled.img`
+  margin: 0rem;
+`;
