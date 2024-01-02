@@ -53,11 +53,12 @@ const HostStatisticsPage = () => {
     "투명한",
     "줏대있는",
   ];
-  const [animalData, setAnimalData] = useState([]);
-  const [mostAnimalData, setMostAnimalData] = useState();
+  const [animalValues, setAnimalValues] = useState([]);
+  const [percentValues, setPercentValues] = useState([]);
+  const [colorValues, setColorValues] = useState([]);
+  const [percentColorValues, setPercentColorValues] = useState([]);
   const [emojiData, setEmojiData] = useState([]);
-  const [colorData, setColorData] = useState([]);
-  const [firstImpressionData, setFirstImpressionData] = useState([]);
+  const [firstImpressionValues, setFirstImpressionValues] = useState([]);
   const [presentImpressionData, setPresentImpressionData] = useState([]);
   const [loading, setLoading] = useState(true);
     useEffect(() => {
@@ -65,30 +66,26 @@ const HostStatisticsPage = () => {
     console.log(hostId);
     getHostStats(token, hostId)
       .then((res) => {
-        const animaldata = res.data.data.animal.map(item => {
-          return {
-            name: animals[item.animal],
-            percent: item.percent
-          };
-        });
-        console.log(animaldata);
-        setAnimalData(animalData);
-        console.log(animalData);
-        console.log(res.status);
         console.log("res.data.data:", res.data.data);
         console.log("res.data.data.animal:", res.data.data.animal);
         console.log("res.data.data.animal:", res.data.data.animal[0]);
         console.log("res.data.data.animal:", res.data.data.animal[0].animal);
-        if (res.status === "200") {    
-          const animaldata = res.data.data.animal.map(item => {
-            return {
-              name: animals[item.animal],
-              percent: item.percent
-            };
-          });
-          console.log(animaldata);
-          setAnimalData(animaldata);
-          console.log(animalData);   
+        if (res.status === 200) {
+          const resAnimal = res.data.data.animal
+          const animalValues = resAnimal.map(item => item.animal);
+          const percentValues = resAnimal.map(item => item.percent);
+          setAnimalValues(animalValues);
+          setPercentValues(percentValues); 
+          console.log(animalValues);
+          console.log(percentValues);
+          const resColor = res.data.data.color
+          const colorValues = resColor.map(color => item.animal);
+          const percentColorValues = resColor.map(item => item.percent);
+          setColorValues(colorValues);
+          setPercentColorValues(percentColorValues); 
+          console.log(colorValues);
+          console.log(percentColorValues);
+
         } else if (res.status === "204") {
           console.log(res.status);
           setLoading(false);
@@ -105,9 +102,9 @@ const HostStatisticsPage = () => {
       });
     }, []);
 
-    if (loading) {
-      return <div>Loading...</div>;
-    }
+    // if (loading) {
+    //   return <div>Loading...</div>;
+    // }/
 
   return (
     <Wrapper>
@@ -118,92 +115,55 @@ const HostStatisticsPage = () => {
         <Title>질문별 통계</Title>
         <WhiteBox>
           <StatisticContainer>     
-            <ContentsText>{hostNickname}이는 {animalData}상이야!</ContentsText>
-            <AnswerContainer>            
-            {animalData.map((item, index) => (
-    <div key={index}>
-      <TextBox>{item.name}</TextBox>
-      <PercentageBarContainer>
-        <PercentageBar width={item.percent} />
-      </PercentageBarContainer>
-      <PercentageTextBox>
-        {item.percent}%
-      </PercentageTextBox>
-    </div>
-  ))}
-            </AnswerContainer>
+            <ContentsText>{hostNickname}이는 {animals[animalValues[0]]}상이야!</ContentsText>
+            {animalValues.map((animalValue, index) => (
+              <AnswerContainer key={index}>
+                <TextBox>{animals[animalValue]}</TextBox>
+                <PercentageBarContainer>
+                  <PercentageBar width={percentColorValues[index]} />
+                </PercentageBarContainer>
+                <PercentageTextBox>
+                  {percentColorValues[index]}%
+                </PercentageTextBox>
+              </AnswerContainer>
+            ))}
           </StatisticContainer> 
           <StatisticContainer>     
             <ContentsText>{hostNickname}이가 이모지라면</ContentsText>
-            <AnswerContainer>            
-            {animalData.map((item, index) => (
-    <div key={index}>
-      <TextBox>{item.name}</TextBox>
-      <PercentageBarContainer>
-        <PercentageBar width={item.percent} />
-      </PercentageBarContainer>
-      <PercentageTextBox>
-        {item.percent}%
-      </PercentageTextBox>
-    </div>
-  ))}
-            </AnswerContainer>
+            {colorValues.map((colorValue, index) => (
+              <AnswerContainer key={index}>
+                <TextBox>{colors[colorValue]}</TextBox>
+                <PercentageBarContainer>
+                  <PercentageBar width={percentValues[index]} />
+                </PercentageBarContainer>
+                <PercentageTextBox>
+                  {percentValues[index]}%
+                </PercentageTextBox>
+              </AnswerContainer>
+            ))}
           </StatisticContainer> 
           <StatisticContainer>     
-            <ContentsText>{hostNickname}이와 어울리는 색은...</ContentsText>
-            <AnswerContainer>            
-            {animalData.map((item, index) => (
-    <div key={index}>
-      <TextBox>{item.name}</TextBox>
-      <PercentageBarContainer>
-        <PercentageBar width={item.percent} />
-      </PercentageBarContainer>
-      <PercentageTextBox>
-        {item.percent}%
-      </PercentageTextBox>
-    </div>
-  ))}
-            </AnswerContainer>
+            <ContentsText>{hostNickname}이가 이모지라면</ContentsText>
+            {colorValues.map((colorValue, index) => (
+              <AnswerContainer key={index}>
+                <TextBox>{colors[colorValue]}</TextBox>
+                <PercentageBarContainer>
+                  <PercentageBar width={percentValues[index]} />
+                </PercentageBarContainer>
+                <PercentageTextBox>
+                  {percentValues[index]}%
+                </PercentageTextBox>
+              </AnswerContainer>
+            ))}
           </StatisticContainer> 
-          <StatisticContainer>     
-            <ContentsText>{hostNickname}이를 처음 봤을 때...</ContentsText>
-            <AnswerContainer>            
-            {animalData.map((item, index) => (
-    <div key={index}>
-      <TextBox>{item.name}</TextBox>
-      <PercentageBarContainer>
-        <PercentageBar width={item.percent} />
-      </PercentageBarContainer>
-      <PercentageTextBox>
-        {item.percent}%
-      </PercentageTextBox>
-    </div>
-  ))}
-            </AnswerContainer>
-          </StatisticContainer> 
-          <StatisticContainer>     
-            <ContentsText>지금 내가 생각하는 {hostNickname}이는...</ContentsText>
-            <AnswerContainer>            
-            {animalData.map((item, index) => (
-    <div key={index}>
-      <TextBox>{item.name}</TextBox>
-      <PercentageBarContainer>
-        <PercentageBar width={item.percent} />
-      </PercentageBarContainer>
-      <PercentageTextBox>
-        {item.percent}%
-      </PercentageTextBox>
-    </div>
-  ))}
-            </AnswerContainer>
-          </StatisticContainer> 
+
           
         </WhiteBox>
         <InformationBox>
           <InformationText>
             *항목별 상위 2개의 통계가 표시됩니다
           </InformationText>
-        </InformationBox>
+            </InformationBox>
       </Container> 
       <Footer />
     </Wrapper>

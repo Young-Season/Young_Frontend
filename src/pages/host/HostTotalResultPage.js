@@ -38,18 +38,29 @@ const HostTotalResultPage = () => {
 
 
   const navigate = useNavigate();
-
   const token = useRecoilValue(tokenState); // 백엔드에서 받아온 토큰
   const totalData = useRecoilValue(hostTotal); // 백엔드에서 받아온 토큰
-
   const hostNickname = useRecoilValue(nicknameAtom);
   const hostId = useRecoilValue(userIdState);
+  // const { totalData } = useLocation();
+
+  // useEffect(() => {
+  // 	const fetchData = async () => {
+  // 		try {
+  // 			const response = await getHostTotalResult(hostId);
+  // 			setTotalData(response.data);
+  // 			console.log(response.data);
+  // 		} catch(error) {
+  // 			console.error(error);
+  // 		}
+  // 	}
+  // 	fetchData;
+  // }, [hostId])
 
   const [visibleGuests, setVisibleGuests] = useState(6);
   const seeMore = () => {
     setVisibleGuests((prevVisibleGuests) => prevVisibleGuests + 6);
   };
-
   const handleDownload = () => {
     const sectionToCapture = document.getElementById('section-to-capture');
 
@@ -150,11 +161,14 @@ const HostTotalResultPage = () => {
             navigate("/hostStatistics", {
               state: { hostId: hostId, token: token },
             })
-          }
-        >
+          }>
           <ButtonText>질문별 통계 보러가기 </ButtonText>
         </Button>
-
+        <Button onClick={handleDownload}>
+          <ButtonText>
+            이미지 다운로드 <DownloadImage src={download} />
+          </ButtonText>
+        </Button>
 
         <VisitorContainer>
           <VisiorListTitle>방문자 목록</VisiorListTitle>
@@ -168,7 +182,7 @@ const HostTotalResultPage = () => {
               </AnswerBox>
             </TableHeaderContainer>
             {totalData.guests.map((guest) => (
-              <TableListContainer>
+              <TableListContainer key={guest.id}>
                 <NicknameBox>
                   <ListText>{guest.name}</ListText>
                 </NicknameBox>
@@ -206,7 +220,6 @@ const HostTotalResultPage = () => {
     </Wrapper>
   );
 };
-
 export default HostTotalResultPage;
 
 const DownloadImage = styled.img`
