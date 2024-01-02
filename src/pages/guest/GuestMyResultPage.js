@@ -43,7 +43,7 @@ const GuestMyResultPage = () => {
   };
 
   const goToHostLogin = () => {
-    navigate("/");
+    navigate("/hostLogin");
   };
   //조사 설정1
   const set_prepositional_particle1 = (name) => {
