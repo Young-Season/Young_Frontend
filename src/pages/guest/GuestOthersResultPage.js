@@ -25,8 +25,6 @@ const HostTotalResultPage = () => {
   const hostName = state.hostName;
   const hostId = useRecoilValue(userIdState);
 
-  // const hostId = useRecoilValue(userIdState);
-
   const goToHostLogin = () => {
     navigate("/hostLogin");
   };

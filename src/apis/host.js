@@ -41,11 +41,13 @@ export const getHostIndividualResult = async (token, hostId, guestId) => {
 
 // 호스트가 질문별 통계 열람
 export const getHostStats = async (token, hostId) => {
-  const url = `${baseUrl}/stats/:${hostId}`;
+  console.log("token:",token);
+  console.log(hostId);
+  const url = `${baseUrl}/stats/${hostId}`;
   try {
     const response = await axios.get(url, {
       headers: {
-        Authorization: `Bearer ${token}`,
+        "token": token,
       },
     });
     return response;

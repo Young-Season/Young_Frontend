@@ -14,7 +14,7 @@ import { useRecoilValue } from "recoil";
 import { nicknameAtom, userIdState } from "../../atom";
 import { getHostStats } from "../../apis/host";
 
-const HostStatisticsPage = () => {
+const HostStatisticsPage2 = () => {
   const backButton = process.env.PUBLIC_URL + "/images/goToBackButton.png";
   const navigate = useNavigate();
   const { state } = useLocation();
@@ -64,30 +64,19 @@ const HostStatisticsPage = () => {
     console.log(hostId);
     getHostStats(token, hostId)
       .then((res) => {
-        const animaldata = res.data.data.animal.map(item => {
-          return {
-            name: animals[item.animal],
-            percent: item.percent
-          };
-        });
-        console.log(animaldata);
-        setAnimalData(animaldata);
-          console.log(animalData); 
         console.log(res.status);
         console.log("res.data.data:", res.data.data);
         console.log("res.data.data.animal:", res.data.data.animal);
         console.log("res.data.data.animal:", res.data.data.animal[0]);
         console.log("res.data.data.animal:", res.data.data.animal[0].animal);
         if (res.status === "200") {    
-          const animaldata = res.data.data.animal.map(item => {
+          const animalData = res.data.data.animal.map(item => {
             return {
               name: animals[item.animal],
               percent: item.percent
             };
           });
-          console.log(animaldata);
-          setAnimalData(animaldata);
-          console.log(animalData);   
+          setAnimalData(animalData);   
         } else if (res.status === "204") {
           console.log(res.status);
         } else if (res.status === "400") {
@@ -99,7 +88,10 @@ const HostStatisticsPage = () => {
       .catch((error) => {
         console.error(error);
       });
-    }, []);
+    }, [animalData, emojiData]);
+    useEffect(() => {
+      console.log("animaldata:", animalData);
+    }, [animalData]);
 
   return (
     <Wrapper>
@@ -137,7 +129,7 @@ const HostStatisticsPage = () => {
     </Wrapper>
   );
 };
-export default HostStatisticsPage;
+export default HostStatisticsPage2;
 
 const WhiteBox = styled.div`
   display: flex;
