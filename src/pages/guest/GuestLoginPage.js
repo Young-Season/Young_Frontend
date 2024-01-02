@@ -78,7 +78,7 @@ const GuestLoginPage = () => {
       else{
         alert('해당 페이지가 존재하지 않습니다. 자신의 공간을 만들어보세요!');
         // navigate(`/guestLogin?hostId=${hostId}`);
-        navigate('/');
+        navigate('/hostLogin');
       }
     };
     fetchData();

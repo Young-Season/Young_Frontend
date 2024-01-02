@@ -61,7 +61,7 @@ const HostLoadingPage = () => {
               setToken("");
               setHostNickname("hello");
 
-              navigate('/');
+              navigate('/hostLogin');
             }
             else{
               alert("로그인을 다시 해주세요.");
