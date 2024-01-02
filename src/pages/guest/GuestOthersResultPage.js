@@ -142,6 +142,7 @@ export const DescriptionContainer = styled.div`
   align-items: center;
   gap: 1.5rem;
   align-self: center;
+  margin-top: 2rem;
 `;
 
 export const DescriptionTitle = styled.div`
@@ -181,6 +182,7 @@ export const CuriousText = styled.div`
   font-weight: 700;
   line-height: normal;
   align-self: center;
+  margin-top: 3.5rem;
 `;
 
 export const Button = styled.button`
@@ -198,6 +200,7 @@ export const Button = styled.button`
   box-shadow: -1px -2px 7.3px 0px rgba(0, 0, 0, 0.25) inset;
   cursor: pointer;
   margin-top: 1.5rem;
+  margin-bottom: 1rem;
 `;
 
 export const ButtonText = styled.div`
