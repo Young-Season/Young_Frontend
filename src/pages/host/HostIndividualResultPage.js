@@ -221,7 +221,7 @@ export const Wrapper = styled.div`
 
 export const Container = styled.div`
   display: flex;
-  padding: 6.25rem 0rem 7.5rem 0rem;
+  padding: 3.25rem 0rem 7.5rem 0rem;
   flex-direction: column;
   height: 100%;
   align-items: flex-start;
@@ -252,12 +252,14 @@ export const Title = styled.div`
   line-height: normal;
   display: flex;
   align-self: center;
+  justify-content: center;
+  padding: 3rem 0 3rem 0;
 `;
 
 export const WhiteBox = styled.div`
   display: flex;
   width: 20rem;
-  padding: 1.25rem 1rem;
+  padding: 1.25rem 0rem;
   flex-direction: column;
   align-items: flex-start;
   gap: 1.25rem;
