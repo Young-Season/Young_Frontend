@@ -21,21 +21,25 @@ const HostIndividualResultPage = () => {
   const [individualData, setIndividualData] = useState({});
   const guestId = guest.id;
 
-  //조사 설정
-  const set_prepositional_particle = (name) => {
-    if (name) {
-      //name의 마지막 음절의 유니코드(UTF-16)
+  const set_prepositional_particle = (idx, name)=>{
+    if(name){
       const charCode = name.charCodeAt(name.length - 1);
-
-      //유니코드의 한글 범위 내에서 해당 코드의 받침 확인
       const consonantCode = (charCode - 44032) % 28;
+  
+      if(consonantCode === 0){
+        if(idx === 1)return `${name}는`;
+        if(idx===2)return `${name}가`;
+        if(idx===3)return `${name}와`;
+        if(idx===4)return `${name}를`;
+        if(idx===5)return `${name}는`;
 
-      if (consonantCode === 0) {
-        //0이면 받침 없음 -> 를
-        return `${name}는`;
       }
-      //1이상이면 받침 있음 -> 을
-      return `${name}은`;
+      if(idx === 1)return `${name}은`;
+      if(idx===2)return `${name}이`;
+      if(idx===3)return `${name}과`;
+      if(idx===4)return `${name}을`;
+      if(idx===5)return `${name}은`;
+
     }
   };
   //조사 설정
@@ -133,6 +137,7 @@ const HostIndividualResultPage = () => {
     else if (int === 7) return "투명해";
     else if (int === 8) return "줏대있어";
   };
+  
 
   return (
     <Wrapper>
@@ -142,11 +147,11 @@ const HostIndividualResultPage = () => {
         </ButtonContainer>
         <Title>
           {set_prepositional_particle2(guest.name)} 생각하는{" "}
-          {set_prepositional_particle(hostNickname)}?
+          {set_prepositional_particle(1, hostNickname)}?
         </Title>
         <WhiteBox>
           <ContentsContainer>
-            <ContentsText>{hostNickname}이는 ㅇㅇ상이야!</ContentsText>
+            <ContentsText>{set_prepositional_particle(1, hostNickname)} ㅇㅇ상이야!</ContentsText>
             <AnswerContainer>
               <RightArrow src={answerArrow} />
               <ContentsAnswer>
@@ -156,7 +161,7 @@ const HostIndividualResultPage = () => {
           </ContentsContainer>
 
           <ContentsContainer>
-            <ContentsText>{hostNickname}이가 이모지라면</ContentsText>
+            <ContentsText>{set_prepositional_particle(2, hostNickname)} 이모지라면</ContentsText>
             <AnswerContainer>
               <RightArrow src={answerArrow} />
               <ContentsAnswer>
@@ -166,7 +171,7 @@ const HostIndividualResultPage = () => {
           </ContentsContainer>
 
           <ContentsContainer>
-            <ContentsText>{hostNickname}이와 어울리는 색은</ContentsText>
+            <ContentsText>{set_prepositional_particle(3, hostNickname)} 어울리는 색은</ContentsText>
             <AnswerContainer>
               <RightArrow src={answerArrow} />
               <ContentsAnswer>
@@ -176,7 +181,7 @@ const HostIndividualResultPage = () => {
           </ContentsContainer>
 
           <ContentsContainer>
-            <ContentsText>{hostNickname}이를 처음 봤을 때...</ContentsText>
+            <ContentsText>{set_prepositional_particle(4, hostNickname)} 처음 봤을 때...</ContentsText>
             <AnswerContainer>
               <RightArrow src={answerArrow} />
               <ContentsAnswer>
@@ -187,7 +192,7 @@ const HostIndividualResultPage = () => {
 
           <ContentsContainer>
             <ContentsText>
-              지금 내가 생각하는 {hostNickname}이는...
+              지금 내가 생각하는 {set_prepositional_particle(5, hostNickname)}...
             </ContentsText>
             <AnswerContainer>
               <RightArrow src={answerArrow} />
