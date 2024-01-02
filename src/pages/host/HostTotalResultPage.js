@@ -64,23 +64,25 @@ const HostTotalResultPage = () => {
     link.click();
   };
 
+        //조사 설정
+        const set_prepositional_particle = (name) => {
+          if (name) {
+            //name의 마지막 음절의 유니코드(UTF-16)
+            const charCode = name.charCodeAt(name.length - 1);
+      
+            //유니코드의 한글 범위 내에서 해당 코드의 받침 확인
+            const consonantCode = (charCode - 44032) % 28;
+      
+            if (consonantCode === 0) {
+              //0이면 받침 없음 -> 는
+              return `${name}는`;
+            }
+            //1이상이면 받침 있음 -> 은
+            return `${name}은`;
+          }
+        };
+
   useEffect(() => {
-    // getHostTotalResult(token, hostId)
-    //   .then((res) => {
-    //     if (res.data.status === "200") {
-    //       console.log(res.data.message);
-    //       setTotalData(res.data.data);
-    //     } else if (res.data.status === "204") {
-    //       console.log(res.data.message);
-    //     } else if (res.data.status === "400") {
-    //       console.log(res.data.message);
-    //     } else if (res.data.status === "403") {
-    //       console.log(res.data.message);
-    //     }
-    //   })
-    //   .catch((error) => {
-    //     console.error(error);
-    //   });
     console.log("토탈토탈");
     console.log(totalData);
     console.log(totalData.title);
@@ -107,7 +109,7 @@ const HostTotalResultPage = () => {
   return (
     <Wrapper>
       <Container>
-        <Title>친구들이 생각하는 {hostNickname}는?</Title>
+        <Title>친구들이 생각하는 {set_prepositional_particle(hostNickname)}?</Title>
         <WhiteBox style={{ padding: 0 }}>
           <Image src={totalData.image} />
         </WhiteBox>

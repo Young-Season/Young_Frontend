@@ -60,27 +60,13 @@ const GuestLoadingPage = () => {
             state: { myResultData: response.data.data },
         });
         }
+        const timer = setTimeout(() => {
+        }, 30000); 
+        return () => clearTimeout(timer);
       }
       catch(error){
         console.error(error);
       }
-      // response
-      //   .then((res) => {
-      //     if (res.data.status === "201") {
-      //       console.log(res.data.message);
-      //       setMyResultData(res.data.data);
-      //     } else if (res.data.status === "400") {
-      //       console.log(res.data.message);
-      //     } else if (res.data.status === "404") {
-      //       console.log(res.data.message);
-      //     }
-      //   })
-      //   .catch((error) => {
-      //     console.error(error);
-      //   });
-      // navigate("/guestResult", {
-      //   state: { myResultData: myResultData },
-      // });
     };
     navigateAfterPost();
   }, []);
