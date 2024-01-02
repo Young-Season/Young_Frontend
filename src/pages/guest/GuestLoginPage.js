@@ -37,7 +37,7 @@ const GuestLoginPage = () => {
         setGuestNickname(newNickname);
         navigate("/guestface");
       }
-      else if(data.status === 400){
+      else if(data.status === 409){
         alert("동일한 닉네임이 존재합니다.");
       }
     }
@@ -78,7 +78,7 @@ const GuestLoginPage = () => {
       else{
         alert('해당 페이지가 존재하지 않습니다. 자신의 공간을 만들어보세요!');
         // navigate(`/guestLogin?hostId=${hostId}`);
-        navigate('/');
+        navigate('/hostLogin');
       }
     };
     fetchData();

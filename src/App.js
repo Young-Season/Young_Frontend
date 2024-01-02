@@ -25,7 +25,9 @@ const App = () => {
       {/* RecoilRoot로 앱 감싸기 */}
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<HostLoginPage />} />
+          <Route path="/" element={<GuestLoginPage />} />
+          <Route path="/guestLogin" element={<GuestLoginPage />} />
+
           <Route path="/guestface" element={<GuestFacePage />} />
           <Route path="/guestemoji" element={<GuestEmojiPage />} />
           <Route path="/guestcolor" element={<GuestColorPage />} />
@@ -39,7 +41,6 @@ const App = () => {
           />
           <Route path="/deploy" element={<HostUrlDeployPage />} />
           <Route path="/guestLoading" element={<GuestLoadingPage />} />
-          <Route path="/guestLogin" element={<GuestLoginPage />} />
           <Route path="/hostLogin" element={<HostLoginPage />} />
           <Route path="/hostLoading" element={<HostLoadingPage />} />
           <Route path="/hostNickname" element={<HostNicknamePage />} />

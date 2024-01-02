@@ -61,7 +61,7 @@ const HostLoadingPage = () => {
               setToken("");
               setHostNickname("hello");
 
-              navigate('/');
+              navigate('/hostLogin');
             }
             else{
               alert("로그인을 다시 해주세요.");
@@ -70,10 +70,9 @@ const HostLoadingPage = () => {
           }
           else if(data && data.status === '404'){
             //신규 가입자
-            // navigate('/hostLoading');
             const timer = setTimeout(() => {
               navigate('/hostNickname');
-            }, 300); // 0.3초 후에 실행
+            }, 500); // 0.3초 후에 실행
             return () => clearTimeout(timer); // 컴포넌트가 언마운트 될 때 타이머를 제거
           }
         }

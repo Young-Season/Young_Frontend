@@ -45,7 +45,7 @@ function GuestEmojiPage() {
     if (lastCharCode < 44032 || lastCharCode > 55203) {
       return "가";
     }
-    return (lastCharCode - 44032) % 28 === 0 ? "가" : "이가";
+    return (lastCharCode - 44032) % 28 === 0 ? "가" : "이";
   };
   return (
     <FaceContainer>
