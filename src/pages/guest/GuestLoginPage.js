@@ -64,9 +64,7 @@ const GuestLoginPage = () => {
     }
   }
   useEffect(()=>{
-    console.log(hostId);
     const fetchData = async () =>{
-      console.log(hostId);
       const urlParams = new URLSearchParams(location.search);
       const hostId = urlParams.get('hostId');
       setUserId(hostId);
