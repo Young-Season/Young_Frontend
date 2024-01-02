@@ -168,14 +168,9 @@ const HostTotalResultPage = () => {
             )}
           </WhiteBox>
           <SharingText>친구에게 공유하고 내 이미지를 알아보세요!</SharingText>
-          <Button>
-            <ButtonContentsContainer>
-              <ButtonText>URL 들어가는 공간</ButtonText>
               <BigButtonContainer id='kakaotalk-sharing-btn' onClick={()=>{shareKaKao()}} text={"친구들에게 공유하기"}>
-      <Image2 src={process.env.PUBLIC_URL + '/images/CopyButton.png'}></Image2>
+              {"친구들에게 공유하기"}<Image2 src={process.env.PUBLIC_URL + '/images/CopyButton.png'}></Image2>
     </BigButtonContainer>
-            </ButtonContentsContainer>
-          </Button>
         </VisitorContainer>
       </Container>
     </Wrapper>
