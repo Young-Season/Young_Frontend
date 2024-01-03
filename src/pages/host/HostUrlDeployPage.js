@@ -64,8 +64,7 @@ const HostUrlDeployPage = () => {
         친구들이 생각하는 {hostName}
         {getSubjectSuffix(hostName)}?
       </Text>
-      <FaceContainer2>
-        <Image src={process.env.PUBLIC_URL + "/images/Ghost.png"}></Image>
+      <Image src={process.env.PUBLIC_URL + "/images/Ghost.png"}></Image>
         <FaceContainer3>
           <Text1>친구에게 공유하고 내 이미지를 알아보세요!</Text1>
           <UrlBtn
@@ -88,7 +87,7 @@ const HostUrlDeployPage = () => {
             <UrlImage src={urlImage}></UrlImage>
           </UrlBtn>
         </FaceContainer3>
-      </FaceContainer2>
+
     </FaceContainer>
   );
 };
@@ -114,8 +113,10 @@ const FaceContainer2 = styled.div`
   align-items: center;
   height: 700px;
 `;
+
 const Image = styled.img`
   margin: 3.75rem;
+  border-radius: 20px;
 `;
 const FaceContainer3 = styled.div`
   display: flex;
@@ -131,8 +132,8 @@ const Text = styled.div`
   line-height: 25px;
   text-align: center;
   // color: #000000;
-  margin-top: 5rem;
-  margin-bottom: 1rem;
+  margin-top: 3rem;
+  margin-bottom: 0.5rem;
 `;
 const Text1 = styled.div`
   font-family: "Spoqa Han Sans Neo";

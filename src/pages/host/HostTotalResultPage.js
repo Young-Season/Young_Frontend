@@ -14,7 +14,6 @@ import {
   WhiteBox,
 } from "./HostIndividualResultPage";
 import {
-  Image,
   DescriptionContainer,
   DescriptionTitle,
   Description,
@@ -431,7 +430,10 @@ const CaptureDiv = styled.div`
   gap: 1.5rem;
   align-items: center;
 `;
-
+const Image = styled.img`
+  margin: 3.75rem;
+  border-radius: 20px;
+`;
 const DescriptionTwo = styled.div`
 color: var(--Gray, #555);
 text-align: center;
