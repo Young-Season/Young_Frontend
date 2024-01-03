@@ -210,7 +210,7 @@ export const ButtonText = styled.div`
   font-family: Spoqa Han Sans Neo;
   font-size: 1rem;
   font-style: normal;
-  font-weight: 500;
+  font-weight: 600;
   line-height: normal;
 `;
 
