@@ -37,8 +37,8 @@ function GuestEmojiPage() {
       setPostArray((prevArray) => {
         let newArray = [...prevArray];
         newArray[1] = index + 1;
-        console.log("index:", index);
-        console.log(`array: ${postArray}`);
+        // console.log("index:", index);
+        // console.log(`array: ${postArray}`);
         return newArray;
       });
       resolve();

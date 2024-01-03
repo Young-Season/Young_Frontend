@@ -18,20 +18,20 @@ function GuestFacePage() {
   const postResponses = usePostResponses();
   const animals = ["강아지", "고양이", "토끼", "여우", "곰", "다람쥐"];
   const handleButtonClick = async (index) => {
-    console.log(`index: ${index}`);
+    // console.log(`index: ${index}`);
     let imageUrl = animalImage;
     imageUrl = imageUrl.slice(0, -5) + (index + 1) + imageUrl.slice(-4);
-    console.log(imageUrl);
+    // console.log(imageUrl);
     setAnimalImage(imageUrl);
-    console.log(animalImage);
+    // console.log(animalImage);
 
     // Wrap setArray in a Promise
     await new Promise((resolve) => {
       setPostArray((prevArray) => {
         let newArray = [...prevArray];
         newArray[0] = index + 1;
-        console.log("index:", index);
-        console.log(`array: ${postArray}`);
+        // console.log("index:", index);
+        // console.log(`array: ${postArray}`);
         return newArray;
       });
 
