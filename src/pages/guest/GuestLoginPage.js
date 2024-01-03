@@ -98,7 +98,7 @@ const GuestLoginPage = () => {
           <Text>내가 생각하는 </Text>
           <Text>{set_prepositional_particle(hostNickname)}?</Text>
           <NicknameBox>
-            <BigButton
+            {/* <BigButton
               textBox={
                 <NicknameInput
                   placeholder="닉네임을 입력해주세요"
@@ -106,7 +106,10 @@ const GuestLoginPage = () => {
                   onChange={handleNicknameChange}
                 />
               }
-            ></BigButton>
+            ></BigButton> */}
+            <BigButtonNickname onChange={handleNicknameChange}>
+              닉네임을 입력해주세요
+            </BigButtonNickname>
             <NicknameText
               red={red}
               style={{ paddingTop: "12px", paddingBottom: "32px" }}
@@ -166,7 +169,7 @@ const Text = styled.div`
   line-height: 1.5;
 `;
 const NicknameBox = styled.div`
-  padding-top: 60px;
+  margin-top: 60px;
 `;
 const NicknameInput = styled.input`
   color: var(--Light-Gray, #a4a4a4);
@@ -190,3 +193,24 @@ const NicknameText = styled.div`
   font-weight: 500;
   line-height: normal;
 `;
+
+const BigButtonNickname = styled.div`
+display: flex;
+width: 17.5rem;
+height: 3.75rem;
+justify-content: center;
+align-items: center;
+// gap: 0.625rem;
+color: var(--Light-Gray, #A4A4A4);
+text-align: center;
+font-family: Spoqa Han Sans Neo;
+font-size: 1rem;
+font-style: normal;
+font-weight: 500;
+line-height: normal;
+
+border-radius: 20px;
+border: 1px solid var(--Brown, #64422e);
+background: var(--White, #fafafa);
+box-shadow: -1px -2px 7.3px 0px rgba(0, 0, 0, 0.25) inset;
+`
