@@ -186,6 +186,7 @@ const NicknameInput = styled.input`
   border: none;
   outline: none;
   background: var(--White, #fafafa);
+  width: 17.5rem;
 `;
 
 const NicknameText = styled.div`
