@@ -29,14 +29,10 @@ const GuestLoginPage = () => {
   //닉네임 post & 시작
   const handleStart = async () => {
     try {
-      // console.log(nickname);
-      const newNickname = nickname.replace(/\s/g, "+");
-      // console.log(newNickname.length);
-      if (newNickname.length > 15) {
+      if (nickname.length > 15 || nickname.length === 0) {
         setRed(true);
       } else {
-        const data = await postGuestLogin(hostId, newNickname);
-        // console.log(data.status);
+        const data = await postGuestLogin(hostId, nickname);
         if (data.status === 200) {
           console.log(nickname)
           setGuestNickname(nickname);
