@@ -12,7 +12,6 @@ const Footer = () => {
           Made by.
           <br />
           중앙대학교 멋쟁이사자처럼 11기 영춘기
-          <br />
         </Text>
       </TextContainer>
       <Image
@@ -28,6 +27,7 @@ export default Footer;
 
 const FooterContainer = styled.div`
   display: flex;
+  flex-direction: row;
   padding: 2rem 0.625rem 2.5rem 1.25rem;
   align-items: flex-start;
   justify-content: space-between;
@@ -43,11 +43,7 @@ const TextContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  width: 23.4375rem;
-  height: 7.5rem;
-  padding: 2rem 0.625rem 2.5rem 1.25rem;
   align-items: flex-start;
-  gap: 0.625rem;
 `;
 
 const Text = styled.div`
@@ -57,12 +53,11 @@ const Text = styled.div`
   font-style: normal;
   font-weight: 700;
   line-height: 150%; /* 1.125rem */
-  white-space: pre-line;
-  margin: 0;
-  padding: 0;
 `;
+
 const Image = styled.img`
   height: 34px;
   width: 34px;
   margin-right: 5px;
+  cursor: pointer;
 `;
