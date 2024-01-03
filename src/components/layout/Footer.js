@@ -57,7 +57,7 @@ const Text = styled.div`
   margin: 0;
   padding: 0;
 `;
-const Image = styled.div`
+const Image = styled.img`
 height: 30px;
 width: 30px;
 `
