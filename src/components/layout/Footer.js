@@ -1,11 +1,10 @@
 import React from "react";
 import styled from "styled-components";
-const instagramUrl =
-process.env.PUBLIC_URL + "/images/instagram.png";
+const instagramUrl = process.env.PUBLIC_URL + "/images/instagram.png";
 const Footer = () => {
   const gotoInstagram = () => {
-    window.open('https://www.instagram.com/young.season79');
-  }
+    window.open("https://www.instagram.com/young.season79");
+  };
   return (
     <FooterContainer>
       <TextContainer>
@@ -13,10 +12,14 @@ const Footer = () => {
           Made by.
           <br />
           중앙대학교 멋쟁이사자처럼 11기 영춘기
-          <br/>
-          <Image src={instagramUrl} alt="Instagram @young.season79" onClick={gotoInstagram}></Image>
+          <br />
         </Text>
       </TextContainer>
+      <Image
+        src={instagramUrl}
+        alt="Instagram @young.season79"
+        onClick={gotoInstagram}
+      ></Image>
     </FooterContainer>
   );
 };
@@ -27,6 +30,7 @@ const FooterContainer = styled.div`
   display: flex;
   padding: 2rem 0.625rem 2.5rem 1.25rem;
   align-items: flex-start;
+  justify-content: space-between;
   gap: 0.625rem;
   height: 7.5rem;
   width: 100%;
@@ -58,6 +62,7 @@ const Text = styled.div`
   padding: 0;
 `;
 const Image = styled.img`
-height: 30px;
-width: 30px;
-`
+  height: 34px;
+  width: 34px;
+  margin-right: 5px;
+`;
