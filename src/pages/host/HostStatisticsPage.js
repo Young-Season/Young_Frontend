@@ -186,11 +186,14 @@ const HostStatisticsPage = () => {
             {emojiValues.map((emojiValue, index) =>
               percentEmojiValues[index] !== 0 ? (
                 <AnswerContainer key={index}>
-                  <ImgBox
-                    src={
-                      process.env.PUBLIC_URL + `/images/emoji${emojiValue}.png`
-                    }
-                  ></ImgBox>
+                  <ImgBox>
+                    <EmojiImage
+                      src={
+                        process.env.PUBLIC_URL +
+                        `/images/emoji${emojiValue}.png`
+                      }
+                    ></EmojiImage>
+                  </ImgBox>
                   <PercentageBarContainer>
                     <PercentageBar width={percentEmojiValues[index]} />
                   </PercentageBarContainer>
@@ -308,11 +311,18 @@ const TextBox = styled.div`
   font-weight: 500;
   line-height: normal;
 `;
-const ImgBox = styled.img`
-  width: 1.65rem;
-  padding: 0.1rem 0.5rem;
-  flex-shrink: 0;
+const ImgBox = styled.div`
+  width: 3.75rem;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
+
+const EmojiImage = styled.img`
+  height: 100%;
+`;
+
 const PercentageBarContainer = styled.div`
   display: flex;
   padding: 0.375rem;
