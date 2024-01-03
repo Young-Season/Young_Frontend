@@ -1,11 +1,11 @@
-import React, { useEffect,  useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import styled from "styled-components";
 import Footer from "../../components/layout/Footer";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { hostTotal, nicknameAtom, tokenState } from "../../atom";
-import { saveAs } from 'file-saver';
-import html2canvas from 'html2canvas';
+import { saveAs } from "file-saver";
+import html2canvas from "html2canvas";
 
 import {
   Wrapper,
@@ -26,59 +26,41 @@ import { getHostTotalResult } from "../../apis/host";
 
 const HostTotalResultPage = () => {
   const { Kakao } = window;
-  // const image = process.env.PUBLIC_URL + "/images/rabbit22.png";
-  // const statistics = process.env.PUBLIC_URL + "/images/home.png";
   const download = process.env.PUBLIC_URL + "/images/download.png";
   const urlImage = process.env.PUBLIC_URL + "/images/copyButton.png";
   const fileImage = process.env.PUBLIC_URL + "/images/file.png";
 
-  //이미지 다운
-  const imageRef = useRef();
-
-
-
   const navigate = useNavigate();
+
   const token = useRecoilValue(tokenState); // 백엔드에서 받아온 토큰
   const totalData = useRecoilValue(hostTotal); // 백엔드에서 받아온 토큰
+
   const hostNickname = useRecoilValue(nicknameAtom);
   const hostId = useRecoilValue(userIdState);
-  // const { totalData } = useLocation();
-
-  // useEffect(() => {
-  // 	const fetchData = async () => {
-  // 		try {
-  // 			const response = await getHostTotalResult(hostId);
-  // 			setTotalData(response.data);
-  // 			console.log(response.data);
-  // 		} catch(error) {
-  // 			console.error(error);
-  // 		}
-  // 	}
-  // 	fetchData;
-  // }, [hostId])
 
   const [visibleGuests, setVisibleGuests] = useState(6);
   const seeMore = () => {
-    setVisibleGuests((prevVisibleGuests) => prevVisibleGuests + 6);
+    setVisibleGuests(visibleGuests + 6);
   };
+
   const handleDownload = () => {
-    const sectionToCapture = document.getElementById('section-to-capture');
+    const sectionToCapture = document.getElementById("section-to-capture");
 
     html2canvas(sectionToCapture, { useCORS: true })
       .then((canvas) => {
-        const image = canvas.toDataURL('image/png');
-        const link = document.createElement('a');
+        const image = canvas.toDataURL("image/png");
+        const link = document.createElement("a");
         link.href = image;
         link.download = `${hostNickname}.png`;
         link.click();
       })
       .catch((err) => {
-        console.error('oops, something went wrong!', err);
+        console.error("oops, something went wrong!", err);
       });
   };
   const convertToImageSource = (imageState) => {
     if (imageState) {
-      console.log(imageState);
+      // console.log(imageState);
       return `https://young-season.o-r.kr/public/images/${imageState}.png`;
     } else {
       // imageState가 유효한 값이 아닌 경우에 대한 처리
@@ -105,18 +87,25 @@ const HostTotalResultPage = () => {
     }
   };
 
-  useEffect(() => {
-    console.log("토탈토탈");
-    console.log(totalData);
-    console.log(totalData.title);
-  }, []);
+  const handleCopyClick = () => {
+    navigator.clipboard
+      .writeText(`https://youngchun.netlify.app/?hostId=${hostId}`)
+      .then(() => {
+        alert("URL이 복사되었습니다.");
+      })
+      .catch((error) => {
+        console.error("복사 실패:", error);
+      });
+  };
+
   useEffect(() => {
     Kakao.cleanup();
     Kakao.init("9769e69ba2b11621a50723827584b67e");
-    console.log(Kakao.isInitialized);
-  }, []);
+    // console.log(Kakao.isInitialized);
+  }, [visibleGuests]);
+
   const shareKaKao = () => {
-    console.log(hostId);
+    // console.log(hostId);
     Kakao.Share.createCustomButton({
       container: "#kakaotalk-sharing-btn",
       templateId: 102394,
@@ -131,48 +120,44 @@ const HostTotalResultPage = () => {
   };
   return (
     <Wrapper>
-      <Container>
-      <div id="section-to-capture">
-  <Title>
-    친구들이 생각하는 {set_prepositional_particle(hostNickname)}?
-  </Title>
-  <WhiteBox style={{ padding: 0 }}>
-    <Image src={convertToImageSource(totalData.image)} />
-  </WhiteBox>
-  <DescriptionContainer>
-    <DescriptionTitle>{totalData.title}</DescriptionTitle>
-    <Description>
-      {totalData.first}
-      <br />
-      <br />
-      {totalData.now}
-    </Description>
-  </DescriptionContainer>
-</div>
+      <Container style={{ alignItems: "center" }}>
+        <CaptureDiv id="section-to-capture">
+          <Title>
+            친구들이 생각하는 {set_prepositional_particle(hostNickname)}?
+          </Title>
+          <WhiteBox style={{ padding: 0, marginBottom: "0.5rem" }}>
+            <Image src={convertToImageSource(totalData.image)} />
+          </WhiteBox>
+          <DescriptionContainer>
+            <DescriptionTitle>{totalData.title}</DescriptionTitle>
+            <Description>
+              {totalData.first}
+              <br />
+              <br />
+              {totalData.now}
+            </Description>
+          </DescriptionContainer>
+        </CaptureDiv>
 
-<Button onClick={handleDownload}>
-  <ButtonText>
-    이미지 다운로드 <DownloadImage src={download} />
-  </ButtonText>
-</Button>
-
-        <Button
-          onClick={() =>
-            navigate("/hostStatistics", {
-              state: { hostId: hostId, token: token },
-            })
-          }>
-          <ButtonText>질문별 통계 보러가기 </ButtonText>
-        </Button>
         <Button onClick={handleDownload}>
           <ButtonText>
             이미지 다운로드 <DownloadImage src={download} />
           </ButtonText>
         </Button>
 
+        <Button
+          onClick={() =>
+            navigate("/hostStatistics", {
+              state: { hostId: hostId, token: token },
+            })
+          }
+        >
+          <ButtonText>질문별 통계 보러가기 </ButtonText>
+        </Button>
+
         <VisitorContainer>
           <VisiorListTitle>방문자 목록</VisiorListTitle>
-          <WhiteBox>
+          <WhiteBox style={{ padding: "0.75rem 0.75rem 1.25rem 0.75rem" }}>
             <TableHeaderContainer>
               <NicknameBox>
                 <HeaderText>닉네임</HeaderText>
@@ -181,8 +166,8 @@ const HostTotalResultPage = () => {
                 <HeaderText>답변</HeaderText>
               </AnswerBox>
             </TableHeaderContainer>
-            {totalData.guests.map((guest) => (
-              <TableListContainer key={guest.id}>
+            {totalData.guests.slice(0, visibleGuests).map((guest) => (
+              <TableListContainer>
                 <NicknameBox>
                   <ListText>{guest.name}</ListText>
                 </NicknameBox>
@@ -203,23 +188,34 @@ const HostTotalResultPage = () => {
             )}
           </WhiteBox>
           <SharingText>친구에게 공유하고 내 이미지를 알아보세요!</SharingText>
-          <BigButtonContainer
+          {/* <Button onClick={handleDownload}>
+            <ButtonText>
+              친구들에게 공유하기
+              <Image2
+              src={process.env.PUBLIC_URL + "/images/CopyButton.png"}
+            ></Image2>
+            </ButtonText>
+          </Button> */}
+          <UrlButton
             id="kakaotalk-sharing-btn"
             onClick={() => {
               shareKaKao();
             }}
-            text={"친구들에게 공유하기"}
           >
-            {"친구들에게 공유하기"}
-            <Image2
-              src={process.env.PUBLIC_URL + "/images/CopyButton.png"}
-            ></Image2>
-          </BigButtonContainer>
+            카카오톡으로 공유하기
+            <UrlImage src={urlImage}></UrlImage>
+          </UrlButton>
+
+          <Button>
+            <ButtonText onClick={handleCopyClick}>URL 복사 </ButtonText>
+          </Button>
         </VisitorContainer>
       </Container>
+      <Footer />
     </Wrapper>
   );
 };
+
 export default HostTotalResultPage;
 
 const DownloadImage = styled.img`
@@ -233,6 +229,7 @@ const VisitorContainer = styled.div`
   align-items: center;
   gap: 3rem;
   padding: 0px;
+  margin-top: 7rem;
 `;
 
 const VisiorListTitle = styled.div`
@@ -350,41 +347,56 @@ const UrlImage = styled.img`
   height: 1rem;
   flex-shrink: 0;
 `;
+
 const BigButtonContainer = styled.button`
   display: flex;
   width: 17.5rem;
-  height: 2.5rem;
+  height: 3.75rem;
   padding: 0.625rem 1.25rem;
-
   justify-content: center;
   align-items: center;
-  gap: 10px;
-
-  border-radius: 20px;
+  gap: 0.625rem;
+  border-radius: 1rem;
   border: 1px solid var(--Brown, #64422e);
   background: var(--White, #fafafa);
   box-shadow: -1px -2px 7.3px 0px rgba(0, 0, 0, 0.25) inset;
-
-  @media (max-width: 360px) {
-    width: 15rem;
-  }
-  @media (max-width: 300px) {
-    width: 13rem;
-  }
-  @media (max-width: 250px) {
-    width: 11rem;
-  }
-  font-family: "Spoqa Han Sans Neo";
+  color: #64422e;
+  font-family: Spoqa Han Sans Neo;
+  font-size: 1rem;
   font-style: normal;
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 15px;
-  /* identical to box height */
-
-  /* Gray */
-  color: #555555;
+  font-weight: 550;
+  line-height: normal;
 `;
 
 const Image2 = styled.img`
-  margin: 0rem;
+  margin-left: 0.5rem 0 0 0.5rem;
+`;
+
+const UrlButton = styled.button`
+  display: flex;
+  height: 3.25rem;
+  padding: 0.5rem 1.25rem;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+  align-self: stretch;
+  border-radius: 1rem;
+  border: 1px solid var(--Brown, #64422e);
+  background: var(--White, #fafafa);
+  box-shadow: -1px -2px 7.3px 0px rgba(0, 0, 0, 0.25) inset;
+  color: #1c1c1c;
+  font-family: Spoqa Han Sans Neo;
+  font-size: 0.75rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  cursor: pointer;
+`;
+
+const CaptureDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  align-items: center;
 `;

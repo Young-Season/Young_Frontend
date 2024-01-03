@@ -27,13 +27,13 @@ function GuestFacePage() {
       setPostArray((prevArray) => {
         let newArray = [...prevArray];
         newArray[4] = index + 1;
-        console.log("index:", index);
-        console.log(`array: ${postArray}`);
+        // console.log("index:", index);
+        // console.log(`array: ${postArray}`);
         return newArray;
       });
       resolve();
     });
-    navigate("/guestLoading");
+    navigate("/guestLoading", { replace: true });
   };
   const getSubjectSuffix = (name) => {
     const lastChar = name.charAt(name.length - 1);

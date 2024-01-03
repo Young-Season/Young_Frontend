@@ -49,7 +49,7 @@ const GuestLoadingPage = () => {
     const navigateAfterPost = async () => {
       try {
         const response = await postMyResult();
-        console.log(response.data);
+        // console.log(response.data);
         if (
           response.data.status === 201 ||
           response.data.status === 400 ||

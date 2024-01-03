@@ -17,6 +17,7 @@ import HostIndividualResultPage from "./pages/host/HostIndividualResultPage";
 import HostTotalResultPage from "./pages/host/HostTotalResultPage";
 import HostStatisticsPage from "./pages/host/HostStatisticsPage";
 import { RecoilRoot } from "recoil"; // RecoilRoot 추가
+import RouteTracker from "./components/RouteTracker";
 
 const App = () => {
   return (
@@ -24,6 +25,7 @@ const App = () => {
       {" "}
       {/* RecoilRoot로 앱 감싸기 */}
       <BrowserRouter>
+        <RouteTracker />
         <Routes>
           <Route path="/" element={<GuestLoginPage />} />
           <Route path="/guestLogin" element={<GuestLoginPage />} />
