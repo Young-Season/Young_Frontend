@@ -92,7 +92,7 @@ const FaceContainer = styled.div`
   align-items: center;
   margin: auto;
   padding: 0px;
-  padding-top: 100px;
+  padding-top: 10px;
   gap: 30px;
   background: #f6f9ff;
 
@@ -107,7 +107,6 @@ const FaceContainer = styled.div`
 `;
 const FaceContainer2 = styled.div`
   height: 320px;
-
   background: #ffffff;
   border-radius: 20px;
 `;
@@ -122,7 +121,8 @@ const FaceContainer3 = styled.div`
   justify-content: center;
   align-items: center;
   padding: 0px;
-  gap: 40px;
+
+  margin-top: 20px;
 `;
 const Text = styled.div`
   font-family: "Spoqa Han Sans Neo";
@@ -131,8 +131,8 @@ const Text = styled.div`
   font-size: 20px;
   line-height: 25px;
   text-align: center;
-
   color: #000000;
+  margin-bottom: 20px;
 `;
 const FaceContainer4 = styled.div`
   display: grid;
@@ -141,7 +141,7 @@ const FaceContainer4 = styled.div`
   align-items: center;
   padding: 0px;
   gap: 20px;
-  padding-bottom: 100px;
+  // padding-bottom: 100px;
 `;
 const StyledLink = styled(Link)`
   text-decoration: none;
