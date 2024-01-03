@@ -108,7 +108,11 @@ const GuestLoginPage = () => {
               }
             ></BigButton> */}
             <BigButtonNickname onChange={handleNicknameChange}>
-              닉네임을 입력해주세요
+            <NicknameInput
+                  placeholder="닉네임을 입력해주세요"
+                  value={nickname}
+                  onChange={handleNicknameChange}
+                />
             </BigButtonNickname>
             <NicknameText
               red={red}
