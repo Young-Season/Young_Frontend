@@ -15,10 +15,10 @@ export default UrlButton;
 
 const BigButtonContainer = styled.button`
 display: flex;
-width: 17.5rem;
+width: 14.5rem;
 height: 2.5rem;
 padding: 0.625rem 1.25rem;
-
+flex-direction: row;
 justify-content: center;
 align-items: center;
 gap: 10px;
@@ -40,15 +40,18 @@ box-shadow: -1px -2px 7.3px 0px rgba(0, 0, 0, 0.25) inset;
 }
 font-family: 'Spoqa Han Sans Neo';
 font-style: normal;
-font-weight: 500;
-font-size: 16px;
+font-weight: 700;
+font-size: 17px;
 line-height: 15px;
 /* identical to box height */
 
 /* Gray */
-color: #555555;
+color: #1C1C1C;
+;
 `
 
 const Image = styled.img`;
 margin: 0rem;
 `
+
+
