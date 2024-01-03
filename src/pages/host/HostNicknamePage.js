@@ -33,7 +33,6 @@ const HostNicknamePage = () => {
         navigate("/");
       } else if (result.status === "201") {
         setToken(result.data.token);
-        navigate("/hostTotalResult");
       } else {
         alert("오류 발생");
         navigate("/");
