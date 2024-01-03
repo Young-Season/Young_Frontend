@@ -111,7 +111,7 @@ const GuestMyResultPage = () => {
           <CuriousText>친구가 보는 내가 궁금하다면?</CuriousText>
           <Button onClick={goToHostLogin}>
             <TextAndPictureContainer>
-              <ButtonText>물어보러 가기 </ButtonText>
+              <ButtonText>물어보러 가기</ButtonText>
               <HomeButton src={homeButton} />
             </TextAndPictureContainer>
           </Button>
