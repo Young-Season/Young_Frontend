@@ -40,7 +40,7 @@ box-shadow: -1px -2px 7.3px 0px rgba(0, 0, 0, 0.25) inset;
 }
 font-family: 'Spoqa Han Sans Neo';
 font-style: normal;
-font-weight: 500;
+font-weight: 700;
 font-size: 16px;
 line-height: 15px;
 /* identical to box height */
