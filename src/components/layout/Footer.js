@@ -28,7 +28,6 @@ export default Footer;
 const FooterContainer = styled.div`
   display: flex;
   flex-direction: row;
-  padding: 2rem 0.625rem 2.5rem 1.25rem;
   align-items: flex-start;
   justify-content: space-between;
   gap: 0.625rem;
@@ -44,6 +43,8 @@ const TextContainer = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
+  margin-top: 2rem;
+  margin-left: 1.25rem;
 `;
 
 const Text = styled.div`
@@ -58,6 +59,7 @@ const Text = styled.div`
 const Image = styled.img`
   height: 34px;
   width: 34px;
-  margin-right: 5px;
+  margin-right: 15px;
+  margin-top: 2rem;
   cursor: pointer;
 `;
