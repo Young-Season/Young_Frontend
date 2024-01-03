@@ -46,7 +46,8 @@ line-height: 15px;
 /* identical to box height */
 
 /* Gray */
-color: #555555;
+color: #1C1C1C;
+;
 `
 
 const Image = styled.img`;
