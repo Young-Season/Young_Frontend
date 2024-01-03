@@ -43,6 +43,7 @@ const HostTotalResultPage = () => {
     setVisibleGuests(visibleGuests + 6);
   };
 
+  // pc 잘되는 코드
   // const handleDownload = () => {
   //   const sectionToCapture = document.getElementById("section-to-capture");
 
@@ -64,15 +65,28 @@ const HostTotalResultPage = () => {
   
     html2canvas(sectionToCapture, { useCORS: true })
       .then((canvas) => {
-        const image = canvas.toDataURL("image/png");  // 여기를 수정했습니다.
+        canvas.toBlob((blob) => {
+          const url = URL.createObjectURL(blob);
   
-        // 모바일 환경에서의 다운로드를 지원하기 위해 window.open() 사용
-        window.open(image);
+          // 모바일 환경에 따라 적절한 방법 선택
+          const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+          if (isMobile) {
+            window.open(url, '_blank');
+          } else {
+            const link = document.createElement("a");
+            link.href = url;
+            link.download = `${hostNickname}.png`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+          }
+        }, "image/png");
       })
       .catch((err) => {
         console.error("oops, something went wrong!", err);
       });
   };
+  
   const convertToImageSource = (imageState) => {
     if (imageState) {
       // console.log(imageState);
