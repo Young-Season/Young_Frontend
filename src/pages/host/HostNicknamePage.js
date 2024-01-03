@@ -30,12 +30,13 @@ const HostNicknamePage = () => {
         console.log("동일 user");
         alert("동일한 유저가 이미 존재합니다.");
         setUserId(null);
-        navigate("/");
+        navigate("/hostLogin");
       } else if (result.status === "201") {
         setToken(result.data.token);
+        navigate("/deploy");
       } else {
         alert("오류 발생");
-        navigate("/");
+        navigate("/hostLogin");
       }
     }
   };
