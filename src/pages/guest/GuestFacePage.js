@@ -78,11 +78,10 @@ export default GuestFacePage;
 const FaceContainer = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   margin: auto;
-  padding: 0px;
-  // padding-top: 35px;
+  padding-top: 72px;
   gap: 60px;
   background: #f6f9ff;
 
