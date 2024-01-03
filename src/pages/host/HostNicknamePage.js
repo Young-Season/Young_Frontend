@@ -23,8 +23,8 @@ const HostNicknamePage = () => {
   //닉네임 post & 시작
   const handleStart = async () => {
     console.log(userId);
-    if(nickname>15)setRed(true);
-    else{
+    if (nickname > 15) setRed(true);
+    else {
       const result = await postNickname(userId, nickname);
       if (result.status === "409") {
         console.log("동일 user");
@@ -33,6 +33,7 @@ const HostNicknamePage = () => {
         navigate("/");
       } else if (result.status === "201") {
         setToken(result.data.token);
+        navigate("/hostTotalResult");
       } else {
         alert("오류 발생");
         navigate("/");
@@ -70,7 +71,10 @@ const HostNicknamePage = () => {
                 />
               }
             ></BigButton>
-            <NicknameText red={red} style={{ paddingTop: "12px", paddingBottom: "32px" }}>
+            <NicknameText
+              red={red}
+              style={{ paddingTop: "12px", paddingBottom: "32px" }}
+            >
               한글 최대 15자
             </NicknameText>
           </NicknameBox>
@@ -136,7 +140,7 @@ const NicknameInput = styled.input`
 `;
 
 const NicknameText = styled.div`
-  color: ${props => props.red ? 'red' : 'var(--Light-Gray, #A4A4A4)'};  
+  color: ${(props) => (props.red ? "red" : "var(--Light-Gray, #A4A4A4)")};
   text-align: center;
   font-family: Spoqa Han Sans Neo;
   font-size: 16px;
