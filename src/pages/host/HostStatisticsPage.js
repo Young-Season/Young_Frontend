@@ -167,84 +167,94 @@ const HostStatisticsPage = () => {
             <ContentsText>
               {set_prepositional_particle(1, hostNickname)} OO상이야!
             </ContentsText>
-            {animalValues.map((animalValue, index) => (
-              <AnswerContainer key={index}>
-                <TextBox>{animals[animalValue - 1]}</TextBox>
-                <PercentageBarContainer>
-                  <PercentageBar width={percentValues[index]} />
-                </PercentageBarContainer>
-                <PercentageTextBox>{percentValues[index]}%</PercentageTextBox>
-              </AnswerContainer>
-            ))}
+            {animalValues.map((animalValue, index) =>
+              percentValues[index] !== 0 ? (
+                <AnswerContainer key={index}>
+                  <TextBox>{animals[animalValue - 1]}</TextBox>
+                  <PercentageBarContainer>
+                    <PercentageBar width={percentValues[index]} />
+                  </PercentageBarContainer>
+                  <PercentageTextBox>{percentValues[index]}%</PercentageTextBox>
+                </AnswerContainer>
+              ) : null
+            )}
           </StatisticContainer>
           <StatisticContainer>
             <ContentsText>
               {set_prepositional_particle(2, hostNickname)} 이모지라면
             </ContentsText>
-            {emojiValues.map((emojiValue, index) => (
-              <AnswerContainer key={index}>
-                <ImgBox
-                  src={
-                    process.env.PUBLIC_URL + `/images/emoji${emojiValue}.png`
-                  }
-                ></ImgBox>
-                <PercentageBarContainer>
-                  <PercentageBar width={percentEmojiValues[index]} />
-                </PercentageBarContainer>
-                <PercentageTextBox>
-                  {percentEmojiValues[index]}%
-                </PercentageTextBox>
-              </AnswerContainer>
-            ))}
+            {emojiValues.map((emojiValue, index) =>
+              percentEmojiValues[index] !== 0 ? (
+                <AnswerContainer key={index}>
+                  <ImgBox
+                    src={
+                      process.env.PUBLIC_URL + `/images/emoji${emojiValue}.png`
+                    }
+                  ></ImgBox>
+                  <PercentageBarContainer>
+                    <PercentageBar width={percentEmojiValues[index]} />
+                  </PercentageBarContainer>
+                  <PercentageTextBox>
+                    {percentEmojiValues[index]}%
+                  </PercentageTextBox>
+                </AnswerContainer>
+              ) : null
+            )}
           </StatisticContainer>
           <StatisticContainer>
             <ContentsText>
               {set_prepositional_particle(3, hostNickname)} 어울리는 색은
             </ContentsText>
-            {colorValues.map((colorValue, index) => (
-              <AnswerContainer key={index}>
-                <TextBox>{colors[colorValue - 1]}</TextBox>
-                <PercentageBarContainer>
-                  <PercentageBar width={percentColorValues[index]} />
-                </PercentageBarContainer>
-                <PercentageTextBox>
-                  {percentColorValues[index]}%
-                </PercentageTextBox>
-              </AnswerContainer>
-            ))}
+            {colorValues.map((colorValue, index) =>
+              percentColorValues[index] !== 0 ? (
+                <AnswerContainer key={index}>
+                  <TextBox>{colors[colorValue - 1]}</TextBox>
+                  <PercentageBarContainer>
+                    <PercentageBar width={percentColorValues[index]} />
+                  </PercentageBarContainer>
+                  <PercentageTextBox>
+                    {percentColorValues[index]}%
+                  </PercentageTextBox>
+                </AnswerContainer>
+              ) : null
+            )}
           </StatisticContainer>
           <StatisticContainer>
             <ContentsText>
               {set_prepositional_particle(4, hostNickname)} 처음 봤을 때...
             </ContentsText>
-            {firstImpressionValues.map((firstValue, index) => (
-              <AnswerContainer key={index}>
-                <TextBox>{firstImpressions[firstValue - 1]}</TextBox>
-                <PercentageBarContainer>
-                  <PercentageBar width={percentFirstImpression[index]} />
-                </PercentageBarContainer>
-                <PercentageTextBox>
-                  {percentFirstImpression[index]}%
-                </PercentageTextBox>
-              </AnswerContainer>
-            ))}
+            {firstImpressionValues.map((firstValue, index) =>
+              percentFirstImpression[index] !== 0 ? (
+                <AnswerContainer key={index}>
+                  <TextBox>{firstImpressions[firstValue - 1]}</TextBox>
+                  <PercentageBarContainer>
+                    <PercentageBar width={percentFirstImpression[index]} />
+                  </PercentageBarContainer>
+                  <PercentageTextBox>
+                    {percentFirstImpression[index]}%
+                  </PercentageTextBox>
+                </AnswerContainer>
+              ) : null
+            )}
           </StatisticContainer>
           <StatisticContainer>
             <ContentsText>
               지금 내가 생각하는 {set_prepositional_particle(5, hostNickname)}
               ...
             </ContentsText>
-            {nowImpressionValues.map((nowValue, index) => (
-              <AnswerContainer key={index}>
-                <TextBox>{presentImpressions[nowValue - 1]}</TextBox>
-                <PercentageBarContainer>
-                  <PercentageBar width={percentNowImpression[index]} />
-                </PercentageBarContainer>
-                <PercentageTextBox>
-                  {percentNowImpression[index]}%
-                </PercentageTextBox>
-              </AnswerContainer>
-            ))}
+            {nowImpressionValues.map((nowValue, index) =>
+              percentNowImpression[index] !== 0 ? (
+                <AnswerContainer key={index}>
+                  <TextBox>{presentImpressions[nowValue - 1]}</TextBox>
+                  <PercentageBarContainer>
+                    <PercentageBar width={percentNowImpression[index]} />
+                  </PercentageBarContainer>
+                  <PercentageTextBox>
+                    {percentNowImpression[index]}%
+                  </PercentageTextBox>
+                </AnswerContainer>
+              ) : null
+            )}
           </StatisticContainer>
         </WhiteBox>
         <InformationBox>
