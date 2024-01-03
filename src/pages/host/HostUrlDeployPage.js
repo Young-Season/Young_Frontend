@@ -27,9 +27,11 @@ const HostUrlDeployPage = () => {
   useEffect(() => {
     Kakao.cleanup();
     Kakao.init("9769e69ba2b11621a50723827584b67e");
+    // console.log(Kakao.isInitialized);
   }, []);
 
   const shareKaKao = () => {
+    // console.log(hostId);
     Kakao.Share.createCustomButton({
       container: "#kakaotalk-sharing-btn",
       templateId: 102394,

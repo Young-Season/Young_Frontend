@@ -17,8 +17,11 @@ const HostLoginPage = () => {
   const startKakao = async () => {
     //카카오 로그인 여기에 구현
     try {
+      // console.log('start');
       const data = await getLogin();
+      // console.log(data);
     } catch (error) {
+      console.error("Login failed:", error);
       // navigate('/hostLoading');
     }
   };
@@ -28,8 +31,10 @@ const HostLoginPage = () => {
       const urlParams = new URLSearchParams(location.search);
       const code = urlParams.get("code");
       if (code) {
+        // console.log(code);
         try {
           const data = await postkakaoCallback(code);
+          // console.log(data.id);
           setUserId(data.id);
 
           if (data && data.status === "200") {
@@ -43,9 +48,7 @@ const HostLoginPage = () => {
           // else{
           //   navigate('/hostLoading');
           // }
-        } catch (error) {
-          console.error(error);
-        }
+        } catch (error) {}
       }
     };
     fetchCode();
@@ -139,7 +142,6 @@ const NicknameText = styled.div`
   font-weight: 600;
   line-height: normal;
 `;
-
 const LetterImage = styled.img`
   width: 100%;
 `;

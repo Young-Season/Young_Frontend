@@ -16,6 +16,7 @@ const HostIndividualResultPage = () => {
   const token = useRecoilValue(tokenState);
   const hostNickname = useRecoilValue(nicknameAtom);
   const hostId = useRecoilValue(userIdState);
+  // console.log(guest);
 
   const [individualData, setIndividualData] = useState({});
   const guestId = guest.id;
@@ -58,14 +59,23 @@ const HostIndividualResultPage = () => {
   };
 
   useEffect(() => {
+    // console.log(token);
+    // console.log(guestId);
+    // console.log(hostId);
     getHostIndividualResult(token, hostId, guestId)
       .then((res) => {
+        // console.log(res);
         if (res.data.status === "200") {
+          // console.log(guest);
+          // console.log(res.data.data.animal);
           setIndividualData(res.data.data);
+          // setLoading(false);
         } else if (res.status === "400") {
           console.log(res.message);
+          // setLoading(false);
         } else if (res.status === "403") {
           console.log(res.message);
+          // setLoading(false);
         }
       })
       .catch((error) => {

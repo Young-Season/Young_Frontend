@@ -74,39 +74,59 @@ const HostStatisticsPage = () => {
   const [percentNowImpression, setPercentNowImpression] = useState([]);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
+    //   console.log(token);
+    // console.log(hostId);
     getHostStats(token, hostId)
       .then((res) => {
+        // console.log(res);
+        // console.log("res.data.data:", res.data.data);
+        // console.log("res.data.data.animal:", res.data.data.animal);
+        // console.log("res.data.data.animal:", res.data.data.animal[0]);
+        // console.log("res.data.data.animal:", res.data.data.animal[0].animal);
         if (res.status === 200) {
           const resAnimal = res.data.data.animal;
           const animalValues = resAnimal.map((item) => item.animal);
           const percentValues = resAnimal.map((item) => item.percent);
           setAnimalValues(animalValues);
           setPercentValues(percentValues);
+          // console.log(animalValues);
+          // console.log(percentValues);
           const resEmoji = res.data.data.emoji;
           const emojiValues = resEmoji.map((item) => item.emoji);
           const percentEmojiValues = resEmoji.map((item) => item.percent);
           setEmojiValues(emojiValues);
           setPercentEmojiValues(percentEmojiValues);
+          // console.log(emojiValues);
+          // console.log(percentEmojiValues);
           const resColor = res.data.data.color;
           const colorValues = resColor.map((item) => item.color);
           const percentColorValues = resColor.map((item) => item.percent);
           setColorValues(colorValues);
           setPercentColorValues(percentColorValues);
+          // console.log(colorValues);
+          // console.log(percentColorValues);
           const resFirst = res.data.data.first;
           const firstImpressionValues = resFirst.map((item) => item.first);
           const percentFirstImpression = resFirst.map((item) => item.percent);
           setFirstImpressionValues(firstImpressionValues);
           setPercentFirstImpression(percentFirstImpression);
+          // console.log(firstImpressionValues);
+          // console.log(percentFirstImpression);
           const resNow = res.data.data.now;
           const nowImpressionValues = resNow.map((item) => item.now);
           const percentNowImpression = resNow.map((item) => item.percent);
           setNowImpressionValues(nowImpressionValues);
           setPercentNowImpression(percentNowImpression);
+          // console.log(nowImpressionValues);
+          // console.log(percentNowImpression);
         } else if (res.status === "204") {
+          // console.log(res.status);
           setLoading(false);
         } else if (res.status === "400") {
+          // console.log(res.status);
           setLoading(false);
         } else if (res.status === "403") {
+          // console.log(res.status);
           setLoading(false);
         }
       })

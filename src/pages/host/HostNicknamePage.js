@@ -22,6 +22,7 @@ const HostNicknamePage = () => {
 
   //닉네임 post & 시작
   const handleStart = async () => {
+    // console.log(userId);
     if (nickname > 15) setRed(true);
     else {
       const result = await postNickname(userId, nickname);

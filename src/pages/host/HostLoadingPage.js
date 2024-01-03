@@ -21,17 +21,28 @@ const HostLoadingPage = () => {
       const urlParams = new URLSearchParams(location.search);
       const code = urlParams.get("code");
       if (code) {
+        // console.log(code);
         try {
           const data = await postkakaoCallback(code);
+          // console.log(data.id);
           setUserId(data.id);
           if (data && data.status === "200") {
             // 기존 유저
             setToken(data.token);
+            // console.log("호스트");
+            // console.log(data.hostName);
             setHostNickname(data.hostName);
+            // console.log(data.token);
+            // console.log(data.id);
 
             //게스트 결과 불러오기 -> 있으면: hostTotalResult / 없으면:
             const hostTotal = await getHostTotalResult(data.token, data.id);
+            // console.log("호스트토탈");
+            // console.log(hostTotal);
+            // console.log(hostTotal.status);
             if (hostTotal && hostTotal.status === "200") {
+              // console.log("전달");
+              // console.log(hostTotal.data);
               // navigate('/deploy');
               setHostTotal(hostTotal.data);
 

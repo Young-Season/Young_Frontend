@@ -60,6 +60,7 @@ const HostTotalResultPage = () => {
   };
   const convertToImageSource = (imageState) => {
     if (imageState) {
+      // console.log(imageState);
       return `https://young-season.o-r.kr/public/images/${imageState}.png`;
     } else {
       // imageState가 유효한 값이 아닌 경우에 대한 처리
@@ -100,10 +101,11 @@ const HostTotalResultPage = () => {
   useEffect(() => {
     Kakao.cleanup();
     Kakao.init("9769e69ba2b11621a50723827584b67e");
+    // console.log(Kakao.isInitialized);
   }, [visibleGuests]);
 
   const shareKaKao = () => {
-    console.log(hostId);
+    // console.log(hostId);
     Kakao.Share.createCustomButton({
       container: "#kakaotalk-sharing-btn",
       templateId: 102394,
