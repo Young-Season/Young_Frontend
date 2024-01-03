@@ -79,4 +79,5 @@ const InstagramText = styled.div`
   font-style: normal;
   font-weight: 700;
   line-height: 150%; /* 0.75rem */
+  cursor: pointer;
 `;
