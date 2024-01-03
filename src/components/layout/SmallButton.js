@@ -16,7 +16,7 @@ const SmallButtonContainer = styled.div`
   display: flex;
   width: 9.5rem;
   height: 3.25rem;
-  // padding: 10px 20px;
+  padding: 0.625rem, 1.25rem;
   justify-content: center;
   align-items: center;
   gap: 10px;
@@ -46,5 +46,6 @@ const ContentBox = styled.div`
   height: 1.5rem;
   display: flex;
   justify-content: center;
+  align-items: center;
 `;
 /* 버튼 내용 */

@@ -271,7 +271,7 @@ export const WhiteBox = styled.div`
   flex-direction: column;
   align-items: flex-start;
   gap: 1.25rem;
-  border-radius: 0.75rem;
+  border-radius: 1.25rem;
   background: #fff;
   align-self: center;
 `;

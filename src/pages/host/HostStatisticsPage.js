@@ -325,7 +325,7 @@ const ImgBox = styled.div`
   height: 0.75rem;
   margin-right: 0.25rem;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
 `;
 
