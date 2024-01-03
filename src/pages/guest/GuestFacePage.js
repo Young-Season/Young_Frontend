@@ -81,12 +81,11 @@ const FaceContainer = styled.div`
   justify-content: flex-start;
   align-items: center;
   margin: auto;
-  padding-top: 72px;
   gap: 60px;
   background: #f6f9ff;
-
-  width: 25rem;
-  height: 50.75rem;
+  background-size: cover;
+  /* width: 25rem;
+  height: 50.75rem; */
   @media (max-width: 400px) {
     width: 23rem;
   }
@@ -95,6 +94,7 @@ const FaceContainer = styled.div`
   }
 `;
 const FaceContainer2 = styled.div`
+  margin-top: 72px;
   height: 320px;
   background: #ffffff;
   border-radius: 20px;
