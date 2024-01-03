@@ -43,16 +43,31 @@ const HostTotalResultPage = () => {
     setVisibleGuests(visibleGuests + 6);
   };
 
+  // const handleDownload = () => {
+  //   const sectionToCapture = document.getElementById("section-to-capture");
+
+  //   html2canvas(sectionToCapture, { useCORS: true })
+  //     .then((canvas) => {
+  //       const image = canvas.toDataURL("image/png");
+  //       const link = document.createElement("a");
+  //       link.href = image;
+  //       link.download = `${hostNickname}.png`;
+  //       link.click();
+  //     })
+  //     .catch((err) => {
+  //       console.error("oops, something went wrong!", err);
+  //     });
+  // };
+
   const handleDownload = () => {
     const sectionToCapture = document.getElementById("section-to-capture");
-
+  
     html2canvas(sectionToCapture, { useCORS: true })
       .then((canvas) => {
-        const image = canvas.toDataURL("image/png");
-        const link = document.createElement("a");
-        link.href = image;
-        link.download = `${hostNickname}.png`;
-        link.click();
+        const image = canvas.toDataURL(`${hostNickname}/png`);
+  
+        // 모바일 환경에서의 다운로드를 지원하기 위해 window.open() 사용
+        window.open(image);
       })
       .catch((err) => {
         console.error("oops, something went wrong!", err);
@@ -68,6 +83,8 @@ const HostTotalResultPage = () => {
       return;
     }
   };
+
+  
 
   //조사 설정
   const set_prepositional_particle = (name) => {
