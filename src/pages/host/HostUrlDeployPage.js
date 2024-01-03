@@ -44,43 +44,8 @@ const HostUrlDeployPage = () => {
       },
     });
   };
-  // const shareKaKao2 = () =>{
-  //   Kakao.Share.createCustomButton({
-  //     container: '#kakaotalk-sharing-btn2',
-  //     templateId: 102394,
-  //     templateArgs: {
-  //       title: '제목 영역입니다.',
-  //       description: '설명 영역입니다.',
-  //       host_nickname: `${hostName}`,
-  //       hostId: `${hostId}`,
-  //       url: `http://localhost:3000/guestLogin?hostId=${hostId}`,
-  //     },
-  //   });
-  // }
-  // useEffect(() => {
-  //   kakaoButton()
-  // }, [])
-  // const kakaoButton = () => {
-  //   if (window.Kakao) {
-  //     const Kakao = window.Kakao
 
-  //     if (!Kakao.isInitialized()) {
-  //       Kakao.init('9769e69ba2b11621a50723827584b67e')
-  //     }
-
-  //     Kakao.Share.createScrapButton({
-  //       container: '#kakaotalk-sharing-btn3',
-  //       requestUrl: "http://localhost:3000/guestLogin",
-  //       templateId: 102394,
-  //       templateArgs: {
-  //         host_nickname: `${hostName}`,
-  //         hostId: `${hostId}`,
-  //         // url: `http://localhost:3000/guestLogin?hostId=${hostId}`,
-  //       },
-  //     });
-
-  //   }
-  // }
+  
 
   const handleCopyClick = () => {
     navigator.clipboard
@@ -113,9 +78,15 @@ const HostUrlDeployPage = () => {
             <UrlImage src={urlImage}></UrlImage>
           </UrlBtn>
 
-          <UrlButton>
-            <ButtonText onClick={handleCopyClick}>URL 복사 </ButtonText>
-          </UrlButton>
+          <UrlBtn
+            id="kakaotalk-sharing-btn"
+            onClick={() => {
+              handleCopyClick();
+            }}
+          >
+            URL 복사
+            <UrlImage src={urlImage}></UrlImage>
+          </UrlBtn>
         </FaceContainer3>
       </FaceContainer2>
     </FaceContainer>
@@ -183,25 +154,26 @@ const ButtonText = styled.div`
   line-height: normal;
 `;
 const UrlBtn = styled.button`
-  display: flex;
-  height: 3.25rem;
-  padding: 0.625rem 1.25rem;
-  justify-content: space-between;
-  align-items: center;
-  gap: 0.625rem;
-  flex-shrink: 0;
-  align-self: stretch;
-  border-radius: 1rem;
-  border: 1px solid var(--Brown, #64422e);
-  background: var(--White, #fafafa);
-  box-shadow: -1px -2px 7.3px 0px rgba(0, 0, 0, 0.25) inset;
-  color: #1c1c1c;
-  font-family: Spoqa Han Sans Neo;
-  font-size: 0.75rem;
-  font-style: normal;
-  font-weight: 600;
-  line-height: normal;
-  cursor: pointer;
+display: flex;
+height: 3.25rem;
+padding: 0.5rem 1.25rem;
+justify-content: space-between;
+align-items: center;
+gap: 0.5rem;
+flex-shrink: 0;
+margin-bottom: 1.5rem;
+align-self: stretch;
+border-radius: 1rem;
+border: 1px solid var(--Brown, #64422e);
+background: var(--White, #fafafa);
+box-shadow: -1px -2px 7.3px 0px rgba(0, 0, 0, 0.25) inset;
+color: #1c1c1c;
+font-family: Spoqa Han Sans Neo;
+font-size: 0.75rem;
+font-style: normal;
+font-weight: 600;
+line-height: normal;
+cursor: pointer;
 `;
 
 const UrlImage = styled.img`

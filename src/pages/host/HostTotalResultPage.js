@@ -231,8 +231,14 @@ const HostTotalResultPage = () => {
             <UrlImage src={urlImage}></UrlImage>
           </UrlButton>
 
-          <UrlButton>
-            <ButtonText onClick={handleCopyClick}>URL 복사 </ButtonText>
+          <UrlButton
+            id="kakaotalk-sharing-btn"
+            onClick={() => {
+              handleCopyClick();
+            }}
+          >
+            URL 복사
+            <UrlImage src={urlImage}></UrlImage>
           </UrlButton>
         </VisitorContainer>
       </Container>
