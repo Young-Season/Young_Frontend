@@ -69,8 +69,8 @@ const HostLoginPage = () => {
               />
               <NicknameText>카카오 로그인</NicknameText>
             </KakaoButton>
-            <Description>결과확인은 사파리, 크롬 등의 웹 브라우저로</Description>
-            <Description>접속해주세요!</Description>
+            {/* <Description>결과확인은 사파리, 크롬 등의 웹 브라우저로</Description>
+            <Description>접속해주세요!</Description> */}
 
             {/* </BigButton> */}
           </NicknameBox>

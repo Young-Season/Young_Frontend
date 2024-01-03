@@ -170,13 +170,13 @@ const HostTotalResultPage = () => {
           </DescriptionContainer>
         </CaptureDiv>
 
-        <Button onClick={handleDownload}>
+        {/* <Button onClick={handleDownload}>
           <ButtonText>
             이미지 다운로드 <DownloadImage src={download} />
           </ButtonText>
         </Button>
         <Description>이미지 다운로드는 사파리, 크롬 등의</Description>
-            <Description>웹 브라우저로 접속해주세요!</Description>
+            <Description>웹 브라우저로 접속해주세요!</Description> */}
 
         <Button
           onClick={() =>
