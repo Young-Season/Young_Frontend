@@ -19,6 +19,7 @@ import {
   Button,
   ButtonText,
   HomeButton,
+  TextAndPictureContainer,
 } from "./GuestOthersResultPage";
 import { hostNicknameState, usePostResponses } from "../../apis/guest";
 import { useRecoilValue } from "recoil";
@@ -109,9 +110,10 @@ const GuestMyResultPage = () => {
         <CuriousContainer>
           <CuriousText>친구가 보는 내가 궁금하다면?</CuriousText>
           <Button onClick={goToHostLogin}>
-            <ButtonText>
-              물어보러 가기 <HomeButton src={homeButton} />
-            </ButtonText>
+            <TextAndPictureContainer>
+              <ButtonText>물어보러 가기 </ButtonText>
+              <HomeButton src={homeButton} />
+            </TextAndPictureContainer>
           </Button>
         </CuriousContainer>
       </Container>

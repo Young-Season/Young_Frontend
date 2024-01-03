@@ -170,11 +170,15 @@ const HostStatisticsPage = () => {
             {animalValues.map((animalValue, index) =>
               percentValues[index] !== 0 ? (
                 <AnswerContainer key={index}>
-                  <TextBox>{animals[animalValue - 1]}</TextBox>
+                  <TextBox>
+                    <AnswerText>{animals[animalValue - 1]}</AnswerText>
+                  </TextBox>
                   <PercentageBarContainer>
                     <PercentageBar width={percentValues[index]} />
                   </PercentageBarContainer>
-                  <PercentageTextBox>{percentValues[index]}%</PercentageTextBox>
+                  <PercentageTextBox>
+                    <AnswerText>{percentValues[index]}%</AnswerText>
+                  </PercentageTextBox>
                 </AnswerContainer>
               ) : null
             )}
@@ -198,7 +202,7 @@ const HostStatisticsPage = () => {
                     <PercentageBar width={percentEmojiValues[index]} />
                   </PercentageBarContainer>
                   <PercentageTextBox>
-                    {percentEmojiValues[index]}%
+                    <AnswerText>{percentEmojiValues[index]}%</AnswerText>
                   </PercentageTextBox>
                 </AnswerContainer>
               ) : null
@@ -211,12 +215,14 @@ const HostStatisticsPage = () => {
             {colorValues.map((colorValue, index) =>
               percentColorValues[index] !== 0 ? (
                 <AnswerContainer key={index}>
-                  <TextBox>{colors[colorValue - 1]}</TextBox>
+                  <TextBox>
+                    <AnswerText>{colors[colorValue - 1]}</AnswerText>
+                  </TextBox>
                   <PercentageBarContainer>
                     <PercentageBar width={percentColorValues[index]} />
                   </PercentageBarContainer>
                   <PercentageTextBox>
-                    {percentColorValues[index]}%
+                    <AnswerText>{percentColorValues[index]}%</AnswerText>
                   </PercentageTextBox>
                 </AnswerContainer>
               ) : null
@@ -229,12 +235,14 @@ const HostStatisticsPage = () => {
             {firstImpressionValues.map((firstValue, index) =>
               percentFirstImpression[index] !== 0 ? (
                 <AnswerContainer key={index}>
-                  <TextBox>{firstImpressions[firstValue - 1]}</TextBox>
+                  <TextBox>
+                    <AnswerText>{firstImpressions[firstValue - 1]}</AnswerText>
+                  </TextBox>
                   <PercentageBarContainer>
                     <PercentageBar width={percentFirstImpression[index]} />
                   </PercentageBarContainer>
                   <PercentageTextBox>
-                    {percentFirstImpression[index]}%
+                    <AnswerText>{percentFirstImpression[index]}%</AnswerText>
                   </PercentageTextBox>
                 </AnswerContainer>
               ) : null
@@ -248,12 +256,14 @@ const HostStatisticsPage = () => {
             {nowImpressionValues.map((nowValue, index) =>
               percentNowImpression[index] !== 0 ? (
                 <AnswerContainer key={index}>
-                  <TextBox>{presentImpressions[nowValue - 1]}</TextBox>
+                  <TextBox>
+                    <AnswerText>{presentImpressions[nowValue - 1]}</AnswerText>
+                  </TextBox>
                   <PercentageBarContainer>
                     <PercentageBar width={percentNowImpression[index]} />
                   </PercentageBarContainer>
                   <PercentageTextBox>
-                    {percentNowImpression[index]}%
+                    <AnswerText>{percentNowImpression[index]}%</AnswerText>
                   </PercentageTextBox>
                 </AnswerContainer>
               ) : null
@@ -304,19 +314,6 @@ const TextBox = styled.div`
   width: 3.75rem;
   flex-shrink: 0;
   margin-right: 0.25rem;
-  color: var(--BLACK, #1c1c1c);
-  font-family: Spoqa Han Sans Neo;
-  font-size: 0.875rem;
-  font-style: normal;
-  font-weight: 500;
-  line-height: normal;
-  color: #000;
-
-  font-family: Spoqa Han Sans Neo;
-  font-size: 0.875rem;
-  font-style: normal;
-  font-weight: 500;
-  line-height: normal;
 `;
 
 const ImgBox = styled.div`
@@ -355,19 +352,10 @@ const PercentageBar = styled.div`
 
 const PercentageTextBox = styled.div`
   display: flex;
-  width: 2.6875rem;
-  height: 1.25rem;
-  padding: 0.0625rem 0rem;
-  justify-content: center;
+  width: 2.75rem;
+  justify-content: flex-end;
   align-items: center;
-  color: #000;
-
-  text-align: right;
-  font-family: Spoqa Han Sans Neo;
-  font-size: 0.875rem;
-  font-style: normal;
-  font-weight: 500;
-  line-height: normal;
+  flex-shrink: 0;
 `;
 
 const InformationBox = styled.div`
@@ -380,6 +368,15 @@ const InformationBox = styled.div`
 
 const InformationText = styled.div`
   color: var(--Light-Gray, #a4a4a4);
+  font-family: Spoqa Han Sans Neo;
+  font-size: 0.875rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+`;
+
+const AnswerText = styled.div`
+  color: var(--BLACK, #1c1c1c);
   font-family: Spoqa Han Sans Neo;
   font-size: 0.875rem;
   font-style: normal;

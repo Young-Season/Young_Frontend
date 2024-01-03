@@ -118,7 +118,7 @@ const HostTotalResultPage = () => {
           <CuriousText>친구가 보는 내가 궁금하다면?</CuriousText>
           <Button onClick={goToHostLogin}>
             <TextAndPictureContainer>
-              <ButtonText>물어보러 가기</ButtonText>
+              <ButtonText>물어보러 가기 </ButtonText>
               <HomeButton src={homeButton} />
             </TextAndPictureContainer>
           </Button>
@@ -221,7 +221,7 @@ export const HomeButton = styled.img`
   align-self: center;
 `;
 
-const TextAndPictureContainer = styled.div`
+export const TextAndPictureContainer = styled.div`
   display: flex;
   height: 1.25rem;
 `;
