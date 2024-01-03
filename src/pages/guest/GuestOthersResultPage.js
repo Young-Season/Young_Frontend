@@ -117,6 +117,10 @@ const HostTotalResultPage = () => {
         <CuriousContainer>
           <CuriousText>친구가 보는 내가 궁금하다면?</CuriousText>
           <Button onClick={goToHostLogin}>
+            <TextAndPictureContainer>
+              <ButtonText>물어보러 가기</ButtonText>
+              <HomeButton src={homeButton} />
+            </TextAndPictureContainer>
             <ButtonText>
               물어보러 가기 <HomeButton src={homeButton} />
             </ButtonText>
@@ -219,4 +223,9 @@ export const HomeButton = styled.img`
   height: 1.25rem;
   align-self: center;
   margin-top: 6px;
+`;
+
+const TextAndPictureContainer = styled.div`
+  display: flex;
+  height: 1.25rem;
 `;
