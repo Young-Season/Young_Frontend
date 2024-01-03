@@ -175,6 +175,8 @@ const HostTotalResultPage = () => {
             이미지 다운로드 <DownloadImage src={download} />
           </ButtonText>
         </Button>
+        <Description>결과확인은 사파리, 크롬 등의 웹 브라우저로</Description>
+            <Description>접속해주세요!</Description>
 
         <Button
           onClick={() =>
@@ -219,14 +221,6 @@ const HostTotalResultPage = () => {
             )}
           </WhiteBox>
           <SharingText>친구에게 공유하고 내 이미지를 알아보세요!</SharingText>
-          {/* <Button onClick={handleDownload}>
-            <ButtonText>
-              친구들에게 공유하기
-              <Image2
-              src={process.env.PUBLIC_URL + "/images/CopyButton.png"}
-            ></Image2>
-            </ButtonText>
-          </Button> */}
           <UrlButton
             id="kakaotalk-sharing-btn"
             onClick={() => {
@@ -237,9 +231,9 @@ const HostTotalResultPage = () => {
             <UrlImage src={urlImage}></UrlImage>
           </UrlButton>
 
-          <Button>
+          <UrlButton>
             <ButtonText onClick={handleCopyClick}>URL 복사 </ButtonText>
-          </Button>
+          </UrlButton>
         </VisitorContainer>
       </Container>
       <Footer />
@@ -430,4 +424,14 @@ const CaptureDiv = styled.div`
   flex-direction: column;
   gap: 1.5rem;
   align-items: center;
+`;
+
+const DescriptionTwo = styled.div`
+color: var(--Gray, #555);
+text-align: center;
+font-family: Spoqa Han Sans Neo;
+font-size: 0.875rem;
+font-style: normal;
+font-weight: 700;
+line-height: 150%; /* 1.3125rem */
 `;

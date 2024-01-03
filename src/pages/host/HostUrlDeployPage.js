@@ -82,6 +82,17 @@ const HostUrlDeployPage = () => {
   //   }
   // }
 
+  const handleCopyClick = () => {
+    navigator.clipboard
+      .writeText(`https://youngchun.netlify.app/?hostId=${hostId}`)
+      .then(() => {
+        alert("URL이 복사되었습니다.");
+      })
+      .catch((error) => {
+        console.error("복사 실패:", error);
+      });
+  };
+
   return (
     <FaceContainer>
       <Text>
@@ -92,7 +103,6 @@ const HostUrlDeployPage = () => {
         <Image src={process.env.PUBLIC_URL + "/images/Ghost.png"}></Image>
         <FaceContainer3>
           <Text1>친구에게 공유하고 내 이미지를 알아보세요!</Text1>
-          {/* <button id='kakaotalk-sharing-btn' onClick={()=>{shareKaKao()}}>친구들에게 공유하기</button> */}
           <UrlBtn
             id="kakaotalk-sharing-btn"
             onClick={() => {
@@ -102,19 +112,10 @@ const HostUrlDeployPage = () => {
             카카오톡으로 공유하기
             <UrlImage src={urlImage}></UrlImage>
           </UrlBtn>
-          {/* <BigButtonContainer
-            id="kakaotalk-sharing-btn"
-            onClick={() => {
-              shareKaKao();
-            }}
-            text={"친구들에게 공유하기"}
-          >
-            {"친구들에게 공유하기"}
-            <Image2
-              src={process.env.PUBLIC_URL + "/images/CopyButton.png"}
-            ></Image2>
-          </BigButtonContainer> */}
-          {/* <UrlButton onClick = {()=>{shareKaKao()}} text={"친구들에게 공유하기"}></UrlButton> */}
+
+          <UrlButton>
+            <ButtonText onClick={handleCopyClick}>URL 복사 </ButtonText>
+          </UrlButton>
         </FaceContainer3>
       </FaceContainer2>
     </FaceContainer>
@@ -173,41 +174,14 @@ const Text1 = styled.div`
   text-align: center;
   color: #64422e;
 `;
-// const BigButtonContainer = styled.button`
-//   display: flex;
-//   width: 17.5rem;
-//   height: 2.5rem;
-//   padding: 0.625rem 1.25rem;
-
-//   justify-content: center;
-//   align-items: center;
-//   gap: 10px;
-
-//   border-radius: 20px;
-//   border: 1px solid var(--Brown, #64422e);
-//   background: var(--White, #fafafa);
-//   box-shadow: -1px -2px 7.3px 0px rgba(0, 0, 0, 0.25) inset;
-
-//   @media (max-width: 360px) {
-//     width: 15rem;
-//   }
-//   @media (max-width: 300px) {
-//     width: 13rem;
-//   }
-//   @media (max-width: 250px) {
-//     width: 11rem;
-//   }
-//   font-family: "Spoqa Han Sans Neo";
-//   font-style: normal;
-//   font-weight: 500;
-//   font-size: 16px;
-//   line-height: 15px;
-//   /* identical to box height */
-
-//   /* Gray */
-//   color: #555555;
-// `;
-
+const ButtonText = styled.div`
+  color: #64422e;
+  font-family: Spoqa Han Sans Neo;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 550;
+  line-height: normal;
+`;
 const UrlBtn = styled.button`
   display: flex;
   height: 3.25rem;

@@ -69,6 +69,8 @@ const HostLoginPage = () => {
               />
               <NicknameText>카카오 로그인</NicknameText>
             </KakaoButton>
+            <Description>결과확인은 사파리, 크롬 등의 웹 브라우저로</Description>
+            <Description>접속해주세요!</Description>
 
             {/* </BigButton> */}
           </NicknameBox>
@@ -144,4 +146,13 @@ const NicknameText = styled.div`
 `;
 const LetterImage = styled.img`
   width: 100%;
+`;
+const Description = styled.div`
+  color: var(--Gray, #555);
+  text-align: center;
+  font-family: Spoqa Han Sans Neo;
+  font-size: 0.7rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 150%; /* 1.3125rem */
 `;
