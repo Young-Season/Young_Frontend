@@ -17,23 +17,23 @@ export const userIdState = atom({
 
 export const nicknameAtom = atom({
   key: "nickname",
-  default: "hello",
+  default: "",
 });
 
 //token
 export const tokenState = atom({
   key: "tokenState",
-  default: '',
+  default: "",
 });
 
 //guestNickname
 export const guestNicknameState = atom({
   key: "guestNicknameState",
-  default: '',
+  default: "",
 });
 
 //guestNickname
 export const hostTotal = atom({
   key: "hostTotalDatas",
-  default: '',
+  default: "",
 });
