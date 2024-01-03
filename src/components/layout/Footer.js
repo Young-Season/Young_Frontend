@@ -1,7 +1,11 @@
 import React from "react";
 import styled from "styled-components";
-
+const instagramUrl =
+process.env.PUBLIC_URL + "/images/instagram.png";
 const Footer = () => {
+  const gotoInstagram = () => {
+    window.open('https://www.instagram.com/young.season79');
+  }
   return (
     <FooterContainer>
       <TextContainer>
@@ -9,6 +13,8 @@ const Footer = () => {
           Made by.
           <br />
           중앙대학교 멋쟁이사자처럼 11기 영춘기
+          <br/>
+          <Image src={instagramUrl} alt="Instagram @young.season79" onClick={gotoInstagram}></Image>
         </Text>
       </TextContainer>
     </FooterContainer>
@@ -51,3 +57,7 @@ const Text = styled.div`
   margin: 0;
   padding: 0;
 `;
+const Image = styled.div`
+height: 30px;
+width: 30px;
+`
