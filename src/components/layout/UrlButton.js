@@ -15,7 +15,7 @@ export default UrlButton;
 
 const BigButtonContainer = styled.button`
 display: flex;
-width: 16.5rem;
+width: 14.5rem;
 height: 2.5rem;
 padding: 0.625rem 1.25rem;
 flex-direction: row;
