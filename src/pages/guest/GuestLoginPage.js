@@ -38,7 +38,8 @@ const GuestLoginPage = () => {
         const data = await postGuestLogin(hostId, newNickname);
         // console.log(data.status);
         if (data.status === 200) {
-          setGuestNickname(data.name);
+          console.log(nickname)
+          setGuestNickname(nickname);
           // console.log(newNickname);
         //  setGuestNickname(newNickname);
           navigate("/guestface");

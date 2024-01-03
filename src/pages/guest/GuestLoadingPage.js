@@ -46,6 +46,11 @@ const GuestLoadingPage = () => {
   };
 
   useEffect(() => {
+
+    console.log("게서트");
+    console.log(guestName);    
+    console.log(hostName);
+    console.log(hostId);
     const navigateAfterPost = async () => {
       try {
         const response = await postMyResult();
