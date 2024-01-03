@@ -14,6 +14,7 @@ import {
   WhiteBox,
 } from "./HostIndividualResultPage";
 import {
+  Image,
   DescriptionContainer,
   DescriptionTitle,
   Description,
@@ -247,9 +248,7 @@ const HostTotalResultPage = () => {
 };
 
 export default HostTotalResultPage;
-const Image = styled.img`
-  border-radius: 20px;
-`;
+
 const DownloadImage = styled.img`
   width: 1.25rem;
   height: 1.25rem;
