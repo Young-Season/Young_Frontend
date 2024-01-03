@@ -121,9 +121,6 @@ const HostTotalResultPage = () => {
               <ButtonText>물어보러 가기</ButtonText>
               <HomeButton src={homeButton} />
             </TextAndPictureContainer>
-            <ButtonText>
-              물어보러 가기 <HomeButton src={homeButton} />
-            </ButtonText>
           </Button>
         </CuriousContainer>
       </Container>
@@ -222,7 +219,6 @@ export const HomeButton = styled.img`
   width: 1.25rem;
   height: 1.25rem;
   align-self: center;
-  margin-top: 6px;
 `;
 
 const TextAndPictureContainer = styled.div`
