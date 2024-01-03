@@ -14,11 +14,10 @@ const Footer = () => {
           중앙대학교 멋쟁이사자처럼 11기 영춘기
         </Text>
       </TextContainer>
-      <Image
-        src={instagramUrl}
-        alt="Instagram @young.season79"
-        onClick={gotoInstagram}
-      ></Image>
+      <InstagramContainer onClick={gotoInstagram}>
+        <Image src={instagramUrl} alt="Instagram @young.season79"></Image>
+        <InstagramText>@young.season79</InstagramText>
+      </InstagramContainer>
     </FooterContainer>
   );
 };
@@ -30,7 +29,6 @@ const FooterContainer = styled.div`
   flex-direction: row;
   align-items: flex-start;
   justify-content: space-between;
-  gap: 0.625rem;
   height: 7.5rem;
   width: 100%;
   background-color: #64422e;
@@ -43,7 +41,7 @@ const TextContainer = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
-  margin-top: 2rem;
+  margin-top: 32px;
   margin-left: 1.25rem;
 `;
 
@@ -57,9 +55,24 @@ const Text = styled.div`
 `;
 
 const Image = styled.img`
-  height: 34px;
-  width: 34px;
-  margin-right: 15px;
-  margin-top: 2rem;
+  height: 1.5rem;
+  width: 1.5rem;
   cursor: pointer;
+`;
+
+const InstagramContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin-top: 28px;
+  margin-right: 18px;
+`;
+
+const InstagramText = styled.div`
+  color: #fffdfd;
+  font-family: Spoqa Han Sans Neo;
+  font-size: 0.5rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 150%; /* 0.75rem */
 `;

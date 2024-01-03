@@ -83,7 +83,6 @@ const FaceContainer = styled.div`
   margin: auto;
   gap: 60px;
   background: #f6f9ff;
-  background-size: contain;
   /* width: 25rem;
   height: 50.75rem; */
   @media (max-width: 400px) {
