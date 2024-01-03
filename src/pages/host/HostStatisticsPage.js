@@ -296,24 +296,34 @@ const StatisticContainer = styled.div`
 const AnswerContainer = styled.div`
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 0.5rem;
   align-self: stretch;
 `;
 
 const TextBox = styled.div`
   width: 3.75rem;
   flex-shrink: 0;
-
+  margin-right: 0.25rem;
   color: var(--BLACK, #1c1c1c);
   font-family: Spoqa Han Sans Neo;
   font-size: 0.875rem;
   font-style: normal;
   font-weight: 500;
   line-height: normal;
+  color: #000;
+
+  font-family: Spoqa Han Sans Neo;
+  font-size: 0.875rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
 `;
+
 const ImgBox = styled.div`
   width: 3.75rem;
   padding: 0;
+  height: 0.75rem;
+  margin-right: 0.25rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -350,6 +360,14 @@ const PercentageTextBox = styled.div`
   padding: 0.0625rem 0rem;
   justify-content: center;
   align-items: center;
+  color: #000;
+
+  text-align: right;
+  font-family: Spoqa Han Sans Neo;
+  font-size: 0.875rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
 `;
 
 const InformationBox = styled.div`
