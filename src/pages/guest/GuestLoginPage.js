@@ -40,7 +40,7 @@ const GuestLoginPage = () => {
         if (data.status === 200) {
           setGuestNickname(data.name);
           // console.log(newNickname);
-          setGuestNickname(newNickname);
+        //  setGuestNickname(newNickname);
           navigate("/guestface");
         } else if (data.status === 409) {
           alert("동일한 닉네임이 존재합니다.");
