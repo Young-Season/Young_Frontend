@@ -48,6 +48,11 @@ const GuestLoginPage = () => {
     }
   };
 
+  const isNicknameBlank = ()=>{
+    if(nickname.length === 0)return true;
+    return false;
+  }
+
   //조사 설정
   const set_prepositional_particle = (name) => {
     if (name) {
@@ -95,17 +100,9 @@ const GuestLoginPage = () => {
           <Text>내가 생각하는 </Text>
           <Text>{set_prepositional_particle(hostNickname)}?</Text>
           <NicknameBox>
-            {/* <BigButton
-              textBox={
-                <NicknameInput
-                  placeholder="닉네임을 입력해주세요"
-                  value={nickname}
-                  onChange={handleNicknameChange}
-                />
-              }
-            ></BigButton> */}
             <BigButtonNickname onChange={handleNicknameChange}>
             <NicknameInput
+                  black={isNicknameBlank()}
                   placeholder="닉네임을 입력해주세요"
                   value={nickname}
                   onChange={handleNicknameChange}
@@ -173,7 +170,8 @@ const NicknameBox = styled.div`
   margin-top: 60px;
 `;
 const NicknameInput = styled.input`
-  color: var(--Light-Gray, #a4a4a4);
+  color: ${(props) => (props.blank ? "var(--Light-Gray, #a4a4a4)" : "black")};
+  
   text-align: center;
   font-family: Spoqa Han Sans Neo;
   font-size: 16px;
@@ -184,6 +182,7 @@ const NicknameInput = styled.input`
   outline: none;
   background: var(--White, #fafafa);
   width: 17.5rem;
+  color:
 `;
 
 const NicknameText = styled.div`
