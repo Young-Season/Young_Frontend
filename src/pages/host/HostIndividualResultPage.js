@@ -93,8 +93,8 @@ const HostIndividualResultPage = () => {
   };
 
   const convertEmoji = (int) => {
-    if (int === 1) return "😊";
-    else if (int === 2) return "😆";
+    if (int === 1) return "🥹";
+    else if (int === 2) return "🤩";
     else if (int === 3) return "😎";
     else if (int === 4) return "😏";
     else if (int === 5) return "🤪";
