@@ -33,8 +33,8 @@ const GuestLoginPage = () => {
       console.log(data.status);
       if(data.status === 200){
         setGuestNickname(data.name);
-        console.log(newNickname);
-        setGuestNickname(newNickname);
+      //  console.log(newNickname);
+      //  setGuestNickname(newNickname);
         navigate("/guestface");
       }
       else if(data.status === 409){
