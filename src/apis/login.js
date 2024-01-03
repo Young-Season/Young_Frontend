@@ -7,7 +7,7 @@ export const getLogin = async () => {
   try{
     const url = `${baseURL}/oauth/kakao`;
     const data = axios.get(url);
-    console.log(data);
+    // console.log(data);
     return data;
 
   }

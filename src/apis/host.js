@@ -7,9 +7,9 @@ export const baseUrl = "https://young-season.o-r.kr";
 // 호스트가 게스트들에게 받은 총 결과 열람
 export const getHostTotalResult = async (token, hostId) => {
   const url = `${baseUrl}/data/${hostId}`;
-  console.log(url);
-  console.log(token);
-  console.log(hostId);
+  // console.log(url);
+  // console.log(token);
+  // console.log(hostId);
   try {
     const data = await axios.get(url, {
       headers: {
@@ -17,7 +17,7 @@ export const getHostTotalResult = async (token, hostId) => {
         token: token,
       },
     });
-    console.log(data);
+    // console.log(data);
     return data.data;
   } catch (error) {
     console.error(error);
