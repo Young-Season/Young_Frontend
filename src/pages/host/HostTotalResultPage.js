@@ -247,7 +247,9 @@ const HostTotalResultPage = () => {
 };
 
 export default HostTotalResultPage;
-
+const Image = styled.img`
+  border-radius: 20px;
+`;
 const DownloadImage = styled.img`
   width: 1.25rem;
   height: 1.25rem;
@@ -430,10 +432,7 @@ const CaptureDiv = styled.div`
   gap: 1.5rem;
   align-items: center;
 `;
-const Image = styled.img`
-  margin: 3.75rem;
-  border-radius: 20px;
-`;
+
 const DescriptionTwo = styled.div`
 color: var(--Gray, #555);
 text-align: center;
