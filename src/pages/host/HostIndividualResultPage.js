@@ -16,30 +16,27 @@ const HostIndividualResultPage = () => {
   const token = useRecoilValue(tokenState);
   const hostNickname = useRecoilValue(nicknameAtom);
   const hostId = useRecoilValue(userIdState);
-  console.log(guest);
 
   const [individualData, setIndividualData] = useState({});
   const guestId = guest.id;
 
-  const set_prepositional_particle = (idx, name)=>{
-    if(name){
+  const set_prepositional_particle = (idx, name) => {
+    if (name) {
       const charCode = name.charCodeAt(name.length - 1);
       const consonantCode = (charCode - 44032) % 28;
-  
-      if(consonantCode === 0){
-        if(idx === 1)return `${name}는`;
-        if(idx===2)return `${name}가`;
-        if(idx===3)return `${name}와`;
-        if(idx===4)return `${name}를`;
-        if(idx===5)return `${name}는`;
 
+      if (consonantCode === 0) {
+        if (idx === 1) return `${name}는`;
+        if (idx === 2) return `${name}가`;
+        if (idx === 3) return `${name}와`;
+        if (idx === 4) return `${name}를`;
+        if (idx === 5) return `${name}는`;
       }
-      if(idx === 1)return `${name}은`;
-      if(idx===2)return `${name}이`;
-      if(idx===3)return `${name}과`;
-      if(idx===4)return `${name}을`;
-      if(idx===5)return `${name}은`;
-
+      if (idx === 1) return `${name}은`;
+      if (idx === 2) return `${name}이`;
+      if (idx === 3) return `${name}과`;
+      if (idx === 4) return `${name}을`;
+      if (idx === 5) return `${name}은`;
     }
   };
   //조사 설정
@@ -61,23 +58,14 @@ const HostIndividualResultPage = () => {
   };
 
   useEffect(() => {
-    console.log(token);
-    console.log(guestId);
-    console.log(hostId);
     getHostIndividualResult(token, hostId, guestId)
       .then((res) => {
-        console.log(res);
         if (res.data.status === "200") {
-          console.log(guest);
-          console.log(res.data.data.animal);
           setIndividualData(res.data.data);
-          // setLoading(false);
         } else if (res.status === "400") {
           console.log(res.message);
-          // setLoading(false);
         } else if (res.status === "403") {
           console.log(res.message);
-          // setLoading(false);
         }
       })
       .catch((error) => {
@@ -137,7 +125,6 @@ const HostIndividualResultPage = () => {
     else if (int === 7) return "투명해";
     else if (int === 8) return "줏대있어";
   };
-  
 
   return (
     <Wrapper>
@@ -151,7 +138,9 @@ const HostIndividualResultPage = () => {
         </Title>
         <WhiteBox>
           <ContentsContainer>
-            <ContentsText>{set_prepositional_particle(1, hostNickname)} ㅇㅇ상이야!</ContentsText>
+            <ContentsText>
+              {set_prepositional_particle(1, hostNickname)} ㅇㅇ상이야!
+            </ContentsText>
             <AnswerContainer>
               <RightArrow src={answerArrow} />
               <ContentsAnswer>
@@ -161,7 +150,9 @@ const HostIndividualResultPage = () => {
           </ContentsContainer>
 
           <ContentsContainer>
-            <ContentsText>{set_prepositional_particle(2, hostNickname)} 이모지라면</ContentsText>
+            <ContentsText>
+              {set_prepositional_particle(2, hostNickname)} 이모지라면
+            </ContentsText>
             <AnswerContainer>
               <RightArrow src={answerArrow} />
               <ContentsAnswer>
@@ -171,7 +162,9 @@ const HostIndividualResultPage = () => {
           </ContentsContainer>
 
           <ContentsContainer>
-            <ContentsText>{set_prepositional_particle(3, hostNickname)} 어울리는 색은</ContentsText>
+            <ContentsText>
+              {set_prepositional_particle(3, hostNickname)} 어울리는 색은
+            </ContentsText>
             <AnswerContainer>
               <RightArrow src={answerArrow} />
               <ContentsAnswer>
@@ -181,7 +174,9 @@ const HostIndividualResultPage = () => {
           </ContentsContainer>
 
           <ContentsContainer>
-            <ContentsText>{set_prepositional_particle(4, hostNickname)} 처음 봤을 때...</ContentsText>
+            <ContentsText>
+              {set_prepositional_particle(4, hostNickname)} 처음 봤을 때...
+            </ContentsText>
             <AnswerContainer>
               <RightArrow src={answerArrow} />
               <ContentsAnswer>
@@ -192,7 +187,8 @@ const HostIndividualResultPage = () => {
 
           <ContentsContainer>
             <ContentsText>
-              지금 내가 생각하는 {set_prepositional_particle(5,hostNickname)}...
+              지금 내가 생각하는 {set_prepositional_particle(5, hostNickname)}
+              ...
             </ContentsText>
             <AnswerContainer>
               <RightArrow src={answerArrow} />

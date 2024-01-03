@@ -60,7 +60,6 @@ const HostTotalResultPage = () => {
   };
   const convertToImageSource = (imageState) => {
     if (imageState) {
-      console.log(imageState);
       return `https://young-season.o-r.kr/public/images/${imageState}.png`;
     } else {
       // imageState가 유효한 값이 아닌 경우에 대한 처리
@@ -88,19 +87,19 @@ const HostTotalResultPage = () => {
   };
 
   const handleCopyClick = () => {
-    navigator.clipboard.writeText(`https://youngchun.netlify.app/?hostId=${hostId}`)
+    navigator.clipboard
+      .writeText(`https://youngchun.netlify.app/?hostId=${hostId}`)
       .then(() => {
-        alert('URL이 복사되었습니다.');
+        alert("URL이 복사되었습니다.");
       })
       .catch((error) => {
-        console.error('복사 실패:', error);
+        console.error("복사 실패:", error);
       });
   };
 
   useEffect(() => {
     Kakao.cleanup();
     Kakao.init("9769e69ba2b11621a50723827584b67e");
-    console.log(Kakao.isInitialized);
   }, [visibleGuests]);
 
   const shareKaKao = () => {
@@ -205,9 +204,9 @@ const HostTotalResultPage = () => {
             <UrlImage src={urlImage}></UrlImage>
           </UrlButton>
 
-        <Button>
-          <ButtonText onClick={handleCopyClick}>URL 복사 </ButtonText>
-        </Button>
+          <Button>
+            <ButtonText onClick={handleCopyClick}>URL 복사 </ButtonText>
+          </Button>
         </VisitorContainer>
       </Container>
       <Footer />

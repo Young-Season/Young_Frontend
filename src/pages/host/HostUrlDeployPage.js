@@ -27,11 +27,9 @@ const HostUrlDeployPage = () => {
   useEffect(() => {
     Kakao.cleanup();
     Kakao.init("9769e69ba2b11621a50723827584b67e");
-    console.log(Kakao.isInitialized);
   }, []);
 
   const shareKaKao = () => {
-    console.log(hostId);
     Kakao.Share.createCustomButton({
       container: "#kakaotalk-sharing-btn",
       templateId: 102394,
@@ -141,7 +139,6 @@ const FaceContainer2 = styled.div`
   justify-content: center;
   align-items: center;
   height: 700px;
-  
 `;
 const Image = styled.img`
   margin: 3.75rem;
