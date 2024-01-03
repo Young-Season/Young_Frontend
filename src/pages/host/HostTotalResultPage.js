@@ -64,7 +64,7 @@ const HostTotalResultPage = () => {
   
     html2canvas(sectionToCapture, { useCORS: true })
       .then((canvas) => {
-        const image = canvas.toDataURL(`${hostNickname}/png`);
+        const image = canvas.toDataURL("image/png");  // 여기를 수정했습니다.
   
         // 모바일 환경에서의 다운로드를 지원하기 위해 window.open() 사용
         window.open(image);
