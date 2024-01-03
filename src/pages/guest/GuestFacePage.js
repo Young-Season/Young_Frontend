@@ -75,16 +75,20 @@ function GuestFacePage() {
   );
 }
 export default GuestFacePage;
+
 const FaceContainer = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
   margin: auto;
-  gap: 60px;
+  padding: 0px;
+  padding-top: 10px;
+  gap: 30px;
   background: #f6f9ff;
-  /* width: 25rem;
-  height: 50.75rem; */
+
+  width: 25rem;
+  height: 50.75rem;
   @media (max-width: 400px) {
     width: 23rem;
   }
@@ -92,12 +96,13 @@ const FaceContainer = styled.div`
     width: 21rem;
   }
 `;
+
 const FaceContainer2 = styled.div`
-  margin-top: 72px;
   height: 320px;
   background: #ffffff;
   border-radius: 20px;
 `;
+
 const Image = styled.img`
   width: 320px;
   height: 320px;
@@ -109,8 +114,9 @@ const FaceContainer3 = styled.div`
   justify-content: center;
   align-items: center;
   padding: 0px;
-  gap: 10px;
+  margin-top: 20px;
 `;
+
 const Text = styled.div`
   font-family: "Spoqa Han Sans Neo";
   font-style: normal;

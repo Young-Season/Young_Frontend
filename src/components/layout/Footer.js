@@ -14,9 +14,13 @@ const Footer = () => {
           중앙대학교 멋쟁이사자처럼 11기 영춘기
         </Text>
       </TextContainer>
-      <InstagramContainer onClick={gotoInstagram}>
-        <Image src={instagramUrl} alt="Instagram @young.season79"></Image>
-        <InstagramText>@young.season79</InstagramText>
+      <InstagramContainer>
+        <Image
+          src={instagramUrl}
+          alt="Instagram @young.season79"
+          onClick={gotoInstagram}
+        ></Image>
+        <InstagramText onClick={gotoInstagram}>@young.season79</InstagramText>
       </InstagramContainer>
     </FooterContainer>
   );

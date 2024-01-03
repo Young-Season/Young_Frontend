@@ -124,6 +124,7 @@ const FaceContainer3 = styled.div`
 
   margin-top: 20px;
 `;
+
 const Text = styled.div`
   font-family: "Spoqa Han Sans Neo";
   font-style: normal;
@@ -134,6 +135,7 @@ const Text = styled.div`
   color: #000000;
   margin-bottom: 20px;
 `;
+
 const FaceContainer4 = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr; // 한 줄에 두 개의 열 생성
@@ -143,6 +145,7 @@ const FaceContainer4 = styled.div`
   gap: 20px;
   // padding-bottom: 100px;
 `;
+
 const StyledLink = styled(Link)`
   text-decoration: none;
 `;
