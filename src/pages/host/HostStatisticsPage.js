@@ -322,7 +322,7 @@ const TextBox = styled.div`
 const ImgBox = styled.div`
   width: 3.75rem;
   padding: 0;
-  height: 0.75rem;
+  height: 1.1rem;
   margin-right: 0.25rem;
   display: flex;
   justify-content: flex-start;
