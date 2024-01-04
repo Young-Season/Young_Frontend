@@ -156,3 +156,4 @@ const Description = styled.div`
   font-weight: 700;
   line-height: 150%; /* 1.3125rem */
 `;
+export { NicknameBox, KakaoButton, NicknameText };

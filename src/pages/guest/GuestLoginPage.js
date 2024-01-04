@@ -8,7 +8,12 @@ import { getHostNickname, postGuestLogin } from "../../apis/guestLogin";
 import { useLocation, useNavigate } from "react-router-dom";
 import { hostNicknameState } from "../../apis/guest";
 import "../../../src/index.css";
-
+import { getLogin, postkakaoCallback } from "../../apis/login";
+import {
+  NicknameBox,
+  KakaoButton,
+  NicknameText,
+} from "../host/HostLoginPage";
 const GuestLoginPage = () => {
   const imageUrl = process.env.PUBLIC_URL + "/images/BG.png";
   const [nickname, setNickname] = useState("");
@@ -25,7 +30,43 @@ const GuestLoginPage = () => {
   const handleNicknameChange = (event) => {
     setNickname(event.target.value);
   };
+  const startKakao = async () => {
+    try {
+      const data = await getLogin();
+      navigate('/hostLoading');
+      // console.log(data);
+    } catch (error) {
+      console.error("Login failed:", error);
+      
+    }
+  };
+  // useEffect(() => {
+  //   const fetchCode = async () => {
+  //     const urlParams = new URLSearchParams(location.search);
+  //     const code = urlParams.get("code");
+  //     if (code) {
+  //       // console.log(code);
+  //       try {
+  //         const data = await postkakaoCallback(code);
+  //         // console.log(data.id);
+  //         setUserId(data.id);
 
+  //         if (data && data.status === "200") {
+  //           // 기존 유저
+  //           setToken(data.token);
+  //           navigate("/deploy");
+  //         } else if (data && data.status === "404") {
+  //           //신규 가입자
+  //           navigate("/hostLoading");
+  //         }
+  //         // else{
+  //         //   navigate('/hostLoading');
+  //         // }
+  //       } catch (error) {}
+  //     }
+  //   };
+  //   fetchCode();
+  // }, [location, setUserId, navigate]);
   //닉네임 post & 시작
   const handleStart = async () => {
     try {
@@ -99,7 +140,7 @@ const GuestLoginPage = () => {
         <Contents>
           <Text>내가 생각하는 </Text>
           <Text>{set_prepositional_particle(hostNickname)}?</Text>
-          <NicknameBox>
+          <NicknameBox2>
             <BigButtonNickname onChange={handleNicknameChange}>
             <NicknameInput
                   black={isNicknameBlank()}
@@ -107,18 +148,37 @@ const GuestLoginPage = () => {
                   value={nickname}
                   onChange={handleNicknameChange}
                 />
+                <Image2 src={process.env.PUBLIC_URL + "/images/guestLoginButton.png"}
+                alt="kakao"
+                onClick={handleStart}></Image2>
             </BigButtonNickname>
-            <NicknameText
+            <NicknameText2
               red={red}
               style={{ paddingTop: "12px", paddingBottom: "32px" }}
             >
               한글 최대 15자
-            </NicknameText>
-          </NicknameBox>
+            </NicknameText2>
+          </NicknameBox2>
+          <Container3>
+            <Line1></Line1>
+            <Text1>이미 공간을 만들었다면?</Text1>
+            <Line1></Line1>
+          </Container3>
+          {/* <br></br>   */}
+          <NicknameBox3 onClick={startKakao}>
+            {/* <BigButton textBox={<> */}
+            <KakaoButton href="https://young-season.o-r.kr/oauth/kakao">
+              <img
+                src={process.env.PUBLIC_URL + "/images/message-circle.png"}
+                alt="kakao"
+              />
+              <NicknameText>카카오 로그인</NicknameText>
+            </KakaoButton>
+            {/* <Description>결과확인은 사파리, 크롬 등의 웹 브라우저로</Description>
+            <Description>접속해주세요!</Description> */}
 
-          <div onClick={handleStart}>
-            <StartButton />
-          </div>
+            {/* </BigButton> */}
+          </NicknameBox3>
         </Contents>
       </Image>
     </BackGround>
@@ -166,7 +226,7 @@ const Text = styled.div`
   letter-spacing: 0.2rem;
   line-height: 1.5;
 `;
-const NicknameBox = styled.div`
+const NicknameBox2 = styled.div`
   margin-top: 60px;
 `;
 const NicknameInput = styled.input`
@@ -185,7 +245,7 @@ const NicknameInput = styled.input`
   color:
 `;
 
-const NicknameText = styled.div`
+const NicknameText2 = styled.div`
   color: ${(props) => (props.red ? "red" : "var(--Light-Gray, #A4A4A4)")};
   text-align: center;
   font-family: Spoqa Han Sans Neo;
@@ -201,7 +261,7 @@ width: 17.5rem;
 height: 3.75rem;
 justify-content: center;
 align-items: center;
-// gap: 0.625rem;
+// gap: 0.62rem;
 color: var(--Light-Gray, #A4A4A4);
 text-align: center;
 font-family: Spoqa Han Sans Neo;
@@ -209,9 +269,49 @@ font-size: 1rem;
 font-style: normal;
 font-weight: 500;
 line-height: normal;
-
+padding-right: 0.5rem;
 border-radius: 20px;
 border: 1px solid var(--Brown, #64422e);
 background: var(--White, #fafafa);
 box-shadow: -1px -2px 7.3px 0px rgba(0, 0, 0, 0.25) inset;
 `
+const Container3 = styled.div`
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding-top: 40px;
+gap: 10px;
+
+width: 21rem;
+`
+const Line1 = styled.div`
+width: 5rem;
+height: 0px;
+border: 1px solid #000000;
+`
+const Text1 = styled.div`
+height: 18px;
+
+font-family: 'Spoqa Han Sans Neo';
+font-style: normal;
+font-weight: 700;
+font-size: 12px;
+line-height: 130%;
+text-align: center;
+color: #866B5B;
+`
+const NicknameBox3 = styled.div`
+  padding-top: 40px;
+  cursor: pointer;
+`;
+
+const Image2 = styled.img`
+width: 1.7rem;
+height: 1.7rem;
+padding-right: 0.2rem;
+cursor: pointer;
+`;
+
+
+
