@@ -43,49 +43,32 @@ const HostTotalResultPage = () => {
     setVisibleGuests(visibleGuests + 6);
   };
 
-  // pc 잘되는 코드
   // const handleDownload = () => {
   //   const sectionToCapture = document.getElementById("section-to-capture");
-
+  
   //   html2canvas(sectionToCapture, { useCORS: true })
   //     .then((canvas) => {
-  //       const image = canvas.toDataURL("image/png");
-  //       const link = document.createElement("a");
-  //       link.href = image;
-  //       link.download = `${hostNickname}.png`;
-  //       link.click();
+  //       canvas.toBlob((blob) => {
+  //         const url = URL.createObjectURL(blob);
+  
+  //         // 모바일 환경에 따라 적절한 방법 선택
+  //         const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+  //         if (isMobile) {
+  //           window.open(url, '_blank');
+  //         } else {
+  //           const link = document.createElement("a");
+  //           link.href = url;
+  //           link.download = `${hostNickname}.png`;
+  //           document.body.appendChild(link);
+  //           link.click();
+  //           document.body.removeChild(link);
+  //         }
+  //       }, "image/png");
   //     })
   //     .catch((err) => {
   //       console.error("oops, something went wrong!", err);
   //     });
   // };
-
-  const handleDownload = () => {
-    const sectionToCapture = document.getElementById("section-to-capture");
-  
-    html2canvas(sectionToCapture, { useCORS: true })
-      .then((canvas) => {
-        canvas.toBlob((blob) => {
-          const url = URL.createObjectURL(blob);
-  
-          // 모바일 환경에 따라 적절한 방법 선택
-          const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-          if (isMobile) {
-            window.open(url, '_blank');
-          } else {
-            const link = document.createElement("a");
-            link.href = url;
-            link.download = `${hostNickname}.png`;
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-          }
-        }, "image/png");
-      })
-      .catch((err) => {
-        console.error("oops, something went wrong!", err);
-      });
-  };
   
   const convertToImageSource = (imageState) => {
     if (imageState) {
@@ -198,7 +181,7 @@ const HostTotalResultPage = () => {
               <AnswerBox>
                 <HeaderText>답변</HeaderText>
               </AnswerBox>
-            </TableHeaderContainer>
+            {/* </TableHeaderContainer>
             {totalData.guests.slice(0, visibleGuests).map((guest) => (
               <TableListContainer>
                 <NicknameBox>
@@ -211,11 +194,35 @@ const HostTotalResultPage = () => {
                       onClick={() =>
                         navigate("/hostResult", { state: { guest: guest } })
                       }
+
+                      
+                    ></AnswerFileImage>
+                  </ListText>
+                </AnswerBox>
+              </TableListContainer>
+            ))} */}
+            </TableHeaderContainer>
+            {[...totalData.guests].reverse().slice(0, visibleGuests).map((guest) => (
+              <TableListContainer>
+                <NicknameBox>
+                  <ListText>{guest.name}</ListText>
+                </NicknameBox>
+                <AnswerBox>
+                  <ListText>
+                    <AnswerFileImage
+                      src={fileImage}
+                      onClick={() =>
+                        navigate("/hostResult", { state: { guest: guest } })
+                      }
+
+                      
                     ></AnswerFileImage>
                   </ListText>
                 </AnswerBox>
               </TableListContainer>
             ))}
+
+
             {visibleGuests < totalData.guests.length && (
               <SeeMoreButton onClick={seeMore}>더보기</SeeMoreButton>
             )}
