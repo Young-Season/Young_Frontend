@@ -80,6 +80,7 @@ const GuestLoginPage = () => {
     }
   };
   useEffect(() => {
+    localStorage.clear();
     const fetchData = async () => {
       const urlParams = new URLSearchParams(location.search);
       const hostId = urlParams.get("hostId");
