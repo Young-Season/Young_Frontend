@@ -9,11 +9,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { hostNicknameState } from "../../apis/guest";
 import "../../../src/index.css";
 import { getLogin, postkakaoCallback } from "../../apis/login";
-import {
-  NicknameBox,
-  KakaoButton,
-  NicknameText,
-} from "../host/HostLoginPage";
+import { NicknameBox, KakaoButton, NicknameText } from "../host/HostLoginPage";
 const GuestLoginPage = () => {
   const imageUrl = process.env.PUBLIC_URL + "/images/BG.png";
   const [nickname, setNickname] = useState("");
@@ -33,11 +29,10 @@ const GuestLoginPage = () => {
   const startKakao = async () => {
     try {
       const data = await getLogin();
-      navigate('/hostLoading');
+      navigate("/hostLoading");
       // console.log(data);
     } catch (error) {
       console.error("Login failed:", error);
-      
     }
   };
   // useEffect(() => {
@@ -75,10 +70,10 @@ const GuestLoginPage = () => {
       } else {
         const data = await postGuestLogin(hostId, nickname);
         if (data.status === 200) {
-          console.log(nickname)
+          console.log(nickname);
           setGuestNickname(nickname);
           // console.log(newNickname);
-        //  setGuestNickname(newNickname);
+          //  setGuestNickname(newNickname);
           navigate("/guestface");
         } else if (data.status === 409) {
           alert("동일한 닉네임이 존재합니다.");
@@ -89,10 +84,10 @@ const GuestLoginPage = () => {
     }
   };
 
-  const isNicknameBlank = ()=>{
-    if(nickname.length === 0)return true;
+  const isNicknameBlank = () => {
+    if (nickname.length === 0) return true;
     return false;
-  }
+  };
 
   //조사 설정
   const set_prepositional_particle = (name) => {
@@ -142,15 +137,17 @@ const GuestLoginPage = () => {
           <Text>{set_prepositional_particle(hostNickname)}?</Text>
           <NicknameBox2>
             <BigButtonNickname onChange={handleNicknameChange}>
-            <NicknameInput
-                  black={isNicknameBlank()}
-                  placeholder="닉네임을 입력해주세요"
-                  value={nickname}
-                  onChange={handleNicknameChange}
-                />
-                <Image2 src={process.env.PUBLIC_URL + "/images/guestLoginButton.png"}
+              <NicknameInput
+                black={isNicknameBlank()}
+                placeholder="닉네임을 입력해주세요"
+                value={nickname}
+                onChange={handleNicknameChange}
+              />
+              <Image2
+                src={process.env.PUBLIC_URL + "/images/guestLoginButton.png"}
                 alt="kakao"
-                onClick={handleStart}></Image2>
+                onClick={handleStart}
+              ></Image2>
             </BigButtonNickname>
             <NicknameText2
               red={red}
@@ -216,7 +213,7 @@ const Contents = styled.div`
 const Text = styled.div`
   color: var(--Brown, #64422e);
   text-align: center;
-  font-family: PartialSansKR-Regular;
+  font-family: "PartialSansKR-Regular";
   color: var(--Brown, #64422e);
   text-align: center;
   font-size: 2rem;
@@ -231,9 +228,9 @@ const NicknameBox2 = styled.div`
 `;
 const NicknameInput = styled.input`
   color: ${(props) => (props.blank ? "var(--Light-Gray, #a4a4a4)" : "black")};
-  
+
   text-align: center;
-  font-family: Spoqa Han Sans Neo;
+  font-family: "Spoqa Han Sans Neo";
   font-size: 16px;
   font-style: normal;
   font-weight: 500;
@@ -242,13 +239,12 @@ const NicknameInput = styled.input`
   outline: none;
   background: var(--White, #fafafa);
   width: 17.5rem;
-  color:
 `;
 
 const NicknameText2 = styled.div`
   color: ${(props) => (props.red ? "red" : "var(--Light-Gray, #A4A4A4)")};
   text-align: center;
-  font-family: Spoqa Han Sans Neo;
+  font-family: "Spoqa Han Sans Neo";
   font-size: 16px;
   font-style: normal;
   font-weight: 500;
@@ -256,62 +252,59 @@ const NicknameText2 = styled.div`
 `;
 
 const BigButtonNickname = styled.div`
-display: flex;
-width: 17.5rem;
-height: 3.75rem;
-justify-content: center;
-align-items: center;
-// gap: 0.62rem;
-color: var(--Light-Gray, #A4A4A4);
-text-align: center;
-font-family: Spoqa Han Sans Neo;
-font-size: 1rem;
-font-style: normal;
-font-weight: 500;
-line-height: normal;
-padding-right: 0.5rem;
-border-radius: 20px;
-border: 1px solid var(--Brown, #64422e);
-background: var(--White, #fafafa);
-box-shadow: -1px -2px 7.3px 0px rgba(0, 0, 0, 0.25) inset;
-`
+  display: flex;
+  width: 17.5rem;
+  height: 3.75rem;
+  justify-content: center;
+  align-items: center;
+  // gap: 0.62rem;
+  color: var(--Light-Gray, #a4a4a4);
+  text-align: center;
+  font-family: "Spoqa Han Sans Neo";
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  padding-right: 0.5rem;
+  border-radius: 20px;
+  border: 1px solid var(--Brown, #64422e);
+  background: var(--White, #fafafa);
+  box-shadow: -1px -2px 7.3px 0px rgba(0, 0, 0, 0.25) inset;
+`;
 const Container3 = styled.div`
-display: flex;
-flex-direction: row;
-justify-content: center;
-align-items: center;
-padding-top: 40px;
-gap: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding-top: 40px;
+  gap: 10px;
 
-width: 21rem;
-`
+  width: 21rem;
+`;
 const Line1 = styled.div`
-width: 5rem;
-height: 0px;
-border: 1px solid #000000;
-`
+  width: 5rem;
+  height: 0px;
+  border: 1px solid #000000;
+`;
 const Text1 = styled.div`
-height: 18px;
+  height: 18px;
 
-font-family: 'Spoqa Han Sans Neo';
-font-style: normal;
-font-weight: 700;
-font-size: 12px;
-line-height: 130%;
-text-align: center;
-color: #866B5B;
-`
+  font-family: "Spoqa Han Sans Neo";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 130%;
+  text-align: center;
+  color: #866b5b;
+`;
 const NicknameBox3 = styled.div`
   padding-top: 40px;
   cursor: pointer;
 `;
 
 const Image2 = styled.img`
-width: 1.7rem;
-height: 1.7rem;
-padding-right: 0.2rem;
-cursor: pointer;
+  width: 1.7rem;
+  height: 1.7rem;
+  padding-right: 0.2rem;
+  cursor: pointer;
 `;
-
-
-

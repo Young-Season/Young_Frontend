@@ -46,9 +46,8 @@ const GuestLoadingPage = () => {
   };
 
   useEffect(() => {
-
     console.log("게서트");
-    console.log(guestName);    
+    console.log(guestName);
     console.log(hostName);
     console.log(hostId);
     const navigateAfterPost = async () => {
@@ -137,7 +136,7 @@ const Contents = styled.div`
 const Text = styled.div`
   color: var(--Brown, #64422e);
   text-align: center;
-  font-family: Spoqa Han Sans Neo;
+  font-family: "Spoqa Han Sans Neo";
   font-size: 20px;
   font-style: normal;
   font-weight: 700;

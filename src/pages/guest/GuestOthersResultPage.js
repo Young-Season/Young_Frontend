@@ -151,7 +151,7 @@ export const DescriptionContainer = styled.div`
 export const DescriptionTitle = styled.div`
   color: #000;
   text-align: center;
-  font-family: Spoqa Han Sans Neo;
+  font-family: "Spoqa Han Sans Neo";
   font-size: 1rem;
   font-style: normal;
   font-weight: 700;
@@ -162,7 +162,7 @@ export const DescriptionTitle = styled.div`
 export const Description = styled.div`
   color: var(--Gray, #555);
   text-align: center;
-  font-family: Spoqa Han Sans Neo;
+  font-family: "Spoqa Han Sans Neo";
   font-size: 0.875rem;
   font-style: normal;
   font-weight: 700;
@@ -179,7 +179,7 @@ export const CuriousContainer = styled.div`
 
 export const CuriousText = styled.div`
   color: #64422e;
-  font-family: Spoqa Han Sans Neo;
+  font-family: "Spoqa Han Sans Neo";
   font-size: 1rem;
   font-style: normal;
   font-weight: 700;
@@ -208,7 +208,7 @@ export const Button = styled.button`
 
 export const ButtonText = styled.div`
   color: #64422e;
-  font-family: Spoqa Han Sans Neo;
+  font-family: "Spoqa Han Sans Neo";
   font-size: 1rem;
   font-style: normal;
   font-weight: 600;
