@@ -100,7 +100,9 @@ const GuestMyResultPage = () => {
 
         <CuriousContainer>
           <CuriousText>
-            다른 친구들이 본 {set_prepositional_particle2(hostName)} 궁금하다면?
+            다른 친구들이 본 
+            <br />
+            {set_prepositional_particle2(hostName)} 궁금하다면?
           </CuriousText>
           <Button onClick={seeOthersResult}>
             <ButtonText>결과 보러 가기</ButtonText>
