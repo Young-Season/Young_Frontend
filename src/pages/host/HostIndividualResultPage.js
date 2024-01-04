@@ -253,7 +253,7 @@ export const GoToBackButton = styled.img`
 
 export const Title = styled.div`
   color: #64422e;
-  font-family: Spoqa Han Sans Neo;
+  font-family: "Spoqa Han Sans Neo";
   font-size: 1.25rem;
   font-style: normal;
   font-weight: 700;
@@ -286,7 +286,7 @@ const ContentsContainer = styled.div`
 
 export const ContentsText = styled.div`
   color: var(--BLACK, #1c1c1c);
-  font-family: Spoqa Han Sans Neo;
+  font-family: "Spoqa Han Sans Neo";
   font-size: 1.05rem;
   font-style: normal;
   font-weight: 800;
@@ -303,7 +303,7 @@ const AnswerContainer = styled.div`
 
 const ContentsAnswer = styled.div`
   color: var(--Brown, #64422e);
-  font-family: Spoqa Han Sans Neo;
+  font-family: "Spoqa Han Sans Neo";
   font-size: 0.875rem;
   font-style: normal;
   font-weight: 700;

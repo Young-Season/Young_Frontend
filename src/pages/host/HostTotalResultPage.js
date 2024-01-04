@@ -45,12 +45,12 @@ const HostTotalResultPage = () => {
 
   // const handleDownload = () => {
   //   const sectionToCapture = document.getElementById("section-to-capture");
-  
+
   //   html2canvas(sectionToCapture, { useCORS: true })
   //     .then((canvas) => {
   //       canvas.toBlob((blob) => {
   //         const url = URL.createObjectURL(blob);
-  
+
   //         // 모바일 환경에 따라 적절한 방법 선택
   //         const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
   //         if (isMobile) {
@@ -69,7 +69,7 @@ const HostTotalResultPage = () => {
   //       console.error("oops, something went wrong!", err);
   //     });
   // };
-  
+
   const convertToImageSource = (imageState) => {
     if (imageState) {
       // console.log(imageState);
@@ -80,8 +80,6 @@ const HostTotalResultPage = () => {
       return;
     }
   };
-
-  
 
   //조사 설정
   const set_prepositional_particle = (name) => {
@@ -181,7 +179,7 @@ const HostTotalResultPage = () => {
               <AnswerBox>
                 <HeaderText>답변</HeaderText>
               </AnswerBox>
-            {/* </TableHeaderContainer>
+              {/* </TableHeaderContainer>
             {totalData.guests.slice(0, visibleGuests).map((guest) => (
               <TableListContainer>
                 <NicknameBox>
@@ -202,26 +200,26 @@ const HostTotalResultPage = () => {
               </TableListContainer>
             ))} */}
             </TableHeaderContainer>
-            {[...totalData.guests].reverse().slice(0, visibleGuests).map((guest) => (
-              <TableListContainer>
-                <NicknameBox>
-                  <ListText>{guest.name}</ListText>
-                </NicknameBox>
-                <AnswerBox>
-                  <ListText>
-                    <AnswerFileImage
-                      src={fileImage}
-                      onClick={() =>
-                        navigate("/hostResult", { state: { guest: guest } })
-                      }
-
-                      
-                    ></AnswerFileImage>
-                  </ListText>
-                </AnswerBox>
-              </TableListContainer>
-            ))}
-
+            {[...totalData.guests]
+              .reverse()
+              .slice(0, visibleGuests)
+              .map((guest) => (
+                <TableListContainer>
+                  <NicknameBox>
+                    <ListText>{guest.name}</ListText>
+                  </NicknameBox>
+                  <AnswerBox>
+                    <ListText>
+                      <AnswerFileImage
+                        src={fileImage}
+                        onClick={() =>
+                          navigate("/hostResult", { state: { guest: guest } })
+                        }
+                      ></AnswerFileImage>
+                    </ListText>
+                  </AnswerBox>
+                </TableListContainer>
+              ))}
 
             {visibleGuests < totalData.guests.length && (
               <SeeMoreButton onClick={seeMore}>더보기</SeeMoreButton>
@@ -272,7 +270,7 @@ const VisitorContainer = styled.div`
 
 const VisiorListTitle = styled.div`
   color: var(--Brown, #64422e);
-  font-family: Spoqa Han Sans Neo;
+  font-family: "Spoqa Han Sans Neo";
   font-size: 1.5rem;
   font-style: normal;
   font-weight: 700;
@@ -308,7 +306,7 @@ const AnswerBox = styled.div`
 
 const HeaderText = styled.div`
   color: #000;
-  font-family: Spoqa Han Sans Neo;
+  font-family: "Spoqa Han Sans Neo";
   font-size: 1rem;
   font-style: normal;
   font-weight: 700;
@@ -328,7 +326,7 @@ const TableListContainer = styled.div`
 
 const ListText = styled.div`
   color: var(--BLACK, #1c1c1c);
-  font-family: Spoqa Han Sans Neo;
+  font-family: "Spoqa Han Sans Neo";
   font-size: 0.875rem;
   font-style: normal;
   font-weight: 500;
@@ -345,7 +343,7 @@ const SeeMoreButton = styled.div`
   width: 5rem;
   color: var(--Light-Gray, #a4a4a4);
   text-align: center;
-  font-family: Spoqa Han Sans Neo;
+  font-family: "Spoqa Han Sans Neo";
   font-size: 0.75rem;
   font-style: normal;
   font-weight: 500;
@@ -356,7 +354,7 @@ const SeeMoreButton = styled.div`
 
 const SharingText = styled.div`
   color: #1c1c1c;
-  font-family: Spoqa Han Sans Neo;
+  font-family: "Spoqa Han Sans Neo";
   font-size: 1rem;
   font-style: normal;
   font-weight: 700;
@@ -373,7 +371,7 @@ const ButtonContentsContainer = styled.div`
 
 const ButtonText = styled.div`
   color: #64422e;
-  font-family: Spoqa Han Sans Neo;
+  font-family: "Spoqa Han Sans Neo";
   font-size: 1rem;
   font-style: normal;
   font-weight: 550;
@@ -399,7 +397,7 @@ const BigButtonContainer = styled.button`
   background: var(--White, #fafafa);
   box-shadow: -1px -2px 7.3px 0px rgba(0, 0, 0, 0.25) inset;
   color: #64422e;
-  font-family: Spoqa Han Sans Neo;
+  font-family: "Spoqa Han Sans Neo";
   font-size: 1rem;
   font-style: normal;
   font-weight: 550;
@@ -424,7 +422,7 @@ const UrlButton = styled.button`
   background: var(--White, #fafafa);
   box-shadow: -1px -2px 7.3px 0px rgba(0, 0, 0, 0.25) inset;
   color: #1c1c1c;
-  font-family: Spoqa Han Sans Neo;
+  font-family: "Spoqa Han Sans Neo";
   font-size: 0.75rem;
   font-style: normal;
   font-weight: 600;
@@ -440,12 +438,11 @@ const CaptureDiv = styled.div`
 `;
 
 const DescriptionTwo = styled.div`
-color: var(--Gray, #555);
-text-align: center;
-font-family: Spoqa Han Sans Neo;
-font-size: 0.875rem;
-font-style: normal;
-font-weight: 700;
-line-height: 150%; /* 1.3125rem */
+  color: var(--Gray, #555);
+  text-align: center;
+  font-family: "Spoqa Han Sans Neo";
+  font-size: 0.875rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 150%; /* 1.3125rem */
 `;
-

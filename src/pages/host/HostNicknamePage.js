@@ -116,7 +116,7 @@ const Contents = styled.div`
 const Text = styled.div`
   color: var(--Brown, #64422e);
   text-align: center;
-  font-family: Sandoll Hoyoyo2;
+  font-family: "Sandoll Hoyoyo2";
   font-size: 30px;
   font-style: normal;
   font-weight: 900;
@@ -129,7 +129,7 @@ const NicknameBox = styled.div`
 const NicknameInput = styled.input`
   color: var(--Light-Gray, #a4a4a4);
   text-align: center;
-  font-family: Spoqa Han Sans Neo;
+  font-family: "Spoqa Han Sans Neo";
   font-size: 16px;
   font-style: normal;
   font-weight: 500;
@@ -142,7 +142,7 @@ const NicknameInput = styled.input`
 const NicknameText = styled.div`
   color: ${(props) => (props.red ? "red" : "var(--Light-Gray, #A4A4A4)")};
   text-align: center;
-  font-family: Spoqa Han Sans Neo;
+  font-family: "Spoqa Han Sans Neo";
   font-size: 16px;
   font-style: normal;
   font-weight: 500;

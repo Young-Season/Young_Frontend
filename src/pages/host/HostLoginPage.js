@@ -124,7 +124,7 @@ const Contents = styled.div`
 const Text = styled.div`
   color: var(--Brown, #64422e);
   text-align: center;
-  font-family: Partial Sans KR;
+  font-family: "Partial Sans KR";
   font-size: 2rem;
   font-style: normal;
   font-weight: 400;
@@ -138,7 +138,7 @@ const NicknameBox = styled.div`
 
 const NicknameText = styled.div`
   color: rgba(0, 0, 0, 0.85);
-  font-family: Spoqa Han Sans Neo;
+  font-family: "Spoqa Han Sans Neo";
   font-size: 1rem;
   font-style: normal;
   font-weight: 600;
@@ -150,7 +150,7 @@ const LetterImage = styled.img`
 const Description = styled.div`
   color: var(--Gray, #555);
   text-align: center;
-  font-family: Spoqa Han Sans Neo;
+  font-family: "Spoqa Han Sans Neo";
   font-size: 0.7rem;
   font-style: normal;
   font-weight: 700;

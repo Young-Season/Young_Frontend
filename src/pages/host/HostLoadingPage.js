@@ -118,7 +118,7 @@ const Contents = styled.div`
 `;
 const Text = styled.div`
   color: var(--Brown, #64422e);
-  font-family: Spoqa Han Sans Neo;
+  font-family: "Spoqa Han Sans Neo";
   font-size: 20px;
   font-style: normal;
   font-weight: 700;

@@ -45,8 +45,6 @@ const HostUrlDeployPage = () => {
     });
   };
 
-  
-
   const handleCopyClick = () => {
     navigator.clipboard
       .writeText(`https://youngchun.netlify.app/?hostId=${hostId}`)
@@ -65,29 +63,28 @@ const HostUrlDeployPage = () => {
         {getSubjectSuffix(hostName)}?
       </Text>
       <Image src={process.env.PUBLIC_URL + "/images/Ghost.png"}></Image>
-        <FaceContainer3>
-          <Text1>친구에게 공유하고 내 이미지를 알아보세요!</Text1>
-          <UrlBtn
-            id="kakaotalk-sharing-btn"
-            onClick={() => {
-              shareKaKao();
-            }}
-          >
-            카카오톡으로 공유하기
-            <UrlImage src={urlImage}></UrlImage>
-          </UrlBtn>
+      <FaceContainer3>
+        <Text1>친구에게 공유하고 내 이미지를 알아보세요!</Text1>
+        <UrlBtn
+          id="kakaotalk-sharing-btn"
+          onClick={() => {
+            shareKaKao();
+          }}
+        >
+          카카오톡으로 공유하기
+          <UrlImage src={urlImage}></UrlImage>
+        </UrlBtn>
 
-          <UrlBtn
-            id="kakaotalk-sharing-btn"
-            onClick={() => {
-              handleCopyClick();
-            }}
-          >
-            URL 복사
-            <UrlImage src={urlImage}></UrlImage>
-          </UrlBtn>
-        </FaceContainer3>
-
+        <UrlBtn
+          id="kakaotalk-sharing-btn"
+          onClick={() => {
+            handleCopyClick();
+          }}
+        >
+          URL 복사
+          <UrlImage src={urlImage}></UrlImage>
+        </UrlBtn>
+      </FaceContainer3>
     </FaceContainer>
   );
 };
@@ -148,33 +145,33 @@ const Text1 = styled.div`
 `;
 const ButtonText = styled.div`
   color: #64422e;
-  font-family: Spoqa Han Sans Neo;
+  font-family: "Spoqa Han Sans Neo";
   font-size: 1rem;
   font-style: normal;
   font-weight: 550;
   line-height: normal;
 `;
 const UrlBtn = styled.button`
-display: flex;
-height: 3.25rem;
-padding: 0.5rem 1.25rem;
-justify-content: space-between;
-align-items: center;
-gap: 0.5rem;
-flex-shrink: 0;
-margin-bottom: 1.5rem;
-align-self: stretch;
-border-radius: 1rem;
-border: 1px solid var(--Brown, #64422e);
-background: var(--White, #fafafa);
-box-shadow: -1px -2px 7.3px 0px rgba(0, 0, 0, 0.25) inset;
-color: #1c1c1c;
-font-family: Spoqa Han Sans Neo;
-font-size: 0.75rem;
-font-style: normal;
-font-weight: 600;
-line-height: normal;
-cursor: pointer;
+  display: flex;
+  height: 3.25rem;
+  padding: 0.5rem 1.25rem;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+  margin-bottom: 1.5rem;
+  align-self: stretch;
+  border-radius: 1rem;
+  border: 1px solid var(--Brown, #64422e);
+  background: var(--White, #fafafa);
+  box-shadow: -1px -2px 7.3px 0px rgba(0, 0, 0, 0.25) inset;
+  color: #1c1c1c;
+  font-family: "Spoqa Han Sans Neo";
+  font-size: 0.75rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  cursor: pointer;
 `;
 
 const UrlImage = styled.img`

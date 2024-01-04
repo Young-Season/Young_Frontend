@@ -368,7 +368,7 @@ const InformationBox = styled.div`
 
 const InformationText = styled.div`
   color: var(--Light-Gray, #a4a4a4);
-  font-family: Spoqa Han Sans Neo;
+  font-family: "Spoqa Han Sans Neo";
   font-size: 0.875rem;
   font-style: normal;
   font-weight: 500;
@@ -377,7 +377,7 @@ const InformationText = styled.div`
 
 const AnswerText = styled.div`
   color: var(--BLACK, #1c1c1c);
-  font-family: Spoqa Han Sans Neo;
+  font-family: "Spoqa Han Sans Neo";
   font-size: 0.875rem;
   font-style: normal;
   font-weight: 500;
