@@ -158,7 +158,7 @@ const HostTotalResultPage = () => {
         </Button>
         <Description>이미지 다운로드는 사파리, 크롬 등의</Description>
             <Description>웹 브라우저로 접속해주세요!</Description> */}
-
+        <Gap/>
         <Button
           onClick={() =>
             navigate("/hostStatistics", {
@@ -446,3 +446,6 @@ const DescriptionTwo = styled.div`
   font-weight: 700;
   line-height: 150%; /* 1.3125rem */
 `;
+const Gap = styled.div`
+height: 5rem;
+`

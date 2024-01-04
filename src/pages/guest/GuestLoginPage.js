@@ -35,33 +35,6 @@ const GuestLoginPage = () => {
       console.error("Login failed:", error);
     }
   };
-  // useEffect(() => {
-  //   const fetchCode = async () => {
-  //     const urlParams = new URLSearchParams(location.search);
-  //     const code = urlParams.get("code");
-  //     if (code) {
-  //       // console.log(code);
-  //       try {
-  //         const data = await postkakaoCallback(code);
-  //         // console.log(data.id);
-  //         setUserId(data.id);
-
-  //         if (data && data.status === "200") {
-  //           // 기존 유저
-  //           setToken(data.token);
-  //           navigate("/deploy");
-  //         } else if (data && data.status === "404") {
-  //           //신규 가입자
-  //           navigate("/hostLoading");
-  //         }
-  //         // else{
-  //         //   navigate('/hostLoading');
-  //         // }
-  //       } catch (error) {}
-  //     }
-  //   };
-  //   fetchCode();
-  // }, [location, setUserId, navigate]);
   //닉네임 post & 시작
   const handleStart = async () => {
     try {

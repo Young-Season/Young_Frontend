@@ -203,7 +203,7 @@ export const Button = styled.button`
   align-self: center;
   box-shadow: -1px -2px 7.3px 0px rgba(0, 0, 0, 0.25) inset;
   cursor: pointer;
-  margin-top: 5rem;
+  margin-top: 0.75rem;
   margin-bottom: 1rem;
 `;
 
